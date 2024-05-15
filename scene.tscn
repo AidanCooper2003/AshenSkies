@@ -1,3 +1,49 @@
-[gd_scene format=3 uid="uid://ishxym64wu80"]
+[gd_scene load_steps=4 format=3 uid="uid://ishxym64wu80"]
+
+[ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_csvwa"]
+[ext_resource type="PackedScene" uid="uid://d20gxaclfvw2f" path="res://scenes/objects/temporary-block.tscn" id="2_x70f1"]
+[ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/territorial-jumper.tscn" id="3_ab10o"]
 
 [node name="Scene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_csvwa")]
+position = Vector2(335, 355)
+
+[node name="Block" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(345, 467)
+
+[node name="Block2" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(473, 467)
+
+[node name="Block3" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(613, 467)
+
+[node name="Block4" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(758, 467)
+
+[node name="Block5" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(886, 467)
+
+[node name="Block6" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1026, 467)
+
+[node name="Block7" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1156, 467)
+
+[node name="Block8" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1284, 467)
+
+[node name="Block9" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1424, 467)
+
+[node name="Block10" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1569, 467)
+
+[node name="Block11" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1697, 467)
+
+[node name="Block12" parent="." instance=ExtResource("2_x70f1")]
+position = Vector2(1837, 467)
+
+[node name="TerritorialJumper" parent="." instance=ExtResource("3_ab10o")]
+position = Vector2(772, 371)

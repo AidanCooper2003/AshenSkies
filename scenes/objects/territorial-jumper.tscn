@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://g6ffppkryo60"]
+
+[ext_resource type="Texture2D" uid="uid://c2q3c4fk242bx" path="res://sprites/TerritorialJumper.png" id="1_hnsvw"]
+[ext_resource type="Script" path="res://Scripts/territorial-jumper.gd" id="1_lyyr7"]
+[ext_resource type="Script" path="res://Scripts/WalkerComponent.gd" id="3_ub03i"]
+[ext_resource type="Script" path="res://Scripts/JumperComponent.gd" id="4_yncpx"]
+[ext_resource type="Script" path="res://Scripts/GravityComponent.gd" id="5_m8lk0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdymr"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_136hl"]
+size = Vector2(64, 20)
+
+[node name="TerritorialJumper" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "objectDetector", "timer")]
+script = ExtResource("1_lyyr7")
+walkerComponent = NodePath("WalkerComponent")
+jumperComponent = NodePath("JumperComponent")
+objectDetector = NodePath("ShapeCast2D")
+timer = NodePath("Timer")
+directionSwitchTime = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_hnsvw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bdymr")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("3_ub03i")
+characterBody2D = NodePath("..")
+acceleration = 250.0
+deccelerationCoefficient = 1.0
+airDeccelerationCoefficient = 1.0
+maxVelocity = 300.0
+
+[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("4_yncpx")
+characterBody2D = NodePath("..")
+jumpForce = 500.0
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("5_m8lk0")
+characterBody2D = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, -138)
+shape = SubResource("RectangleShape2D_136hl")
+target_position = Vector2(0, 96)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

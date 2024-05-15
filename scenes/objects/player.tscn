@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://brogejmjvqi2i"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_v2qqn"]
+[ext_resource type="Texture2D" uid="uid://fiiasxy81fkc" path="res://sprites/PurplePlayerLeft.png" id="2_udjua"]
+[ext_resource type="Texture2D" uid="uid://dve3ruyqyqat1" path="res://sprites/PurplePlayerRight.png" id="2_w5ays"]
+[ext_resource type="Script" path="res://Scripts/WalkerComponent.gd" id="3_xwy8h"]
+[ext_resource type="Script" path="res://Scripts/GravityComponent.gd" id="4_4vd6d"]
+[ext_resource type="Script" path="res://Scripts/JumperComponent.gd" id="5_4qcle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vb32p"]
+size = Vector2(96, 96)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "sprite2D")]
+script = ExtResource("1_v2qqn")
+walkerComponent = NodePath("WalkerComponent")
+jumperComponent = NodePath("JumperComponent")
+leftSprite = ExtResource("2_udjua")
+rightSprite = ExtResource("2_w5ays")
+sprite2D = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vb32p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("2_w5ays")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("3_xwy8h")
+characterBody2D = NodePath("..")
+walkDirection = 1
+acceleration = 600.0
+deccelerationCoefficient = 4.0
+airDeccelerationCoefficient = 0.75
+maxVelocity = 400.0
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("4_4vd6d")
+characterBody2D = NodePath("..")
+
+[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("5_4qcle")
+characterBody2D = NodePath("..")
+jumpForce = 500.0
