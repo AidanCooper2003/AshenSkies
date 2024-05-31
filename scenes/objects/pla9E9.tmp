@@ -1,15 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://brogejmjvqi2i"]
+[gd_scene load_steps=11 format=3 uid="uid://brogejmjvqi2i"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Player.gd" id="1_guxbx"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_v2qqn"]
 [ext_resource type="Texture2D" uid="uid://fiiasxy81fkc" path="res://sprites/PurplePlayerLeft.png" id="2_udjua"]
 [ext_resource type="Texture2D" uid="uid://dve3ruyqyqat1" path="res://sprites/PurplePlayerRight.png" id="2_w5ays"]
-[ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
-[ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
-[ext_resource type="Script" path="res://Scripts/entity-components/JumperComponent.gd" id="6_r8v7u"]
-[ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_wlhmx"]
-[ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="8_57w21"]
-[ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
-[ext_resource type="PackedScene" uid="uid://5ryw1xocjdr2" path="res://scenes/objects/weapons/basic-gun.tscn" id="10_rt8kp"]
+[ext_resource type="Script" path="res://Scripts/WalkerComponent.gd" id="3_xwy8h"]
+[ext_resource type="Script" path="res://Scripts/GravityComponent.gd" id="4_4vd6d"]
+[ext_resource type="Script" path="res://Scripts/JumperComponent.gd" id="5_4qcle"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="7_ximy7"]
+[ext_resource type="Script" path="res://Scripts/HitboxComponent.gd" id="8_ijfcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vb32p"]
 size = Vector2(96, 96)
@@ -17,13 +15,12 @@ size = Vector2(96, 96)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohajd"]
 size = Vector2(97, 96)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "weaponManager", "sprite2D")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "sprite2D")]
 collision_mask = 16
-script = ExtResource("1_guxbx")
+script = ExtResource("1_v2qqn")
 walkerComponent = NodePath("WalkerComponent")
 jumperComponent = NodePath("JumperComponent")
 jumpCooldownTimer = NodePath("JumpCooldownTimer")
-weaponManager = NodePath("WeaponManager")
 leftSprite = ExtResource("2_udjua")
 rightSprite = ExtResource("2_w5ays")
 sprite2D = NodePath("Sprite2D")
@@ -38,7 +35,7 @@ scale = Vector2(6, 6)
 texture = ExtResource("2_w5ays")
 
 [node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
-script = ExtResource("4_w5kmv")
+script = ExtResource("3_xwy8h")
 characterBody2D = NodePath("..")
 walkDirection = 1
 acceleration = 600.0
@@ -47,21 +44,21 @@ airDeccelerationCoefficient = 0.5
 maxVelocity = 400.0
 
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
-script = ExtResource("5_j8pe6")
+script = ExtResource("4_4vd6d")
 characterBody2D = NodePath("..")
 
 [node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
-script = ExtResource("6_r8v7u")
+script = ExtResource("5_4qcle")
 characterBody2D = NodePath("..")
 jumpForce = 500.0
 
 [node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("7_wlhmx")
+script = ExtResource("7_ximy7")
 maxHealth = 3
 simpleHealth = true
 
 [node name="HitboxComponent" type="Area2D" parent="."]
-script = ExtResource("8_57w21")
+script = ExtResource("8_ijfcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-0.5, 0)
@@ -69,13 +66,6 @@ shape = SubResource("RectangleShape2D_ohajd")
 
 [node name="JumpCooldownTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="WeaponManager" type="Node2D" parent="."]
-script = ExtResource("9_ppa1w")
-currentWeapon = ExtResource("10_rt8kp")
-weaponDistance = 100.0
-
-[node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
 [connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
 [connection signal="timeout" from="JumpCooldownTimer" to="." method="_on_jump_cooldown_timer_timeout"]

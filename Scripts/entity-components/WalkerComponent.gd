@@ -33,7 +33,6 @@ func _physics_process(delta):
 	var currentDeccelerationRate = deccelerationCoefficient
 	if !characterBody2D.is_on_floor():
 		currentDeccelerationRate *= airDeccelerationCoefficient
-	print(currentDeccelerationRate)
 	var velocity = characterBody2D.velocity
 	var intendedXVelocity
 	
