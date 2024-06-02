@@ -55,6 +55,7 @@ shape = SubResource("RectangleShape2D_136hl")
 target_position = Vector2(0, 134)
 
 [node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 4
 script = ExtResource("6_prjgq")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
@@ -66,6 +67,8 @@ script = ExtResource("7_85u8s")
 maxHealth = 5
 
 [node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("8_exqqi")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]

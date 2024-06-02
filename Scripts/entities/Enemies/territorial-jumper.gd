@@ -30,5 +30,3 @@ func _physics_process(_delta):
 	if objectDetector.is_colliding() && is_on_floor():
 		jumperComponent.jump()
 	move_and_slide()
-
-
