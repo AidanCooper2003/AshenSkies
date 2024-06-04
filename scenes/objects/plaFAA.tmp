@@ -79,8 +79,10 @@ weaponDistance = 300.0
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
 [node name="LeftWeaponSpot" type="Node2D" parent="WeaponManager"]
+position = Vector2(-50, 0)
 
 [node name="RightWeaponSpot" type="Node2D" parent="WeaponManager"]
+position = Vector2(49, 0)
 
 [connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
 [connection signal="timeout" from="JumpCooldownTimer" to="." method="_on_jump_cooldown_timer_timeout"]

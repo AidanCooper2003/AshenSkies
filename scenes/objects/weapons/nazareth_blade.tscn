@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://unrkr0xwcn64"]
+
+[ext_resource type="Script" path="res://Scripts/entities/Weapons/NazarethBlade.gd" id="1_6b64p"]
+[ext_resource type="Texture2D" uid="uid://bsbr318vv4e56" path="res://sprites/CrossLeft.png" id="2_t6jio"]
+[ext_resource type="Script" path="res://Scripts/entity-components/DamageDealerComponent.gd" id="3_56b6w"]
+[ext_resource type="Script" path="res://Scripts/entities/weapon-components/MeleeHandler.gd" id="3_jhsj2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oj4i8"]
+size = Vector2(73, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fx80"]
+size = Vector2(19, 58)
+
+[node name="NazarethBlade" type="Node2D" node_paths=PackedStringArray("meleeHandler", "fireDelayTimer", "sprite")]
+script = ExtResource("1_6b64p")
+meleeHandler = NodePath("MeleeHandler")
+fireDelayTimer = NodePath("FireDelayTimer")
+sprite = NodePath("Sprite2D")
+fireDelay = 1.0
+durability = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(42, 0)
+rotation = 0.785398
+scale = Vector2(4, 4)
+texture = ExtResource("2_t6jio")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+
+[node name="MeleeHandler" type="Node2D" parent="." node_paths=PackedStringArray("swingTimer")]
+script = ExtResource("3_jhsj2")
+swingTime = 1.0
+swingTimer = NodePath("SwingTimer")
+
+[node name="SwingTimer" type="Timer" parent="MeleeHandler"]
+one_shot = true
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_56b6w")
+damage = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+position = Vector2(36.5, 0)
+shape = SubResource("RectangleShape2D_oj4i8")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
+position = Vector2(50.5, 0)
+shape = SubResource("RectangleShape2D_1fx80")
+
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]
+[connection signal="disableDamage" from="MeleeHandler" to="DamageDealerComponent" method="disable"]
+[connection signal="enableDamage" from="MeleeHandler" to="DamageDealerComponent" method="enable"]
+[connection signal="timeout" from="MeleeHandler/SwingTimer" to="MeleeHandler" method="turnOffWeapon"]
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="damage_dealt" from="DamageDealerComponent" to="MeleeHandler" method="turnOffWeapon"]

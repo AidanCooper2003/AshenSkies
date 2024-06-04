@@ -18,7 +18,7 @@ shape = ExtResource("2_wjwft")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("2_j8ow2")
 offset = Vector2(0, -1)
 

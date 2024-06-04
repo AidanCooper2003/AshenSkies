@@ -26,8 +26,7 @@ func _physics_process(_delta):
 	handleWalk()
 	handleJump()
 	move_and_slide()
-	handlePrimaryFire()
-	handleSecondaryFire()
+	handleWeaponFiring()
 
 func handleWalk():
 	if Input.is_action_pressed("Move Left") && !Input.is_action_pressed("Move Right"):
@@ -56,6 +55,15 @@ func handlePrimaryFire():
 func handleSecondaryFire():
 	if Input.is_action_pressed("Secondary Fire"):
 		weaponManager.fire_secondary()
+
+func handleTertiaryFire():
+	if Input.is_action_pressed("Tertiary Fire"):
+		weaponManager.fire_tertiary()
+		
+func handleWeaponFiring():
+	handlePrimaryFire()
+	handleSecondaryFire()
+	handleTertiaryFire()
 
 
 func _on_jump_cooldown_timer_timeout():
