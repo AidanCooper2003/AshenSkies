@@ -43,10 +43,13 @@ func handleJump():
 		currentJumps = maxJumps
 	
 	if Input.is_action_just_pressed("Jump") && canJump && currentJumps >= 1:
+		if !is_on_floor():
+			currentJumps -= 1
 		jumperComponent.jump()
-		currentJumps -= 1
 		canJump = false
 		jumpCooldownTimer.start()
+	if Input.is_action_just_released("Jump"):
+		jumperComponent.jump_release()
 		
 func handlePrimaryFire():
 	if Input.is_action_pressed("Primary Fire"):

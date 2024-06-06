@@ -1,21 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://brogejmjvqi2i"]
+[gd_scene load_steps=12 format=3 uid="uid://brogejmjvqi2i"]
 
 [ext_resource type="Script" path="res://Scripts/entities/Player.gd" id="1_guxbx"]
-[ext_resource type="Texture2D" uid="uid://fiiasxy81fkc" path="res://sprites/PurplePlayerLeft.png" id="2_udjua"]
-[ext_resource type="Texture2D" uid="uid://dve3ruyqyqat1" path="res://sprites/PurplePlayerRight.png" id="2_w5ays"]
+[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
+[ext_resource type="Shape2D" uid="uid://be0k2hmvomtvx" path="res://colliders/player.tres" id="4_877sk"]
 [ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
 [ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
+[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/PlayerRight.png" id="5_mf2qx"]
 [ext_resource type="Script" path="res://Scripts/entity-components/JumperComponent.gd" id="6_r8v7u"]
 [ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_wlhmx"]
 [ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="8_57w21"]
 [ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
 [ext_resource type="PackedScene" uid="uid://bg12mot7m8ooy" path="res://scenes/objects/weapons/test_gun.tscn" id="10_53x7q"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vb32p"]
-size = Vector2(96, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohajd"]
-size = Vector2(97, 96)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "weaponManager", "sprite2D")]
 collision_mask = 16
@@ -24,36 +19,41 @@ walkerComponent = NodePath("WalkerComponent")
 jumperComponent = NodePath("JumperComponent")
 jumpCooldownTimer = NodePath("JumpCooldownTimer")
 weaponManager = NodePath("WeaponManager")
-leftSprite = ExtResource("2_udjua")
-rightSprite = ExtResource("2_w5ays")
+leftSprite = ExtResource("2_p5gux")
+rightSprite = ExtResource("5_mf2qx")
 sprite2D = NodePath("Sprite2D")
 maxJumps = 2
 jumpDelay = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_vb32p")
+position = Vector2(0, 0.5)
+shape = ExtResource("4_877sk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)
-texture = ExtResource("2_w5ays")
+texture = ExtResource("5_mf2qx")
 
 [node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("4_w5kmv")
 characterBody2D = NodePath("..")
 walkDirection = 1
-acceleration = 600.0
+acceleration = 800.0
 deccelerationCoefficient = 4.0
 airDeccelerationCoefficient = 0.5
-maxVelocity = 400.0
+maxVelocity = 600.0
 
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("5_j8pe6")
 characterBody2D = NodePath("..")
+gravityCoefficient = 1.5
+downwardsGravityCoefficient = 2.0
 
-[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent")]
 script = ExtResource("6_r8v7u")
 characterBody2D = NodePath("..")
-jumpForce = 500.0
+jumpForce = 900.0
+jumpStopGap = 450.0
+gravityComponent = NodePath("../GravityComponent")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_wlhmx")
@@ -65,8 +65,7 @@ collision_mask = 12
 script = ExtResource("8_57w21")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_ohajd")
+shape = ExtResource("4_877sk")
 
 [node name="JumpCooldownTimer" type="Timer" parent="."]
 one_shot = true

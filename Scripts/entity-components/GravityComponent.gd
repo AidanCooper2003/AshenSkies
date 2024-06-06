@@ -10,9 +10,17 @@ var defaultGravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var gravity
 
+var fastFallOverride: bool
+
+@export var downwardsGravityCoefficient: float
+
 func _ready():
 	gravity = defaultGravity * gravityCoefficient
 
 func _physics_process(delta):
-	if not characterBody2D.is_on_floor():
+	if characterBody2D.velocity.y >= 0 || fastFallOverride:
+		characterBody2D.velocity.y += gravity * downwardsGravityCoefficient * delta
+	else:
 		characterBody2D.velocity.y += gravity * delta
+	if characterBody2D.is_on_floor():
+		fastFallOverride = false

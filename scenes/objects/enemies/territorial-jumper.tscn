@@ -48,6 +48,7 @@ jumpForce = 400.0
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("5_lhlh0")
 characterBody2D = NodePath("..")
+downwardsGravityCoefficient = 2.0
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 position = Vector2(0, -178)
