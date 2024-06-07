@@ -40,10 +40,11 @@ deccelerationCoefficient = 1.5
 airDeccelerationCoefficient = 1.0
 maxVelocity = 300.0
 
-[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent")]
 script = ExtResource("4_hxhpf")
 characterBody2D = NodePath("..")
 jumpForce = 400.0
+gravityComponent = NodePath("../GravityComponent")
 
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
 script = ExtResource("5_lhlh0")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ishxym64wu80"]
+[gd_scene load_steps=6 format=3 uid="uid://ishxym64wu80"]
 
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_csvwa"]
 [ext_resource type="TileSet" uid="uid://b46a5kc02ihhm" path="res://TileSet.tres" id="2_d5bko"]
 [ext_resource type="PackedScene" uid="uid://bd08pg1n5dry2" path="res://scenes/objects/enemies/void-target.tscn" id="4_wmr6h"]
+[ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/enemies/territorial-jumper.tscn" id="5_b41w6"]
 [ext_resource type="Script" path="res://Scripts/DEBUG-HELPER.gd" id="5_kao0p"]
 
 [node name="Scene" type="Node2D"]
@@ -59,3 +60,6 @@ position = Vector2(346, 62)
 
 [node name="DEBUG_HELPER" type="Node2D" parent="."]
 script = ExtResource("5_kao0p")
+
+[node name="TerritorialJumper" parent="." instance=ExtResource("5_b41w6")]
+position = Vector2(1652, -162)

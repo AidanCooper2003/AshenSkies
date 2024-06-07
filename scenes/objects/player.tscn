@@ -14,13 +14,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "coyoteTimer", "weaponManager", "sprite2D")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "coyoteTimer", "jumpQueueTimer", "weaponManager", "sprite2D")]
 collision_mask = 16
 script = ExtResource("1_guxbx")
 walkerComponent = NodePath("WalkerComponent")
 jumperComponent = NodePath("JumperComponent")
 jumpCooldownTimer = NodePath("JumpCooldownTimer")
 coyoteTimer = NodePath("CoyoteTimer")
+jumpQueueTimer = NodePath("JumpQueueTimer")
 weaponManager = NodePath("WeaponManager")
 leftSprite = ExtResource("2_p5gux")
 rightSprite = ExtResource("5_mf2qx")
@@ -87,6 +88,11 @@ weaponDistance = 300.0
 wait_time = 0.1
 one_shot = true
 
+[node name="JumpQueueTimer" type="Timer" parent="."]
+wait_time = 0.667
+one_shot = true
+
 [connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
 [connection signal="timeout" from="JumpCooldownTimer" to="." method="_on_jump_cooldown_timer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumpQueueTimer" to="." method="_on_jump_queue_timer_timeout"]

@@ -9,7 +9,9 @@ var time: float = 0
 
 func _process(delta):
 	if Input.is_action_pressed("Debug Reset"):
-		get_tree().change_scene_to_file("res://playtest_level.tscn")
+		get_tree().change_scene_to_file("res://scenes/levels/playtest_level.tscn")
+	if Input.is_action_pressed("Debug 1"):
+		get_tree().change_scene_to_file("res://scenes/levels/scene.tscn")
 	if timerText != null:
 		time += delta
 		timerText.text = "Time: " + str(snapped(time, 0.01))
