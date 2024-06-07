@@ -35,7 +35,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 606.0
 offset_bottom = 157.0
-text = "sd"
+text = "Time: 0.00"
 
 [node name="Final Time" type="RichTextLabel" parent="Camera2D/CanvasLayer/Control"]
 layout_mode = 0
