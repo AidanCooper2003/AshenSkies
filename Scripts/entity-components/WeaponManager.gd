@@ -38,7 +38,7 @@ func fire_secondary():
 		print("no secondary ability")
 
 func fire_tertiary():
-	if !instantiatedWeapon.fire_tertiary(weaponAngle):
+	if !instantiatedWeapon.fire_tertiary(aimAngle):
 		print("no tertiary ability")
 
 func aim():

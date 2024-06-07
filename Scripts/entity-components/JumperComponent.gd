@@ -14,6 +14,6 @@ class_name JumperComponent
 func jump():
 	characterBody2D.velocity.y = -jumpForce
 	gravityComponent.fastFallOverride = false
-	
+
 func jump_release():
 	gravityComponent.fastFallOverride = true

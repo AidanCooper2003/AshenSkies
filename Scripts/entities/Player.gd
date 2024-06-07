@@ -4,6 +4,7 @@ class_name Player
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
 @export var jumpCooldownTimer: Timer
+@export var coyoteTimer: Timer
 @export var weaponManager: WeaponManager
 
 @export var leftSprite: Texture
@@ -14,8 +15,12 @@ class_name Player
 @export var jumpDelay: float
 
 
+
 var currentJumps
 var canJump := true
+
+var wasOnFloor: bool
+var isCoyoteState: bool
 
 func _ready():
 	currentJumps = maxJumps
@@ -39,11 +44,15 @@ func handleWalk():
 		walkerComponent.walkDirection = 0
 
 func handleJump():
+	if !is_on_floor() && wasOnFloor:
+		coyoteTimer.start()
+		isCoyoteState = true
+	wasOnFloor = is_on_floor()
 	if is_on_floor() && currentJumps < maxJumps:
 		currentJumps = maxJumps
 	
 	if Input.is_action_just_pressed("Jump") && canJump && currentJumps >= 1:
-		if !is_on_floor():
+		if !is_on_floor() && !isCoyoteState:
 			currentJumps -= 1
 		jumperComponent.jump()
 		canJump = false
@@ -71,3 +80,7 @@ func handleWeaponFiring():
 
 func _on_jump_cooldown_timer_timeout():
 	canJump = true
+
+
+func _on_coyote_timer_timeout():
+	isCoyoteState = false

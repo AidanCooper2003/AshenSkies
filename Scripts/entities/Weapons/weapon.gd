@@ -20,13 +20,13 @@ var isSpriteFlipped: bool
 func _ready():
 	fireDelayTimer.wait_time = fireDelay
 
-func fire_primary(weaponAngle: float):
+func fire_primary(weaponAngle: Vector2):
 	return false
 	
-func fire_secondary(weaponAngle: float):
+func fire_secondary(weaponAngle: Vector2):
 	return false
 
-func fire_tertiary(weaponAngle: float):
+func fire_tertiary(weaponAngle: Vector2):
 	return false
 
 func set_sprite_right():
