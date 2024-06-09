@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/entities/Enemies/territorial-jumper.gd" id="1_y404u"]
 [ext_resource type="Shape2D" uid="uid://d08ulqwjdmbir" path="res://colliders/territorial-jumper.tres" id="3_baf3f"]
 [ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="3_hhxes"]
-[ext_resource type="Script" path="res://Scripts/entity-components/JumperComponent.gd" id="4_hxhpf"]
+[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity-parts/jumper.tscn" id="5_16e0a"]
 [ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_lhlh0"]
 [ext_resource type="Script" path="res://Scripts/entity-components/DamageDealerComponent.gd" id="6_prjgq"]
 [ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_85u8s"]
@@ -40,8 +40,7 @@ deccelerationCoefficient = 1.5
 airDeccelerationCoefficient = 1.0
 maxVelocity = 300.0
 
-[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent")]
-script = ExtResource("4_hxhpf")
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("5_16e0a")]
 characterBody2D = NodePath("..")
 jumpForce = 400.0
 gravityComponent = NodePath("../GravityComponent")

@@ -12,15 +12,15 @@ max_contacts_reported = 5
 contact_monitor = true
 script = ExtResource("1_v6rfs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = -1.57782
-shape = ExtResource("2_wjwft")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("2_j8ow2")
 offset = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57782
+shape = ExtResource("2_wjwft")
 
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 collision_layer = 2

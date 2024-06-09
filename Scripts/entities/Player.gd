@@ -1,32 +1,23 @@
 extends CharacterBody2D
 
 class_name Player
+
+
+signal changeOnFloorState
+
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
-@export var jumpCooldownTimer: Timer
-@export var coyoteTimer: Timer
-@export var jumpQueueTimer: Timer
 @export var weaponManager: WeaponManager
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
 @export var sprite2D: Sprite2D
 
-@export var maxJumps: int
-@export var jumpDelay: float
 
 
 
-var currentJumps
 var canJump := true
-
 var wasOnFloor: bool
-var isCoyoteState: bool
-var jumpQueued: bool
-
-func _ready():
-	currentJumps = maxJumps
-	jumpCooldownTimer.wait_time = jumpDelay
 
 
 func _physics_process(_delta):
@@ -46,26 +37,16 @@ func handleWalk():
 		walkerComponent.walkDirection = 0
 
 func handleJump():
-	if !is_on_floor() && wasOnFloor:
-		coyoteTimer.start()
-		isCoyoteState = true
-	wasOnFloor = is_on_floor()
-	if is_on_floor() && currentJumps < maxJumps:
-		currentJumps = maxJumps
-	
-	if (Input.is_action_just_pressed("Jump") || jumpQueued) && canJump && currentJumps >= 1:
-		if !is_on_floor() && !isCoyoteState:
-			currentJumps -= 1
-		jumperComponent.jump()
-		canJump = false
-		jumpCooldownTimer.start()
-		if jumpQueued:
-			jumpQueued = false
-		else:
-			jumpQueueTimer.start()
+	#wasOnFloor, coyoteTimer, isCoyoteState, isOnFloor (through signal), currentJumps, maxJumps, jumpQueued, canJump, jumpCooldownTimer
+	if Input.is_action_just_pressed("Jump"):
+		jumperComponent.start_jump()
 	if Input.is_action_just_released("Jump"):
-		jumperComponent.jump_release()
+		jumperComponent.release_jump()
+	if is_on_floor() != wasOnFloor:
+		changeOnFloorState.emit(is_on_floor())
+	wasOnFloor = is_on_floor()
 		
+
 func handlePrimaryFire():
 	if Input.is_action_pressed("Primary Fire"):
 		weaponManager.fire_primary()
@@ -82,14 +63,3 @@ func handleWeaponFiring():
 	handlePrimaryFire()
 	handleSecondaryFire()
 	handleTertiaryFire()
-
-
-func _on_jump_cooldown_timer_timeout():
-	canJump = true
-
-
-func _on_coyote_timer_timeout():
-	isCoyoteState = false
-
-func _on_jump_queue_timer_timeout():
-	jumpQueued = false

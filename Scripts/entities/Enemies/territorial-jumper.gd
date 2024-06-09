@@ -27,6 +27,6 @@ func _physics_process(_delta):
 	elif position.x > actualRightBound:
 		currentWalkDirection = -1
 		walkerComponent.walkDirection = currentWalkDirection
-	if objectDetector.is_colliding() && is_on_floor():
-		jumperComponent.jump()
+	if objectDetector.is_colliding():
+		jumperComponent.force_jump()
 	move_and_slide()

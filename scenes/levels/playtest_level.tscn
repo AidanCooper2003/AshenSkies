@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxn60d8h5jtnl"]
+[gd_scene load_steps=7 format=3 uid="uid://bxn60d8h5jtnl"]
 
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_eg45t"]
 [ext_resource type="TileSet" uid="uid://b46a5kc02ihhm" path="res://TileSet.tres" id="2_n6233"]
 [ext_resource type="Script" path="res://Scripts/DEBUG-HELPER.gd" id="3_pcsxx"]
+[ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/enemies/territorial-jumper.tscn" id="4_g4ohe"]
 
 [sub_resource type="Theme" id="Theme_idek2"]
 default_font_size = 24
@@ -13,7 +14,6 @@ size = Vector2(50, 28)
 [node name="PlaytestLevel" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_eg45t")]
-maxJumps = 1
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -61,5 +61,8 @@ position = Vector2(6417, -1547)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(15, -4)
 shape = SubResource("RectangleShape2D_mxg24")
+
+[node name="TerritorialJumper" parent="." instance=ExtResource("4_g4ohe")]
+position = Vector2(1109, 344)
 
 [connection signal="area_entered" from="Area2D" to="Node2D" method="_on_area_2d_area_entered"]

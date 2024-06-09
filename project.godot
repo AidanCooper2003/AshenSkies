@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=4
+window/stretch/mode="viewport"
 
 [input]
 
@@ -71,8 +73,12 @@ Jump={
 2d_physics/layer_4="Enemy Projectiles"
 2d_physics/layer_5="Ground"
 
+[physics]
+
+common/physics_ticks_per_second=240
+common/max_physics_steps_per_frame=32
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
