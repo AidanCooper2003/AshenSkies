@@ -25,7 +25,6 @@ func _physics_process(delta):
 func draw_weapon():
 	instantiatedWeapon = currentWeapon.instantiate()
 	weaponHolder.add_child(instantiatedWeapon)
-	print("Instantiated!")
 
 
 # Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
