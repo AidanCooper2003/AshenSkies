@@ -17,7 +17,7 @@ durability = 20
 position = Vector2(66, 0)
 script = ExtResource("2_diodx")
 bullet = ExtResource("3_ehfst")
-bulletVelocity = 4000.0
+bulletVelocity = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(26, 18)
