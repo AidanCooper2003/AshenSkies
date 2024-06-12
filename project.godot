@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
 window/stretch/mode="viewport"
 
 [input]
@@ -67,6 +66,10 @@ Jump={
 
 [layer_names]
 
+2d_render/layer_1="Player"
+2d_render/layer_2="Enemy Projectile"
+2d_render/layer_3="Enemy"
+2d_render/layer_4="Player Projectile"
 2d_physics/layer_1="Player Character"
 2d_physics/layer_2="Friendly Projectiles"
 2d_physics/layer_3="Enemy"

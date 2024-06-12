@@ -12,7 +12,7 @@ maxJumps = 1
 one_shot = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 one_shot = true
 
 [node name="JumpQueueTimer" type="Timer" parent="."]

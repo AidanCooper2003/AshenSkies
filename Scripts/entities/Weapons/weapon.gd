@@ -11,7 +11,7 @@ signal weapon_broke
 @export var durability : int
 
 
-var canFire: bool = true
+var canFire: bool
 
 var isSpriteFlipped: bool
 
@@ -19,6 +19,8 @@ var isSpriteFlipped: bool
 
 func _ready():
 	fireDelayTimer.wait_time = fireDelay
+	canFire = false
+	fireDelayTimer.start()
 
 func fire_primary(weaponAngle: Vector2):
 	return false

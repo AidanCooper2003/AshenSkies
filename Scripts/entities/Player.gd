@@ -4,10 +4,12 @@ class_name Player
 
 
 signal changeOnFloorState
+signal healthChanged
 
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
 @export var weaponManager: WeaponManager
+@export var animationPlayer: AnimationPlayer
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
@@ -45,7 +47,10 @@ func handleJump():
 	if is_on_floor() != wasOnFloor:
 		changeOnFloorState.emit(is_on_floor())
 	wasOnFloor = is_on_floor()
-		
+
+
+func handleAim():
+	weaponManager.aimPosition = get_global_mouse_position()
 
 func handlePrimaryFire():
 	if Input.is_action_pressed("Primary Fire"):
@@ -60,6 +65,11 @@ func handleTertiaryFire():
 		weaponManager.fire_tertiary()
 		
 func handleWeaponFiring():
+	handleAim()
 	handlePrimaryFire()
 	handleSecondaryFire()
 	handleTertiaryFire()
+
+func relayChangedHealth(newHealth: int):
+	healthChanged.emit(newHealth)
+	animationPlayer.play("iFrameFlashing")

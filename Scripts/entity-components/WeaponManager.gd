@@ -10,14 +10,13 @@ var instantiatedWeapon : Weapon
 var weaponHolder: Node2D
 var weaponAngle
 var aimAngle
-var leftWeaponRelativePosition: Vector2
-var rightWeaponRelativePosition: Vector2
+
+var aimPosition: Vector2
 
 func _ready():
 	weaponHolder = get_child(0)
-	leftWeaponRelativePosition = get_child(1).position
-	rightWeaponRelativePosition = get_child(2).position
 	draw_weapon()
+	aimAngle = Vector2.ZERO
 
 func _physics_process(delta):
 	aim()
@@ -41,12 +40,11 @@ func fire_tertiary():
 		print("no tertiary ability")
 
 func aim():
-	var weaponAngle = (get_global_mouse_position() - global_position).normalized().angle()
+	var weaponAngle = (aimPosition - global_position).normalized().angle()
 	if weaponAngle >= PI/2 || weaponAngle <= -PI/2:
 		instantiatedWeapon.set_sprite_right()
-		weaponHolder.global_position = global_position + leftWeaponRelativePosition
 	else:
 		instantiatedWeapon.set_sprite_left()
-		weaponHolder.global_position = global_position + rightWeaponRelativePosition
+	weaponHolder.global_position = global_position
 	weaponHolder.global_rotation = weaponAngle
-	aimAngle = (get_global_mouse_position() - weaponHolder.global_position).normalized()
+	aimAngle = (aimPosition - weaponHolder.global_position).normalized()

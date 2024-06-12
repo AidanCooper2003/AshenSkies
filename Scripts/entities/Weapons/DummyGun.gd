@@ -1,10 +1,8 @@
 extends Weapon
 
-class_name TestGun
+class_name DummyGun
 
 @export var projectileShooter: ProjectileShooter
-
-
 
 func fire_primary(weaponAngle):
 	if canFire:
