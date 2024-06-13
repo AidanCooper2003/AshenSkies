@@ -11,7 +11,7 @@ projectileShooter = NodePath("ProjectileShooter")
 fireDelayTimer = NodePath("FireDelayTimer")
 sprite = NodePath("Sprite2D")
 fireDelay = 0.5
-durability = 20
+maxDurability = 15
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(52, 4)

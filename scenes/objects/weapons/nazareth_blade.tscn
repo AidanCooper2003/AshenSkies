@@ -17,7 +17,7 @@ meleeHandler = NodePath("MeleeHandler")
 fireDelayTimer = NodePath("FireDelayTimer")
 sprite = NodePath("Sprite2D")
 fireDelay = 1.0
-durability = 20
+maxDurability = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 0)

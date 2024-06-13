@@ -5,12 +5,14 @@ class_name Player
 
 signal changeOnFloorState
 signal healthChanged
+signal selectedNewWeapon
+signal durabilityChanged
 
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
 @export var weaponManager: WeaponManager
 @export var animationPlayer: AnimationPlayer
-@export var inventoryManager: InventoryManager
+@export var weaponInventoryManager: WeaponInventoryManager
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
@@ -67,18 +69,23 @@ func handleTertiaryFire():
 
 func handleWeaponSwap():
 	if Input.is_action_just_pressed("SwapWeaponDown"):
-		weaponManager.switch_weapon(inventoryManager.swap_weapon_left())
+		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
-		weaponManager.switch_weapon(inventoryManager.swap_weapon_right())
+		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_right())
+	selectedNewWeapon.emit(weaponInventoryManager.currentWeapon)
 	
-	
-		
+func handleWeaponDurability():
+	var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
+	durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
+
+
 func handleWeaponFiring():
 	handleAim()
 	handlePrimaryFire()
 	handleSecondaryFire()
 	handleTertiaryFire()
 	handleWeaponSwap()
+	handleWeaponDurability()
 
 func relayChangedHealth(newHealth: int):
 	healthChanged.emit(newHealth)

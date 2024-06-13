@@ -1,9 +1,8 @@
 extends Node2D
 
-class_name InventoryManager
+class_name WeaponInventoryManager
 
 
-var resources: Dictionary
 var weapons: Array = []
 
 @export var weaponInventorySize: int

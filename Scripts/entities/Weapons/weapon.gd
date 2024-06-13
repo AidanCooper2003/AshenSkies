@@ -8,8 +8,9 @@ signal weapon_broke
 @export var sprite: Sprite2D
 
 @export var fireDelay : float
-@export var durability : int
+@export var maxDurability : int
 
+var durability
 
 var canFire: bool
 
@@ -18,6 +19,7 @@ var isSpriteFlipped: bool
 
 
 func _ready():
+	durability = maxDurability
 	fireDelayTimer.wait_time = fireDelay
 	canFire = false
 	fireDelayTimer.start()
