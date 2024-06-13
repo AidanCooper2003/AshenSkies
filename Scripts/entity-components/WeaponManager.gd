@@ -2,10 +2,11 @@ extends Node2D
 
 class_name WeaponManager
 
-@export var currentWeapon : PackedScene
+@export var defaultWeapon : PackedScene
 @export var weaponDistance: float
 
 
+var currentWeaponScene : PackedScene
 var instantiatedWeapon : Weapon
 var weaponHolder: Node2D
 var weaponAngle
@@ -14,17 +15,24 @@ var aimAngle
 var aimPosition: Vector2
 
 func _ready():
+	currentWeaponScene = defaultWeapon
 	weaponHolder = get_child(0)
 	draw_weapon()
 	aimAngle = Vector2.ZERO
+
 
 func _physics_process(delta):
 	aim()
 
 func draw_weapon():
-	instantiatedWeapon = currentWeapon.instantiate()
+	if instantiatedWeapon != null:
+		instantiatedWeapon.queue_free()
+	instantiatedWeapon = currentWeaponScene.instantiate()
 	weaponHolder.add_child(instantiatedWeapon)
 
+func switch_weapon(newWeapon):
+	currentWeaponScene = newWeapon
+	draw_weapon()
 
 # Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
 func fire_primary():

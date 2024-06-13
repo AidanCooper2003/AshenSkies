@@ -10,6 +10,7 @@ signal healthChanged
 @export var jumperComponent: JumperComponent
 @export var weaponManager: WeaponManager
 @export var animationPlayer: AnimationPlayer
+@export var inventoryManager: InventoryManager
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
@@ -63,12 +64,21 @@ func handleSecondaryFire():
 func handleTertiaryFire():
 	if Input.is_action_pressed("Tertiary Fire"):
 		weaponManager.fire_tertiary()
+
+func handleWeaponSwap():
+	if Input.is_action_just_pressed("SwapWeaponDown"):
+		weaponManager.switch_weapon(inventoryManager.swap_weapon_left())
+	if Input.is_action_just_pressed("SwapWeaponUp"):
+		weaponManager.switch_weapon(inventoryManager.swap_weapon_right())
+	
+	
 		
 func handleWeaponFiring():
 	handleAim()
 	handlePrimaryFire()
 	handleSecondaryFire()
 	handleTertiaryFire()
+	handleWeaponSwap()
 
 func relayChangedHealth(newHealth: int):
 	healthChanged.emit(newHealth)

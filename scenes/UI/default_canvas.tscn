@@ -1,0 +1,192 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvfn2yusm676m"]
+
+[ext_resource type="Theme" uid="uid://t5lkcrxxkxm6" path="res://default-theme.tres" id="1_seas8"]
+[ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/seven-seven.png" id="2_q0axk"]
+[ext_resource type="Texture2D" uid="uid://dqoekfmq8vv0x" path="res://sprites/spikeballer.png" id="3_cjwft"]
+[ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/storm.png" id="4_7lqui"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Timer" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_right = 606.0
+offset_bottom = 157.0
+theme = ExtResource("1_seas8")
+text = "Time: 0.00"
+
+[node name="Final Time" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 419.0
+offset_right = 1241.0
+offset_bottom = 619.0
+theme = ExtResource("1_seas8")
+
+[node name="Health" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 93.0
+offset_right = 591.0
+offset_bottom = 163.0
+theme = ExtResource("1_seas8")
+text = "Player Health: 3"
+
+[node name="Death" type="RichTextLabel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 696.0
+offset_top = 368.0
+offset_right = 1281.0
+offset_bottom = 632.0
+theme = ExtResource("1_seas8")
+text = "You're Dead!
+Press \"R\" to restart."
+
+[node name="InventoryContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 412.0
+offset_top = -1.0
+offset_right = 1015.0
+offset_bottom = 155.0
+
+[node name="Control" type="Control" parent="Control/InventoryContainer"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control/InventoryContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.421731, 0.421731, 0.421731, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_q0axk")
+stretch_mode = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 4.0
+grow_vertical = 0
+show_percentage = false
+
+[node name="Control2" type="Control" parent="Control/InventoryContainer"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control/InventoryContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.421731, 0.421731, 0.421731, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cjwft")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control2"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 4.0
+grow_vertical = 0
+show_percentage = false
+
+[node name="Control3" type="Control" parent="Control/InventoryContainer"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control/InventoryContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.421731, 0.421731, 0.421731, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_7lqui")
+stretch_mode = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control3"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 4.0
+grow_vertical = 0
+show_percentage = false
+
+[node name="Control4" type="Control" parent="Control/InventoryContainer"]
+modulate = Color(1, 1, 1, 0.705882)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control/InventoryContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.421731, 0.421731, 0.421731, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/InventoryContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control4"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 4.0
+grow_vertical = 0
+show_percentage = false

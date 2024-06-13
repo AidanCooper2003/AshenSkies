@@ -50,7 +50,7 @@ texture = ExtResource("1_y2jae")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("2_5xul8")
-currentWeapon = ExtResource("3_28v66")
+defaultWeapon = ExtResource("3_28v66")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
