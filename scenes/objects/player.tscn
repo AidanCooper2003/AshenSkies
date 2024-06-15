@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://brogejmjvqi2i"]
+[gd_scene load_steps=16 format=3 uid="uid://brogejmjvqi2i"]
 
 [ext_resource type="Script" path="res://Scripts/entities/Player.gd" id="1_guxbx"]
 [ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
 [ext_resource type="PackedScene" uid="uid://bg12mot7m8ooy" path="res://scenes/objects/weapons/test_gun.tscn" id="10_77isk"]
 [ext_resource type="Script" path="res://Scripts/entity-components/InventoryManager.gd" id="11_ivavg"]
+[ext_resource type="Script" path="res://scenes/objects/ResourceInventoryManager.gd" id="12_a4ijk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)
@@ -102,6 +103,13 @@ libraries = {
 [node name="WeaponInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ivavg")
 weaponInventorySize = 4
+
+[node name="ResourceInventoryManager" type="Node2D" parent="."]
+script = ExtResource("12_a4ijk")
+resources = {
+"Forbidden Fruit Juice": 0,
+"Sulfur": 0
+}
 
 [connection signal="changeOnFloorState" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="healthChanged" from="HealthComponent" to="." method="relayChangedHealth"]
