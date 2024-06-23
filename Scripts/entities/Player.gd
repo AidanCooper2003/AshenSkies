@@ -7,6 +7,8 @@ signal changeOnFloorState
 signal healthChanged
 signal selectedNewWeapon
 signal durabilityChanged
+signal changeCraftingMenuState
+signal resourceCountChanged
 
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
@@ -23,13 +25,15 @@ signal durabilityChanged
 
 var canJump := true
 var wasOnFloor: bool
+var craftingOpen: bool = false
 
 
 func _physics_process(_delta):
 	handleWalk()
 	handleJump()
-	move_and_slide()
 	handleWeaponFiring()
+	move_and_slide()
+	handleCraftingToggle()
 
 func handleWalk():
 	if Input.is_action_pressed("Move Left") && !Input.is_action_pressed("Move Right"):
@@ -77,16 +81,29 @@ func handleWeaponSwap():
 func handleWeaponDurability():
 	var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
 	durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
+	
+func handleCraftingToggle():
+	if Input.is_action_just_pressed("ToggleCraftingMenu"):
+		craftingOpen = !craftingOpen
+		changeCraftingMenuState.emit(craftingOpen)
 
 
+
+# Later you should still be able to fire, but only if its outside the bounds
+# of the crafting menu
 func handleWeaponFiring():
 	handleAim()
-	handlePrimaryFire()
-	handleSecondaryFire()
-	handleTertiaryFire()
+	if !craftingOpen:
+		handlePrimaryFire()
+		handleSecondaryFire()
+		handleTertiaryFire()
 	handleWeaponSwap()
 	handleWeaponDurability()
 
 func relayChangedHealth(newHealth: int):
 	healthChanged.emit(newHealth)
 	animationPlayer.play("iFrameFlashing")
+
+
+func _on_resource_inventory_manager_resource_count_changed(resourceName: String, resourceCount: int):
+	resourceCountChanged.emit(resourceName, resourceCount)
