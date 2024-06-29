@@ -236,7 +236,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 columns = 3
 
-[node name="ResourceContainer" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
+[node name="ResourceContainer1" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
 
 [node name="ResourceContainer2" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
@@ -277,7 +277,7 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 4
 
-[node name="TextureRect" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="TextureRect1" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -362,7 +362,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 3
 
-[node name="TextureRect" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer2/ScrollContainer/RecipeGrid"]
+[node name="TextureRect1" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer2/ScrollContainer/RecipeGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

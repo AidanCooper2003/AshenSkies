@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="1_1xlbe"]
 
-[node name="ResourceContainer" type="Control"]
-layout_mode = 3
+[node name="ResourceContainer" type="Button"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

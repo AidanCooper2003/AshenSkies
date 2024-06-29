@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxn60d8h5jtnl"]
+[gd_scene load_steps=11 format=3 uid="uid://bxn60d8h5jtnl"]
 
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_eg45t"]
 [ext_resource type="PackedScene" uid="uid://bvfn2yusm676m" path="res://scenes/UI/default_canvas.tscn" id="2_eqhnj"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/enemies/territorial-jumper.tscn" id="4_g4ohe"]
 [ext_resource type="Script" path="res://scenes/levels/CraftingUIManager.gd" id="5_cgfae"]
 [ext_resource type="PackedScene" uid="uid://posx1uyfda5n" path="res://scenes/objects/enemies/AshPriest.tscn" id="6_nfakm"]
+[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="6_pth3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxg24"]
 size = Vector2(50, 28)
@@ -96,17 +97,20 @@ deselectedSlotColor = Color(1, 1, 1, 0.588235)
 selecectedSlotColor = Color(1, 1, 1, 0.784314)
 weaponSlots = [NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control2"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control3"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control4")]
 
-[node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("craftingContainer", "resourceGrid")]
+[node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("craftingContainer", "resourceGrid", "player")]
 script = ExtResource("5_cgfae")
 craftingContainer = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer")
 resourceGrid = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid")
+player = NodePath("../Player")
+noTexture = ExtResource("6_pth3x")
 
-[node name="DEBUG_HELPER" type="Node2D" parent="." node_paths=PackedStringArray("timerText", "finalTimerText", "healthText", "deathText")]
+[node name="DEBUG_HELPER" type="Node2D" parent="." node_paths=PackedStringArray("timerText", "finalTimerText", "healthText", "deathText", "player")]
 script = ExtResource("3_pcsxx")
 timerText = NodePath("../Camera2D/CanvasLayer/Control/Timer")
 finalTimerText = NodePath("../Camera2D/CanvasLayer/Control/Final Time")
 healthText = NodePath("../Camera2D/CanvasLayer/Control/Health")
 deathText = NodePath("../Camera2D/CanvasLayer/Control/Death")
+player = NodePath("../Player")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(6417, -1547)

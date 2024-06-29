@@ -15,6 +15,8 @@ signal resourceCountChanged
 @export var weaponManager: WeaponManager
 @export var animationPlayer: AnimationPlayer
 @export var weaponInventoryManager: WeaponInventoryManager
+@export var resourceInventoryManager: ResourceInventoryManager
+@export var craftingManager: CraftingManager
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
@@ -99,6 +101,18 @@ func handleWeaponFiring():
 		handleTertiaryFire()
 	handleWeaponSwap()
 	handleWeaponDurability()
+
+func addToCrafting(resourceName: String):
+	resourceInventoryManager.addResourceToCrafting(resourceName)
+	
+func removeFromCrafting(resourceName: String):
+	resourceInventoryManager.subtractResourceFromCrafting(resourceName)
+
+func startCrafting():
+	print(resourceInventoryManager.resourcesInCrafting)
+	print(resourceInventoryManager.getCraftingCount())
+	if resourceInventoryManager.getCraftingCount() == 8:
+		print(craftingManager.craft(resourceInventoryManager.resourcesInCrafting))
 
 func relayChangedHealth(newHealth: int):
 	healthChanged.emit(newHealth)

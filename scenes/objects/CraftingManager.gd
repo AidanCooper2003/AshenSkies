@@ -12,6 +12,8 @@ var recipeQualities: Dictionary
 var resourceTags: Dictionary
 var resourceQualities: Dictionary
 
+var currentIngredients: Dictionary
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
