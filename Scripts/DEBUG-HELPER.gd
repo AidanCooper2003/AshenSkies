@@ -19,4 +19,7 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("Debug 3"):
 		player.startCrafting()
+		
+	if Input.is_action_just_pressed("Debug 2"):
+		player.resetCrafting()
 

@@ -71,8 +71,7 @@ func craft(ingredients: Dictionary):
 			itemPool.append(item)
 	var chosenItem = randi_range(0, itemPool.size() - 1)
 	return itemPool[chosenItem]
-	
-			
+
 func getTagMatchCount(item: String, tagCounts: Dictionary):
 	var itemTags = recipeTags[item]
 	var itemCount = 0

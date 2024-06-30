@@ -9,6 +9,7 @@ signal selectedNewWeapon
 signal durabilityChanged
 signal changeCraftingMenuState
 signal resourceCountChanged
+signal ingredientsChanged
 
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
@@ -104,9 +105,15 @@ func handleWeaponFiring():
 
 func addToCrafting(resourceName: String):
 	resourceInventoryManager.addResourceToCrafting(resourceName)
+	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
 	
 func removeFromCrafting(resourceName: String):
 	resourceInventoryManager.subtractResourceFromCrafting(resourceName)
+	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
+	
+func resetCrafting():
+	resourceInventoryManager.resetCrafting()
+	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
 
 func startCrafting():
 	print(resourceInventoryManager.resourcesInCrafting)

@@ -50,7 +50,7 @@ func addResourceToCrafting(resourceName):
 	if hasResource(resourceName) && resources[resourceName] > 0 && getCraftingCount() < maxResourcesInCrafting:
 		if !resourcesInCrafting.has(resourceName):
 			resourcesInCrafting[resourceName] = 1
-		else:
+		elif resources[resourceName] - resourcesInCrafting[resourceName] > 0:
 			resourcesInCrafting[resourceName] += 1
 		resourceCountChanged.emit(resourceName, getResourceCount(resourceName))
 
@@ -78,6 +78,11 @@ func getCraftingCount():
 		total += resourceCount
 	return total
 
+func resetCrafting():
+	resourcesInCrafting = {}
+	for resource in resources:
+		resourceCountChanged.emit(resource, resources[resource])
+	
 
 # Maybe have some csv for a verifier later?
 

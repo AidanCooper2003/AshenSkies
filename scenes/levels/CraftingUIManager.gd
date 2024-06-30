@@ -4,6 +4,7 @@ class_name CraftingUIManager
 
 @export var craftingContainer: Control
 @export var resourceGrid: GridContainer
+@export var craftingGrid: GridContainer
 @export var player: Player
 
 @export var noTexture: Texture
@@ -53,6 +54,18 @@ func _on_player_resource_count_changed(resourceName, resourceCount):
 		resourceContainers[resourceName].get_child(0).texture = noTexture
 		resourceContainers.erase(resourceName)
 		containersFull = false
+
+func _on_ingredients_changed(ingredients: Dictionary):
+	var ingredientContainers = craftingGrid.get_children()
+	var containerIndex = 0
+	for ingredient in ingredients:
+		for i in range(ingredients[ingredient]):
+			ingredientContainers[containerIndex].icon = load("res://sprites/ResourceIcons/" + resourceTextures[ingredient])
+			containerIndex += 1
+	if containerIndex < 7:
+		for i in range(8 - containerIndex):
+			ingredientContainers[containerIndex].icon = null
+			containerIndex += 1
 
 func setup_ingredient_buttons():
 	for button in resourceGrid.get_children():

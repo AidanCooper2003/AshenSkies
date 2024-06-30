@@ -277,69 +277,53 @@ layout_mode = 2
 size_flags_vertical = 3
 columns = 4
 
-[node name="TextureRect1" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton1" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect2" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton2" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect3" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton3" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect4" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton4" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect5" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton5" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect6" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton6" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect7" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton7" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
-[node name="TextureRect8" type="TextureRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
+[node name="IngredientButton8" type="Button" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("5_n4eca")
-expand_mode = 2
-stretch_mode = 5
+expand_icon = true
 
 [node name="Spacer" type="Control" parent="Control/CraftingContainer/HBoxContainer"]
 layout_mode = 2
