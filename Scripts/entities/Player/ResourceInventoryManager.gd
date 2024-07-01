@@ -18,10 +18,8 @@ func _process(_delta):
 
 
 func hasResource(resourceName: String):
-	var resourceExists = resources.has(resourceName)
-	if !resourceExists:
-		print("Resource does not exist!")
-	return resourceExists
+	return resources.has(resourceName)
+
 
 func addResource(resourceName: String, resourceCount: int):
 	if hasResource(resourceName):
@@ -84,7 +82,7 @@ func resetCrafting():
 		resourceCountChanged.emit(resource, resources[resource])
 	
 
-# Maybe have some csv for a verifier later?
+# Maybe have some csv for a verifier of valid resource types later?
 
 func initializeInventory():
 	addResourceType("cyclonium")

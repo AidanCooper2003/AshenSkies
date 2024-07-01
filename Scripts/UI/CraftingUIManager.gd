@@ -10,8 +10,6 @@ class_name CraftingUIManager
 @export var noTexture: Texture
 
 
-var recipes = preload("res://recipes.csv").records
-var resources = preload("res://resources.csv").records
 
 var resourceTextures: Dictionary
 
@@ -22,7 +20,7 @@ var resourceContainers: Dictionary
 var containersFull: bool = false
 
 func _init():
-	resourceTextures = getProperty(resources, 0, 3)
+	resourceTextures = CSVManager.getProperty(CSVManager.resources, 0, 3)
 
 func _ready():
 	setup_ingredient_buttons()
@@ -76,11 +74,3 @@ func on_ingredient_clicked(button):
 	if buttonResource == null:
 		return
 	player.addToCrafting(buttonResource)
-
-
-func getProperty(collection, nameColumn, propertyColumn):
-	var properties: Dictionary
-	for object in collection:
-		properties[object[nameColumn]] = object[propertyColumn]
-		print(object[nameColumn] + ", " + object[propertyColumn])
-	return properties

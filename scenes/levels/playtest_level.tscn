@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_eg45t"]
 [ext_resource type="PackedScene" uid="uid://bvfn2yusm676m" path="res://scenes/UI/default_canvas.tscn" id="2_eqhnj"]
 [ext_resource type="TileSet" uid="uid://b46a5kc02ihhm" path="res://TileSet.tres" id="2_n6233"]
-[ext_resource type="Script" path="res://Scripts/DEBUG-HELPER.gd" id="3_pcsxx"]
-[ext_resource type="Script" path="res://scenes/levels/UI-Manager.gd" id="4_bs2vo"]
+[ext_resource type="Script" path="res://Scripts/Utility/DEBUG-HELPER.gd" id="3_pcsxx"]
+[ext_resource type="Script" path="res://Scripts/UI/UI-Manager.gd" id="4_bs2vo"]
 [ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/enemies/territorial-jumper.tscn" id="4_g4ohe"]
-[ext_resource type="Script" path="res://scenes/levels/CraftingUIManager.gd" id="5_cgfae"]
+[ext_resource type="Script" path="res://Scripts/UI/CraftingUIManager.gd" id="5_cgfae"]
 [ext_resource type="PackedScene" uid="uid://posx1uyfda5n" path="res://scenes/objects/enemies/AshPriest.tscn" id="6_nfakm"]
 [ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="6_pth3x"]
 

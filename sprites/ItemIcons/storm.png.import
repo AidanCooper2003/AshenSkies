@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://56cmojcdccr3"
-path="res://.godot/imported/ash-staff.png-95144e0cc3f13686ca10ab177708aa52.ctex"
+uid="uid://c0i7tt3qcssat"
+path="res://.godot/imported/storm.png-82e3e8bd8779ee31655f27b5c56743b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ash-staff.png"
-dest_files=["res://.godot/imported/ash-staff.png-95144e0cc3f13686ca10ab177708aa52.ctex"]
+source_file="res://sprites/ItemIcons/storm.png"
+dest_files=["res://.godot/imported/storm.png-82e3e8bd8779ee31655f27b5c56743b9.ctex"]
 
 [params]
 

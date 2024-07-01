@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/entities/Weapons/basic-gun.gd" id="1_2ukhe"]
 [ext_resource type="Script" path="res://Scripts/entities/weapon-components/ProjectileShooter.gd" id="2_diodx"]
-[ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/seven-seven.png" id="3_dgwie"]
+[ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/ItemIcons/test-gun.png" id="3_dgwie"]
 [ext_resource type="PackedScene" uid="uid://cxgy32f0tctp1" path="res://scenes/objects/projectiles/test_gun_bullet.tscn" id="3_ehfst"]
 
 [node name="TestGun" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]

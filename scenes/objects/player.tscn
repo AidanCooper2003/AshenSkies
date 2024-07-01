@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://brogejmjvqi2i"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Player.gd" id="1_guxbx"]
+[ext_resource type="Script" path="res://Scripts/entities/Player/Player.gd" id="1_guxbx"]
 [ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
 [ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
 [ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
 [ext_resource type="PackedScene" uid="uid://bg12mot7m8ooy" path="res://scenes/objects/weapons/test_gun.tscn" id="10_77isk"]
 [ext_resource type="Script" path="res://Scripts/entity-components/InventoryManager.gd" id="11_ivavg"]
-[ext_resource type="Script" path="res://scenes/objects/ResourceInventoryManager.gd" id="12_a4ijk"]
-[ext_resource type="Script" path="res://scenes/objects/CraftingManager.gd" id="13_d1llt"]
+[ext_resource type="Script" path="res://Scripts/entities/Player/ResourceInventoryManager.gd" id="12_a4ijk"]
+[ext_resource type="Script" path="res://Scripts/entities/Player/CraftingManager.gd" id="13_d1llt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)

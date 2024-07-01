@@ -3,8 +3,6 @@ extends Node2D
 class_name CraftingManager
 
 
-var recipes = preload("res://recipes.csv").records
-var resources = preload("res://resources.csv").records
 
 
 var recipeTags: Dictionary
@@ -18,19 +16,14 @@ var currentIngredients: Dictionary
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Removes headers from csv
-	recipes.remove_at(0)
-	resources.remove_at(0)
 	
-	print(recipes)
-	print("----------------------")
-	print(resources)
+
+	recipeTags = CSVManager.getTags(CSVManager.recipes, 0, 1)
+	resourceTags = CSVManager.getTags(CSVManager.resources, 0, 1)
+	recipeQualities = CSVManager.getProperty(CSVManager.recipes, 0, 2)
+	resourceQualities = CSVManager.getProperty(CSVManager.resources, 0, 2)
 	
-	recipeTags = getTags(recipes, 0, 1)
-	resourceTags = getTags(resources, 0, 1)
-	recipeQualities = getProperty(recipes, 0, 2)
-	resourceQualities = getProperty(resources, 0, 2)
-	
-	test_crafting()
+	#test_crafting()
 
 
 
@@ -101,17 +94,3 @@ func getIngredientsTags(ingredients: Dictionary):
 			else:
 				tagCounts[tag] = ingredients[ingredient]
 	return tagCounts
-
-
-func getTags(collection, nameColumn, tagColumn):
-	var tags: Dictionary
-	for object in collection:
-		var tagArray = object[1].split(", ")
-		tags[object[0]] = tagArray
-	return tags
-
-func getProperty(collection, nameColumn, propertyColumn):
-	var properties: Dictionary
-	for object in collection:
-		properties[object[nameColumn]] = object[propertyColumn]
-	return properties

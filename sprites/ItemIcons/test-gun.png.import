@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0i7tt3qcssat"
-path="res://.godot/imported/storm.png-01199c84da2993ebb7eb0b9b07d80d1b.ctex"
+uid="uid://pslav07eagb2"
+path="res://.godot/imported/test-gun.png-b970fb74d8cf94f7bc770f999f28d16e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/storm.png"
-dest_files=["res://.godot/imported/storm.png-01199c84da2993ebb7eb0b9b07d80d1b.ctex"]
+source_file="res://sprites/ItemIcons/test-gun.png"
+dest_files=["res://.godot/imported/test-gun.png-b970fb74d8cf94f7bc770f999f28d16e.ctex"]
 
 [params]
 

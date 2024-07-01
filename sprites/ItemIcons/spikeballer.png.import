@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pslav07eagb2"
-path="res://.godot/imported/seven-seven.png-49a9ea528187fc7ff9a7786a1bf9a6a2.ctex"
+uid="uid://dqoekfmq8vv0x"
+path="res://.godot/imported/spikeballer.png-457349a91f8e5a01e599a2eabf6191d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/seven-seven.png"
-dest_files=["res://.godot/imported/seven-seven.png-49a9ea528187fc7ff9a7786a1bf9a6a2.ctex"]
+source_file="res://sprites/ItemIcons/spikeballer.png"
+dest_files=["res://.godot/imported/spikeballer.png-457349a91f8e5a01e599a2eabf6191d6.ctex"]
 
 [params]
 

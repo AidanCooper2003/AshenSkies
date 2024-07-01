@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/entities/Weapons/basic-gun.gd" id="1_fl8eb"]
 [ext_resource type="Script" path="res://Scripts/entities/weapon-components/ProjectileShooter.gd" id="2_6xqjk"]
-[ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/storm.png" id="3_6qdxe"]
+[ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/ItemIcons/storm.png" id="3_6qdxe"]
 [ext_resource type="PackedScene" uid="uid://ca24n6aoqby43" path="res://scenes/objects/projectiles/dummy-gun-bullet.tscn" id="3_huidj"]
 
 [node name="DummyGun" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/entities/Weapons/basic-gun.gd" id="1_emrt6"]
 [ext_resource type="Script" path="res://Scripts/entities/weapon-components/ProjectileShooter.gd" id="2_7ihbh"]
 [ext_resource type="PackedScene" uid="uid://dj5p6oevulj6" path="res://scenes/objects/projectiles/spikeball.tscn" id="3_lppc8"]
-[ext_resource type="Texture2D" uid="uid://dqoekfmq8vv0x" path="res://sprites/spikeballer.png" id="4_4blqk"]
+[ext_resource type="Texture2D" uid="uid://dqoekfmq8vv0x" path="res://sprites/ItemIcons/spikeballer.png" id="4_4blqk"]
 
 [node name="SpikeballLauncher" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]
 script = ExtResource("1_emrt6")
