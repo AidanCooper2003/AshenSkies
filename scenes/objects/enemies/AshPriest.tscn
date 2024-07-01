@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/entities/Enemies/AshPriest.gd" id="1_bmwkr"]
 [ext_resource type="Texture2D" uid="uid://cj0d48cfl53wg" path="res://sprites/sun-priest.png" id="1_y2jae"]
 [ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="2_5xul8"]
-[ext_resource type="PackedScene" uid="uid://bkglorimicvgf" path="res://scenes/objects/weapons/ash_staff.tscn" id="3_28v66"]
+[ext_resource type="PackedScene" uid="uid://bkglorimicvgf" path="res://scenes/objects/weapons/ash-staff.tscn" id="4_n0fwc"]
 [ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="5_hrj6w"]
 [ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="6_acbgd"]
 
@@ -50,7 +50,7 @@ texture = ExtResource("1_y2jae")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("2_5xul8")
-defaultWeapon = ExtResource("3_28v66")
+defaultWeapon = ExtResource("4_n0fwc")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 

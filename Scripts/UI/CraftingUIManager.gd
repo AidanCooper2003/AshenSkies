@@ -20,7 +20,7 @@ var resourceContainers: Dictionary
 var containersFull: bool = false
 
 func _init():
-	resourceTextures = CSVManager.getProperty(CSVManager.resources, 0, 3)
+	resourceTextures = CSVManager.getProperties(CSVManager.resources, 0, 3)
 
 func _ready():
 	setup_ingredient_buttons()

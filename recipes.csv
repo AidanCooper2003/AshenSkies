@@ -9,4 +9,4 @@ Spikeball Launcher,Gun,2,TRUE,,
 8Air,Air,2,TRUE,,
 9Air,Air,2,TRUE,,
 10AirGun,"Air, Gun",2,TRUE,,
-Test Gun,Tes,2,TRUE,test-gun.png,test-gun.tscn
+Test Gun,Test,2,TRUE,test-gun.png,test-gun.tscn

@@ -10,6 +10,7 @@ signal durabilityChanged
 signal changeCraftingMenuState
 signal resourceCountChanged
 signal ingredientsChanged
+signal weaponSlotChanged
 
 @export var walkerComponent: WalkerComponent
 @export var jumperComponent: JumperComponent
@@ -82,8 +83,9 @@ func handleWeaponSwap():
 	selectedNewWeapon.emit(weaponInventoryManager.currentWeapon)
 	
 func handleWeaponDurability():
-	var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
-	durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
+	if weaponManager.instantiatedWeapon != null:
+		var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
+		durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
 	
 func handleCraftingToggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
@@ -119,7 +121,12 @@ func startCrafting():
 	print(resourceInventoryManager.resourcesInCrafting)
 	print(resourceInventoryManager.getCraftingCount())
 	if resourceInventoryManager.getCraftingCount() == 8:
-		print(craftingManager.craft(resourceInventoryManager.resourcesInCrafting))
+		var item = craftingManager.craft(resourceInventoryManager.resourcesInCrafting)
+		var itemScene = CSVManager.getItemScene(item)
+		if itemScene != null:
+			weaponInventoryManager.add_weapon(itemScene)
+		weaponSlotChanged.emit(weaponInventoryManager.weapons.size() - 1, item)
+
 
 func relayChangedHealth(newHealth: int):
 	healthChanged.emit(newHealth)

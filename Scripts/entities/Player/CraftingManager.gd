@@ -15,13 +15,13 @@ var currentIngredients: Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Removes headers from csv
+
 	
 
 	recipeTags = CSVManager.getTags(CSVManager.recipes, 0, 1)
 	resourceTags = CSVManager.getTags(CSVManager.resources, 0, 1)
-	recipeQualities = CSVManager.getProperty(CSVManager.recipes, 0, 2)
-	resourceQualities = CSVManager.getProperty(CSVManager.resources, 0, 2)
+	recipeQualities = CSVManager.getProperties(CSVManager.recipes, 0, 2)
+	resourceQualities = CSVManager.getProperties(CSVManager.resources, 0, 2)
 	
 	#test_crafting()
 
@@ -64,6 +64,7 @@ func craft(ingredients: Dictionary):
 			itemPool.append(item)
 	var chosenItem = randi_range(0, itemPool.size() - 1)
 	return itemPool[chosenItem]
+
 
 func getTagMatchCount(item: String, tagCounts: Dictionary):
 	var itemTags = recipeTags[item]
