@@ -1,17 +1,17 @@
 [gd_scene load_steps=16 format=3 uid="uid://brogejmjvqi2i"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Player/Player.gd" id="1_guxbx"]
-[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
-[ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
-[ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
-[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/PlayerRight.png" id="5_mf2qx"]
-[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity-parts/jumper.tscn" id="6_q6d2k"]
-[ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_wlhmx"]
-[ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="8_57w21"]
-[ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
-[ext_resource type="Script" path="res://Scripts/entity-components/InventoryManager.gd" id="11_ivavg"]
-[ext_resource type="Script" path="res://Scripts/entities/Player/ResourceInventoryManager.gd" id="12_a4ijk"]
-[ext_resource type="Script" path="res://Scripts/entities/Player/CraftingManager.gd" id="13_d1llt"]
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_v3r2n"]
+[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/player/player_left.png" id="2_p5gux"]
+[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/player/player_right.png" id="3_jc6ji"]
+[ext_resource type="Script" path="res://scripts/entity-components/walker_component.gd" id="4_4fqoi"]
+[ext_resource type="Script" path="res://scripts/entity-components/gravity_component.gd" id="5_j8pe6"]
+[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity_parts/jumper.tscn" id="6_q6d2k"]
+[ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="7_r6hrc"]
+[ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="8_mbve0"]
+[ext_resource type="Script" path="res://scripts/entity-components/weapon_manager.gd" id="9_fy50t"]
+[ext_resource type="Script" path="res://scripts/entity-components/weapon_inventory_manager.gd" id="10_d84o6"]
+[ext_resource type="Script" path="res://scripts/entities/player/resource_inventory_manager.gd" id="11_ql8no"]
+[ext_resource type="Script" path="res://scripts/entities/player/crafting_manager.gd" id="12_qkxvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)
@@ -38,7 +38,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "weaponManager", "animationPlayer", "weaponInventoryManager", "resourceInventoryManager", "craftingManager", "sprite2D")]
 collision_mask = 16
-script = ExtResource("1_guxbx")
+script = ExtResource("1_v3r2n")
 walkerComponent = NodePath("WalkerComponent")
 jumperComponent = NodePath("JumperComponent")
 weaponManager = NodePath("WeaponManager")
@@ -47,19 +47,19 @@ weaponInventoryManager = NodePath("WeaponInventoryManager")
 resourceInventoryManager = NodePath("ResourceInventoryManager")
 craftingManager = NodePath("CraftingManager")
 leftSprite = ExtResource("2_p5gux")
-rightSprite = ExtResource("5_mf2qx")
+rightSprite = ExtResource("3_jc6ji")
 sprite2D = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)
-texture = ExtResource("5_mf2qx")
+texture = ExtResource("3_jc6ji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_t5u02")
 
 [node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
-script = ExtResource("4_w5kmv")
+script = ExtResource("4_4fqoi")
 characterBody2D = NodePath("..")
 walkDirection = 1
 acceleration = 800.0
@@ -78,20 +78,20 @@ characterBody2D = NodePath("..")
 gravityComponent = NodePath("../GravityComponent")
 
 [node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("7_wlhmx")
+script = ExtResource("7_r6hrc")
 maxHealth = 3
 simpleHealth = true
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_mask = 12
-script = ExtResource("8_57w21")
+script = ExtResource("8_mbve0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false
 shape = SubResource("RectangleShape2D_t5u02")
 
 [node name="WeaponManager" type="Node2D" parent="."]
-script = ExtResource("9_ppa1w")
+script = ExtResource("9_fy50t")
 weaponDistance = 300.0
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
@@ -102,14 +102,14 @@ libraries = {
 }
 
 [node name="WeaponInventoryManager" type="Node2D" parent="."]
-script = ExtResource("11_ivavg")
+script = ExtResource("10_d84o6")
 weaponInventorySize = 4
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
-script = ExtResource("12_a4ijk")
+script = ExtResource("11_ql8no")
 
 [node name="CraftingManager" type="Node2D" parent="."]
-script = ExtResource("13_d1llt")
+script = ExtResource("12_qkxvb")
 
 [connection signal="changeOnFloorState" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="healthChanged" from="HealthComponent" to="." method="relayChangedHealth"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bia5ul7w7do3n"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Projectiles/basic_gun_bullet.gd" id="1_flxvv"]
-[ext_resource type="Texture2D" uid="uid://bvca55fgdj6ng" path="res://sprites/Solar_Essence.png" id="2_8poc3"]
-[ext_resource type="Shape2D" uid="uid://dv2i3fxhgrcvw" path="res://colliders/ash-staff-bullet-collider.tres" id="3_x5epf"]
-[ext_resource type="Script" path="res://Scripts/entity-components/DamageDealerComponent.gd" id="4_vchdq"]
+[ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_flxvv"]
+[ext_resource type="Texture2D" uid="uid://bvca55fgdj6ng" path="res://sprites/projectiles/solar_essence.png" id="2_8poc3"]
+[ext_resource type="Shape2D" uid="uid://dv2i3fxhgrcvw" path="res://colliders/ash_staff_bullet_collider.tres" id="3_x5epf"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_vchdq"]
 
 [node name="BasicGunBullet" type="RigidBody2D"]
 collision_layer = 8

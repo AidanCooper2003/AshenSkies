@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ca24n6aoqby43"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Projectiles/basic_gun_bullet.gd" id="1_ubyb4"]
-[ext_resource type="Texture2D" uid="uid://dap7cfh50ghns" path="res://sprites/spaceMissiles_017.png" id="2_irsf3"]
+[ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_ubyb4"]
+[ext_resource type="Texture2D" uid="uid://dap7cfh50ghns" path="res://sprites/projectiles/bullet.png" id="2_irsf3"]
 [ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="3_4vh6b"]
-[ext_resource type="Script" path="res://Scripts/entity-components/DamageDealerComponent.gd" id="4_fxxo6"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_fxxo6"]
 
 [node name="BasicGunBullet" type="RigidBody2D"]
 collision_layer = 2

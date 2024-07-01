@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://t5lkcrxxkxm6" path="res://default-theme.tres" id="1_seas8"]
 [ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="5_n4eca"]
-[ext_resource type="PackedScene" uid="uid://bow7e73jbp8hw" path="res://scenes/UI/Elements/resource_container.tscn" id="5_xt3hk"]
+[ext_resource type="PackedScene" uid="uid://bow7e73jbp8hw" path="res://scenes/ui/elements/resource_container.tscn" id="5_xt3hk"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
