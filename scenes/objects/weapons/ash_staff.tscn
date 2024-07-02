@@ -5,11 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bia5ul7w7do3n" path="res://scenes/objects/projectiles/ash_staff_bullet.tscn" id="3_e5jr1"]
 [ext_resource type="Texture2D" uid="uid://56cmojcdccr3" path="res://sprites/item_icons/ash_staff.png" id="4_qevtc"]
 
-[node name="AshStaff" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]
+[node name="AshStaff" type="Node2D"]
 script = ExtResource("1_8ec8x")
-projectileShooter = NodePath("ProjectileShooter")
-fireDelayTimer = NodePath("Timer")
-sprite = NodePath("Sprite2D")
 fireDelay = 2.0
 maxDurability = 1000
 
@@ -25,6 +22,6 @@ rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("4_qevtc")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="FireDelayTimer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_fire_delay_timer_timeout"]
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

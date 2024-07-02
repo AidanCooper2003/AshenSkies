@@ -36,19 +36,11 @@ _data = {
 "iFrameFlashing": SubResource("Animation_ybw7g")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "weaponManager", "animationPlayer", "weaponInventoryManager", "resourceInventoryManager", "craftingManager", "sprite2D")]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 48
 script = ExtResource("1_v3r2n")
-walkerComponent = NodePath("WalkerComponent")
-jumperComponent = NodePath("JumperComponent")
-weaponManager = NodePath("WeaponManager")
-animationPlayer = NodePath("AnimationPlayer")
-weaponInventoryManager = NodePath("WeaponInventoryManager")
-resourceInventoryManager = NodePath("ResourceInventoryManager")
-craftingManager = NodePath("CraftingManager")
 leftSprite = ExtResource("2_p5gux")
 rightSprite = ExtResource("3_jc6ji")
-sprite2D = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)

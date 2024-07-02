@@ -5,11 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://ca24n6aoqby43" path="res://scenes/objects/projectiles/dummy-gun-bullet.tscn" id="3_an0tq"]
 [ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/item_icons/storm.png" id="4_xm5iw"]
 
-[node name="DummyGun" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]
+[node name="DummyGun" type="Node2D"]
 script = ExtResource("1_83b3o")
-projectileShooter = NodePath("ProjectileShooter")
-fireDelayTimer = NodePath("Timer")
-sprite = NodePath("Sprite2D")
 fireDelay = 0.07
 maxDurability = 200
 
@@ -25,6 +22,6 @@ position = Vector2(32, 14)
 scale = Vector2(4, 4)
 texture = ExtResource("4_xm5iw")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="FireDelayTimer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_fire_delay_timer_timeout"]
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

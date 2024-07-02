@@ -5,11 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/item_icons/test_gun.png" id="3_dgwie"]
 [ext_resource type="PackedScene" uid="uid://cxgy32f0tctp1" path="res://scenes/objects/projectiles/test_gun_bullet.tscn" id="3_ehfst"]
 
-[node name="TestGun" type="Node2D" node_paths=PackedStringArray("projectileShooter", "fireDelayTimer", "sprite")]
+[node name="TestGun" type="Node2D"]
 script = ExtResource("1_2ukhe")
-projectileShooter = NodePath("ProjectileShooter")
-fireDelayTimer = NodePath("FireDelayTimer")
-sprite = NodePath("Sprite2D")
 fireDelay = 0.5
 maxDurability = 20
 

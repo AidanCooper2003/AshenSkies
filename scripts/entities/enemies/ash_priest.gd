@@ -2,7 +2,7 @@ extends Node2D
 
 class_name AshPriest
 
-@export var weaponManager: WeaponManager
+@onready var weaponManager:= $WeaponManager
 
 var target
 

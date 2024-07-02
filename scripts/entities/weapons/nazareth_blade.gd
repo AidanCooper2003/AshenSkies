@@ -6,7 +6,7 @@ class_name NazarethBlade
 @export var leftSprite : Texture2D
 @export var rightSprite : Texture2D
 
-@export var meleeHandler: MeleeHandler
+@onready var meleeHandler:= $MeleeHandler
 
 
 func fire_primary(_weaponAngle):

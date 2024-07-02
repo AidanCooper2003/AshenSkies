@@ -4,8 +4,8 @@ class_name Weapon
 
 signal weapon_broke
 
-@export var fireDelayTimer: Timer
-@export var sprite: Sprite2D
+@onready var fireDelayTimer:= $FireDelayTimer
+@onready var sprite:= $Sprite2D
 
 @export var fireDelay : float
 @export var maxDurability : int

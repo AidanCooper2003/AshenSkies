@@ -34,15 +34,11 @@ _data = {
 "hurt": SubResource("Animation_yqmoa")
 }
 
-[node name="TerritorialJumper" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "objectDetector", "animationPlayer")]
+[node name="TerritorialJumper" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 16
 floor_max_angle = 1.0472
 script = ExtResource("1_y404u")
-walkerComponent = NodePath("WalkerComponent")
-jumperComponent = NodePath("JumperComponent")
-objectDetector = NodePath("ShapeCast2D")
-animationPlayer = NodePath("AnimationPlayer")
 relativeLeftBound = 100.0
 relativeRightBound = 100.0
 

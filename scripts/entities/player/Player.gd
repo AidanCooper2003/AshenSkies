@@ -12,17 +12,18 @@ signal resourceCountChanged
 signal ingredientsChanged
 signal weaponSlotChanged
 
-@export var walkerComponent: WalkerComponent
-@export var jumperComponent: JumperComponent
-@export var weaponManager: WeaponManager
-@export var animationPlayer: AnimationPlayer
-@export var weaponInventoryManager: WeaponInventoryManager
-@export var resourceInventoryManager: ResourceInventoryManager
-@export var craftingManager: CraftingManager
+@onready var walkerComponent:= $WalkerComponent
+@onready var jumperComponent:= $JumperComponent
+@onready var weaponManager:= $WeaponManager
+@onready var animationPlayer:= $AnimationPlayer
+@onready var weaponInventoryManager:= $WeaponInventoryManager
+@onready var resourceInventoryManager:= $ResourceInventoryManager
+@onready var craftingManager:= $CraftingManager
+@onready var sprite2D:= $Sprite2D
 
 @export var leftSprite: Texture
 @export var rightSprite: Texture
-@export var sprite2D: Sprite2D
+
 
 
 
@@ -33,13 +34,13 @@ var craftingOpen: bool = false
 
 
 func _physics_process(_delta):
-	handleWalk()
-	handleJump()
-	handleWeaponFiring()
+	handle_walk()
+	handle_jump()
+	handle_weapon_firing()
 	move_and_slide()
-	handleCraftingToggle()
+	handle_crafting_toggle()
 
-func handleWalk():
+func handle_walk():
 	if Input.is_action_pressed("Move Left") && !Input.is_action_pressed("Move Right"):
 		sprite2D.texture = leftSprite
 		walkerComponent.walkDirection = -1
@@ -49,7 +50,7 @@ func handleWalk():
 	else:
 		walkerComponent.walkDirection = 0
 
-func handleJump():
+func handle_jump():
 	#wasOnFloor, coyoteTimer, isCoyoteState, isOnFloor (through signal), currentJumps, maxJumps, jumpQueued, canJump, jumpCooldownTimer
 	if Input.is_action_just_pressed("Jump"):
 		jumperComponent.start_jump()
@@ -60,34 +61,34 @@ func handleJump():
 	wasOnFloor = is_on_floor()
 
 
-func handleAim():
+func handle_aim():
 	weaponManager.aimPosition = get_global_mouse_position()
 
-func handlePrimaryFire():
+func handle_primary_fire():
 	if Input.is_action_pressed("Primary Fire"):
 		weaponManager.fire_primary()
 		
-func handleSecondaryFire():
+func handle_secondary_fire():
 	if Input.is_action_pressed("Secondary Fire"):
 		weaponManager.fire_secondary()
 
-func handleTertiaryFire():
+func handle_tertiary_fire():
 	if Input.is_action_pressed("Tertiary Fire"):
 		weaponManager.fire_tertiary()
 
-func handleWeaponSwap():
+func handle_weapon_swap():
 	if Input.is_action_just_pressed("SwapWeaponDown"):
 		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
 		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_right())
 	selectedNewWeapon.emit(weaponInventoryManager.currentWeapon)
 	
-func handleWeaponDurability():
+func handle_weapon_durability():
 	if weaponManager.instantiatedWeapon != null:
 		var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
 		durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
 	
-func handleCraftingToggle():
+func handle_crafting_toggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
 
 		craftingOpen = !craftingOpen
@@ -97,14 +98,14 @@ func handleCraftingToggle():
 
 # Later you should still be able to fire, but only if its outside the bounds
 # of the crafting menu
-func handleWeaponFiring():
-	handleAim()
+func handle_weapon_firing():
+	handle_aim()
 	if !craftingOpen:
-		handlePrimaryFire()
-		handleSecondaryFire()
-		handleTertiaryFire()
-	handleWeaponSwap()
-	handleWeaponDurability()
+		handle_primary_fire()
+		handle_secondary_fire()
+		handle_tertiary_fire()
+	handle_weapon_swap()
+	handle_weapon_durability()
 
 func addToCrafting(resourceName: String):
 	resourceInventoryManager.addResourceToCrafting(resourceName)

@@ -2,7 +2,7 @@ extends Weapon
 
 class_name BasicGun
 
-@export var projectileShooter: ProjectileShooter
+@onready var projectileShooter:= $ProjectileShooter
 
 
 

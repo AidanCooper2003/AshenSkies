@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@export var walkerComponent: WalkerComponent
-@export var jumperComponent: JumperComponent
-@export var objectDetector: ShapeCast2D
-@export var animationPlayer: AnimationPlayer
+@onready var walkerComponent:= $WalkerComponent
+@onready var jumperComponent:= $JumperComponent
+@onready var objectDetector:= $ShapeCast2D
+@onready var animationPlayer:= $AnimationPlayer
 
 @export var relativeLeftBound: float
 @export var relativeRightBound: float

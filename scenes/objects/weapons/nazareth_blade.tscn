@@ -11,11 +11,8 @@ size = Vector2(73, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fx80"]
 size = Vector2(19, 58)
 
-[node name="NazarethBlade" type="Node2D" node_paths=PackedStringArray("meleeHandler", "fireDelayTimer", "sprite")]
+[node name="NazarethBlade" type="Node2D"]
 script = ExtResource("1_6b64p")
-meleeHandler = NodePath("MeleeHandler")
-fireDelayTimer = NodePath("FireDelayTimer")
-sprite = NodePath("Sprite2D")
 fireDelay = 1.0
 maxDurability = 30
 
