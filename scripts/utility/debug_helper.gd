@@ -19,10 +19,10 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/levels/playtest_level.tscn")
 
 	if Input.is_action_just_pressed("Debug 3"):
-		player.startCrafting()
+		player.start_crafting()
 		
 	if Input.is_action_just_pressed("Debug 2"):
-		player.resetCrafting()
+		player.reset_crafting()
 		
 	if Input.is_action_just_pressed("Debug 4"):
 		var nothing = ""

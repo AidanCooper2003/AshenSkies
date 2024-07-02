@@ -20,7 +20,7 @@ var resourceContainers: Dictionary
 var containersFull: bool = false
 
 func _init():
-	resourceTextures = CSVManager.getProperties(CSVManager.resources, 0, 3)
+	resourceTextures = CSVManager.get_properties(CSVManager.resources, 0, 3)
 
 func _ready():
 	setup_ingredient_buttons()
@@ -73,4 +73,4 @@ func on_ingredient_clicked(button):
 	var buttonResource = resourceContainers.find_key(button)
 	if buttonResource == null:
 		return
-	player.addToCrafting(buttonResource)
+	player.add_to_crafting(buttonResource)

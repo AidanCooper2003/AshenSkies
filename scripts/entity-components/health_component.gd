@@ -13,7 +13,7 @@ var currentHealth : int
 func _ready():
 	currentHealth = maxHealth
 
-func takeDamage(damage : int):
+func take_damage(damage : int):
 	if !simpleHealth:
 		currentHealth -= damage
 	else:
@@ -26,5 +26,5 @@ func die():
 	get_parent().queue_free()
 
 func _on_hitbox_component_damage_taken(damageAmount):
-	takeDamage(damageAmount)
+	take_damage(damageAmount)
 

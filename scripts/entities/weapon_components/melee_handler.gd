@@ -15,19 +15,19 @@ var isWeaponEnabled: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	turnOffWeapon()
+	turn_off_weapon()
 	swingTimer.wait_time = swingTime
 
-func turnOnWeapon():
+func turn_on_weapon():
 	isWeaponEnabled = true
 	enableDamage.emit()
 	print("weapon on")
 
-func turnOffWeapon():
+func turn_off_weapon():
 	isWeaponEnabled = false
 	disableDamage.emit()
 	print("weapon off")
 
 func swing():
-	turnOnWeapon()
+	turn_on_weapon()
 	swingTimer.start()

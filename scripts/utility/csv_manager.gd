@@ -14,29 +14,29 @@ func _ready():
 	print(CSVManager.resources)
 	print("----------------------")
 
-func getTags(collection, nameColumn, tagColumn):
+func get_tags(collection, nameColumn, tagColumn):
 	var tags: Dictionary
 	for object in collection:
 		var tagArray = object[1].split(", ")
 		tags[object[0]] = tagArray
 	return tags
 
-func getProperties(collection, nameColumn, propertyColumn):
+func get_properties(collection, nameColumn, propertyColumn):
 	var properties: Dictionary
 	for object in collection:
 		properties[object[nameColumn]] = object[propertyColumn]
 	return properties
 	
 
-func getProperty(collection, nameColumn, propertyColumn, objectName):
+func get_property(collection, nameColumn, propertyColumn, objectName):
 	for object in collection:
 		if object[nameColumn] == objectName:
 			return object[propertyColumn]
 	return null
 
 
-func getItemIcon(itemName):
-	return getProperty(recipes, 0, 4, itemName)
+func get_item_icon(itemName):
+	return get_property(recipes, 0, 4, itemName)
 
-func getItemScene(itemName):
-	return getProperty(recipes, 0, 5, itemName)
+func get_item_scene(itemName):
+	return get_property(recipes, 0, 5, itemName)

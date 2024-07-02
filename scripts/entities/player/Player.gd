@@ -90,7 +90,6 @@ func handle_weapon_durability():
 	
 func handle_crafting_toggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
-
 		craftingOpen = !craftingOpen
 		changeCraftingMenuState.emit(craftingOpen)
 
@@ -107,30 +106,30 @@ func handle_weapon_firing():
 	handle_weapon_swap()
 	handle_weapon_durability()
 
-func addToCrafting(resourceName: String):
-	resourceInventoryManager.addResourceToCrafting(resourceName)
+func add_to_crafting(resourceName: String):
+	resourceInventoryManager.add_resource_to_crafting(resourceName)
 	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
 	
-func removeFromCrafting(resourceName: String):
-	resourceInventoryManager.subtractResourceFromCrafting(resourceName)
+func remove_from_crafting(resourceName: String):
+	resourceInventoryManager.subtract_resource_from_crafting(resourceName)
 	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
 	
-func resetCrafting():
-	resourceInventoryManager.resetCrafting()
+func reset_crafting():
+	resourceInventoryManager.reset_crafting()
 	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
 
-func startCrafting():
+func start_crafting():
 	print(resourceInventoryManager.resourcesInCrafting)
-	print(resourceInventoryManager.getCraftingCount())
-	if resourceInventoryManager.getCraftingCount() == 8:
+	print(resourceInventoryManager.get_crafting_count())
+	if resourceInventoryManager.get_crafting_count() == 8:
 		var item = craftingManager.craft(resourceInventoryManager.resourcesInCrafting)
-		var itemScene = CSVManager.getItemScene(item)
+		var itemScene = CSVManager.get_item_scene(item)
 		if itemScene != null:
 			weaponInventoryManager.add_weapon(itemScene)
 		weaponSlotChanged.emit(weaponInventoryManager.weapons.size() - 1, item)
 
 
-func relayChangedHealth(newHealth: int):
+func relay_changed_health(newHealth: int):
 	healthChanged.emit(newHealth)
 	animationPlayer.play("iFrameFlashing")
 

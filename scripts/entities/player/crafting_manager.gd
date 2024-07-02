@@ -18,10 +18,10 @@ func _ready():
 
 	
 
-	recipeTags = CSVManager.getTags(CSVManager.recipes, 0, 1)
-	resourceTags = CSVManager.getTags(CSVManager.resources, 0, 1)
-	recipeQualities = CSVManager.getProperties(CSVManager.recipes, 0, 2)
-	resourceQualities = CSVManager.getProperties(CSVManager.resources, 0, 2)
+	recipeTags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
+	resourceTags = CSVManager.get_tags(CSVManager.resources, 0, 1)
+	recipeQualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
+	resourceQualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
 	
 	#test_crafting()
 
@@ -57,16 +57,16 @@ func test_crafting():
 
 func craft(ingredients: Dictionary):
 	var itemPool: Array[String]
-	var tagCounts: Dictionary = getIngredientsTags(ingredients)
+	var tagCounts: Dictionary = get_ingredients_tags(ingredients)
 
 	for item in recipeTags:
-		for i in getTagMatchCount(item, tagCounts):
+		for i in get_tag_match_count(item, tagCounts):
 			itemPool.append(item)
 	var chosenItem = randi_range(0, itemPool.size() - 1)
 	return itemPool[chosenItem]
 
 
-func getTagMatchCount(item: String, tagCounts: Dictionary):
+func get_tag_match_count(item: String, tagCounts: Dictionary):
 	var itemTags = recipeTags[item]
 	var itemCount = 0
 	for tag in itemTags:
@@ -78,14 +78,14 @@ func getTagMatchCount(item: String, tagCounts: Dictionary):
 
 
 # Combine tags, turn negative tags into max 0 (or even prevent defaults?)
-func ingredientTagsProcessing():
+func ingredient_tags_processing():
 	pass
 
 
 
 
 # Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
-func getIngredientsTags(ingredients: Dictionary):
+func get_ingredients_tags(ingredients: Dictionary):
 	var tagCounts: Dictionary
 	for ingredient in ingredients:
 		var ingredientTags = resourceTags.get(ingredient)
