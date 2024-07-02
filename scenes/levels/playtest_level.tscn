@@ -93,7 +93,7 @@ layer_0/tile_data = PackedInt32Array(393216, 983044, 11, 327680, 983044, 11, 327
 [node name="UIManager" type="Node2D" parent="." node_paths=PackedStringArray("timerText", "finalTimerText", "healthText", "deathText", "weaponSlots")]
 script = ExtResource("4_bs2vo")
 timerText = NodePath("../Camera2D/CanvasLayer/Control/Timer")
-finalTimerText = NodePath("../Camera2D/CanvasLayer/Control/Timer")
+finalTimerText = NodePath("../Camera2D/CanvasLayer/Control/Final Time")
 healthText = NodePath("../Camera2D/CanvasLayer/Control/Health")
 deathText = NodePath("../Camera2D/CanvasLayer/Control/Death")
 deselectedSlotColor = Color(1, 1, 1, 0.588235)
@@ -119,6 +119,7 @@ uiManager = NodePath("../UIManager")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(6417, -1547)
+collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(15, -4)
