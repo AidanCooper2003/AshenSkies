@@ -141,13 +141,6 @@ position = Vector2(4435, -1568)
 relativeLeftBound = -50.0
 relativeRightBound = 400.0
 
-[connection signal="changeCraftingMenuState" from="Player" to="CraftingUIManager" method="_on_player_change_crafting_menu_state"]
-[connection signal="durabilityChanged" from="Player" to="UIManager" method="_on_player_durability_changed"]
-[connection signal="healthChanged" from="Player" to="UIManager" method="_on_player_health_changed"]
-[connection signal="ingredientsChanged" from="Player" to="CraftingUIManager" method="_on_ingredients_changed"]
-[connection signal="resourceCountChanged" from="Player" to="CraftingUIManager" method="_on_player_resource_count_changed"]
-[connection signal="selectedNewWeapon" from="Player" to="UIManager" method="_on_player_selected_new_weapon"]
-[connection signal="weaponSlotChanged" from="Player" to="UIManager" method="_on_player_weapon_slot_changed"]
 [connection signal="area_entered" from="Area2D" to="UIManager" method="_on_area_2d_area_entered"]
 
 [editable path="Camera2D/CanvasLayer"]
