@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bia5ul7w7do3n"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_flxvv"]
+[ext_resource type="Texture2D" uid="uid://bvca55fgdj6ng" path="res://sprites/projectiles/solar_essence.png" id="2_8poc3"]
+[ext_resource type="Shape2D" uid="uid://dv2i3fxhgrcvw" path="res://colliders/ash_staff_bullet_collider.tres" id="3_x5epf"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_vchdq"]
+
+[node name="BasicGunBullet" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 17
+gravity_scale = 0.0
+continuous_cd = 1
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_flxvv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_8poc3")
+offset = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57782
+shape = ExtResource("3_x5epf")
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("4_vchdq")
+damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+rotation = 1.57815
+shape = ExtResource("3_x5epf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="damage_dealt" from="DamageDealerComponent" to="." method="_on_damage_dealer_component_damage_dealt"]

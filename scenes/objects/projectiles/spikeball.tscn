@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj5p6oevulj6"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/spikeball.gd" id="1_xn0on"]
+[ext_resource type="Texture2D" uid="uid://bae0o4gcnfsqb" path="res://sprites/projectiles/spikeball.png" id="2_bimv6"]
+[ext_resource type="Shape2D" uid="uid://dhff1g6w32064" path="res://colliders/spikeball.tres" id="3_vb65p"]
+[ext_resource type="Script" path="res://scripts/entities/projectiles/continuous_damage_dealer.gd" id="5_n1gyd"]
+
+[sub_resource type="Animation" id="Animation_mnhlk"]
+resource_name = "despawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnc48"]
+_data = {
+"despawn": SubResource("Animation_mnhlk")
+}
+
+[node name="Spikeball" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 18
+continuous_cd = 1
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_xn0on")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 8
+position = Vector2(1, -1)
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_bimv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57782
+shape = ExtResource("3_vb65p")
+
+[node name="ContinuousDamageDealer" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("5_n1gyd")
+damage = 1.0
+damageDelay = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]
+position = Vector2(1.36424e-12, 1.13687e-13)
+rotation = 1.57815
+shape = ExtResource("3_vb65p")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vnc48")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_entered"]
+[connection signal="area_exited" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_exited"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

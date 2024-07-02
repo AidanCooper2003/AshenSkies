@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=3 uid="uid://g6ffppkryo60"]
+
+[ext_resource type="Texture2D" uid="uid://c2q3c4fk242bx" path="res://sprites/enemies/territorial_jumper.png" id="1_hnsvw"]
+[ext_resource type="Script" path="res://scripts/entities/enemies/territorial_jumper.gd" id="1_y404u"]
+[ext_resource type="Shape2D" uid="uid://d08ulqwjdmbir" path="res://colliders/territorial_jumper.tres" id="3_baf3f"]
+[ext_resource type="Script" path="res://scripts/entity-components/walker_component.gd" id="3_hhxes"]
+[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity_parts/jumper.tscn" id="5_16e0a"]
+[ext_resource type="Script" path="res://scripts/entity-components/gravity_component.gd" id="5_lhlh0"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="6_prjgq"]
+[ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="7_85u8s"]
+[ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="8_exqqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_136hl"]
+size = Vector2(64, 25)
+
+[sub_resource type="Animation" id="Animation_yqmoa"]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.434811, 0.366139, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3dthq"]
+_data = {
+"hurt": SubResource("Animation_yqmoa")
+}
+
+[node name="TerritorialJumper" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 16
+floor_max_angle = 1.0472
+script = ExtResource("1_y404u")
+relativeLeftBound = 100.0
+relativeRightBound = 100.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_hnsvw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = ExtResource("3_baf3f")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("3_hhxes")
+characterBody2D = NodePath("..")
+walkDirection = 1
+acceleration = 250.0
+deccelerationCoefficient = 1.5
+airDeccelerationCoefficient = 1.0
+maxVelocity = 300.0
+
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("5_16e0a")]
+characterBody2D = NodePath("..")
+jumpForce = 400.0
+gravityComponent = NodePath("../GravityComponent")
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("5_lhlh0")
+characterBody2D = NodePath("..")
+downwardsGravityCoefficient = 2.0
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(0, -178)
+shape = SubResource("RectangleShape2D_136hl")
+target_position = Vector2(0, 134)
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 4
+script = ExtResource("6_prjgq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
+visible = false
+position = Vector2(-0.5, 0)
+shape = ExtResource("3_baf3f")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("7_85u8s")
+maxHealth = 3
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("8_exqqi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+shape = ExtResource("3_baf3f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3dthq")
+}
+
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://unrkr0xwcn64"]
 
-[ext_resource type="Script" path="res://Scripts/entities/Weapons/NazarethBlade.gd" id="1_6b64p"]
-[ext_resource type="Texture2D" uid="uid://bsbr318vv4e56" path="res://sprites/CrossLeft.png" id="2_t6jio"]
-[ext_resource type="Script" path="res://Scripts/entity-components/DamageDealerComponent.gd" id="3_56b6w"]
-[ext_resource type="Script" path="res://Scripts/entities/weapon-components/MeleeHandler.gd" id="3_jhsj2"]
+[ext_resource type="Script" path="res://scripts/entities/weapons/nazareth_blade.gd" id="1_6b64p"]
+[ext_resource type="Texture2D" uid="uid://bsbr318vv4e56" path="res://sprites/cross_left.png" id="2_t6jio"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="3_56b6w"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/melee_handler.gd" id="3_jhsj2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oj4i8"]
 size = Vector2(73, 18)
@@ -11,13 +11,10 @@ size = Vector2(73, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fx80"]
 size = Vector2(19, 58)
 
-[node name="NazarethBlade" type="Node2D" node_paths=PackedStringArray("meleeHandler", "fireDelayTimer", "sprite")]
+[node name="NazarethBlade" type="Node2D"]
 script = ExtResource("1_6b64p")
-meleeHandler = NodePath("MeleeHandler")
-fireDelayTimer = NodePath("FireDelayTimer")
-sprite = NodePath("Sprite2D")
 fireDelay = 1.0
-durability = 20
+maxDurability = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 0)

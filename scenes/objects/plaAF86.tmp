@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://brogejmjvqi2i"]
+
+[ext_resource type="Script" path="res://Scripts/entities/Player/Player.gd" id="1_guxbx"]
+[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
+[ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
+[ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
+[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/PlayerRight.png" id="5_mf2qx"]
+[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity-parts/jumper.tscn" id="6_q6d2k"]
+[ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_wlhmx"]
+[ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="8_57w21"]
+[ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
+[ext_resource type="PackedScene" uid="uid://bg12mot7m8ooy" path="res://scenes/objects/weapons/test_gun.tscn" id="10_77isk"]
+[ext_resource type="Script" path="res://Scripts/entity-components/InventoryManager.gd" id="11_ivavg"]
+[ext_resource type="Script" path="res://Scripts/entities/Player/ResourceInventoryManager.gd" id="12_a4ijk"]
+[ext_resource type="Script" path="res://Scripts/entities/Player/CraftingManager.gd" id="13_d1llt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
+size = Vector2(48, 96)
+
+[sub_resource type="Animation" id="Animation_ybw7g"]
+resource_name = "iFrameFlashing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lsudj"]
+_data = {
+"iFrameFlashing": SubResource("Animation_ybw7g")
+}
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "weaponManager", "animationPlayer", "weaponInventoryManager", "resourceInventoryManager", "craftingManager", "sprite2D")]
+collision_mask = 16
+script = ExtResource("1_guxbx")
+walkerComponent = NodePath("WalkerComponent")
+jumperComponent = NodePath("JumperComponent")
+weaponManager = NodePath("WeaponManager")
+animationPlayer = NodePath("AnimationPlayer")
+weaponInventoryManager = NodePath("WeaponInventoryManager")
+resourceInventoryManager = NodePath("ResourceInventoryManager")
+craftingManager = NodePath("CraftingManager")
+leftSprite = ExtResource("2_p5gux")
+rightSprite = ExtResource("5_mf2qx")
+sprite2D = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("5_mf2qx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("4_w5kmv")
+characterBody2D = NodePath("..")
+walkDirection = 1
+acceleration = 800.0
+deccelerationCoefficient = 4.0
+airDeccelerationCoefficient = 0.5
+maxVelocity = 600.0
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("5_j8pe6")
+characterBody2D = NodePath("..")
+gravityCoefficient = 1.5
+downwardsGravityCoefficient = 2.0
+
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("6_q6d2k")]
+characterBody2D = NodePath("..")
+gravityComponent = NodePath("../GravityComponent")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("7_wlhmx")
+maxHealth = 3
+simpleHealth = true
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 12
+script = ExtResource("8_57w21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource("9_ppa1w")
+defaultWeapon = ExtResource("10_77isk")
+weaponDistance = 300.0
+
+[node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lsudj")
+}
+
+[node name="WeaponInventoryManager" type="Node2D" parent="."]
+script = ExtResource("11_ivavg")
+weaponInventorySize = 4
+
+[node name="ResourceInventoryManager" type="Node2D" parent="."]
+script = ExtResource("12_a4ijk")
+
+[node name="CraftingManager" type="Node2D" parent="."]
+script = ExtResource("13_d1llt")
+
+[connection signal="changeOnFloorState" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
+[connection signal="healthChanged" from="HealthComponent" to="." method="relayChangedHealth"]
+[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
+[connection signal="resourceCountChanged" from="ResourceInventoryManager" to="." method="_on_resource_inventory_manager_resource_count_changed"]

@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://brogejmjvqi2i"]
+
+[ext_resource type="Script" path="res://Scripts/entities/Player.gd" id="1_guxbx"]
+[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/PlayerLeft.png" id="2_p5gux"]
+[ext_resource type="Script" path="res://Scripts/entity-components/WalkerComponent.gd" id="4_w5kmv"]
+[ext_resource type="Script" path="res://Scripts/entity-components/GravityComponent.gd" id="5_j8pe6"]
+[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/PlayerRight.png" id="5_mf2qx"]
+[ext_resource type="Script" path="res://Scripts/entity-components/JumperComponent.gd" id="6_r8v7u"]
+[ext_resource type="Script" path="res://Scripts/entity-components/HealthComponent.gd" id="7_wlhmx"]
+[ext_resource type="Script" path="res://Scripts/entity-components/HitboxComponent.gd" id="8_57w21"]
+[ext_resource type="Script" path="res://Scripts/entity-components/WeaponManager.gd" id="9_ppa1w"]
+[ext_resource type="PackedScene" uid="uid://bg12mot7m8ooy" path="res://scenes/objects/weapons/test_gun.tscn" id="10_53x7q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
+size = Vector2(48, 96)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("walkerComponent", "jumperComponent", "jumpCooldownTimer", "coyoteTimer", "jumpQueueTimer", "weaponManager", "sprite2D")]
+collision_mask = 16
+script = ExtResource("1_guxbx")
+walkerComponent = NodePath("WalkerComponent")
+jumperComponent = NodePath("JumperComponent")
+jumpCooldownTimer = NodePath("JumperComponent/JumpCooldownTimer")
+coyoteTimer = NodePath("JumperComponent/CoyoteTimer")
+jumpQueueTimer = NodePath("JumperComponent/JumpQueueTimer")
+weaponManager = NodePath("WeaponManager")
+leftSprite = ExtResource("2_p5gux")
+rightSprite = ExtResource("5_mf2qx")
+sprite2D = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("5_mf2qx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("4_w5kmv")
+characterBody2D = NodePath("..")
+walkDirection = 1
+acceleration = 800.0
+deccelerationCoefficient = 4.0
+airDeccelerationCoefficient = 0.5
+maxVelocity = 600.0
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+script = ExtResource("5_j8pe6")
+characterBody2D = NodePath("..")
+gravityCoefficient = 1.5
+downwardsGravityCoefficient = 2.0
+
+[node name="JumperComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent")]
+script = ExtResource("6_r8v7u")
+characterBody2D = NodePath("..")
+jumpForce = 900.0
+gravityComponent = NodePath("../GravityComponent")
+maxJumps = 1
+
+[node name="JumpCooldownTimer" type="Timer" parent="JumperComponent"]
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="JumperComponent"]
+wait_time = 0.1
+one_shot = true
+
+[node name="JumpQueueTimer" type="Timer" parent="JumperComponent"]
+wait_time = 0.667
+one_shot = true
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("7_wlhmx")
+maxHealth = 3
+simpleHealth = true
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 12
+script = ExtResource("8_57w21")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource("9_ppa1w")
+currentWeapon = ExtResource("10_53x7q")
+weaponDistance = 300.0
+
+[node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
+
+[node name="LeftWeaponSpot" type="Node2D" parent="WeaponManager"]
+
+[node name="RightWeaponSpot" type="Node2D" parent="WeaponManager"]
+
+[connection signal="changeOnFloorState" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
+[connection signal="timeout" from="JumperComponent/JumpCooldownTimer" to="JumperComponent" method="_on_jump_cooldown_timer_timeout"]
+[connection signal="timeout" from="JumperComponent/CoyoteTimer" to="JumperComponent" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="JumperComponent/JumpQueueTimer" to="JumperComponent" method="_on_jump_queue_timer_timeout"]
+[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
