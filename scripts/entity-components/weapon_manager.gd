@@ -36,26 +36,26 @@ func switch_weapon(newWeapon):
 	currentWeaponScene = newWeapon
 	draw_weapon()
 
-# Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
+#Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
 func fire_primary():
 	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_primary(aimAngle):
+		if not instantiatedWeapon.fire_primary(aimAngle):
 			print("no primary ability")
 
 func fire_secondary():
 	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_secondary(aimAngle):
+		if not instantiatedWeapon.fire_secondary(aimAngle):
 			print("no secondary ability")
 
 func fire_tertiary():
 	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_tertiary(aimAngle):
+		if not instantiatedWeapon.fire_tertiary(aimAngle):
 			print("no tertiary ability")
 
 func aim():
 	if instantiatedWeapon != null:
 		var weaponAngle = (aimPosition - global_position).normalized().angle()
-		if weaponAngle >= PI/2 || weaponAngle <= -PI/2:
+		if weaponAngle >= PI/2 or weaponAngle <= -PI/2:
 			instantiatedWeapon.set_sprite_right()
 		else:
 			instantiatedWeapon.set_sprite_left()

@@ -32,23 +32,24 @@ func _on_player_change_crafting_menu_state(isMenuOpen):
 
 
 func _on_player_resource_count_changed(resourceName, resourceCount):
-	# If there isn't a resource container for the resource, assign it.
-	if !resourceContainers.has(resourceName):
+	#If there isn't a resource container for the resource, assign it.
+	if not resourceContainers.has(resourceName):
 		for resourceContainer in resourceGrid.get_children():
-			if !resourceContainers.values().has(resourceContainer):
+			if not resourceContainers.values().has(resourceContainer):
 				resourceContainers[resourceName] = resourceContainer
-				print(resourceTextures.keys())
-				resourceContainers[resourceName].get_child(0).texture = load("res://sprites/resource_icons/" + resourceTextures[resourceName])
+				resourceContainers[resourceName].get_child(0).texture = (
+						load("res://sprites/resource_icons/" + resourceTextures[resourceName])
+				)
 				break
-		# If there are no more resource containers, ignore the change.
-		# This should be verified to not happen by the inventory for now.
-		if !resourceContainers.has(resourceName):
+		#If there are no more resource containers, ignore the change.
+		#This should be verified to not happen by the inventory for now.
+		if not resourceContainers.has(resourceName):
 			print("No more room!")
 			containersFull = true
 			return
 	resourceContainers[resourceName].get_child(1).text = "[right]" + str(resourceCount)
-	# If a resource goes down to 0 and there's no more room, unassign it.
-	if resourceCount == 0 && containersFull && resourceContainers.has(resourceName):
+	#If a resource goes down to 0 and there's no more room, unassign it.
+	if resourceCount == 0 and containersFull and resourceContainers.has(resourceName):
 		resourceContainers[resourceName].get_child(0).texture = noTexture
 		resourceContainers.erase(resourceName)
 		containersFull = false
@@ -58,7 +59,9 @@ func _on_ingredients_changed(ingredients: Dictionary):
 	var containerIndex = 0
 	for ingredient in ingredients:
 		for i in range(ingredients[ingredient]):
-			ingredientContainers[containerIndex].icon = load("res://sprites/resource_icons/" + resourceTextures[ingredient])
+			ingredientContainers[containerIndex].icon = (
+					load("res://sprites/resource_icons/" + resourceTextures[ingredient])
+			)
 			containerIndex += 1
 	if containerIndex < 7:
 		for i in range(8 - containerIndex):

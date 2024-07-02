@@ -1,8 +1,8 @@
 extends Node2D
 
 class_name ProjectileShooter
-# used for guns that shoot projectiles with a straight directory.
-# place this at the end of the weapon where the bullet should spawn from.
+#used for guns that shoot projectiles with a straight directory.
+#place this at the end of the weapon where the bullet should spawn from.
 
 @export var bullet : PackedScene
 

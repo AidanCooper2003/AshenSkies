@@ -14,7 +14,7 @@ func _ready():
 	currentHealth = maxHealth
 
 func take_damage(damage : int):
-	if !simpleHealth:
+	if not simpleHealth:
 		currentHealth -= damage
 	else:
 		currentHealth -= 1

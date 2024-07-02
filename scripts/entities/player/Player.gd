@@ -41,17 +41,16 @@ func _physics_process(_delta):
 	handle_crafting_toggle()
 
 func handle_walk():
-	if Input.is_action_pressed("Move Left") && !Input.is_action_pressed("Move Right"):
+	if Input.is_action_pressed("Move Left") and not Input.is_action_pressed("Move Right"):
 		sprite2D.texture = leftSprite
 		walkerComponent.walkDirection = -1
-	elif Input.is_action_pressed("Move Right") && !Input.is_action_pressed("Move Left"):
+	elif Input.is_action_pressed("Move Right") and not Input.is_action_pressed("Move Left"):
 		sprite2D.texture = rightSprite
 		walkerComponent.walkDirection = 1
 	else:
 		walkerComponent.walkDirection = 0
 
 func handle_jump():
-	#wasOnFloor, coyoteTimer, isCoyoteState, isOnFloor (through signal), currentJumps, maxJumps, jumpQueued, canJump, jumpCooldownTimer
 	if Input.is_action_just_pressed("Jump"):
 		jumperComponent.start_jump()
 	if Input.is_action_just_released("Jump"):
@@ -85,21 +84,23 @@ func handle_weapon_swap():
 	
 func handle_weapon_durability():
 	if weaponManager.instantiatedWeapon != null:
-		var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
+		var durabilityPercentage = (
+				float(weaponManager.instantiatedWeapon.durability) / 
+				float(weaponManager.instantiatedWeapon.maxDurability)) * 100
 		durability_changed.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
 	
 func handle_crafting_toggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
-		craftingOpen = !craftingOpen
+		craftingOpen = not craftingOpen
 		crafting_menu_state_changed.emit(craftingOpen)
 
 
 
-# Later you should still be able to fire, but only if its outside the bounds
-# of the crafting menu
+#Later you should still be able to fire, but only if its outside the bounds
+#of the crafting menu
 func handle_weapon_firing():
 	handle_aim()
-	if !craftingOpen:
+	if not craftingOpen:
 		handle_primary_fire()
 		handle_secondary_fire()
 		handle_tertiary_fire()
@@ -119,8 +120,6 @@ func reset_crafting():
 	ingredients_changed.emit(resourceInventoryManager.resourcesInCrafting)
 
 func start_crafting():
-	print(resourceInventoryManager.resourcesInCrafting)
-	print(resourceInventoryManager.get_crafting_count())
 	if resourceInventoryManager.get_crafting_count() == 8:
 		var item = craftingManager.craft(resourceInventoryManager.resourcesInCrafting)
 		var itemScene = CSVManager.get_item_scene(item)

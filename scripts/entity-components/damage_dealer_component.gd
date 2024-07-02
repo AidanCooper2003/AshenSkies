@@ -9,7 +9,6 @@ signal damage_dealt
 var isActive: bool = true
 
 
-# Make sure you connect the signal
 func _on_area_entered(area):
 	if isActive:
 		if area is HitboxComponent:

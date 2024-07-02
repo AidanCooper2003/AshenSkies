@@ -4,16 +4,21 @@ extends Node2D
 var recipes = preload("res://csv/recipes.csv").records
 var resources = preload("res://csv/resources.csv").records
 
-# Later this should use dictionaries to cache everything
+#Later this should use dictionaries to cache everything
 
 func _ready():
 	recipes.remove_at(0)
 	resources.remove_at(0)
+
+	
+
+func print_csv():
 	print(CSVManager.recipes)
 	print("----------------------")
 	print(CSVManager.resources)
 	print("----------------------")
-
+	
+	
 func get_tags(collection, nameColumn, tagColumn):
 	var tags: Dictionary
 	for object in collection:

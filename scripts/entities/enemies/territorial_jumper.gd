@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @export var relativeLeftBound: float
 @export var relativeRightBound: float
-@export var startingDirection: float = 1
+@export var startingDirection: float = 1.0
 
 var currentWalkDirection
 var actualLeftBound: float
@@ -28,7 +28,7 @@ func _physics_process(_delta):
 	elif position.x > actualRightBound:
 		currentWalkDirection = -1
 		walkerComponent.walkDirection = currentWalkDirection
-	if objectDetector.is_colliding() && is_on_floor():
+	if objectDetector.is_colliding() and is_on_floor():
 		jumperComponent.force_jump()
 	move_and_slide()
 

@@ -13,7 +13,7 @@ var resourceQualities: Dictionary
 var currentIngredients: Dictionary
 
 
-# Called when the node enters the scene tree for the first time.
+#Called when the node enters the scene tree for the first time.
 func _ready():
 
 	
@@ -23,7 +23,7 @@ func _ready():
 	recipeQualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
 	resourceQualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
 	
-	#test_crafting()
+	# test_crafting()
 
 
 
@@ -45,15 +45,15 @@ func test_crafting():
 	for i in 10:
 		print(craft({"cyclonium": 6, "gun parts": 2}))
 
-# Situations needing to account for:
-# Normal crafting
-# Too many/too few ingredients
-# Duplicate ingredient names (either condense or throw error?)
+#Situations needing to account for:
+#Normal crafting
+#Too many/too few ingredients
+#Duplicate ingredient names (either condense or throw error?)
 
-# ALSO heavily optimize later, this may be pretty rough for now
-# Replacing item strings with item IDs could greatly help preformance
-# Also, since there are so many duplicate entries, maybe there could be
-# a set of ranges that the random number chosen will be tested to see where it falls
+#ALSO heavily optimize later, this may be pretty rough for now
+#Replacing item strings with item IDs could greatly help preformance
+#Also, since there are so many duplicate entries, maybe there could be
+#a set of ranges that the random number chosen will be tested to see where it falls
 
 func craft(ingredients: Dictionary):
 	var itemPool: Array[String]
@@ -70,21 +70,21 @@ func get_tag_match_count(item: String, tagCounts: Dictionary):
 	var itemTags = recipeTags[item]
 	var itemCount = 0
 	for tag in itemTags:
-		if !tagCounts.has(tag):
+		if not tagCounts.has(tag):
 			return 0 # If your ingredients don't contain every tag in the item, the item can't be added
 		itemCount += tagCounts[tag]
 	return itemCount
 
 
 
-# Combine tags, turn negative tags into max 0 (or even prevent defaults?)
+#Combine tags, turn negative tags into max 0 (or even prevent defaults?)
 func ingredient_tags_processing():
 	pass
 
 
 
 
-# Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
+#Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
 func get_ingredients_tags(ingredients: Dictionary):
 	var tagCounts: Dictionary
 	for ingredient in ingredients:
