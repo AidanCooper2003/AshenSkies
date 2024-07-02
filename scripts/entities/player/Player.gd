@@ -89,6 +89,7 @@ func handleWeaponDurability():
 	
 func handleCraftingToggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
+
 		craftingOpen = !craftingOpen
 		changeCraftingMenuState.emit(craftingOpen)
 
