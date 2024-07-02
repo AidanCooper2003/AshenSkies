@@ -3,14 +3,14 @@ extends CharacterBody2D
 class_name Player
 
 
-signal changeOnFloorState
-signal healthChanged
-signal selectedNewWeapon
-signal durabilityChanged
-signal changeCraftingMenuState
-signal resourceCountChanged
-signal ingredientsChanged
-signal weaponSlotChanged
+signal change_on_floor_state
+signal health_changed
+signal new_weapon_selected
+signal durability_changed
+signal crafting_menu_state_changed
+signal resource_count_changed
+signal ingredients_changed
+signal weapon_slot_changed
 
 @onready var walkerComponent:= $WalkerComponent
 @onready var jumperComponent:= $JumperComponent
@@ -57,7 +57,7 @@ func handle_jump():
 	if Input.is_action_just_released("Jump"):
 		jumperComponent.release_jump()
 	if is_on_floor() != wasOnFloor:
-		changeOnFloorState.emit(is_on_floor())
+		change_on_floor_state.emit(is_on_floor())
 	wasOnFloor = is_on_floor()
 
 
@@ -81,17 +81,17 @@ func handle_weapon_swap():
 		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
 		weaponManager.switch_weapon(weaponInventoryManager.swap_weapon_right())
-	selectedNewWeapon.emit(weaponInventoryManager.currentWeapon)
+	new_weapon_selected.emit(weaponInventoryManager.currentWeapon)
 	
 func handle_weapon_durability():
 	if weaponManager.instantiatedWeapon != null:
 		var durabilityPercentage = (float(weaponManager.instantiatedWeapon.durability) / float(weaponManager.instantiatedWeapon.maxDurability)) * 100
-		durabilityChanged.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
+		durability_changed.emit(weaponInventoryManager.currentWeapon, durabilityPercentage)
 	
 func handle_crafting_toggle():
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
 		craftingOpen = !craftingOpen
-		changeCraftingMenuState.emit(craftingOpen)
+		crafting_menu_state_changed.emit(craftingOpen)
 
 
 
@@ -108,15 +108,15 @@ func handle_weapon_firing():
 
 func add_to_crafting(resourceName: String):
 	resourceInventoryManager.add_resource_to_crafting(resourceName)
-	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
+	ingredients_changed.emit(resourceInventoryManager.resourcesInCrafting)
 	
 func remove_from_crafting(resourceName: String):
 	resourceInventoryManager.subtract_resource_from_crafting(resourceName)
-	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
+	ingredients_changed.emit(resourceInventoryManager.resourcesInCrafting)
 	
 func reset_crafting():
 	resourceInventoryManager.reset_crafting()
-	ingredientsChanged.emit(resourceInventoryManager.resourcesInCrafting)
+	ingredients_changed.emit(resourceInventoryManager.resourcesInCrafting)
 
 func start_crafting():
 	print(resourceInventoryManager.resourcesInCrafting)
@@ -126,13 +126,13 @@ func start_crafting():
 		var itemScene = CSVManager.get_item_scene(item)
 		if itemScene != null:
 			weaponInventoryManager.add_weapon(itemScene)
-		weaponSlotChanged.emit(weaponInventoryManager.weapons.size() - 1, item)
+		weapon_slot_changed.emit(weaponInventoryManager.weapons.size() - 1, item)
 
 
 func relay_changed_health(newHealth: int):
-	healthChanged.emit(newHealth)
+	health_changed.emit(newHealth)
 	animationPlayer.play("iFrameFlashing")
 
 
 func _on_resource_inventory_manager_resource_count_changed(resourceName: String, resourceCount: int):
-	resourceCountChanged.emit(resourceName, resourceCount)
+	resource_count_changed.emit(resourceName, resourceCount)

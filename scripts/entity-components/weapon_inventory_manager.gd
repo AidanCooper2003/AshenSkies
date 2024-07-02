@@ -2,7 +2,7 @@ extends Node2D
 
 class_name WeaponInventoryManager
 
-signal itemSlotChanged
+signal item_slot_changed
 var weapons: Array = []
 
 @export var weaponInventorySize: int

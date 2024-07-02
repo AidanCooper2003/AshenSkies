@@ -2,7 +2,7 @@ extends Node2D
 
 class_name ResourceInventoryManager
 
-signal resourceCountChanged
+signal resource_count_changed
 
 @export var resources: Dictionary = {}
 
@@ -25,13 +25,13 @@ func add_resource(resourceName: String, resourceCount: int):
 	if has_resource(resourceName):
 		resources[resourceName] = resources[resourceName] + resourceCount
 		print(resourceName + ": " + str(resources[resourceName]))
-		resourceCountChanged.emit(resourceName, get_resource_count(resourceName))
+		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
 
 func subtract_resource(resourceName: String, resourceCount: int):
 	if has_resource_count(resourceName, resourceCount):
 		resources[resourceName] = resources[resourceName] - resourceCount
 		print(resourceName + ": " + str(resources[resourceName]))
-		resourceCountChanged.emit(resourceName, get_resource_count(resourceName))
+		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
 
 func has_resource_count(resourceName: String, resourceCount: int):
 	if has_resource(resourceName):
@@ -40,7 +40,7 @@ func has_resource_count(resourceName: String, resourceCount: int):
 func add_resource_type(resourceName):
 	if !has_resource(resourceName):
 		resources[resourceName] = 0
-		resourceCountChanged.emit(resourceName, resources[resourceName])
+		resource_count_changed.emit(resourceName, resources[resourceName])
 	else:
 		print("Resource already exists")
 
@@ -50,7 +50,7 @@ func add_resource_to_crafting(resourceName):
 			resourcesInCrafting[resourceName] = 1
 		elif resources[resourceName] - resourcesInCrafting[resourceName] > 0:
 			resourcesInCrafting[resourceName] += 1
-		resourceCountChanged.emit(resourceName, get_resource_count(resourceName))
+		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
 
 func subtract_resource_from_crafting(resourceName):
 	if has_resource(resourceName):
@@ -60,7 +60,7 @@ func subtract_resource_from_crafting(resourceName):
 			resourcesInCrafting.erase(resourceName)
 		else:
 			resourcesInCrafting[resourceName] -= 1
-		resourceCountChanged.emit(resourceName, get_resource_count(resourceName))
+		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
 
 func get_resource_count(resourceName):
 	if has_resource(resourceName) && resourcesInCrafting.has(resourceName):
@@ -79,7 +79,7 @@ func get_crafting_count():
 func reset_crafting():
 	resourcesInCrafting = {}
 	for resource in resources:
-		resourceCountChanged.emit(resource, resources[resource])
+		resource_count_changed.emit(resource, resources[resource])
 	
 
 # Maybe have some csv for a verifier of valid resource types later?

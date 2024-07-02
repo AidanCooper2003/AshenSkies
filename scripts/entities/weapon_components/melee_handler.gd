@@ -2,8 +2,8 @@ extends Node2D
 
 class_name MeleeHandler
 
-signal enableDamage
-signal disableDamage
+signal enable_damage
+signal disable_damage
 
 var isWeaponEnabled: bool
 
@@ -20,12 +20,12 @@ func _ready():
 
 func turn_on_weapon():
 	isWeaponEnabled = true
-	enableDamage.emit()
+	enable_damage.emit()
 	print("weapon on")
 
 func turn_off_weapon():
 	isWeaponEnabled = false
-	disableDamage.emit()
+	disable_damage.emit()
 	print("weapon off")
 
 func swing():

@@ -2,7 +2,7 @@ extends Area2D
 
 class_name HitboxComponent
 
-signal damageTaken
+signal damage_taken
 
 func damage(damageAmount: int):
-	damageTaken.emit(damageAmount)
+	damage_taken.emit(damageAmount)

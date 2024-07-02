@@ -34,7 +34,7 @@ func _on_player_health_changed(newHealth: int):
 		deathText.visible = true
 
 
-func _on_player_selected_new_weapon(newWeapon: int):
+func _on_player_new_weapon_selected(newWeapon: int):
 	weaponSlots[lastSelectedWeapon].modulate = deselectedSlotColor
 	weaponSlots[newWeapon].modulate = selecectedSlotColor
 	lastSelectedWeapon = newWeapon
