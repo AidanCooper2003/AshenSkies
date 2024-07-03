@@ -1,34 +1,38 @@
 extends CharacterBody2D
 
-@onready var _walker_component:= $_walker_component
+@export var _relative_left_bound: float
+@export var _relative_right_bound: float
+@export var _starting_direction: float = 1.0
+
+var _current_walk_direction
+var _actual_left_bound: float
+var _actual_right_bound: float
+
+@onready var _walker_component:= $WalkerComponent
 @onready var _jumper_component:= $JumperComponent
-@onready var objectDetector:= $ShapeCast2D
+@onready var _object_detector:= $ShapeCast2D
 @onready var _animation_player:= $AnimationPlayer
 
-@export var relativeLeftBound: float
-@export var relativeRightBound: float
-@export var startingDirection: float = 1.0
 
-var currentWalkDirection
-var actualLeftBound: float
-var actualRightBound: float
+
+
 
 func _ready():
-	currentWalkDirection = startingDirection
-	actualLeftBound = position.x - relativeLeftBound
-	actualRightBound = position.x + relativeRightBound
+	_current_walk_direction = _starting_direction
+	_actual_left_bound = position.x - _relative_left_bound
+	_actual_right_bound = position.x + _relative_right_bound
 
 
 
 
 func _physics_process(_delta):
-	if position.x < actualLeftBound:
-		currentWalkDirection = 1
-		_walker_component.walkDirection = currentWalkDirection
-	elif position.x > actualRightBound:
-		currentWalkDirection = -1
-		_walker_component.walkDirection = currentWalkDirection
-	if objectDetector.is_colliding() and is_on_floor():
+	if position.x < _actual_left_bound:
+		_current_walk_direction = 1
+		_walker_component.walkDirection = _current_walk_direction
+	elif position.x > _actual_right_bound:
+		_current_walk_direction = -1
+		_walker_component.walkDirection = _current_walk_direction
+	if _object_detector.is_colliding() and is_on_floor():
 		_jumper_component.force_jump()
 	move_and_slide()
 

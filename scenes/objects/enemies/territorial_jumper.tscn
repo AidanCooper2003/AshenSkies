@@ -39,8 +39,6 @@ collision_layer = 4
 collision_mask = 16
 floor_max_angle = 1.0472
 script = ExtResource("1_y404u")
-relativeLeftBound = 100.0
-relativeRightBound = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -102,5 +100,3 @@ libraries = {
 }
 
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
-[connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
