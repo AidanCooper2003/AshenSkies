@@ -1,19 +1,14 @@
+class_name CraftingManager
 extends Node2D
 
-class_name CraftingManager
 
-
-
+var current_ingredients: Dictionary
 
 var _recipe_tags: Dictionary
 var _recipe_qualities: Dictionary
 var _resource_tags: Dictionary
 var _resource_qualities: Dictionary
 
-var current_ingredients: Dictionary
-
-
-#Called when the node enters the scene tree for the first time.
 func _ready():
 	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
 	_resource_tags = CSVManager.get_tags(CSVManager.resources, 0, 1)
@@ -21,25 +16,6 @@ func _ready():
 	_resource_qualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
 	
 	# _test_crafting()
-
-
-func _test_crafting():
-	print("Only Gun Tags")
-	print("----------")
-	for i in 10:
-		print(craft({"gun parts": 8}))
-	print("Only Air Tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 8}))
-	print("Equal part air and gun tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 4, "gun parts": 4}))
-	print("More air than gun tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 6, "gun parts": 2}))
 
 #Situations needing to account for:
 #Normal crafting
@@ -61,6 +37,24 @@ func craft(ingredients: Dictionary):
 	var chosen_item = randi_range(0, item_pool.size() - 1)
 	return item_pool[chosen_item]
 
+func _test_crafting():
+	print("Only Gun Tags")
+	print("----------")
+	for i in 10:
+		print(craft({"gun parts": 8}))
+	print("Only Air Tags")
+	print("----------")
+	for i in 10:
+		print(craft({"cyclonium": 8}))
+	print("Equal part air and gun tags")
+	print("----------")
+	for i in 10:
+		print(craft({"cyclonium": 4, "gun parts": 4}))
+	print("More air than gun tags")
+	print("----------")
+	for i in 10:
+		print(craft({"cyclonium": 6, "gun parts": 2}))
+
 
 func _get_tag_match_count(item: String, tag_counts: Dictionary):
 	var item_tags = _recipe_tags[item]
@@ -72,12 +66,9 @@ func _get_tag_match_count(item: String, tag_counts: Dictionary):
 	return item_count
 
 
-
 #Combine tags, turn negative tags into max 0 (or even prevent defaults?)
 func _ingredient_tags_processing():
 	pass
-
-
 
 
 #Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
