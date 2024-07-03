@@ -5,29 +5,25 @@ class_name CraftingManager
 
 
 
-var recipeTags: Dictionary
-var recipeQualities: Dictionary
-var resourceTags: Dictionary
-var resourceQualities: Dictionary
+var _recipe_tags: Dictionary
+var _recipe_qualities: Dictionary
+var _resource_tags: Dictionary
+var _resource_qualities: Dictionary
 
-var currentIngredients: Dictionary
+var current_ingredients: Dictionary
 
 
 #Called when the node enters the scene tree for the first time.
 func _ready():
-
+	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
+	_resource_tags = CSVManager.get_tags(CSVManager.resources, 0, 1)
+	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
+	_resource_qualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
 	
-
-	recipeTags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
-	resourceTags = CSVManager.get_tags(CSVManager.resources, 0, 1)
-	recipeQualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
-	resourceQualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
-	
-	# test_crafting()
+	# _test_crafting()
 
 
-
-func test_crafting():
+func _test_crafting():
 	print("Only Gun Tags")
 	print("----------")
 	for i in 10:
@@ -56,42 +52,42 @@ func test_crafting():
 #a set of ranges that the random number chosen will be tested to see where it falls
 
 func craft(ingredients: Dictionary):
-	var itemPool: Array[String]
-	var tagCounts: Dictionary = get_ingredients_tags(ingredients)
+	var item_pool: Array[String]
+	var tag_counts: Dictionary = _get_ingredients_tags(ingredients)
 
-	for item in recipeTags:
-		for i in get_tag_match_count(item, tagCounts):
-			itemPool.append(item)
-	var chosenItem = randi_range(0, itemPool.size() - 1)
-	return itemPool[chosenItem]
+	for item in _recipe_tags:
+		for i in _get_tag_match_count(item, tag_counts):
+			item_pool.append(item)
+	var chosen_item = randi_range(0, item_pool.size() - 1)
+	return item_pool[chosen_item]
 
 
-func get_tag_match_count(item: String, tagCounts: Dictionary):
-	var itemTags = recipeTags[item]
-	var itemCount = 0
-	for tag in itemTags:
-		if not tagCounts.has(tag):
+func _get_tag_match_count(item: String, tag_counts: Dictionary):
+	var item_tags = _recipe_tags[item]
+	var item_count = 0
+	for tag in item_tags:
+		if not tag_counts.has(tag):
 			return 0 # If your ingredients don't contain every tag in the item, the item can't be added
-		itemCount += tagCounts[tag]
-	return itemCount
+		item_count += tag_counts[tag]
+	return item_count
 
 
 
 #Combine tags, turn negative tags into max 0 (or even prevent defaults?)
-func ingredient_tags_processing():
+func _ingredient_tags_processing():
 	pass
 
 
 
 
 #Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
-func get_ingredients_tags(ingredients: Dictionary):
-	var tagCounts: Dictionary
+func _get_ingredients_tags(ingredients: Dictionary):
+	var tag_counts: Dictionary
 	for ingredient in ingredients:
-		var ingredientTags = resourceTags.get(ingredient)
-		for tag in ingredientTags:
-			if tagCounts.has(tag):
-				tagCounts[tag] = tagCounts[tag] + ingredients[ingredient]
+		var ingredient_tags = _resource_tags.get(ingredient)
+		for tag in ingredient_tags:
+			if tag_counts.has(tag):
+				tag_counts[tag] = tag_counts[tag] + ingredients[ingredient]
 			else:
-				tagCounts[tag] = ingredients[ingredient]
-	return tagCounts
+				tag_counts[tag] = ingredients[ingredient]
+	return tag_counts
