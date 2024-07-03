@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@onready var walkerComponent:= $WalkerComponent
-@onready var jumperComponent:= $JumperComponent
+@onready var _walker_component:= $_walker_component
+@onready var _jumper_component:= $JumperComponent
 @onready var objectDetector:= $ShapeCast2D
-@onready var animationPlayer:= $AnimationPlayer
+@onready var _animation_player:= $AnimationPlayer
 
 @export var relativeLeftBound: float
 @export var relativeRightBound: float
@@ -24,18 +24,18 @@ func _ready():
 func _physics_process(_delta):
 	if position.x < actualLeftBound:
 		currentWalkDirection = 1
-		walkerComponent.walkDirection = currentWalkDirection
+		_walker_component.walkDirection = currentWalkDirection
 	elif position.x > actualRightBound:
 		currentWalkDirection = -1
-		walkerComponent.walkDirection = currentWalkDirection
+		_walker_component.walkDirection = currentWalkDirection
 	if objectDetector.is_colliding() and is_on_floor():
-		jumperComponent.force_jump()
+		_jumper_component.force_jump()
 	move_and_slide()
 
 
 func _on_health_component_health_changed(currentHealth):
-	animationPlayer.play("hurt")
-	if animationPlayer.is_playing():
-		animationPlayer.stop()
-		animationPlayer.play("hurt")
-		animationPlayer.advance(0.1)
+	_animation_player.play("hurt")
+	if _animation_player.is_playing():
+		_animation_player.stop()
+		_animation_player.play("hurt")
+		_animation_player.advance(0.1)

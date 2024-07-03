@@ -3,8 +3,8 @@ extends Weapon
 class_name NazarethBlade
 
 
-@export var leftSprite : Texture2D
-@export var rightSprite : Texture2D
+@export var _left_sprite : Texture2D
+@export var _right_sprite : Texture2D
 
 @onready var meleeHandler:= $MeleeHandler
 

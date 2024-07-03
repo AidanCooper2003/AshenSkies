@@ -13,11 +13,11 @@ class_name JumperComponent
 var currentJumps: int
 @export var maxJumps: int
 
-var wasOnFloor: bool
+var _was_on_floor: bool
 var isCoyoteState: bool
 var isOnFloor: bool
 var jumpQueued: bool
-var canJump: bool = true
+var _can_jump: bool = true
 
 var coyoteTimer: Timer
 var jumpCooldownTimer: Timer
@@ -32,10 +32,10 @@ func _ready():
 	jumpQueueTimer = get_child(2)
 
 func _physics_process(delta):
-	if not isOnFloor and wasOnFloor:
+	if not isOnFloor and _was_on_floor:
 		coyoteTimer.start()
 		isCoyoteState = true
-	wasOnFloor = isOnFloor
+	_was_on_floor = isOnFloor
 	if isOnFloor and currentJumps < maxJumps:
 		currentJumps = maxJumps
 	if jumpQueued:
@@ -46,7 +46,7 @@ func jump():
 	gravityComponent.fastFallOverride = false
 	if not isOnFloor and not isCoyoteState:
 		currentJumps -= 1
-	canJump = false
+	_can_jump = false
 	jumpCooldownTimer.start()
 	if jumpQueued:
 		jumpQueued = false
@@ -58,7 +58,7 @@ func force_jump():
 	gravityComponent.fastFallOverride = false
 
 func start_jump():
-	if canJump and currentJumps >= 1:
+	if _can_jump and currentJumps >= 1:
 		jump()
 
 func release_jump():
@@ -69,7 +69,7 @@ func _on_character_change_on_floor_state(newFloorState):
 	isOnFloor = newFloorState
 
 func _on_jump_cooldown_timer_timeout():
-	canJump = true
+	_can_jump = true
 
 func _on_coyote_timer_timeout():
 	isCoyoteState = false
