@@ -1,92 +1,105 @@
+class_name ResourceInventoryManager
 extends Node2D
 
-class_name ResourceInventoryManager
+
 
 signal resource_count_changed
 
 @export var resources: Dictionary = {}
 
-var resourcesInCrafting: Dictionary = {}
+var ingredients: Dictionary = {}
 
-var maxResourcesInCrafting = 8
+var MAX_INGREDIENTS = 8
 
 func _ready():
-	initialize_inventory()
-
-func _process(_delta):
-	pass
+	_initialize_inventory()
 
 
-func has_resource(resourceName: String):
-	return resources.has(resourceName)
+func has_resource(resource_name: String):
+	return resources.has(resource_name)
 
 
-func add_resource(resourceName: String, resourceCount: int):
-	if has_resource(resourceName):
-		resources[resourceName] = resources[resourceName] + resourceCount
-		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
+func add_resource(resource_name: String, resource_count: int):
+	if has_resource(resource_name):
+		resources[resource_name] = resources[resource_name] + resource_count
+		_update_resource(resource_name)
 
-func subtract_resource(resourceName: String, resourceCount: int):
-	if has_resource_count(resourceName, resourceCount):
-		resources[resourceName] = resources[resourceName] - resourceCount
-		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
 
-func has_resource_count(resourceName: String, resourceCount: int):
-	if has_resource(resourceName):
-		return resources[resourceName] - resourceCount >= 0
-		
-func add_resource_type(resourceName):
-	if not has_resource(resourceName):
-		resources[resourceName] = 0
-		resource_count_changed.emit(resourceName, resources[resourceName])
+func subtract_resource(resource_name: String, resource_count: int):
+	if has_resource_count(resource_name, resource_count):
+		resources[resource_name] = resources[resource_name] - resource_count
+		_update_resource(resource_name)
+
+
+func has_resource_count(resource_name: String, resource_count: int):
+	if has_resource(resource_name):
+		return resources[resource_name] - resource_count >= 0
+
+
+func add_resource_type(resource_name):
+	if not has_resource(resource_name):
+		resources[resource_name] = 0
+		_update_resource(resource_name)
 	else:
 		print("Resource already exists")
 
-func add_resource_to_crafting(resourceName):
+
+func increment_ingredient(resource_name):
 	if (
-			has_resource(resourceName)
-			and resources[resourceName] > 0 
-			and get_crafting_count() < maxResourcesInCrafting
+			has_resource(resource_name)
+			and resources[resource_name] > 0 
+			and get_ingredient_count() < MAX_INGREDIENTS
 	):
-		if not resourcesInCrafting.has(resourceName):
-			resourcesInCrafting[resourceName] = 1
-		elif resources[resourceName] - resourcesInCrafting[resourceName] > 0:
-			resourcesInCrafting[resourceName] += 1
-		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
+		if not ingredients.has(resource_name):
+			ingredients[resource_name] = 1
+		elif resources[resource_name] - ingredients[resource_name] > 0:
+			ingredients[resource_name] += 1
+		_update_resource(resource_name)
 
-func subtract_resource_from_crafting(resourceName):
-	if has_resource(resourceName):
-		if not resourcesInCrafting.has(resourceName):
+
+func decrement_ingredient(resource_name):
+	if has_resource(resource_name):
+		if not ingredients.has(resource_name):
 			print("Resource is not in crafting!")
-		elif resourcesInCrafting[resourceName] == 1:
-			resourcesInCrafting.erase(resourceName)
+		elif ingredients[resource_name] == 1:
+			ingredients.erase(resource_name)
 		else:
-			resourcesInCrafting[resourceName] -= 1
-		resource_count_changed.emit(resourceName, get_resource_count(resourceName))
+			ingredients[resource_name] -= 1
+		_update_resource(resource_name)
 
-func get_resource_count(resourceName):
-	if has_resource(resourceName) and resourcesInCrafting.has(resourceName):
-		return resources[resourceName] - resourcesInCrafting[resourceName]
-	elif has_resource(resourceName):
-		return resources[resourceName]
+
+func get_resource_count(resource_name):
+	if has_resource(resource_name) and ingredients.has(resource_name):
+		return resources[resource_name] - ingredients[resource_name]
+	elif has_resource(resource_name):
+		return resources[resource_name]
 	else:
 		return 0
 
-func get_crafting_count():
+
+func get_ingredient_count():
 	var total = 0
-	for resourceCount in resourcesInCrafting.values():
-		total += resourceCount
+	for ingredient_count in ingredients.values():
+		total += ingredient_count
 	return total
 
-func reset_crafting():
-	resourcesInCrafting = {}
-	for resource in resources:
-		resource_count_changed.emit(resource, resources[resource])
-	
+
+func reset_ingredients():
+	ingredients = {}
+	_update_all_resources()
+
+
+func _update_all_resources():
+	for resource_name in resources:
+		_update_resource(resource_name)
+
+
+func _update_resource(resource_name: String):
+	resource_count_changed.emit(resource_name, get_resource_count(resource_name))
+
 
 #Maybe have some csv for a verifier of valid resource types later?
-
-func initialize_inventory():
+func _initialize_inventory():
 	add_resource_type("cyclonium")
 	add_resource_type("gun parts")
 	add_resource_type("airsoft bullet")

@@ -31,27 +31,27 @@ func _on_player_change_crafting_menu_state(isMenuOpen):
 	craftingContainer.visible = isMenuOpen
 
 
-func _on_player_resource_count_changed(resourceName, resourceCount):
+func _on_player_resource_count_changed(resource_name, resource_count):
 	#If there isn't a resource container for the resource, assign it.
-	if not resourceContainers.has(resourceName):
+	if not resourceContainers.has(resource_name):
 		for resourceContainer in resourceGrid.get_children():
 			if not resourceContainers.values().has(resourceContainer):
-				resourceContainers[resourceName] = resourceContainer
-				resourceContainers[resourceName].get_child(0).texture = (
-						load("res://sprites/resource_icons/" + resourceTextures[resourceName])
+				resourceContainers[resource_name] = resourceContainer
+				resourceContainers[resource_name].get_child(0).texture = (
+						load("res://sprites/resource_icons/" + resourceTextures[resource_name])
 				)
 				break
 		#If there are no more resource containers, ignore the change.
 		#This should be verified to not happen by the inventory for now.
-		if not resourceContainers.has(resourceName):
+		if not resourceContainers.has(resource_name):
 			print("No more room!")
 			containersFull = true
 			return
-	resourceContainers[resourceName].get_child(1).text = "[right]" + str(resourceCount)
+	resourceContainers[resource_name].get_child(1).text = "[right]" + str(resource_count)
 	#If a resource goes down to 0 and there's no more room, unassign it.
-	if resourceCount == 0 and containersFull and resourceContainers.has(resourceName):
-		resourceContainers[resourceName].get_child(0).texture = noTexture
-		resourceContainers.erase(resourceName)
+	if resource_count == 0 and containersFull and resourceContainers.has(resource_name):
+		resourceContainers[resource_name].get_child(0).texture = noTexture
+		resourceContainers.erase(resource_name)
 		containersFull = false
 
 func _on_ingredients_changed(ingredients: Dictionary):

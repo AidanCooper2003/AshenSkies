@@ -22,7 +22,7 @@ func _process(delta):
 		player.start_crafting()
 		
 	if Input.is_action_just_pressed("Debug 2"):
-		player.reset_crafting()
+		player.reset_ingredients()
 		
 	if Input.is_action_just_pressed("Debug 4"):
 		var nothing = ""

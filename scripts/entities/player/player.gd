@@ -34,24 +34,24 @@ func _physics_process(_delta):
 	_handle_crafting_toggle()
 
 
-func add_to_crafting(resourceName: String):
-	_resource_inventory_manager.add_resource_to_crafting(resourceName)
-	ingredients_changed.emit(_resource_inventory_manager.resourcesInCrafting)
+func add_to_crafting(resource_name: String):
+	_resource_inventory_manager.increment_ingredient(resource_name)
+	ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 
-func remove_from_crafting(resourceName: String):
-	_resource_inventory_manager.subtract_resource_from_crafting(resourceName)
-	ingredients_changed.emit(_resource_inventory_manager.resourcesInCrafting)
+func remove_from_crafting(resource_name: String):
+	_resource_inventory_manager.decrement_ingredient(resource_name)
+	ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 
-func reset_crafting():
-	_resource_inventory_manager.reset_crafting()
-	ingredients_changed.emit(_resource_inventory_manager.resourcesInCrafting)
+func reset_ingredients():
+	_resource_inventory_manager.reset_ingredients()
+	ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 
 func start_crafting():
-	if _resource_inventory_manager.get_crafting_count() == 8:
-		var item = _crafting_manager.craft(_resource_inventory_manager.resourcesInCrafting)
+	if _resource_inventory_manager.get_ingredient_count() == 8:
+		var item = _crafting_manager.craft(_resource_inventory_manager.ingredients)
 		var itemScene = CSVManager.get_item_scene(item)
 		if itemScene != null:
 			_weapon_inventory_manager.add_weapon(itemScene)
@@ -137,5 +137,5 @@ func _on_changed_health(newHealth: int):
 	_animation_player.play("iFrameFlashing")
 
 
-func _on_resource_inventory_manager_resource_count_changed(resourceName: String, resourceCount: int):
-	resource_count_changed.emit(resourceName, resourceCount)
+func _on_resource_inventory_manager_resource_count_changed(resource_name: String, resource_count: int):
+	resource_count_changed.emit(resource_name, resource_count)
