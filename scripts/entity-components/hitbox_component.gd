@@ -1,8 +1,8 @@
-extends Area2D
-
 class_name HitboxComponent
+
+extends Area2D
 
 signal damage_taken
 
-func damage(damageAmount: int):
-	damage_taken.emit(damageAmount)
+func damage(damage_amount: int):
+	damage_taken.emit(damage_amount)

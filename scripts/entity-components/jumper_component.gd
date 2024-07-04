@@ -1,78 +1,81 @@
-extends Node2D
-
 class_name JumperComponent
 
+extends Node2D
+
 @export var _character_body_2d: CharacterBody2D
+@export var _jump_force: float
+@export var _jump_delay: float
+@export var _gravity_component: GravityComponent
+@export var _max_jumps: int
 
-@export var jumpForce: float
-@export var jumpDelay: float
-
-@export var gravityComponent: GravityComponent
-
-
-var currentJumps: int
-@export var maxJumps: int
-
+var _current_jumps: int
 var _was_on_floor: bool
-var isCoyoteState: bool
-var isOnFloor: bool
-var jumpQueued: bool
-var _can_jump: bool = true
-
-var coyoteTimer: Timer
-var jumpCooldownTimer: Timer
-var jumpQueueTimer: Timer
-
-
+var _is_coyote_state: bool
+var _is_on_floor: bool
+var _jump_queued: bool
+var _can_jump := true
+var _coyote_timer: Timer
+var _jump_cooldown_timer: Timer
+var _jump_queue_timer: Timer
 
 func _ready():
-	jumpCooldownTimer = get_child(0)
-	jumpCooldownTimer.wait_time = jumpDelay
-	coyoteTimer = get_child(1)
-	jumpQueueTimer = get_child(2)
+	_jump_cooldown_timer = get_child(0)
+	_jump_cooldown_timer.wait_time = _jump_delay
+	_coyote_timer = get_child(1)
+	_jump_queue_timer = get_child(2)
+
 
 func _physics_process(delta):
-	if not isOnFloor and _was_on_floor:
-		coyoteTimer.start()
-		isCoyoteState = true
-	_was_on_floor = isOnFloor
-	if isOnFloor and currentJumps < maxJumps:
-		currentJumps = maxJumps
-	if jumpQueued:
+	#Handle Coyote
+	if not _is_on_floor and _was_on_floor:
+		_coyote_timer.start()
+		_is_coyote_state = true
+	_was_on_floor = _is_on_floor
+	#Handle Jump Replenishment
+	if _is_on_floor and _current_jumps < _max_jumps:
+		_current_jumps = _max_jumps
+	if _jump_queued:
 		start_jump()
 
-func jump():
-	_character_body_2d.velocity.y = -jumpForce
-	gravityComponent.fast_fall_override = false
-	if not isOnFloor and not isCoyoteState:
-		currentJumps -= 1
-	_can_jump = false
-	jumpCooldownTimer.start()
-	if jumpQueued:
-		jumpQueued = false
-	else:
-		jumpQueueTimer.start()
 
 func force_jump():
-	_character_body_2d.velocity.y = -jumpForce
-	gravityComponent.fast_fall_override = false
+	_character_body_2d.velocity.y = -_jump_force
+	_gravity_component.fast_fall_override = false
+
 
 func start_jump():
-	if _can_jump and currentJumps >= 1:
-		jump()
+	if _can_jump and _current_jumps >= 1:
+		_jump()
+
 
 func release_jump():
-	gravityComponent.fast_fall_override = true
+	_gravity_component.fast_fall_override = true
+
+
+func _jump():
+	_character_body_2d.velocity.y = -_jump_force
+	_gravity_component.fast_fall_override = false
+	if not _is_on_floor and not _is_coyote_state:
+		_current_jumps -= 1
+	_can_jump = false
+	_jump_cooldown_timer.start()
+	if _jump_queued:
+		_jump_queued = false
+	else:
+		_jump_queue_timer.start()
 
 
 func _on_character_change_on_floor_state(newFloorState):
-	isOnFloor = newFloorState
+	_is_on_floor = newFloorState
+
 
 func _on_jump_cooldown_timer_timeout():
 	_can_jump = true
 
+
 func _on_coyote_timer_timeout():
-	isCoyoteState = false
+	_is_coyote_state = false
+
 
 func _on_jump_queue_timer_timeout():
-	jumpQueued = false
+	_jump_queued = false

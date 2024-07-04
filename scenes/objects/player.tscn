@@ -62,9 +62,7 @@ maxVelocity = 600.0
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_j8pe6")
 
-[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("6_q6d2k")]
-characterBody2D = NodePath("..")
-gravityComponent = NodePath("../GravityComponent")
+[node name="JumperComponent" parent="." instance=ExtResource("6_q6d2k")]
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_r6hrc")
