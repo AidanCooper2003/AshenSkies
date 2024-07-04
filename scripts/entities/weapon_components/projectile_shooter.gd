@@ -8,9 +8,9 @@ class_name ProjectileShooter
 
 @export var bulletVelocity : float
 
-func fire_bullet(weaponAngle: Vector2):
+func fire_bullet(weapon_angle: Vector2):
 	var bulletInstance = bullet.instantiate()
 	get_tree().current_scene.add_child(bulletInstance)
 	bulletInstance.position = self.global_position
-	bulletInstance.apply_impulse(weaponAngle * bulletVelocity, Vector2.ZERO)
-	bulletInstance.rotation = weaponAngle.angle()
+	bulletInstance.apply_impulse(weapon_angle * bulletVelocity, Vector2.ZERO)
+	bulletInstance.rotation = weapon_angle.angle()

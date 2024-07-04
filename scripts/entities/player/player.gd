@@ -110,7 +110,7 @@ func _handle_weapon_durability():
 	if _weapon_manager.instantiatedWeapon != null:
 		var durabilityPercentage = (
 				float(_weapon_manager.instantiatedWeapon.durability) / 
-				float(_weapon_manager.instantiatedWeapon.maxDurability)) * 100
+				float(_weapon_manager.instantiatedWeapon.max_durability)) * 100
 		durability_changed.emit(_weapon_inventory_manager.currentWeapon, durabilityPercentage)
 
 

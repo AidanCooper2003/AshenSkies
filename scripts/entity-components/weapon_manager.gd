@@ -9,7 +9,7 @@ class_name WeaponManager
 var currentWeaponScene : PackedScene
 var instantiatedWeapon : Weapon
 var weaponHolder: Node2D
-var weaponAngle
+var weapon_angle
 var aimAngle
 
 var aimPosition: Vector2
@@ -54,11 +54,11 @@ func fire_tertiary():
 
 func aim():
 	if instantiatedWeapon != null:
-		var weaponAngle = (aimPosition - global_position).normalized().angle()
-		if weaponAngle >= PI/2 or weaponAngle <= -PI/2:
+		var weapon_angle = (aimPosition - global_position).normalized().angle()
+		if weapon_angle >= PI/2 or weapon_angle <= -PI/2:
 			instantiatedWeapon.set_sprite_right()
 		else:
 			instantiatedWeapon.set_sprite_left()
 		weaponHolder.global_position = global_position
-		weaponHolder.global_rotation = weaponAngle
+		weaponHolder.global_rotation = weapon_angle
 		aimAngle = (aimPosition - weaponHolder.global_position).normalized()
