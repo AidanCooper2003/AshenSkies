@@ -2,7 +2,7 @@ class_name Player
 
 extends CharacterBody2D
 
-signal change_on_floor_state
+signal on_floor_state_changed
 signal health_changed
 signal new_weapon_selected
 signal durability_changed
@@ -76,7 +76,7 @@ func _handle_jump():
 	if Input.is_action_just_released("Jump"):
 		_jumper_component.release_jump()
 	if is_on_floor() != _was_on_floor:
-		change_on_floor_state.emit(is_on_floor())
+		on_floor_state_changed.emit(is_on_floor())
 	_was_on_floor = is_on_floor()
 
 

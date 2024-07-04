@@ -2,32 +2,29 @@ extends Node2D
 
 class_name MeleeHandler
 
-signal enable_damage
-signal disable_damage
+signal damage_enabled
+signal damage_disabled
 
-var isWeaponEnabled: bool
+var _is_weapon_enabled: bool
 
-@export var swingTime: float
-
-@export var swingTimer: Timer
-
-
-
+@export var _swing_time: float
+@export var _swing_timer: Timer
 
 func _ready():
-	turn_off_weapon()
-	swingTimer.wait_time = swingTime
-
-func turn_on_weapon():
-	isWeaponEnabled = true
-	enable_damage.emit()
-
-
-func turn_off_weapon():
-	isWeaponEnabled = false
-	disable_damage.emit()
+	_turn_off_weapon()
+	_swing_timer.wait_time = _swing_time
 
 
 func swing():
-	turn_on_weapon()
-	swingTimer.start()
+	_turn_on_weapon()
+	_swing_timer.start()
+
+
+func _turn_on_weapon():
+	_is_weapon_enabled = true
+	damage_enabled.emit()
+
+
+func _turn_off_weapon():
+	_is_weapon_enabled = false
+	damage_disabled.emit()
