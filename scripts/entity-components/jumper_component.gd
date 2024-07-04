@@ -2,7 +2,7 @@ extends Node2D
 
 class_name JumperComponent
 
-@export var characterBody2D: CharacterBody2D
+@export var _character_body_2d: CharacterBody2D
 
 @export var jumpForce: float
 @export var jumpDelay: float
@@ -42,8 +42,8 @@ func _physics_process(delta):
 		start_jump()
 
 func jump():
-	characterBody2D.velocity.y = -jumpForce
-	gravityComponent.fastFallOverride = false
+	_character_body_2d.velocity.y = -jumpForce
+	gravityComponent.fast_fall_override = false
 	if not isOnFloor and not isCoyoteState:
 		currentJumps -= 1
 	_can_jump = false
@@ -54,15 +54,15 @@ func jump():
 		jumpQueueTimer.start()
 
 func force_jump():
-	characterBody2D.velocity.y = -jumpForce
-	gravityComponent.fastFallOverride = false
+	_character_body_2d.velocity.y = -jumpForce
+	gravityComponent.fast_fall_override = false
 
 func start_jump():
 	if _can_jump and currentJumps >= 1:
 		jump()
 
 func release_jump():
-	gravityComponent.fastFallOverride = true
+	gravityComponent.fast_fall_override = true
 
 
 func _on_character_change_on_floor_state(newFloorState):

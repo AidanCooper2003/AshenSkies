@@ -59,11 +59,8 @@ deccelerationCoefficient = 4.0
 airDeccelerationCoefficient = 0.5
 maxVelocity = 600.0
 
-[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_j8pe6")
-characterBody2D = NodePath("..")
-gravityCoefficient = 1.5
-downwardsGravityCoefficient = 2.0
 
 [node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("6_q6d2k")]
 characterBody2D = NodePath("..")
@@ -71,8 +68,6 @@ gravityComponent = NodePath("../GravityComponent")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_r6hrc")
-maxHealth = 3
-simpleHealth = true
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_mask = 12

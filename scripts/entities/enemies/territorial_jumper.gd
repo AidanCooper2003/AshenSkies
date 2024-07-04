@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func _on_health_component_health_changed(currentHealth):
+func _on_health_component_health_changed(_current_health):
 	_animation_player.play("hurt")
 	if _animation_player.is_playing():
 		_animation_player.stop()

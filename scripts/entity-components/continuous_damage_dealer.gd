@@ -2,8 +2,6 @@ class_name ContinuousDamageDealer
 
 extends Area2D
 
-
-
 signal damage_dealt
 
 @export var _damage: float

@@ -3,7 +3,7 @@ extends Node2D
 
 class_name WalkerComponent
 
-@export var characterBody2D: CharacterBody2D
+@export var _character_body_2d: CharacterBody2D
 
 ## Which direction the entity is intended to move in. Should be -1, 0, or 1.
 @export var walkDirection: int = 0
@@ -31,9 +31,9 @@ var stoppingThreshold: float = 1.0
 
 func _physics_process(delta):
 	var currentDeccelerationRate = deccelerationCoefficient
-	if not characterBody2D.is_on_floor():
+	if not _character_body_2d.is_on_floor():
 		currentDeccelerationRate *= airDeccelerationCoefficient
-	var velocity = characterBody2D.velocity
+	var velocity = _character_body_2d.velocity
 	var intendedXVelocity
 	
 	# If moving in the opposite direction than currently moving, use decceleration rate. Otherwise, accelerate normally.
@@ -52,7 +52,7 @@ func _physics_process(delta):
 		# If decceleration would cause velocity to overshoot 0, set to 0.
 		if abs(decceleratedXVelocity) > abs(velocity.x) - stoppingThreshold:
 			decceleratedXVelocity = 0
-		characterBody2D.velocity = Vector2(decceleratedXVelocity, velocity.y)
+		_character_body_2d.velocity = Vector2(decceleratedXVelocity, velocity.y)
 	
 	# If movement is within bounds, or outside of bounds but getting closer to bounds.
 	elif ( 
@@ -60,4 +60,4 @@ func _physics_process(delta):
 			or ((intendedXVelocity < -maxVelocity) and (intendedXVelocity > velocity.x))
 			or ((intendedXVelocity > maxVelocity) and (intendedXVelocity < velocity.x))
 	):
-		characterBody2D.velocity = Vector2(intendedXVelocity, velocity.y)
+		_character_body_2d.velocity = Vector2(intendedXVelocity, velocity.y)

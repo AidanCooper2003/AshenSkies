@@ -1,6 +1,6 @@
-extends Area2D
-
 class_name DamageDealerComponent
+
+extends Area2D
 
 signal damage_dealt
 

@@ -62,10 +62,8 @@ characterBody2D = NodePath("..")
 jumpForce = 400.0
 gravityComponent = NodePath("../GravityComponent")
 
-[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_lhlh0")
-characterBody2D = NodePath("..")
-downwardsGravityCoefficient = 2.0
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 position = Vector2(0, -178)
@@ -83,7 +81,6 @@ shape = ExtResource("3_baf3f")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_85u8s")
-maxHealth = 3
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 4

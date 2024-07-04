@@ -1,30 +1,31 @@
-extends Node2D
-
 class_name HealthComponent
+
+extends Node2D
 
 signal health_changed
 
-@export var maxHealth : int
-@export var simpleHealth : bool
+@export var _max_health : int
+@export var _simple_health : bool
 
-var currentHealth : int
-
+var _current_health : int
 
 func _ready():
-	currentHealth = maxHealth
+	_current_health = _max_health
+
 
 func take_damage(damage : int):
-	if not simpleHealth:
-		currentHealth -= damage
+	if not _simple_health:
+		_current_health -= damage
 	else:
-		currentHealth -= 1
-	health_changed.emit(currentHealth)
-	if currentHealth <= 0:
+		_current_health -= 1
+	health_changed.emit(_current_health)
+	if _current_health <= 0:
 		die()
+
 
 func die():
 	get_parent().queue_free()
 
+
 func _on_hitbox_component_damage_taken(damageAmount):
 	take_damage(damageAmount)
-
