@@ -22,10 +22,10 @@ func _ready():
 func _physics_process(_delta):
 	if position.x < _actual_left_bound:
 		_current_walk_direction = 1
-		_walker_component.walkDirection = _current_walk_direction
+		_walker_component.walk_direction = _current_walk_direction
 	elif position.x > _actual_right_bound:
 		_current_walk_direction = -1
-		_walker_component.walkDirection = _current_walk_direction
+		_walker_component.walk_direction = _current_walk_direction
 	if _object_detector.is_colliding() and is_on_floor():
 		_jumper_component.force_jump()
 	move_and_slide()

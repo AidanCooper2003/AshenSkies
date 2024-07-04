@@ -62,12 +62,12 @@ func start_crafting():
 func _handle_walk():
 	if Input.is_action_pressed("Move Left") and not Input.is_action_pressed("Move Right"):
 		_sprite_2d.texture = _left_sprite
-		_walker_component.walkDirection = -1
+		_walker_component.walk_direction = -1
 	elif Input.is_action_pressed("Move Right") and not Input.is_action_pressed("Move Left"):
 		_sprite_2d.texture = _right_sprite
-		_walker_component.walkDirection = 1
+		_walker_component.walk_direction = 1
 	else:
-		_walker_component.walkDirection = 0
+		_walker_component.walk_direction = 0
 
 
 func _handle_jump():
@@ -81,7 +81,7 @@ func _handle_jump():
 
 
 func _handle_aim():
-	_weapon_manager.aimPosition = get_global_mouse_position()
+	_weapon_manager.aim_position = get_global_mouse_position()
 
 
 func _handle_primary_fire():
@@ -104,15 +104,15 @@ func _handle_weapon_swap():
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_right())
-	new_weapon_selected.emit(_weapon_inventory_manager.currentWeapon)
+	new_weapon_selected.emit(_weapon_inventory_manager._current_weapon)
 
 
 func _handle_weapon_durability():
-	if _weapon_manager.instantiatedWeapon != null:
+	if _weapon_manager.instantiated_weapon != null:
 		var durabilityPercentage = (
-				float(_weapon_manager.instantiatedWeapon.durability) / 
-				float(_weapon_manager.instantiatedWeapon.max_durability)) * 100
-		durability_changed.emit(_weapon_inventory_manager.currentWeapon, durabilityPercentage)
+				float(_weapon_manager.instantiated_weapon.durability) / 
+				float(_weapon_manager.instantiated_weapon.max_durability)) * 100
+		durability_changed.emit(_weapon_inventory_manager._current_weapon, durabilityPercentage)
 
 
 func _handle_crafting_toggle():

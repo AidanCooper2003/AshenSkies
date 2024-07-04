@@ -1,16 +1,13 @@
-extends Node2D
-
 class_name WeaponInventoryManager
 
+extends Node2D
+
 signal item_slot_changed
-var weapons: Array = []
 
-@export var weaponInventorySize: int
+@export var _weapon_inventory_size: int
 
-var currentWeapon: int = 0
-
-func _ready():
-	pass
+var weapons := []
+var _current_weapon := 0
 
 func has_weapons():
 	return weapons.size() >= 1
@@ -25,21 +22,21 @@ func add_weapon(weapon: String):
 func swap_weapon_left():
 	if not has_weapons():
 		return
-	if currentWeapon > 0:
-		currentWeapon -= 1
+	if _current_weapon > 0:
+		_current_weapon -= 1
 	else:
-		currentWeapon = min(weaponInventorySize, weapons.size() - 1)
-	return weapons[currentWeapon]
+		_current_weapon = min(_weapon_inventory_size, weapons.size() - 1)
+	return weapons[_current_weapon]
 
 func swap_weapon_right():
 	if not has_weapons():
 		return
-	if currentWeapon < weapons.size() - 1:
-		currentWeapon += 1
+	if _current_weapon < weapons.size() - 1:
+		_current_weapon += 1
 	else:
-		currentWeapon = 0
-	return weapons[currentWeapon]
+		_current_weapon = 0
+	return weapons[_current_weapon]
 
-func swap_weapon(weaponIndex: int):
-	currentWeapon = weaponIndex
-	return weapons[currentWeapon]
+func swap_weapon(weapon_index: int):
+	_current_weapon = weapon_index
+	return weapons[_current_weapon]

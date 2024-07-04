@@ -50,14 +50,8 @@ texture = ExtResource("3_jc6ji")
 visible = false
 shape = SubResource("RectangleShape2D_t5u02")
 
-[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="WalkerComponent" type="Node2D" parent="."]
 script = ExtResource("4_4fqoi")
-characterBody2D = NodePath("..")
-walkDirection = 1
-acceleration = 800.0
-deccelerationCoefficient = 4.0
-airDeccelerationCoefficient = 0.5
-maxVelocity = 600.0
 
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_j8pe6")
@@ -77,7 +71,6 @@ shape = SubResource("RectangleShape2D_t5u02")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("9_fy50t")
-weaponDistance = 300.0
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
@@ -88,7 +81,6 @@ libraries = {
 
 [node name="WeaponInventoryManager" type="Node2D" parent="."]
 script = ExtResource("10_d84o6")
-weaponInventorySize = 4
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ql8no")

@@ -8,7 +8,7 @@ var _target: Node2D
 
 func _physics_process(delta):
 	if _target != null:
-		_weapon_manager.aimPosition = _target.position
+		_weapon_manager.aim_position = _target.position
 		_weapon_manager.fire_primary()
 
 

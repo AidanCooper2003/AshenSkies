@@ -40,8 +40,8 @@ func _on_player_new_weapon_selected(newWeapon: int):
 	lastSelectedWeapon = newWeapon
 
 
-func _on_player_durability_changed(currentWeapon: int, durability: int):
-	weaponSlots[currentWeapon].get_child(2).value = durability
+func _on_player_durability_changed(_current_weapon: int, durability: int):
+	weaponSlots[_current_weapon].get_child(2).value = durability
 
 func _on_player_weapon_slot_changed(weaponSlot: int, weaponName: String):
 	if weaponName == "":
