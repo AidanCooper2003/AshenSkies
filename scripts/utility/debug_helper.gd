@@ -4,7 +4,7 @@ extends Node2D
 @export var finalTimerText: RichTextLabel
 @export var healthText: RichTextLabel
 @export var deathText: RichTextLabel
-@export var player: Player
+@export var _player: Player
 @export var uiManager: UIManager
 
 var time: float = 0.0
@@ -19,10 +19,10 @@ func _process(delta):
 		get_tree().change_scene_to_file("res://scenes/levels/playtest_level.tscn")
 
 	if Input.is_action_just_pressed("Debug 3"):
-		player.start_crafting()
+		_player.start_crafting()
 		
 	if Input.is_action_just_pressed("Debug 2"):
-		player.reset_ingredients()
+		_player.reset_ingredients()
 		
 	if Input.is_action_just_pressed("Debug 4"):
 		var nothing = ""

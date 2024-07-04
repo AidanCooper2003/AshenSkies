@@ -1,19 +1,16 @@
-extends Node2D
-
 class_name UIManager
+
+extends Node2D
 
 @export var timerText: RichTextLabel
 @export var finalTimerText: RichTextLabel
 @export var healthText: RichTextLabel
 @export var deathText: RichTextLabel
-
 @export var deselectedSlotColor: Color
 @export var selecectedSlotColor: Color
-
 @export var weaponSlots: Array[Control]
 
 var lastSelectedWeapon = 0
-
 var time: float = 0.0
 
 
