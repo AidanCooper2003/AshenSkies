@@ -1,6 +1,6 @@
 class_name CraftingManager
-extends Node2D
 
+extends Node2D
 
 var current_ingredients: Dictionary
 
@@ -27,9 +27,9 @@ func _ready():
 #Also, since there are so many duplicate entries, maybe there could be
 #a set of ranges that the random number chosen will be tested to see where it falls
 
-func craft(ingredients: Dictionary):
+func craft(ingredients: Dictionary) -> String:
 	var item_pool: Array[String]
-	var tag_counts: Dictionary = _get_ingredients_tags(ingredients)
+	var tag_counts := _get_ingredients_tags(ingredients)
 
 	for item in _recipe_tags:
 		for i in _get_tag_match_count(item, tag_counts):
@@ -56,7 +56,7 @@ func _test_crafting():
 		print(craft({"cyclonium": 6, "gun parts": 2}))
 
 
-func _get_tag_match_count(item: String, tag_counts: Dictionary):
+func _get_tag_match_count(item: String, tag_counts: Dictionary) -> int:
 	var item_tags = _recipe_tags[item]
 	var item_count = 0
 	for tag in item_tags:
@@ -72,7 +72,7 @@ func _ingredient_tags_processing():
 
 
 #Loop through all ingredients, and add each tag they have multiplied by the ingredient count.
-func _get_ingredients_tags(ingredients: Dictionary):
+func _get_ingredients_tags(ingredients: Dictionary) -> Dictionary:
 	var tag_counts: Dictionary
 	for ingredient in ingredients:
 		var ingredient_tags = _resource_tags.get(ingredient)

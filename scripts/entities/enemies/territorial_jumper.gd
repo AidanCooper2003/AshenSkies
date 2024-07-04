@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 @export var _relative_left_bound: float
 @export var _relative_right_bound: float
-@export var _starting_direction: float = 1.0
+@export var _starting_direction := 1
 
-var _current_walk_direction
+var _current_walk_direction: int
 var _actual_left_bound: float
 var _actual_right_bound: float
 
@@ -13,16 +13,10 @@ var _actual_right_bound: float
 @onready var _object_detector:= $ShapeCast2D
 @onready var _animation_player:= $AnimationPlayer
 
-
-
-
-
 func _ready():
 	_current_walk_direction = _starting_direction
 	_actual_left_bound = position.x - _relative_left_bound
 	_actual_right_bound = position.x + _relative_right_bound
-
-
 
 
 func _physics_process(_delta):

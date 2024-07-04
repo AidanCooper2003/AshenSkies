@@ -7,17 +7,14 @@ signal weapon_broke
 @export var _fire_delay: float
 @export var maxDurability: int
 
-var durability: int
+var _can_fire := false
 
-var _can_fire: bool
-
-@onready var _fire_delay_timer:= $FireDelayTimer
-@onready var sprite:= $Sprite2D
+@onready var _fire_delay_timer := $FireDelayTimer
+@onready var sprite := $Sprite2D
+@onready var durability = maxDurability
 
 func _ready():
-	durability = maxDurability
 	_fire_delay_timer.wait_time = _fire_delay
-	_can_fire = false
 	_fire_delay_timer.start()
 
 

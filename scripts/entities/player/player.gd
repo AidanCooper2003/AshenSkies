@@ -1,4 +1,5 @@
 class_name Player
+
 extends CharacterBody2D
 
 signal change_on_floor_state
@@ -15,16 +16,16 @@ signal weapon_slot_changed
 
 var _can_jump := true
 var _was_on_floor: bool
-var _crafting_open: bool = false
+var _crafting_open := false
 
-@onready var _walker_component:= $WalkerComponent
-@onready var _jumper_component:= $JumperComponent
-@onready var _weapon_manager:= $WeaponManager
-@onready var _animation_player:= $AnimationPlayer
-@onready var _weapon_inventory_manager:= $WeaponInventoryManager
-@onready var _resource_inventory_manager:= $ResourceInventoryManager
-@onready var _crafting_manager:= $CraftingManager
-@onready var _sprite_2d:= $Sprite2D
+@onready var _walker_component := $WalkerComponent
+@onready var _jumper_component := $JumperComponent
+@onready var _weapon_manager := $WeaponManager
+@onready var _animation_player := $AnimationPlayer
+@onready var _weapon_inventory_manager := $WeaponInventoryManager
+@onready var _resource_inventory_manager := $ResourceInventoryManager
+@onready var _crafting_manager := $CraftingManager
+@onready var _sprite_2d := $Sprite2D
 
 func _physics_process(_delta):
 	_handle_walk()
@@ -36,17 +37,17 @@ func _physics_process(_delta):
 
 func add_to_crafting(resource_name: String):
 	_resource_inventory_manager.increment_ingredient(resource_name)
-	ingredients_changed.emit(_resource_inventory_manager.ingredients)
+	_update_ingredients()
 
 
 func remove_from_crafting(resource_name: String):
 	_resource_inventory_manager.decrement_ingredient(resource_name)
-	ingredients_changed.emit(_resource_inventory_manager.ingredients)
+	_update_ingredients()
 
 
 func reset_ingredients():
 	_resource_inventory_manager.reset_ingredients()
-	ingredients_changed.emit(_resource_inventory_manager.ingredients)
+	_update_ingredients()
 
 
 func start_crafting():
@@ -131,6 +132,8 @@ func _handle_weapon_firing():
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
+func _update_ingredients():
+	ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 func _on_changed_health(newHealth: int):
 	health_changed.emit(newHealth)

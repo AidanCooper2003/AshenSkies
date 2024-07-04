@@ -2,8 +2,7 @@ class_name Spikeball
 
 extends RigidBody2D
 
-@onready var _animation_player:= $AnimationPlayer
-
+@onready var _animation_player := $AnimationPlayer
 
 func _on_despawn_timer_timeout():
 	_animation_player.play("despawn")

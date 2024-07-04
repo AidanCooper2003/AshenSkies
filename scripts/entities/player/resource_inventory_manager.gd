@@ -1,15 +1,14 @@
 class_name ResourceInventoryManager
+
 extends Node2D
 
-
-
 signal resource_count_changed
+
+const MAX_INGREDIENTS = 8
 
 @export var resources: Dictionary = {}
 
 var ingredients: Dictionary = {}
-
-var MAX_INGREDIENTS = 8
 
 func _ready():
 	_initialize_inventory()
@@ -21,13 +20,13 @@ func has_resource(resource_name: String):
 
 func add_resource(resource_name: String, resource_count: int):
 	if has_resource(resource_name):
-		resources[resource_name] = resources[resource_name] + resource_count
+		resources[resource_name] += resource_count
 		_update_resource(resource_name)
 
 
 func subtract_resource(resource_name: String, resource_count: int):
 	if has_resource_count(resource_name, resource_count):
-		resources[resource_name] = resources[resource_name] - resource_count
+		resources[resource_name] -= resource_count
 		_update_resource(resource_name)
 
 

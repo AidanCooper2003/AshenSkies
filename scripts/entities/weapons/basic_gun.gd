@@ -2,7 +2,7 @@ class_name BasicGun
 
 extends Weapon
 
-@onready var _projectile_shooter:= $ProjectileShooter
+@onready var _projectile_shooter := $ProjectileShooter
 
 func fire_primary(weapon_angle):
 	if _can_fire:

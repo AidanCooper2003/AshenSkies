@@ -1,9 +1,10 @@
 class_name AshPriest
+
 extends Node2D
 
-var _target
+var _target: Node2D
 
-@onready var _weapon_manager:= $WeaponManager
+@onready var _weapon_manager := $WeaponManager
 
 func _physics_process(delta):
 	if _target != null:
