@@ -15,5 +15,5 @@ func _process(_delta):
 	if Input.is_action_just_pressed("Debug 2"):
 		_player.reset_ingredients()
 	if Input.is_action_just_pressed("Debug 4"):
-		var nothing = ""
+		var nothing := ""
 		_ui_manager._on_player_weapon_slot_changed(1, nothing)

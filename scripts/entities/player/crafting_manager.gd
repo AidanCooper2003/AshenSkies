@@ -34,7 +34,7 @@ func craft(ingredients: Dictionary) -> String:
 	for item in _recipe_tags:
 		for i in _get_tag_match_count(item, tag_counts):
 			item_pool.append(item)
-	var chosen_item = randi_range(0, item_pool.size() - 1)
+	var chosen_item := randi_range(0, item_pool.size() - 1)
 	return item_pool[chosen_item]
 
 func _test_crafting():
@@ -58,7 +58,7 @@ func _test_crafting():
 
 func _get_tag_match_count(item: String, tag_counts: Dictionary) -> int:
 	var item_tags = _recipe_tags[item]
-	var item_count = 0
+	var item_count := 0
 	for tag in item_tags:
 		if not tag_counts.has(tag):
 			return 0 # If your ingredients don't contain every tag in the item, the item can't be added

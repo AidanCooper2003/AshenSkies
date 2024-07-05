@@ -10,7 +10,7 @@ var aim_position: Vector2
 
 var _current_weapon_scene : PackedScene
 var _weapon_holder: Node2D
-var _aim_angle
+var _aim_angle: Vector2
 
 func _ready():
 	if _default_weapon != null:

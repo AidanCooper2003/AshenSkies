@@ -9,7 +9,7 @@ extends Node2D
 var _gravity: float
 var fast_fall_override: bool
 
-@onready var defaultGravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+@onready var defaultGravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	_gravity = defaultGravity * _gravity_coefficient

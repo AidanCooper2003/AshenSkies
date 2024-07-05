@@ -18,24 +18,24 @@ func print_csv():
 	print("----------------------")
 
 
-func get_tags(collection: Array, nameColumn: int, tagColumn: int) -> Dictionary:
+func get_tags(collection: Array, name_column: int, tag_column: int) -> Dictionary:
 	var tags: Dictionary
 	for object in collection:
-		var tagArray = object[1].split(", ")
-		tags[object[0]] = tagArray
+		var tag_array = object[tag_column].split(", ")
+		tags[object[name_column]] = tag_array
 	return tags
 
 
-func get_properties(collection: Array, nameColumn: int, propertyColumn: int) -> Dictionary:
+func get_properties(collection: Array, name_column: int, propertyColumn: int) -> Dictionary:
 	var properties: Dictionary
 	for object in collection:
-		properties[object[nameColumn]] = object[propertyColumn]
+		properties[object[name_column]] = object[propertyColumn]
 	return properties
 
 
-func get_property(collection: Array, nameColumn: int, propertyColumn: int, objectName: String) -> Variant:
+func get_property(collection: Array, name_column: int, propertyColumn: int, objectName: String) -> Variant:
 	for object in collection:
-		if object[nameColumn] == objectName:
+		if object[name_column] == objectName:
 			return object[propertyColumn]
 	return null
 

@@ -53,9 +53,9 @@ func reset_ingredients():
 func start_crafting():
 	if _resource_inventory_manager.get_ingredient_count() == 8:
 		var item = _crafting_manager.craft(_resource_inventory_manager.ingredients)
-		var itemScene = CSVManager.get_item_scene(item)
-		if itemScene != null:
-			_weapon_inventory_manager.add_weapon(itemScene)
+		var item_scene = CSVManager.get_item_scene(item)
+		if item_scene != null:
+			_weapon_inventory_manager.add_weapon(item_scene)
 		weapon_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, item)
 
 
@@ -109,10 +109,10 @@ func _handle_weapon_swap():
 
 func _handle_weapon_durability():
 	if _weapon_manager.instantiated_weapon != null:
-		var durabilityPercentage = (
+		var durability_percentage := (
 				float(_weapon_manager.instantiated_weapon.durability) / 
 				float(_weapon_manager.instantiated_weapon.max_durability)) * 100
-		durability_changed.emit(_weapon_inventory_manager._current_weapon, durabilityPercentage)
+		durability_changed.emit(_weapon_inventory_manager._current_weapon, durability_percentage)
 
 
 func _handle_crafting_toggle():

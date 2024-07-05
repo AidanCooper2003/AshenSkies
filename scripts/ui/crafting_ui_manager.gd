@@ -51,18 +51,18 @@ func _on_player_resource_count_changed(resource_name, resource_count):
 
 
 func _on_ingredients_changed(ingredients: Dictionary):
-	var ingredientContainers = _crafting_grid.get_children()
-	var containerIndex = 0
+	var ingredient_containers := _crafting_grid.get_children()
+	var container_index := 0
 	for ingredient in ingredients:
 		for i in range(ingredients[ingredient]):
-			ingredientContainers[containerIndex].icon = (
+			ingredient_containers[container_index].icon = (
 					load("res://sprites/resource_icons/" + _resource_textures[ingredient])
 			)
-			containerIndex += 1
-	if containerIndex < 7:
-		for i in range(8 - containerIndex):
-			ingredientContainers[containerIndex].icon = null
-			containerIndex += 1
+			container_index += 1
+	if container_index < 7:
+		for i in range(8 - container_index):
+			ingredient_containers[container_index].icon = null
+			container_index += 1
 
 
 func _on_player_change_crafting_menu_state(is_menu_open):
