@@ -60,6 +60,7 @@ _max_velocity = 300.0
 
 [node name="JumperComponent" parent="." node_paths=PackedStringArray("_character_body_2d", "_gravity_component") instance=ExtResource("5_16e0a")]
 _character_body_2d = NodePath("..")
+_jump_force = 400.0
 _gravity_component = NodePath("../GravityComponent")
 
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
