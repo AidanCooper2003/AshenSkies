@@ -7,7 +7,7 @@ extends Node2D
 
 var _time: float = 0.0
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if Input.is_action_pressed("Debug 1"):
 		get_tree().change_scene_to_file("res://scenes/levels/playtest_level.tscn")
 	if Input.is_action_just_pressed("Debug 3"):

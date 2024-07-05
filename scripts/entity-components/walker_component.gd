@@ -20,7 +20,7 @@ var _stopping_threshold := 1.0
 ##If an entities velocity + acceleration is within the x velocity bounds, the entity may increase its speed.
 ##If an entities velocity is outside the bounds, do not set it lower in case the entity was launched.
 ##If an entities velocity is outside the bounds, moving in the opposite direction should slow it down.
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	var current_decceleration_rate = _decceleration_coefficient
 	if not _character_body_2d.is_on_floor():
 		current_decceleration_rate *= _air_decceleration_coefficient

@@ -9,11 +9,11 @@ signal health_changed
 
 var _current_health : int
 
-func _ready():
+func _ready() -> void:
 	_current_health = _max_health
 
 
-func take_damage(damage : int):
+func take_damage(damage : int) -> void:
 	if not _simple_health:
 		_current_health -= damage
 	else:
@@ -23,9 +23,9 @@ func take_damage(damage : int):
 		die()
 
 
-func die():
+func die() -> void:
 	get_parent().queue_free()
 
 
-func _on_hitbox_component_damage_taken(damageAmount):
+func _on_hitbox_component_damage_taken(damageAmount) -> void:
 	take_damage(damageAmount)

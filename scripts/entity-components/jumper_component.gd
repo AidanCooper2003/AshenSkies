@@ -18,14 +18,14 @@ var _coyote_timer: Timer
 var _jump_cooldown_timer: Timer
 var _jump_queue_timer: Timer
 
-func _ready():
+func _ready() -> void:
 	_jump_cooldown_timer = get_child(0)
 	_jump_cooldown_timer.wait_time = _jump_delay
 	_coyote_timer = get_child(1)
 	_jump_queue_timer = get_child(2)
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	#Handle Coyote
 	if not _is_on_floor and _was_on_floor:
 		_coyote_timer.start()
@@ -38,21 +38,21 @@ func _physics_process(delta):
 		start_jump()
 
 
-func force_jump():
+func force_jump() -> void:
 	_character_body_2d.velocity.y = -_jump_force
 	_gravity_component.fast_fall_override = false
 
 
-func start_jump():
+func start_jump() -> void:
 	if _can_jump and _current_jumps >= 1:
 		_jump()
 
 
-func release_jump():
+func release_jump() -> void:
 	_gravity_component.fast_fall_override = true
 
 
-func _jump():
+func _jump() -> void:
 	_character_body_2d.velocity.y = -_jump_force
 	_gravity_component.fast_fall_override = false
 	if not _is_on_floor and not _is_coyote_state:
@@ -65,17 +65,17 @@ func _jump():
 		_jump_queue_timer.start()
 
 
-func _on_character_change_on_floor_state(newFloorState):
+func _on_character_change_on_floor_state(newFloorState) -> void:
 	_is_on_floor = newFloorState
 
 
-func _on_jump_cooldown_timer_timeout():
+func _on_jump_cooldown_timer_timeout() -> void:
 	_can_jump = true
 
 
-func _on_coyote_timer_timeout():
+func _on_coyote_timer_timeout() -> void:
 	_is_coyote_state = false
 
 
-func _on_jump_queue_timer_timeout():
+func _on_jump_queue_timer_timeout() -> void:
 	_jump_queued = false

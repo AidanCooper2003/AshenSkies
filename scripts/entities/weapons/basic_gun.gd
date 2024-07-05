@@ -4,7 +4,7 @@ extends Weapon
 
 @onready var _projectile_shooter := $ProjectileShooter
 
-func fire_primary(weapon_angle):
+func fire_primary(weapon_angle) -> bool:
 	if _can_fire:
 		_projectile_shooter.fire_bullet(weapon_angle)
 		durability -= 1;

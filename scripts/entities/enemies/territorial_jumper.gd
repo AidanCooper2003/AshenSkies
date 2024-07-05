@@ -13,13 +13,13 @@ var _actual_right_bound: float
 @onready var _object_detector:= $ShapeCast2D
 @onready var _animation_player:= $AnimationPlayer
 
-func _ready():
+func _ready() -> void:
 	_current_walk_direction = _starting_direction
 	_actual_left_bound = position.x - _relative_left_bound
 	_actual_right_bound = position.x + _relative_right_bound
 
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	if position.x < _actual_left_bound:
 		_current_walk_direction = 1
 		_walker_component.walk_direction = _current_walk_direction
@@ -31,7 +31,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func _on_health_component_health_changed(_current_health):
+func _on_health_component_health_changed(_current_health) -> void:
 	_animation_player.play("hurt")
 	if _animation_player.is_playing():
 		_animation_player.stop()

@@ -27,7 +27,7 @@ var _crafting_open := false
 @onready var _crafting_manager := $CraftingManager
 @onready var _sprite_2d := $Sprite2D
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	_handle_walk()
 	_handle_jump()
 	_handle_weapon_firing()
@@ -35,22 +35,22 @@ func _physics_process(_delta):
 	_handle_crafting_toggle()
 
 
-func add_to_crafting(resource_name: String):
+func add_to_crafting(resource_name: String) -> void:
 	_resource_inventory_manager.increment_ingredient(resource_name)
 	_update_ingredients()
 
 
-func remove_from_crafting(resource_name: String):
+func remove_from_crafting(resource_name: String) -> void:
 	_resource_inventory_manager.decrement_ingredient(resource_name)
 	_update_ingredients()
 
 
-func reset_ingredients():
+func reset_ingredients() -> void:
 	_resource_inventory_manager.reset_ingredients()
 	_update_ingredients()
 
 
-func start_crafting():
+func start_crafting() -> void:
 	if _resource_inventory_manager.get_ingredient_count() == 8:
 		var item = _crafting_manager.craft(_resource_inventory_manager.ingredients)
 		var item_scene = CSVManager.get_item_scene(item)
@@ -59,7 +59,7 @@ func start_crafting():
 		weapon_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, item)
 
 
-func _handle_walk():
+func _handle_walk() -> void:
 	if Input.is_action_pressed("Move Left") and not Input.is_action_pressed("Move Right"):
 		_sprite_2d.texture = _left_sprite
 		_walker_component.walk_direction = -1
@@ -70,7 +70,7 @@ func _handle_walk():
 		_walker_component.walk_direction = 0
 
 
-func _handle_jump():
+func _handle_jump() -> void:
 	if Input.is_action_just_pressed("Jump"):
 		_jumper_component.start_jump()
 	if Input.is_action_just_released("Jump"):
@@ -80,26 +80,26 @@ func _handle_jump():
 	_was_on_floor = is_on_floor()
 
 
-func _handle_aim():
+func _handle_aim() -> void:
 	_weapon_manager.aim_position = get_global_mouse_position()
 
 
-func _handle_primary_fire():
+func _handle_primary_fire() -> void:
 	if Input.is_action_pressed("Primary Fire"):
 		_weapon_manager.fire_primary()
 
 
-func _handle_secondary_fire():
+func _handle_secondary_fire() -> void:
 	if Input.is_action_pressed("Secondary Fire"):
 		_weapon_manager.fire_secondary()
 
 
-func _handle_tertiary_fire():
+func _handle_tertiary_fire() -> void:
 	if Input.is_action_pressed("Tertiary Fire"):
 		_weapon_manager.fire_tertiary()
 
 
-func _handle_weapon_swap():
+func _handle_weapon_swap() -> void:
 	if Input.is_action_just_pressed("SwapWeaponDown"):
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
@@ -107,7 +107,7 @@ func _handle_weapon_swap():
 	new_weapon_selected.emit(_weapon_inventory_manager._current_weapon)
 
 
-func _handle_weapon_durability():
+func _handle_weapon_durability() -> void:
 	if _weapon_manager.instantiated_weapon != null:
 		var durability_percentage := (
 				float(_weapon_manager.instantiated_weapon.durability) / 
@@ -115,7 +115,7 @@ func _handle_weapon_durability():
 		durability_changed.emit(_weapon_inventory_manager._current_weapon, durability_percentage)
 
 
-func _handle_crafting_toggle():
+func _handle_crafting_toggle() -> void:
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
 		_crafting_open = not _crafting_open
 		crafting_menu_state_changed.emit(_crafting_open)
@@ -123,7 +123,7 @@ func _handle_crafting_toggle():
 
 #Later you should still be able to fire, but only if its outside the bounds
 #of the crafting menu
-func _handle_weapon_firing():
+func _handle_weapon_firing() -> void:
 	_handle_aim()
 	if not _crafting_open:
 		_handle_primary_fire()
@@ -132,13 +132,13 @@ func _handle_weapon_firing():
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
-func _update_ingredients():
+func _update_ingredients() -> void:
 	ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
-func _on_changed_health(newHealth: int):
+func _on_changed_health(newHealth: int) -> void:
 	health_changed.emit(newHealth)
 	_animation_player.play("iFrameFlashing")
 
 
-func _on_resource_inventory_manager_resource_count_changed(resource_name: String, resource_count: int):
+func _on_resource_count_changed(resource_name: String, resource_count: int) -> void:
 	resource_count_changed.emit(resource_name, resource_count)

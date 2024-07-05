@@ -7,7 +7,7 @@ extends Weapon
 
 @onready var melee_handler := $MeleeHandler
 
-func fire_primary(_weapon_angle):
+func fire_primary(_weapon_angle) -> bool:
 	if _can_fire:
 		melee_handler.swing()
 		durability -= 1
@@ -18,11 +18,11 @@ func fire_primary(_weapon_angle):
 	return true
 
 
-func set_sprite_left():
+func set_sprite_left() -> void:
 	sprite.flip_v = false
 	sprite.rotation = deg_to_rad(45)
 
 
-func set_sprite_right():
+func set_sprite_right() -> void:
 	sprite.flip_v = true
 	sprite.rotation = deg_to_rad(-45)

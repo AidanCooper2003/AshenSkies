@@ -9,7 +9,7 @@ var _recipe_qualities: Dictionary
 var _resource_tags: Dictionary
 var _resource_qualities: Dictionary
 
-func _ready():
+func _ready() -> void:
 	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
 	_resource_tags = CSVManager.get_tags(CSVManager.resources, 0, 1)
 	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
@@ -37,7 +37,7 @@ func craft(ingredients: Dictionary) -> String:
 	var chosen_item := randi_range(0, item_pool.size() - 1)
 	return item_pool[chosen_item]
 
-func _test_crafting():
+func _test_crafting() -> void:
 	print("Only Gun Tags")
 	print("----------")
 	for i in 10:

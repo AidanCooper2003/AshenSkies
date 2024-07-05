@@ -12,7 +12,7 @@ var _current_weapon_scene : PackedScene
 var _weapon_holder: Node2D
 var _aim_angle: Vector2
 
-func _ready():
+func _ready() -> void:
 	if _default_weapon != null:
 		_current_weapon_scene = _default_weapon
 	_weapon_holder = get_child(0)
@@ -20,11 +20,11 @@ func _ready():
 	_aim_angle = Vector2.ZERO
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	aim()
 
 
-func draw_weapon():
+func draw_weapon() -> void:
 	if instantiated_weapon != null:
 		instantiated_weapon.queue_free()
 	if _current_weapon_scene != null:
@@ -32,31 +32,31 @@ func draw_weapon():
 		_weapon_holder.add_child(instantiated_weapon)
 
 
-func switch_weapon(newWeapon):
+func switch_weapon(newWeapon) -> void:
 	_current_weapon_scene = newWeapon
 	draw_weapon()
 
 
 #Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
-func fire_primary():
+func fire_primary() -> void:
 	if instantiated_weapon != null:
 		if not instantiated_weapon.fire_primary(_aim_angle):
 			print("no primary ability")
 
 
-func fire_secondary():
+func fire_secondary() -> void:
 	if instantiated_weapon != null:
 		if not instantiated_weapon.fire_secondary(_aim_angle):
 			print("no secondary ability")
 
 
-func fire_tertiary():
+func fire_tertiary() -> void:
 	if instantiated_weapon != null:
 		if not instantiated_weapon.fire_tertiary(_aim_angle):
 			print("no tertiary ability")
 
 
-func aim():
+func aim() -> void:
 	if instantiated_weapon != null:
 		var weapon_angle = (aim_position - global_position).normalized().angle()
 		if weapon_angle >= PI/2 or weapon_angle <= -PI/2:

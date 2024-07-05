@@ -13,20 +13,20 @@ var _is_menu_open: bool = false
 var _resource_containers: Dictionary
 var _containers_full: bool = false
 
-func _init():
+func _init() -> void:
 	_resource_textures = CSVManager.get_properties(CSVManager.resources, 0, 3)
 
 
-func _ready():
+func _ready() -> void:
 	_setup_ingredient_buttons()
 
 
-func _setup_ingredient_buttons():
+func _setup_ingredient_buttons() -> void:
 	for button in _resource_grid.get_children():
 		button.connect("pressed", _on_ingredient_clicked.bind(button))
 
 
-func _on_player_resource_count_changed(resource_name, resource_count):
+func _on_player_resource_count_changed(resource_name, resource_count) -> void:
 	#If there isn't a resource container for the resource, assign it.
 	if not _resource_containers.has(resource_name):
 		for resourceContainer in _resource_grid.get_children():
@@ -50,7 +50,7 @@ func _on_player_resource_count_changed(resource_name, resource_count):
 		_containers_full = false
 
 
-func _on_ingredients_changed(ingredients: Dictionary):
+func _on_ingredients_changed(ingredients: Dictionary) -> void:
 	var ingredient_containers := _crafting_grid.get_children()
 	var container_index := 0
 	for ingredient in ingredients:
@@ -65,12 +65,12 @@ func _on_ingredients_changed(ingredients: Dictionary):
 			container_index += 1
 
 
-func _on_player_change_crafting_menu_state(is_menu_open):
+func _on_player_change_crafting_menu_state(is_menu_open) -> void:
 	_is_menu_open = is_menu_open
 	_crafting_container.visible = _is_menu_open
 
 
-func _on_ingredient_clicked(button):
+func _on_ingredient_clicked(button) -> void:
 	var button_resource = _resource_containers.find_key(button)
 	if button_resource == null:
 		return

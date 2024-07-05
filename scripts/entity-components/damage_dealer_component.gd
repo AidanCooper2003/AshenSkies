@@ -8,7 +8,7 @@ signal damage_dealt
 
 var _is_active: bool = true
 
-func _on_area_entered(area):
+func _on_area_entered(area) -> void:
 	if _is_active:
 		if area is HitboxComponent:
 			area.damage(_damage) 

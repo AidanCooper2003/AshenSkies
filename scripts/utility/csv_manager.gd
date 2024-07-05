@@ -6,12 +6,12 @@ extends Node2D
 var recipes := preload("res://csv/recipes.csv").records
 var resources := preload("res://csv/resources.csv").records
 
-func _ready():
+func _ready() -> void:
 	recipes.remove_at(0)
 	resources.remove_at(0)
 
 
-func print_csv():
+func print_csv() -> void:
 	print(recipes)
 	print("----------------------")
 	print(resources)
@@ -26,17 +26,17 @@ func get_tags(collection: Array, name_column: int, tag_column: int) -> Dictionar
 	return tags
 
 
-func get_properties(collection: Array, name_column: int, propertyColumn: int) -> Dictionary:
+func get_properties(collection: Array, name_column: int, property_column: int) -> Dictionary:
 	var properties: Dictionary
 	for object in collection:
-		properties[object[name_column]] = object[propertyColumn]
+		properties[object[name_column]] = object[property_column]
 	return properties
 
 
-func get_property(collection: Array, name_column: int, propertyColumn: int, objectName: String) -> Variant:
+func get_property(collection: Array, name_column: int, property_column: int, objectName: String) -> Variant:
 	for object in collection:
 		if object[name_column] == objectName:
-			return object[propertyColumn]
+			return object[property_column]
 	return null
 
 
