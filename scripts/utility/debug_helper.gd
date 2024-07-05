@@ -1,13 +1,13 @@
 extends Node2D
 
-@export var timerText: RichTextLabel
-@export var finalTimerText: RichTextLabel
-@export var healthText: RichTextLabel
-@export var deathText: RichTextLabel
+@export var _timer_text: RichTextLabel
+@export var _final_timer_text: RichTextLabel
+@export var _health_text: RichTextLabel
+@export var _death_text: RichTextLabel
 @export var _player: Player
 @export var uiManager: UIManager
 
-var time: float = 0.0
+var _time: float = 0.0
 
 
 
