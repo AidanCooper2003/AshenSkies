@@ -122,10 +122,10 @@ shape = SubResource("RectangleShape2D_mxg24")
 [node name="TerritorialJumper" parent="." instance=ExtResource("4_g4ohe")]
 position = Vector2(994, 350)
 
-[node name="SolarTurret" parent="." instance=ExtResource("6_nfakm")]
+[node name="AshPriest1" parent="." instance=ExtResource("6_nfakm")]
 position = Vector2(2442, 308)
 
-[node name="AshPriest" parent="." instance=ExtResource("6_nfakm")]
+[node name="AshPriest2" parent="." instance=ExtResource("6_nfakm")]
 position = Vector2(4256, -398)
 
 [node name="TerritorialJumper2" parent="." instance=ExtResource("4_g4ohe")]
