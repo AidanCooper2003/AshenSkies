@@ -48,19 +48,10 @@ texture = ExtResource("1_hnsvw")
 visible = false
 shape = ExtResource("3_baf3f")
 
-[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="WalkerComponent" type="Node2D" parent="."]
 script = ExtResource("3_hhxes")
-characterBody2D = NodePath("..")
-walkDirection = 1
-acceleration = 250.0
-deccelerationCoefficient = 1.5
-airDeccelerationCoefficient = 1.0
-maxVelocity = 300.0
 
-[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("5_16e0a")]
-characterBody2D = NodePath("..")
-jumpForce = 400.0
-gravityComponent = NodePath("../GravityComponent")
+[node name="JumperComponent" parent="." instance=ExtResource("5_16e0a")]
 
 [node name="GravityComponent" type="Node2D" parent="."]
 script = ExtResource("5_lhlh0")
