@@ -2,8 +2,6 @@ class_name ResourceInventoryManager
 
 extends Node2D
 
-signal resource_count_changed
-
 const MAX_INGREDIENTS = 8
 
 @export var resources: Dictionary = {}
@@ -11,10 +9,10 @@ const MAX_INGREDIENTS = 8
 var ingredients: Dictionary = {}
 
 func _ready() -> void:
-	_initialize_inventory()
-	EventBus.ingredient_selected.connect(add_resource)
-	EventBus.ingredient_deselected.connect(subtract_resource)
+	EventBus.ingredient_selected.connect(increment_ingredient)
+	EventBus.ingredient_deselected.connect(decrement_ingredient)
 	EventBus.ingredients_reset.connect(reset_ingredients)
+	self.call_deferred("_initialize_inventory")
 
 func has_resource(resource_name: String) -> bool:
 	return resources.has(resource_name)
@@ -97,8 +95,9 @@ func _update_all_resources() -> void:
 
 
 func _update_resource(resource_name: String) -> void:
-	print("Updating resource: " + resource_name + "in inventory.")
-	resource_count_changed.emit(resource_name, get_resource_count(resource_name))
+	print("Updating resource: " + resource_name + " in inventory.")
+	EventBus.resource_count_changed.emit(resource_name, get_resource_count(resource_name))
+	EventBus.ingredients_changed.emit(ingredients)
 
 
 #Maybe have some csv for a verifier of valid resource types later?

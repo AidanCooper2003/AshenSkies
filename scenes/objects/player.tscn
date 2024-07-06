@@ -104,4 +104,3 @@ script = ExtResource("12_qkxvb")
 [connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]
 [connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
-[connection signal="resource_count_changed" from="ResourceInventoryManager" to="." method="_on_resource_count_changed"]

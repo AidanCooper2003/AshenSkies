@@ -1,3 +1,5 @@
+##Handles events not handled entirely in a packed scene.
+##Make sure to, in any ready function, call_deferred if the actions require a connected signal.
 extends Node
 
 #From Player

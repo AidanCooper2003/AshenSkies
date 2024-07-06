@@ -88,8 +88,6 @@ func _handle_weapon_swap() -> void:
 
 
 func _handle_weapon_durability() -> void:
-	if not _game_loaded:
-		await owner.ready
 	if _weapon_manager.has_weapon():
 		var durability_percentage: float = _weapon_manager.get_durability_percentage()
 		EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
@@ -112,11 +110,6 @@ func _handle_weapon_firing() -> void:
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
-
-func _update_ingredients() -> void:
-	EventBus.ingredients_changed.emit(_resource_inventory_manager.ingredients)
-
-
 func _on_changed_health(newHealth: int) -> void:
 	if not _game_loaded:
 		await owner.ready
@@ -124,12 +117,6 @@ func _on_changed_health(newHealth: int) -> void:
 		_animation_player.play("iFrameFlashing")
 	EventBus.player_health_changed.emit(newHealth)
 
-
-func _on_resource_count_changed(resource_name: String, resource_count: int) -> void:
-	if not _game_loaded:
-		await owner.ready
-	print(str(resource_count) + " in player")
-	EventBus.resource_count_changed.emit(resource_name, resource_count)
 
 func _on_crafting_started() -> void:
 	if _resource_inventory_manager.get_ingredient_count() == 8:
