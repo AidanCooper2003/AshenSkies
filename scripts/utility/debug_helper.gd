@@ -11,9 +11,9 @@ func _process(_delta) -> void:
 	if Input.is_action_pressed("Debug 1"):
 		get_tree().change_scene_to_file("res://scenes/levels/playtest_level.tscn")
 	if Input.is_action_just_pressed("Debug 3"):
-		_player.start_crafting()
+		EventBus.crafting_started.emit()
 	if Input.is_action_just_pressed("Debug 2"):
-		_player.reset_ingredients()
+		EventBus.ingredients_reset.emit()
 	if Input.is_action_just_pressed("Debug 4"):
 		var nothing := ""
 		_ui_manager._on_player_weapon_slot_changed(1, nothing)

@@ -82,4 +82,4 @@ func _on_ingredient_clicked(button) -> void:
 	var button_resource = _resource_containers.find_key(button)
 	if button_resource == null:
 		return
-	_player.add_to_crafting(button_resource)
+	EventBus.ingredient_selected.emit(button_resource)

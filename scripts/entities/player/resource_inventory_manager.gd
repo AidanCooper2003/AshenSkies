@@ -12,7 +12,9 @@ var ingredients: Dictionary = {}
 
 func _ready() -> void:
 	_initialize_inventory()
-
+	EventBus.ingredient_selected.connect(add_resource)
+	EventBus.ingredient_deselected.connect(subtract_resource)
+	EventBus.ingredients_reset.connect(reset_ingredients)
 
 func has_resource(resource_name: String) -> bool:
 	return resources.has(resource_name)

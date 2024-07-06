@@ -24,6 +24,7 @@ var _game_loaded := false
 @onready var _sprite_2d := $Sprite2D
 
 func _ready():
+	_setup_signals()
 	await owner.ready
 	_game_loaded = true
 
@@ -35,29 +36,8 @@ func _physics_process(_delta) -> void:
 	_handle_crafting_toggle()
 
 
-func add_to_crafting(resource_name: String) -> void:
-	_resource_inventory_manager.increment_ingredient(resource_name)
-	_update_ingredients()
-
-
-func remove_from_crafting(resource_name: String) -> void:
-	_resource_inventory_manager.decrement_ingredient(resource_name)
-	_update_ingredients()
-
-
-func reset_ingredients() -> void:
-	_resource_inventory_manager.reset_ingredients()
-	_update_ingredients()
-
-
-func start_crafting() -> void:
-	if _resource_inventory_manager.get_ingredient_count() == 8:
-		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
-		var weapon_scene = CSVManager.get_weapon_scene(weapon)
-		if weapon_scene != null:
-			_weapon_inventory_manager.add_weapon(weapon_scene)
-		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
-
+func _setup_signals() -> void:
+	EventBus.crafting_started.connect(_on_crafting_started)
 
 func _handle_walk() -> void:
 	if Input.is_action_pressed("Move Left") and not Input.is_action_pressed("Move Right"):
@@ -132,8 +112,10 @@ func _handle_weapon_firing() -> void:
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
+
 func _update_ingredients() -> void:
 	EventBus.ingredients_changed.emit(_resource_inventory_manager.ingredients)
+
 
 func _on_changed_health(newHealth: int) -> void:
 	if not _game_loaded:
@@ -143,9 +125,16 @@ func _on_changed_health(newHealth: int) -> void:
 	EventBus.player_health_changed.emit(newHealth)
 
 
-
 func _on_resource_count_changed(resource_name: String, resource_count: int) -> void:
 	if not _game_loaded:
 		await owner.ready
 	print(str(resource_count) + " in player")
 	EventBus.resource_count_changed.emit(resource_name, resource_count)
+
+func _on_crafting_started() -> void:
+	if _resource_inventory_manager.get_ingredient_count() == 8:
+		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
+		var weapon_scene = CSVManager.get_weapon_scene(weapon)
+		if weapon_scene != null:
+			_weapon_inventory_manager.add_weapon(weapon_scene)
+		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
