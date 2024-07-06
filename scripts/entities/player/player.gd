@@ -104,15 +104,13 @@ func _handle_weapon_swap() -> void:
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_right())
-	new_weapon_selected.emit(_weapon_inventory_manager._current_weapon)
+	new_weapon_selected.emit(_weapon_inventory_manager.current_weapon)
 
 
 func _handle_weapon_durability() -> void:
-	if _weapon_manager.instantiated_weapon != null:
-		var durability_percentage := (
-				float(_weapon_manager.instantiated_weapon.durability) / 
-				float(_weapon_manager.instantiated_weapon.max_durability)) * 100
-		durability_changed.emit(_weapon_inventory_manager._current_weapon, durability_percentage)
+	if _weapon_manager.has_weapon():
+		var durability_percentage: float = _weapon_manager.get_durability_percentage()
+		durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
 
 
 func _handle_crafting_toggle() -> void:

@@ -25,7 +25,7 @@ func _physics_process(delta) -> void:
 
 
 func draw_weapon() -> void:
-	if instantiated_weapon != null:
+	if has_weapon():
 		instantiated_weapon.queue_free()
 	if _current_weapon_scene != null:
 		instantiated_weapon = _current_weapon_scene.instantiate()
@@ -39,25 +39,22 @@ func switch_weapon(newWeapon) -> void:
 
 #Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
 func fire_primary() -> void:
-	if instantiated_weapon != null:
-		if not instantiated_weapon.fire_primary(_aim_angle):
+	if has_weapon() && not instantiated_weapon.fire_primary(_aim_angle):
 			print("no primary ability")
 
 
 func fire_secondary() -> void:
-	if instantiated_weapon != null:
-		if not instantiated_weapon.fire_secondary(_aim_angle):
-			print("no secondary ability")
+	if has_weapon() && not instantiated_weapon.fire_secondary(_aim_angle):
+		print("no secondary ability")
 
 
 func fire_tertiary() -> void:
-	if instantiated_weapon != null:
-		if not instantiated_weapon.fire_tertiary(_aim_angle):
-			print("no tertiary ability")
+	if has_weapon() && not instantiated_weapon.fire_tertiary(_aim_angle):
+		print("no tertiary ability")
 
 
 func aim() -> void:
-	if instantiated_weapon != null:
+	if has_weapon():
 		var weapon_angle = (aim_position - global_position).normalized().angle()
 		if weapon_angle >= PI/2 or weapon_angle <= -PI/2:
 			instantiated_weapon.set_sprite_right()
@@ -66,3 +63,16 @@ func aim() -> void:
 		_weapon_holder.global_position = global_position
 		_weapon_holder.global_rotation = weapon_angle
 		_aim_angle = (aim_position - _weapon_holder.global_position).normalized()
+		
+func has_weapon():
+	return instantiated_weapon != null
+
+
+##Returns 0 if no weapon is instantiated
+func get_durability_percentage() -> float:
+	if has_weapon():
+		var durability_percentage := (
+				float(instantiated_weapon.durability) / 
+				float(instantiated_weapon.max_durability)) * 100
+		return durability_percentage
+	return 0.0
