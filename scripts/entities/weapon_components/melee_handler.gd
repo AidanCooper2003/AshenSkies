@@ -2,8 +2,8 @@ extends Node2D
 
 class_name MeleeHandler
 
-signal damage_enabled
-signal damage_disabled
+signal damage_enabled()
+signal damage_disabled()
 
 var _is_weapon_enabled: bool
 

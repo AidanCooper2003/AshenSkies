@@ -2,10 +2,10 @@ class_name ContinuousDamageDealer
 
 extends Area2D
 
-signal damage_dealt
+signal damage_dealt(damage: int)
 
-@export var _damage: float
-@export var _damage_delay: float
+@export var _damage: int
+@export var _damage_delay: int
 
 var _is_active: bool = true
 var _damage_disabled: bool

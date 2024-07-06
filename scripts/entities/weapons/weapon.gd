@@ -2,7 +2,7 @@ class_name Weapon
 
 extends Node2D
 
-signal weapon_broke
+signal weapon_broke()
 
 @export var max_durability: int
 @export var _fire_delay: float

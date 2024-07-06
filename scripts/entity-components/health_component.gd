@@ -2,7 +2,7 @@ class_name HealthComponent
 
 extends Node2D
 
-signal health_changed
+signal health_changed(new_health: int)
 
 @export var _max_health : int
 @export var _simple_health : bool
