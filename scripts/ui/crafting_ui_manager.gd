@@ -18,6 +18,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	_setup_signals()
 	_setup_ingredient_buttons()
 
 
@@ -26,7 +27,13 @@ func _setup_ingredient_buttons() -> void:
 		button.connect("pressed", _on_ingredient_clicked.bind(button))
 
 
-func _on_player_resource_count_changed(resource_name, resource_count) -> void:
+func _setup_signals():
+	EventBus.resource_count_changed.connect(_on_resource_count_changed)
+	EventBus.ingredients_changed.connect(_on_ingredients_changed)
+	EventBus.crafting_menu_state_changed.connect(_on_change_crafting_menu_state)
+
+
+func _on_resource_count_changed(resource_name, resource_count) -> void:
 	#If there isn't a resource container for the resource, assign it.
 	if not _resource_containers.has(resource_name):
 		for resourceContainer in _resource_grid.get_children():
@@ -65,7 +72,7 @@ func _on_ingredients_changed(ingredients: Dictionary) -> void:
 			container_index += 1
 
 
-func _on_player_change_crafting_menu_state(is_menu_open) -> void:
+func _on_change_crafting_menu_state(is_menu_open) -> void:
 	_is_menu_open = is_menu_open
 	_crafting_container.visible = _is_menu_open
 

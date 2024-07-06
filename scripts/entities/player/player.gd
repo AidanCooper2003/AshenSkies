@@ -3,13 +3,8 @@ class_name Player
 extends CharacterBody2D
 
 signal on_floor_state_changed
-signal health_changed
-signal new_weapon_selected
-signal durability_changed
-signal crafting_menu_state_changed
-signal resource_count_changed
-signal ingredients_changed
-signal weapon_slot_changed
+
+
 
 @export var _left_sprite: Texture
 @export var _right_sprite: Texture
@@ -56,7 +51,7 @@ func start_crafting() -> void:
 		var weapon_scene = CSVManager.get_weapon_scene(weapon)
 		if weapon_scene != null:
 			_weapon_inventory_manager.add_weapon(weapon_scene)
-		weapon_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
+		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
 
 
 func _handle_walk() -> void:
@@ -104,19 +99,20 @@ func _handle_weapon_swap() -> void:
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
 	if Input.is_action_just_pressed("SwapWeaponUp"):
 		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_right())
-	new_weapon_selected.emit(_weapon_inventory_manager.current_weapon)
+	EventBus.active_slot_changed.emit(_weapon_inventory_manager.current_weapon)
 
 
 func _handle_weapon_durability() -> void:
+	await owner.ready
 	if _weapon_manager.has_weapon():
 		var durability_percentage: float = _weapon_manager.get_durability_percentage()
-		durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
+		EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
 
 
 func _handle_crafting_toggle() -> void:
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
 		_crafting_open = not _crafting_open
-		crafting_menu_state_changed.emit(_crafting_open)
+		EventBus.crafting_menu_state_changed.emit(_crafting_open)
 
 
 #Later you should still be able to fire, but only if its outside the bounds
@@ -131,12 +127,14 @@ func _handle_weapon_firing() -> void:
 	_handle_weapon_durability()
 
 func _update_ingredients() -> void:
-	ingredients_changed.emit(_resource_inventory_manager.ingredients)
+	EventBus.ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 func _on_changed_health(newHealth: int) -> void:
-	health_changed.emit(newHealth)
+	await owner.ready
+	EventBus.player_health_changed.emit(newHealth)
 	_animation_player.play("iFrameFlashing")
 
 
 func _on_resource_count_changed(resource_name: String, resource_count: int) -> void:
-	resource_count_changed.emit(resource_name, resource_count)
+	await owner.ready
+	EventBus.resource_count_changed.emit(resource_name, resource_count)

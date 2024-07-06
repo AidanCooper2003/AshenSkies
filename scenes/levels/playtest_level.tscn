@@ -32,6 +32,9 @@ position_smoothing_speed = 10.0
 [node name="Control" parent="Camera2D/CanvasLayer" index="0"]
 mouse_force_pass_scroll_events = false
 
+[node name="Health" parent="Camera2D/CanvasLayer/Control" index="2"]
+text = "Player Health: 0"
+
 [node name="Death" parent="Camera2D/CanvasLayer/Control" index="3"]
 text = "You're Dead!
 Press \"[\" to restart."

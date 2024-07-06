@@ -13,11 +13,20 @@ extends Node2D
 var _last_selected_weapon := 0
 var _time: float = 0.0
 
+func _ready():
+	_setup_signals()
+
+
 func _process(delta) -> void:
 	if _timer_text != null:
 		_time += delta
 		_timer_text.text = "Time: " + str(snapped(_time, 0.001))
 
+func _setup_signals():
+	EventBus.player_health_changed.connect(_on_player_health_changed)
+	EventBus.durability_changed.connect(_on_durability_changed)
+	EventBus.active_slot_changed.connect(_on_active_slot_changed)
+	EventBus.weapon_in_slot_changed.connect(_on_weapon_in_slot_changed)
 
 func _on_area_2d_area_entered(area) -> void:
 	_final_timer_text.text = "FINAL TIME: " + str(snapped(_time, 0.001))
@@ -29,17 +38,17 @@ func _on_player_health_changed(new_health: int) -> void:
 		_death_text.visible = true
 
 
-func _on_player_new_weapon_selected(new_weapon: int) -> void:
+func _on_active_slot_changed(new_weapon: int) -> void:
 	_weapon_slots[_last_selected_weapon].modulate = _deselected_slot_color
 	_weapon_slots[new_weapon].modulate = _selected_slot_color
 	_last_selected_weapon = new_weapon
 
 
-func _on_player_durability_changed(current_weapon: int, durability: int) -> void:
+func _on_durability_changed(current_weapon: int, durability: int) -> void:
 	_weapon_slots[current_weapon].get_child(2).value = durability
 
 
-func _on_player_weapon_slot_changed(weapon_slot: int, weapon_name: String) -> void:
+func _on_weapon_in_slot_changed(weapon_slot: int, weapon_name: String) -> void:
 	if weapon_name == "":
 		_weapon_slots[weapon_slot].get_child(1).texture = null
 		_weapon_slots[weapon_slot].get_child(2).visible = false

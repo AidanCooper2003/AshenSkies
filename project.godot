@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CSVManager="*res://scripts/utility/csv_manager.gd"
+EventBus="*res://scripts/utility/event_bus.gd"
 
 [display]
 
