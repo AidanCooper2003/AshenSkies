@@ -1,7 +1,7 @@
 ##To call the autoload, use "CSVManager"
 class_name CsvManager
 
-extends Node2D
+extends Node
 
 var recipes := preload("res://csv/recipes.csv").records
 var resources := preload("res://csv/resources.csv").records
