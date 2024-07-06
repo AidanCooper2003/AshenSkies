@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://g6ffppkryo60"]
+[gd_scene load_steps=14 format=3 uid="uid://g6ffppkryo60"]
 
 [ext_resource type="Texture2D" uid="uid://c2q3c4fk242bx" path="res://sprites/enemies/territorial_jumper.png" id="1_hnsvw"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/territorial_jumper.gd" id="1_y404u"]
@@ -34,6 +34,9 @@ _data = {
 "hurt": SubResource("Animation_yqmoa")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm77d"]
+size = Vector2(20, 16)
+
 [node name="TerritorialJumper" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 16
@@ -68,7 +71,7 @@ script = ExtResource("5_lhlh0")
 _character_body_2d = NodePath("..")
 _downwards_gravity_coefficient = 1.0
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+[node name="EnemyDetector" type="ShapeCast2D" parent="."]
 position = Vector2(0, -178)
 shape = SubResource("RectangleShape2D_136hl")
 target_position = Vector2(0, 134)
@@ -100,6 +103,20 @@ shape = ExtResource("3_baf3f")
 libraries = {
 "": SubResource("AnimationLibrary_3dthq")
 }
+
+[node name="LeftWallDetector" type="ShapeCast2D" parent="."]
+position = Vector2(-41, -24)
+shape = SubResource("RectangleShape2D_dm77d")
+target_position = Vector2(0, 48)
+collision_mask = 16
+collide_with_areas = true
+
+[node name="RightWallDetector" type="ShapeCast2D" parent="."]
+position = Vector2(41, -24)
+shape = SubResource("RectangleShape2D_dm77d")
+target_position = Vector2(0, 48)
+collision_mask = 16
+collide_with_areas = true
 
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

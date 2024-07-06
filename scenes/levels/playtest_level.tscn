@@ -99,6 +99,8 @@ _timer_text = NodePath("../Camera2D/CanvasLayer/Control/Timer")
 _final_timer_text = NodePath("../Camera2D/CanvasLayer/Control/Final Time")
 _health_text = NodePath("../Camera2D/CanvasLayer/Control/Health")
 _death_text = NodePath("../Camera2D/CanvasLayer/Control/Death")
+_deselected_slot_color = Color(1, 1, 1, 0.623529)
+_selected_slot_color = Color(1, 1, 1, 0.87451)
 _weapon_slots = [NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control2"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control3"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control4")]
 
 [node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("_crafting_container", "_resource_grid", "_crafting_grid", "_player")]
@@ -123,7 +125,7 @@ position = Vector2(15, -4)
 shape = SubResource("RectangleShape2D_mxg24")
 
 [node name="TerritorialJumper" parent="." instance=ExtResource("4_g4ohe")]
-position = Vector2(994, 350)
+position = Vector2(1159, 350)
 
 [node name="AshPriest1" parent="." instance=ExtResource("6_nfakm")]
 position = Vector2(2442, 308)
@@ -132,7 +134,11 @@ position = Vector2(2442, 308)
 position = Vector2(4256, -398)
 
 [node name="TerritorialJumper2" parent="." instance=ExtResource("4_g4ohe")]
-position = Vector2(4435, -1568)
+position = Vector2(4662, -1570)
+
+[node name="TerritorialJumper3" parent="." instance=ExtResource("4_g4ohe")]
+position = Vector2(3748, 929)
+_relative_left_bound = 1000.0
 
 [connection signal="area_entered" from="Area2D" to="UIManager" method="_on_area_2d_area_entered"]
 

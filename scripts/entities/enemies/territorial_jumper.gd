@@ -10,8 +10,10 @@ var _actual_right_bound: float
 
 @onready var _walker_component:= $WalkerComponent
 @onready var _jumper_component:= $JumperComponent
-@onready var _object_detector:= $ShapeCast2D
+@onready var _enemy_detector:= $EnemyDetector
 @onready var _animation_player:= $AnimationPlayer
+@onready var _left_wall_detector:= $LeftWallDetector
+@onready var _right_wall_detector:= $RightWallDetector
 
 func _ready() -> void:
 	_current_walk_direction = _starting_direction
@@ -19,15 +21,19 @@ func _ready() -> void:
 	_actual_right_bound = position.x + _relative_right_bound
 
 
+
 func _physics_process(_delta) -> void:
 	if position.x < _actual_left_bound:
 		_current_walk_direction = 1
-		_walker_component.walk_direction = _current_walk_direction
 	elif position.x > _actual_right_bound:
 		_current_walk_direction = -1
-		_walker_component.walk_direction = _current_walk_direction
-	if _object_detector.is_colliding() and is_on_floor():
+	elif _left_wall_detector.is_colliding():
+		_current_walk_direction = 1
+	elif _right_wall_detector.is_colliding():
+		_current_walk_direction = -1
+	if _enemy_detector.is_colliding() and is_on_floor():
 		_jumper_component.force_jump()
+	_walker_component.walk_direction = _current_walk_direction
 	move_and_slide()
 
 
