@@ -103,12 +103,11 @@ _deselected_slot_color = Color(1, 1, 1, 0.623529)
 _selected_slot_color = Color(1, 1, 1, 0.87451)
 _weapon_slots = [NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control2"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control3"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control4")]
 
-[node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("_crafting_container", "_resource_grid", "_crafting_grid", "_player")]
+[node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("_crafting_container", "_resource_grid", "_crafting_grid")]
 script = ExtResource("5_cgfae")
 _crafting_container = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer")
 _resource_grid = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid")
 _crafting_grid = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid")
-_player = NodePath("../Player")
 _no_texture = ExtResource("6_gqxib")
 
 [node name="DEBUG_HELPER" type="Node2D" parent="." node_paths=PackedStringArray("_player", "_ui_manager")]

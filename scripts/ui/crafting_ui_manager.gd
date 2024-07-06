@@ -5,7 +5,6 @@ extends Node2D
 @export var _crafting_container: Control
 @export var _resource_grid: GridContainer
 @export var _crafting_grid: GridContainer
-@export var _player: Player
 @export var _no_texture: Texture
 
 var _resource_textures: Dictionary

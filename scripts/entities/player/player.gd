@@ -4,8 +4,6 @@ extends CharacterBody2D
 
 signal on_floor_state_changed
 
-
-
 @export var _left_sprite: Texture
 @export var _right_sprite: Texture
 
