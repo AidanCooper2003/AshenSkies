@@ -1,6 +1,6 @@
-extends RigidBody2D
-
 class_name BasicGunBullet
 
-func _on_body_entered(body):
+extends RigidBody2D
+
+func _on_body_entered(_body) -> void:
 	queue_free()

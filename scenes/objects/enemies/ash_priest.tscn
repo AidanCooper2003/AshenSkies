@@ -49,7 +49,7 @@ texture = ExtResource("1_y2jae")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("2_5xul8")
-defaultWeapon = ExtResource("4_n0fwc")
+_default_weapon = ExtResource("4_n0fwc")
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
@@ -72,8 +72,8 @@ shape = SubResource("RectangleShape2D_ps0wi")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("6_acbgd")
-maxHealth = 4
+_max_health = 4
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_area_2d_body_exited"]
-[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="takeDamage"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

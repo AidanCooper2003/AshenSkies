@@ -1,42 +1,48 @@
-extends Node2D
+##To call the autoload, use "CSVManager"
+class_name CsvManager
 
+extends Node
 
-var recipes = preload("res://csv/recipes.csv").records
-var resources = preload("res://csv/resources.csv").records
+var recipes := preload("res://csv/recipes.csv").records
+var resources := preload("res://csv/resources.csv").records
 
-# Later this should use dictionaries to cache everything
-
-func _ready():
+func _ready() -> void:
 	recipes.remove_at(0)
 	resources.remove_at(0)
-	print(CSVManager.recipes)
+
+
+func print_csv() -> void:
+	print(recipes)
 	print("----------------------")
-	print(CSVManager.resources)
+	print(resources)
 	print("----------------------")
 
-func getTags(collection, nameColumn, tagColumn):
+
+func get_tags(collection: Array, name_column: int, tag_column: int) -> Dictionary:
 	var tags: Dictionary
 	for object in collection:
-		var tagArray = object[1].split(", ")
-		tags[object[0]] = tagArray
+		var tag_array = object[tag_column].split(", ")
+		tags[object[name_column]] = tag_array
 	return tags
 
-func getProperties(collection, nameColumn, propertyColumn):
+
+func get_properties(collection: Array, name_column: int, property_column: int) -> Dictionary:
 	var properties: Dictionary
 	for object in collection:
-		properties[object[nameColumn]] = object[propertyColumn]
+		properties[object[name_column]] = object[property_column]
 	return properties
-	
 
-func getProperty(collection, nameColumn, propertyColumn, objectName):
+
+func get_property(collection: Array, name_column: int, property_column: int, objectName: String) -> Variant:
 	for object in collection:
-		if object[nameColumn] == objectName:
-			return object[propertyColumn]
+		if object[name_column] == objectName:
+			return object[property_column]
 	return null
 
 
-func getItemIcon(itemName):
-	return getProperty(recipes, 0, 4, itemName)
+func get_weapon_icon(weaponName: String) -> Variant:
+	return get_property(recipes, 0, 4, weaponName)
 
-func getItemScene(itemName):
-	return getProperty(recipes, 0, 5, itemName)
+
+func get_weapon_scene(weaponName: String) -> Variant:
+	return get_property(recipes, 0, 5, weaponName)

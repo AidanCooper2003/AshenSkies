@@ -1,16 +1,15 @@
+##Used for guns that shoot projectiles with a straight directory.
+##Place this at the end of the weapon where the bullet should spawn from.
+class_name ProjectileShooter
+
 extends Node2D
 
-class_name ProjectileShooter
-# used for guns that shoot projectiles with a straight directory.
-# place this at the end of the weapon where the bullet should spawn from.
+@export var _bullet : PackedScene
+@export var _bullet_velocity : float
 
-@export var bullet : PackedScene
-
-@export var bulletVelocity : float
-
-func fire_bullet(weaponAngle: Vector2):
-	var bulletInstance = bullet.instantiate()
-	get_tree().current_scene.add_child(bulletInstance)
-	bulletInstance.position = self.global_position
-	bulletInstance.apply_impulse(weaponAngle * bulletVelocity, Vector2.ZERO)
-	bulletInstance.rotation = weaponAngle.angle()
+func fire_bullet(weapon_angle: Vector2) -> void:
+	var bullet_instance = _bullet.instantiate()
+	get_tree().current_scene.add_child(bullet_instance)
+	bullet_instance.position = self.global_position
+	bullet_instance.apply_impulse(weapon_angle * _bullet_velocity, Vector2.ZERO)
+	bullet_instance.rotation = weapon_angle.angle()

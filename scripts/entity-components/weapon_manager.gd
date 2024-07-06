@@ -1,64 +1,78 @@
-extends Node2D
-
 class_name WeaponManager
 
-@export var weaponDistance: float
-@export var defaultWeapon: PackedScene
+extends Node2D
 
+@export var _default_weapon: PackedScene
 
-var currentWeaponScene : PackedScene
-var instantiatedWeapon : Weapon
-var weaponHolder: Node2D
-var weaponAngle
-var aimAngle
+var weapon_angle
+var instantiated_weapon : Weapon
+var aim_position: Vector2
 
-var aimPosition: Vector2
+var _current_weapon_scene : PackedScene
+var _weapon_holder: Node2D
+var _aim_angle: Vector2
 
-func _ready():
-	if defaultWeapon != null:
-		currentWeaponScene = defaultWeapon
-	weaponHolder = get_child(0)
+func _ready() -> void:
+	if _default_weapon != null:
+		_current_weapon_scene = _default_weapon
+	_weapon_holder = get_child(0)
 	draw_weapon()
-	aimAngle = Vector2.ZERO
+	_aim_angle = Vector2.ZERO
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	aim()
 
-func draw_weapon():
-	if instantiatedWeapon != null:
-		instantiatedWeapon.queue_free()
-	if currentWeaponScene != null:
-		instantiatedWeapon = currentWeaponScene.instantiate()
-		weaponHolder.add_child(instantiatedWeapon)
 
-func switch_weapon(newWeapon):
-	currentWeaponScene = newWeapon
+func draw_weapon() -> void:
+	if has_weapon():
+		instantiated_weapon.queue_free()
+	if _current_weapon_scene != null:
+		instantiated_weapon = _current_weapon_scene.instantiate()
+		_weapon_holder.add_child(instantiated_weapon)
+
+
+func switch_weapon(newWeapon) -> void:
+	_current_weapon_scene = newWeapon
 	draw_weapon()
 
-# Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
-func fire_primary():
-	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_primary(aimAngle):
+
+#Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
+func fire_primary() -> void:
+	if has_weapon() && not instantiated_weapon.fire_primary(_aim_angle):
 			print("no primary ability")
 
-func fire_secondary():
-	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_secondary(aimAngle):
-			print("no secondary ability")
 
-func fire_tertiary():
-	if instantiatedWeapon != null:
-		if !instantiatedWeapon.fire_tertiary(aimAngle):
-			print("no tertiary ability")
+func fire_secondary() -> void:
+	if has_weapon() && not instantiated_weapon.fire_secondary(_aim_angle):
+		print("no secondary ability")
 
-func aim():
-	if instantiatedWeapon != null:
-		var weaponAngle = (aimPosition - global_position).normalized().angle()
-		if weaponAngle >= PI/2 || weaponAngle <= -PI/2:
-			instantiatedWeapon.set_sprite_right()
+
+func fire_tertiary() -> void:
+	if has_weapon() && not instantiated_weapon.fire_tertiary(_aim_angle):
+		print("no tertiary ability")
+
+
+func aim() -> void:
+	if has_weapon():
+		var weapon_angle = (aim_position - global_position).normalized().angle()
+		if weapon_angle >= PI/2 or weapon_angle <= -PI/2:
+			instantiated_weapon.set_sprite_right()
 		else:
-			instantiatedWeapon.set_sprite_left()
-		weaponHolder.global_position = global_position
-		weaponHolder.global_rotation = weaponAngle
-		aimAngle = (aimPosition - weaponHolder.global_position).normalized()
+			instantiated_weapon.set_sprite_left()
+		_weapon_holder.global_position = global_position
+		_weapon_holder.global_rotation = weapon_angle
+		_aim_angle = (aim_position - _weapon_holder.global_position).normalized()
+		
+func has_weapon():
+	return instantiated_weapon != null
+
+
+##Returns 0 if no weapon is instantiated
+func get_durability_percentage() -> float:
+	if has_weapon():
+		var durability_percentage := (
+				float(instantiated_weapon.durability) / 
+				float(instantiated_weapon.max_durability)) * 100
+		return durability_percentage
+	return 0.0

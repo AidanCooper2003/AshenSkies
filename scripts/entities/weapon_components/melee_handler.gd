@@ -2,32 +2,29 @@ extends Node2D
 
 class_name MeleeHandler
 
-signal enableDamage
-signal disableDamage
+signal damage_enabled()
+signal damage_disabled()
 
-var isWeaponEnabled: bool
+var _is_weapon_enabled: bool
 
-@export var swingTime: float
+@export var _swing_time: float
+@export var _swing_timer: Timer
 
-@export var swingTimer: Timer
+func _ready() -> void:
+	_turn_off_weapon()
+	_swing_timer.wait_time = _swing_time
 
 
+func swing() -> void:
+	_turn_on_weapon()
+	_swing_timer.start()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	turnOffWeapon()
-	swingTimer.wait_time = swingTime
 
-func turnOnWeapon():
-	isWeaponEnabled = true
-	enableDamage.emit()
-	print("weapon on")
+func _turn_on_weapon() -> void:
+	_is_weapon_enabled = true
+	damage_enabled.emit()
 
-func turnOffWeapon():
-	isWeaponEnabled = false
-	disableDamage.emit()
-	print("weapon off")
 
-func swing():
-	turnOnWeapon()
-	swingTimer.start()
+func _turn_off_weapon() -> void:
+	_is_weapon_enabled = false
+	damage_disabled.emit()

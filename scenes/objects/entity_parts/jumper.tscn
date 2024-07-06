@@ -4,9 +4,9 @@
 
 [node name="JumperComponent" type="Node2D"]
 script = ExtResource("1_0orma")
-jumpForce = 900.0
-jumpDelay = 0.1
-maxJumps = 1
+_jump_force = 900.0
+_jump_delay = 0.1
+_max_jumps = 1
 
 [node name="JumpCooldownTimer" type="Timer" parent="."]
 one_shot = true

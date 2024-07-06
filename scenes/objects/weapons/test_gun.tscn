@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_2ukhe"]
 [ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_diodx"]
-[ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/item_icons/test_gun.png" id="3_dgwie"]
+[ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/weapon_icons/test_gun.png" id="3_dgwie"]
 [ext_resource type="PackedScene" uid="uid://cxgy32f0tctp1" path="res://scenes/objects/projectiles/test_gun_bullet.tscn" id="3_ehfst"]
 
 [node name="TestGun" type="Node2D"]
 script = ExtResource("1_2ukhe")
-fireDelay = 0.5
-maxDurability = 20
+max_durability = 20
+_fire_delay = 0.5
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(52, 4)
 script = ExtResource("2_diodx")
-bullet = ExtResource("3_ehfst")
-bulletVelocity = 2000.0
+_bullet = ExtResource("3_ehfst")
+_bullet_velocity = 2000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(26, 18)

@@ -1,18 +1,15 @@
-extends Weapon
-
 class_name BasicGun
 
-@onready var projectileShooter:= $ProjectileShooter
+extends Weapon
 
+@onready var _projectile_shooter := $ProjectileShooter
 
-
-func fire_primary(weaponAngle):
-	if canFire:
-		projectileShooter.fire_bullet(weaponAngle)
+func fire_primary(weapon_angle) -> bool:
+	if _can_fire:
+		_projectile_shooter.fire_bullet(weapon_angle)
 		durability -= 1;
-		canFire = false
-		fireDelayTimer.start()
-	
+		_can_fire = false
+		_fire_delay_timer.start()
 	if durability <= 0:
 		weapon_broke.emit()
 	return true

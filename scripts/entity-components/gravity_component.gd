@@ -1,26 +1,24 @@
-extends Node2D
-
 class_name GravityComponent
 
-var defaultGravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+extends Node2D
 
-@export var characterBody2D : CharacterBody2D
+@export var _character_body_2d: CharacterBody2D
+@export var _downwards_gravity_coefficient: float
+@export var _gravity_coefficient := 1.0
 
-@export var gravityCoefficient : float = 1
+var _gravity: float
+var fast_fall_override: bool
 
-var gravity
+@onready var defaultGravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var fastFallOverride: bool
+func _ready() -> void:
+	_gravity = defaultGravity * _gravity_coefficient
 
-@export var downwardsGravityCoefficient: float
 
-func _ready():
-	gravity = defaultGravity * gravityCoefficient
-
-func _physics_process(delta):
-	if characterBody2D.velocity.y >= 0 || fastFallOverride:
-		characterBody2D.velocity.y += gravity * downwardsGravityCoefficient * delta
+func _physics_process(delta) -> void:
+	if _character_body_2d.velocity.y >= 0 or fast_fall_override:
+		_character_body_2d.velocity.y += _gravity * _downwards_gravity_coefficient * delta
 	else:
-		characterBody2D.velocity.y += gravity * delta
-	if characterBody2D.is_on_floor():
-		fastFallOverride = false
+		_character_body_2d.velocity.y += _gravity * delta
+	if _character_body_2d.is_on_floor():
+		fast_fall_override = false

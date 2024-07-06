@@ -1,23 +1,15 @@
-extends Area2D
-
 class_name DamageDealerComponent
 
-signal damage_dealt
+extends Area2D
 
-@export var damage: float
+signal damage_dealt(damage: int)
 
-var isActive: bool = true
+@export var _damage: int
 
+var _is_active: bool = true
 
-# Make sure you connect the signal
-func _on_area_entered(area):
-	if isActive:
+func _on_area_entered(area) -> void:
+	if _is_active:
 		if area is HitboxComponent:
-			area.damage(damage) 
+			area.damage(_damage) 
 			damage_dealt.emit()
-
-func disable():
-	isActive = false
-
-func enable():
-	isActive = true

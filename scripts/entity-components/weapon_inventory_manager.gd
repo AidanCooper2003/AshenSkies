@@ -1,49 +1,41 @@
-extends Node2D
-
 class_name WeaponInventoryManager
 
-signal itemSlotChanged
-var weapons: Array = []
+extends Node2D
 
-@export var weaponInventorySize: int
+@export var _weapon_inventory_size: int
 
-var currentWeapon: int = 0
+var weapons := []
 
-func _ready():
-	#weapons.append(load("res://scenes/objects/weapons/test_gun.tscn"))
-	#weapons.append(load("res://scenes/objects/weapons/spikeball_launcher.tscn"))
-	#weapons.append(load("res://scenes/objects/weapons/dummy_gun.tscn"))
-	pass
+var current_weapon := 0
 
-func has_weapons():
+func has_weapons() -> bool:
 	return weapons.size() >= 1
 
-func has_room():
+func has_room() -> bool:
 	return weapons.size() < 4
 
-func add_weapon(weapon: String):
-	print(weapons.size())
+func add_weapon(weapon: String) -> void:
 	if has_room():
 		weapons.append(load("res://scenes/objects/weapons/" + weapon))
 
-func swap_weapon_left():
-	if !has_weapons():
-		return
-	if currentWeapon > 0:
-		currentWeapon -= 1
+func swap_weapon_left() -> Object:
+	if not has_weapons():
+		return null
+	if current_weapon > 0:
+		current_weapon -= 1
 	else:
-		currentWeapon = min(weaponInventorySize, weapons.size() - 1)
-	return weapons[currentWeapon]
+		current_weapon = min(_weapon_inventory_size, weapons.size() - 1)
+	return weapons[current_weapon]
 
-func swap_weapon_right():
-	if !has_weapons():
+func swap_weapon_right() -> Object:
+	if not has_weapons():
 		return
-	if currentWeapon < weapons.size() - 1:
-		currentWeapon += 1
+	if current_weapon < weapons.size() - 1:
+		current_weapon += 1
 	else:
-		currentWeapon = 0
-	return weapons[currentWeapon]
+		current_weapon = 0
+	return weapons[current_weapon]
 
-func swap_weapon(weaponIndex: int):
-	currentWeapon = weaponIndex
-	return weapons[currentWeapon]
+func swap_weapon(weapon_index: int) -> Object:
+	current_weapon = weapon_index
+	return weapons[current_weapon]

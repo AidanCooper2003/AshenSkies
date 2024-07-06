@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/entities/projectiles/spikeball.gd" id="1_xn0on"]
 [ext_resource type="Texture2D" uid="uid://bae0o4gcnfsqb" path="res://sprites/projectiles/spikeball.png" id="2_bimv6"]
 [ext_resource type="Shape2D" uid="uid://dhff1g6w32064" path="res://colliders/spikeball.tres" id="3_vb65p"]
-[ext_resource type="Script" path="res://scripts/entities/projectiles/continuous_damage_dealer.gd" id="5_n1gyd"]
+[ext_resource type="Script" path="res://scripts/entity-components/continuous_damage_dealer.gd" id="5_n1gyd"]
 
 [sub_resource type="Animation" id="Animation_mnhlk"]
 resource_name = "despawn"
@@ -48,8 +48,8 @@ shape = ExtResource("3_vb65p")
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("5_n1gyd")
-damage = 1.0
-damageDelay = 0.5
+_damage = 1.0
+_damage_delay = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]
 position = Vector2(1.36424e-12, 1.13687e-13)

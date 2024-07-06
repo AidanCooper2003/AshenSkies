@@ -39,8 +39,8 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 48
 script = ExtResource("1_v3r2n")
-leftSprite = ExtResource("2_p5gux")
-rightSprite = ExtResource("3_jc6ji")
+_left_sprite = ExtResource("2_p5gux")
+_right_sprite = ExtResource("3_jc6ji")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(6, 6)
@@ -50,29 +50,28 @@ texture = ExtResource("3_jc6ji")
 visible = false
 shape = SubResource("RectangleShape2D_t5u02")
 
-[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
 script = ExtResource("4_4fqoi")
-characterBody2D = NodePath("..")
-walkDirection = 1
-acceleration = 800.0
-deccelerationCoefficient = 4.0
-airDeccelerationCoefficient = 0.5
-maxVelocity = 600.0
+_character_body_2d = NodePath("..")
+_acceleration = 800.0
+_decceleration_coefficient = 4.0
+_air_decceleration_coefficient = 0.5
+_max_velocity = 600.0
 
-[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
 script = ExtResource("5_j8pe6")
-characterBody2D = NodePath("..")
-gravityCoefficient = 1.5
-downwardsGravityCoefficient = 2.0
+_character_body_2d = NodePath("..")
+_downwards_gravity_coefficient = 2.0
+_gravity_coefficient = 1.5
 
-[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("6_q6d2k")]
-characterBody2D = NodePath("..")
-gravityComponent = NodePath("../GravityComponent")
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("_character_body_2d", "_gravity_component") instance=ExtResource("6_q6d2k")]
+_character_body_2d = NodePath("..")
+_gravity_component = NodePath("../GravityComponent")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_r6hrc")
-maxHealth = 3
-simpleHealth = true
+_max_health = 3
+_simple_health = true
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_mask = 12
@@ -84,7 +83,6 @@ shape = SubResource("RectangleShape2D_t5u02")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("9_fy50t")
-weaponDistance = 300.0
 
 [node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
 
@@ -95,7 +93,7 @@ libraries = {
 
 [node name="WeaponInventoryManager" type="Node2D" parent="."]
 script = ExtResource("10_d84o6")
-weaponInventorySize = 4
+_weapon_inventory_size = 4
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ql8no")
@@ -103,7 +101,6 @@ script = ExtResource("11_ql8no")
 [node name="CraftingManager" type="Node2D" parent="."]
 script = ExtResource("12_qkxvb")
 
-[connection signal="changeOnFloorState" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
-[connection signal="healthChanged" from="HealthComponent" to="." method="relayChangedHealth"]
-[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
-[connection signal="resourceCountChanged" from="ResourceInventoryManager" to="." method="_on_resource_inventory_manager_resource_count_changed"]
+[connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

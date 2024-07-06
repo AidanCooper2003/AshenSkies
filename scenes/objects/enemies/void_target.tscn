@@ -26,6 +26,6 @@ shape = ExtResource("2_wtj66")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("4_tialj")
-maxHealth = 1
+_max_health = 1
 
-[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="takeDamage"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

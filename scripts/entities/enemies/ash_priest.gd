@@ -1,24 +1,22 @@
-extends Node2D
-
 class_name AshPriest
 
-@onready var weaponManager:= $WeaponManager
+extends Node2D
 
-var target
+var _target: Node2D
+
+@onready var _weapon_manager := $WeaponManager
+
+func _physics_process(delta) -> void:
+	if _target != null:
+		_weapon_manager.aim_position = _target.position
+		_weapon_manager.fire_primary()
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body) -> void:
 	if body.name == "Player":
-		target = body
-		
-func _on_area_2d_body_exited(body):
+		_target = body
+
+
+func _on_area_2d_body_exited(body) -> void:
 	if body.name == "Player":
-		target = null
-
-		
-func _physics_process(delta):
-	if target != null:
-		weaponManager.aimPosition = target.position
-		weaponManager.fire_primary()
-
-
+		_target = null

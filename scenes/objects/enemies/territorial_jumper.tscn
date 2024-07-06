@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://g6ffppkryo60"]
+[gd_scene load_steps=14 format=3 uid="uid://g6ffppkryo60"]
 
 [ext_resource type="Texture2D" uid="uid://c2q3c4fk242bx" path="res://sprites/enemies/territorial_jumper.png" id="1_hnsvw"]
 [ext_resource type="Script" path="res://scripts/entities/enemies/territorial_jumper.gd" id="1_y404u"]
@@ -34,13 +34,16 @@ _data = {
 "hurt": SubResource("Animation_yqmoa")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dm77d"]
+size = Vector2(20, 16)
+
 [node name="TerritorialJumper" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 16
 floor_max_angle = 1.0472
 script = ExtResource("1_y404u")
-relativeLeftBound = 100.0
-relativeRightBound = 100.0
+_relative_left_bound = 100.0
+_relative_right_bound = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -50,26 +53,25 @@ texture = ExtResource("1_hnsvw")
 visible = false
 shape = ExtResource("3_baf3f")
 
-[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
 script = ExtResource("3_hhxes")
-characterBody2D = NodePath("..")
-walkDirection = 1
-acceleration = 250.0
-deccelerationCoefficient = 1.5
-airDeccelerationCoefficient = 1.0
-maxVelocity = 300.0
+_character_body_2d = NodePath("..")
+_acceleration = 250.0
+_decceleration_coefficient = 1.5
+_air_decceleration_coefficient = 1.0
+_max_velocity = 300.0
 
-[node name="JumperComponent" parent="." node_paths=PackedStringArray("characterBody2D", "gravityComponent") instance=ExtResource("5_16e0a")]
-characterBody2D = NodePath("..")
-jumpForce = 400.0
-gravityComponent = NodePath("../GravityComponent")
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("_character_body_2d", "_gravity_component") instance=ExtResource("5_16e0a")]
+_character_body_2d = NodePath("..")
+_jump_force = 400.0
+_gravity_component = NodePath("../GravityComponent")
 
-[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("characterBody2D")]
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
 script = ExtResource("5_lhlh0")
-characterBody2D = NodePath("..")
-downwardsGravityCoefficient = 2.0
+_character_body_2d = NodePath("..")
+_downwards_gravity_coefficient = 1.0
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+[node name="EnemyDetector" type="ShapeCast2D" parent="."]
 position = Vector2(0, -178)
 shape = SubResource("RectangleShape2D_136hl")
 target_position = Vector2(0, 134)
@@ -77,6 +79,7 @@ target_position = Vector2(0, 134)
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 collision_layer = 4
 script = ExtResource("6_prjgq")
+_damage = 1.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
 visible = false
@@ -85,7 +88,7 @@ shape = ExtResource("3_baf3f")
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("7_85u8s")
-maxHealth = 3
+_max_health = 3
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 4
@@ -101,6 +104,20 @@ libraries = {
 "": SubResource("AnimationLibrary_3dthq")
 }
 
+[node name="LeftWallDetector" type="ShapeCast2D" parent="."]
+position = Vector2(-41, -24)
+shape = SubResource("RectangleShape2D_dm77d")
+target_position = Vector2(0, 48)
+collision_mask = 16
+collide_with_areas = true
+
+[node name="RightWallDetector" type="ShapeCast2D" parent="."]
+position = Vector2(41, -24)
+shape = SubResource("RectangleShape2D_dm77d")
+target_position = Vector2(0, 48)
+collision_mask = 16
+collide_with_areas = true
+
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
-[connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
-[connection signal="damageTaken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

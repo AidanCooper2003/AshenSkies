@@ -3,18 +3,18 @@
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_emrt6"]
 [ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_7ihbh"]
 [ext_resource type="PackedScene" uid="uid://dj5p6oevulj6" path="res://scenes/objects/projectiles/spikeball.tscn" id="3_lppc8"]
-[ext_resource type="Texture2D" uid="uid://dqoekfmq8vv0x" path="res://sprites/item_icons/spikeballer.png" id="4_4blqk"]
+[ext_resource type="Texture2D" uid="uid://dqoekfmq8vv0x" path="res://sprites/weapon_icons/spikeballer.png" id="4_4blqk"]
 
 [node name="SpikeballLauncher" type="Node2D"]
 script = ExtResource("1_emrt6")
-fireDelay = 0.5
-maxDurability = 15
+max_durability = 15
+_fire_delay = 0.5
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(52, 4)
 script = ExtResource("2_7ihbh")
-bullet = ExtResource("3_lppc8")
-bulletVelocity = 800.0
+_bullet = ExtResource("3_lppc8")
+_bullet_velocity = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 28)
