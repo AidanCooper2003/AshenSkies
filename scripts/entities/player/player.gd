@@ -52,11 +52,11 @@ func reset_ingredients() -> void:
 
 func start_crafting() -> void:
 	if _resource_inventory_manager.get_ingredient_count() == 8:
-		var item = _crafting_manager.craft(_resource_inventory_manager.ingredients)
-		var item_scene = CSVManager.get_item_scene(item)
-		if item_scene != null:
-			_weapon_inventory_manager.add_weapon(item_scene)
-		weapon_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, item)
+		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
+		var weapon_scene = CSVManager.get_weapon_scene(weapon)
+		if weapon_scene != null:
+			_weapon_inventory_manager.add_weapon(weapon_scene)
+		weapon_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
 
 
 func _handle_walk() -> void:

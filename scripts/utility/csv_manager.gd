@@ -40,9 +40,9 @@ func get_property(collection: Array, name_column: int, property_column: int, obj
 	return null
 
 
-func get_item_icon(itemName: String) -> Variant:
-	return get_property(recipes, 0, 4, itemName)
+func get_weapon_icon(weaponName: String) -> Variant:
+	return get_property(recipes, 0, 4, weaponName)
 
 
-func get_item_scene(itemName: String) -> Variant:
-	return get_property(recipes, 0, 5, itemName)
+func get_weapon_scene(weaponName: String) -> Variant:
+	return get_property(recipes, 0, 5, weaponName)

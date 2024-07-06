@@ -45,6 +45,6 @@ func _on_player_weapon_slot_changed(weapon_slot: int, weapon_name: String) -> vo
 		_weapon_slots[weapon_slot].get_child(2).visible = false
 		return
 	_weapon_slots[weapon_slot].get_child(1).texture = (
-			load("res://sprites/item_icons/" + CSVManager.get_item_icon(weapon_name))
+			load("res://sprites/weapon_icons/" + CSVManager.get_weapon_icon(weapon_name))
 	)
 	_weapon_slots[weapon_slot].get_child(2).visible = true

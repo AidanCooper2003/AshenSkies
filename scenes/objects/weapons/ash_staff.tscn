@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_8ec8x"]
 [ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_jb88t"]
 [ext_resource type="PackedScene" uid="uid://bia5ul7w7do3n" path="res://scenes/objects/projectiles/ash_staff_bullet.tscn" id="3_e5jr1"]
-[ext_resource type="Texture2D" uid="uid://56cmojcdccr3" path="res://sprites/item_icons/ash_staff.png" id="4_qevtc"]
+[ext_resource type="Texture2D" uid="uid://56cmojcdccr3" path="res://sprites/weapon_icons/ash_staff.png" id="4_qevtc"]
 
 [node name="AshStaff" type="Node2D"]
 script = ExtResource("1_8ec8x")

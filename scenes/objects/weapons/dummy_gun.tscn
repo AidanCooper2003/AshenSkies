@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://skokgkyu6uwq"]
+[gd_scene load_steps=4 format=3 uid="uid://skokgkyu6uwq"]
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_83b3o"]
 [ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_a3i0w"]
-[ext_resource type="PackedScene" uid="uid://ca24n6aoqby43" path="res://scenes/objects/projectiles/dummy-gun-bullet.tscn" id="3_an0tq"]
-[ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/item_icons/storm.png" id="4_xm5iw"]
+[ext_resource type="Texture2D" uid="uid://c0i7tt3qcssat" path="res://sprites/weapon_icons/storm.png" id="4_xm5iw"]
 
 [node name="DummyGun" type="Node2D"]
 script = ExtResource("1_83b3o")
@@ -11,7 +10,6 @@ script = ExtResource("1_83b3o")
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(64, 14)
 script = ExtResource("2_a3i0w")
-bullet = ExtResource("3_an0tq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.986738, 0.425119, 1, 1)
