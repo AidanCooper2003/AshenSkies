@@ -26,7 +26,7 @@ shape = ExtResource("3_x5epf")
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 collision_layer = 8
 script = ExtResource("4_vchdq")
-damage = 1.0
+_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
 rotation = 1.57815

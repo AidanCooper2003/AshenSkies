@@ -95,6 +95,7 @@ func _update_all_resources() -> void:
 
 
 func _update_resource(resource_name: String) -> void:
+	print("Updating resource: " + resource_name + "in inventory.")
 	resource_count_changed.emit(resource_name, get_resource_count(resource_name))
 
 
@@ -104,7 +105,4 @@ func _initialize_inventory() -> void:
 	add_resource_type("gun parts")
 	add_resource_type("airsoft bullet")
 	add_resource_type("testing fluid")
-	# add_resource("gun parts", 1)
-	# add_resource("cyclonium", 1)
-	# add_resource("airsoft bullet", 1)
 	add_resource("testing fluid", 10)

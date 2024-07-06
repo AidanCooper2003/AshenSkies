@@ -4,14 +4,15 @@ extends Node2D
 
 signal weapon_broke
 
+@export var max_durability: int
 @export var _fire_delay: float
-@export var _max_durability: int
+
 
 var _can_fire := false
 
 @onready var _fire_delay_timer := $FireDelayTimer
 @onready var sprite := $Sprite2D
-@onready var durability := _max_durability
+@onready var durability := max_durability
 
 func _ready() -> void:
 	_fire_delay_timer.wait_time = _fire_delay

@@ -13,8 +13,6 @@ size = Vector2(19, 58)
 
 [node name="NazarethBlade" type="Node2D"]
 script = ExtResource("1_6b64p")
-fireDelay = 1.0
-maxDurability = 30
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 0)
@@ -24,10 +22,8 @@ texture = ExtResource("2_t6jio")
 
 [node name="FireDelayTimer" type="Timer" parent="."]
 
-[node name="MeleeHandler" type="Node2D" parent="." node_paths=PackedStringArray("swingTimer")]
+[node name="MeleeHandler" type="Node2D" parent="."]
 script = ExtResource("3_jhsj2")
-swingTime = 1.0
-swingTimer = NodePath("SwingTimer")
 
 [node name="SwingTimer" type="Timer" parent="MeleeHandler"]
 one_shot = true
@@ -36,7 +32,6 @@ one_shot = true
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("3_56b6w")
-damage = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
 position = Vector2(36.5, 0)
@@ -47,8 +42,6 @@ position = Vector2(50.5, 0)
 shape = SubResource("RectangleShape2D_1fx80")
 
 [connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]
-[connection signal="disableDamage" from="MeleeHandler" to="DamageDealerComponent" method="disable"]
-[connection signal="enableDamage" from="MeleeHandler" to="DamageDealerComponent" method="enable"]
 [connection signal="timeout" from="MeleeHandler/SwingTimer" to="MeleeHandler" method="turnOffWeapon"]
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
 [connection signal="damage_dealt" from="DamageDealerComponent" to="MeleeHandler" method="turnOffWeapon"]

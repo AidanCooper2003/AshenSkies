@@ -34,6 +34,7 @@ func _setup_signals():
 
 
 func _on_resource_count_changed(resource_name, resource_count) -> void:
+	print("Changing resource: " + resource_name + ", " + str(resource_count))
 	#If there isn't a resource container for the resource, assign it.
 	if not _resource_containers.has(resource_name):
 		for resourceContainer in _resource_grid.get_children():

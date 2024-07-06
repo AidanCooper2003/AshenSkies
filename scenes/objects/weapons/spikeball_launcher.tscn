@@ -7,14 +7,14 @@
 
 [node name="SpikeballLauncher" type="Node2D"]
 script = ExtResource("1_emrt6")
-fireDelay = 0.5
-maxDurability = 15
+max_durability = 15
+_fire_delay = 0.5
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(52, 4)
 script = ExtResource("2_7ihbh")
-bullet = ExtResource("3_lppc8")
-bulletVelocity = 800.0
+_bullet = ExtResource("3_lppc8")
+_bullet_velocity = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 28)

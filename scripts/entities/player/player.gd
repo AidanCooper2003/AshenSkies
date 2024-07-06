@@ -12,6 +12,7 @@ signal on_floor_state_changed
 var _can_jump := true
 var _was_on_floor: bool
 var _crafting_open := false
+var _game_loaded := false
 
 @onready var _walker_component := $WalkerComponent
 @onready var _jumper_component := $JumperComponent
@@ -21,6 +22,10 @@ var _crafting_open := false
 @onready var _resource_inventory_manager := $ResourceInventoryManager
 @onready var _crafting_manager := $CraftingManager
 @onready var _sprite_2d := $Sprite2D
+
+func _ready():
+	await owner.ready
+	_game_loaded = true
 
 func _physics_process(_delta) -> void:
 	_handle_walk()
@@ -103,7 +108,8 @@ func _handle_weapon_swap() -> void:
 
 
 func _handle_weapon_durability() -> void:
-	await owner.ready
+	if not _game_loaded:
+		await owner.ready
 	if _weapon_manager.has_weapon():
 		var durability_percentage: float = _weapon_manager.get_durability_percentage()
 		EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
@@ -130,11 +136,16 @@ func _update_ingredients() -> void:
 	EventBus.ingredients_changed.emit(_resource_inventory_manager.ingredients)
 
 func _on_changed_health(newHealth: int) -> void:
-	await owner.ready
+	if not _game_loaded:
+		await owner.ready
+	else:
+		_animation_player.play("iFrameFlashing")
 	EventBus.player_health_changed.emit(newHealth)
-	_animation_player.play("iFrameFlashing")
+
 
 
 func _on_resource_count_changed(resource_name: String, resource_count: int) -> void:
-	await owner.ready
+	if not _game_loaded:
+		await owner.ready
+	print(str(resource_count) + " in player")
 	EventBus.resource_count_changed.emit(resource_name, resource_count)

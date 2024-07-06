@@ -102,3 +102,5 @@ libraries = {
 }
 
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

@@ -11,6 +11,7 @@ var _current_health : int
 
 func _ready() -> void:
 	_current_health = _max_health
+	health_changed.emit(_current_health)
 
 
 func take_damage(damage : int) -> void:
