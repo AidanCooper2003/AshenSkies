@@ -1,5 +1,5 @@
 Item-name,Item-tags,Item-quality,Is-offensive,Icon-path,Scene-path
-Spikeball Launcher,Gun,2,TRUE,,
+Spikeball Launcher,Test,2,TRUE,spikeball_launcher.png,spikeball_launcher.tscn
 2Gun,Gun,2,TRUE,,
 3Gun,Gun,2,TRUE,,
 4Gun,Gun,2,TRUE,,
