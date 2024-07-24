@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn6ksjgoqo6mb"]
+
+[ext_resource type="Script" path="res://scripts/entities/level_objects/resource_breakable.gd" id="1_r8nvc"]
+[ext_resource type="Texture2D" uid="uid://d3k5iechf43wq" path="res://sprites/level_objects/porcelain-vase.png" id="2_ix4uq"]
+[ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="3_de57v"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kvr8a"]
+radius = 31.0
+height = 128.0
+
+[node name="ResourceBreakable" type="Node2D"]
+position = Vector2(1551, 114)
+script = ExtResource("1_r8nvc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-15, -49)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ix4uq")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_de57v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-14, -50)
+shape = SubResource("CapsuleShape2D_kvr8a")
+
+[connection signal="damage_taken" from="HitboxComponent" to="." method="_on_damage_taken"]

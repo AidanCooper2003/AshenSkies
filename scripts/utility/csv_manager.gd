@@ -46,3 +46,18 @@ func get_weapon_icon(weaponName: String) -> Variant:
 
 func get_weapon_scene(weaponName: String) -> Variant:
 	return weaponName + ".tscn"
+
+
+func get_weapon_names() -> Array:
+	return _get_names(recipes, 0)
+
+
+func get_resource_names() -> Array:
+	return _get_names(resources, 0)
+
+
+func _get_names(collection: Array, name_column) -> Array:
+	var names: Array
+	for object in collection:
+		names.append(object[name_column])
+	return names

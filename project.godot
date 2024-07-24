@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 CSVManager="*res://scripts/utility/csv_manager.gd"
 EventBus="*res://scripts/utility/event_bus.gd"
+LevelManager="*res://scripts/utility/level_manager.gd"
 
 [display]
 

@@ -12,6 +12,8 @@ func _ready() -> void:
 	EventBus.ingredient_selected.connect(increment_ingredient)
 	EventBus.ingredient_deselected.connect(decrement_ingredient)
 	EventBus.ingredients_reset.connect(reset_ingredients)
+	EventBus.resource_added.connect(add_resource)
+	EventBus.resource_subtracted.connect(subtract_resource)
 	self.call_deferred("_initialize_inventory")
 
 func has_resource(resource_name: String) -> bool:
@@ -19,6 +21,7 @@ func has_resource(resource_name: String) -> bool:
 
 
 func add_resource(resource_name: String, resource_count: int) -> void:
+	print(resource_name)
 	if has_resource(resource_name):
 		resources[resource_name] += resource_count
 		_update_resource(resource_name)

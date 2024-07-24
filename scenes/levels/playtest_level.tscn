@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxn60d8h5jtnl"]
+[gd_scene load_steps=12 format=3 uid="uid://bxn60d8h5jtnl"]
 
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_eg45t"]
 [ext_resource type="PackedScene" uid="uid://bvfn2yusm676m" path="res://scenes/ui/default_canvas.tscn" id="2_eqhnj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/ui/crafting_ui_manager.gd" id="5_cgfae"]
 [ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="6_gqxib"]
 [ext_resource type="PackedScene" uid="uid://posx1uyfda5n" path="res://scenes/objects/enemies/ash_priest.tscn" id="6_nfakm"]
+[ext_resource type="PackedScene" uid="uid://cn6ksjgoqo6mb" path="res://scenes/objects/level_objects/resource_breakable.tscn" id="10_nes5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxg24"]
 size = Vector2(50, 28)
@@ -139,6 +140,17 @@ position = Vector2(4662, -1570)
 [node name="TerritorialJumper3" parent="." instance=ExtResource("4_g4ohe")]
 position = Vector2(3748, 929)
 _relative_left_bound = 1000.0
+
+[node name="ResourceBreakable" parent="." instance=ExtResource("10_nes5d")]
+
+[node name="ResourceBreakable2" parent="." instance=ExtResource("10_nes5d")]
+position = Vector2(1639, 115)
+
+[node name="ResourceBreakable3" parent="." instance=ExtResource("10_nes5d")]
+position = Vector2(1474, 115)
+
+[node name="ResourceBreakable4" parent="." instance=ExtResource("10_nes5d")]
+position = Vector2(1404, 116)
 
 [connection signal="area_entered" from="Area2D" to="UIManager" method="_on_area_2d_area_entered"]
 
