@@ -88,7 +88,11 @@ func _handle_weapon_swap() -> void:
 func _handle_weapon_durability() -> void:
 	if _weapon_manager.has_weapon():
 		var durability_percentage: float = _weapon_manager.get_durability_percentage()
-		EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
+		if durability_percentage <= 0:
+			_weapon_inventory_manager.remove_current_weapon()
+			_reset_weapon_inventory_ui()
+		else:
+			EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
 
 
 func _handle_crafting_toggle() -> void:
@@ -125,3 +129,12 @@ func _on_crafting_started() -> void:
 		if weapon_scene != null:
 			_weapon_inventory_manager.add_weapon(weapon_scene)
 		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
+
+
+func _reset_weapon_inventory_ui() -> void:
+	for i in range(_weapon_inventory_manager.weapon_inventory_size):
+		var weapon_name = _weapon_inventory_manager.get_weapon_name(i)
+		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
+		if weapon_name != "":
+			EventBus.durability_changed.emit(i, 1)
+		print(weapon_name)

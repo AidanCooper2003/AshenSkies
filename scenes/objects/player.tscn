@@ -93,7 +93,6 @@ libraries = {
 
 [node name="WeaponInventoryManager" type="Node2D" parent="."]
 script = ExtResource("10_d84o6")
-_weapon_inventory_size = 4
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ql8no")

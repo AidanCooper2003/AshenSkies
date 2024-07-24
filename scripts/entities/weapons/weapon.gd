@@ -6,7 +6,7 @@ signal weapon_broke()
 
 @export var max_durability: int
 @export var _fire_delay: float
-
+@export var weapon_name: String
 
 var _can_fire := false
 

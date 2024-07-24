@@ -13,6 +13,7 @@ size = Vector2(19, 58)
 
 [node name="NazarethBlade" type="Node2D"]
 script = ExtResource("1_6b64p")
+weapon_name = "nazareth_blade"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(42, 0)

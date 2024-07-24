@@ -9,6 +9,7 @@
 script = ExtResource("1_8ec8x")
 max_durability = 1000
 _fire_delay = 2.0
+weapon_name = "ash_staff"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(92, 6)
