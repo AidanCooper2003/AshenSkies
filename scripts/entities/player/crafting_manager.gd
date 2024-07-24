@@ -35,7 +35,10 @@ func craft(ingredients: Dictionary) -> String:
 		for i in _get_tag_match_count(weapon, tag_counts):
 			weapon_pool.append(weapon)
 	var chosen_weapon := randi_range(0, weapon_pool.size() - 1)
-	return weapon_pool[chosen_weapon]
+	if weapon_pool.size() > 0:
+		return weapon_pool[chosen_weapon]
+	else:
+		return "test_gun"
 
 func _test_crafting() -> void:
 	print("Only Gun Tags")

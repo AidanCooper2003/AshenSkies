@@ -117,41 +117,51 @@ script = ExtResource("3_pcsxx")
 _player = NodePath("../Player")
 _ui_manager = NodePath("../UIManager")
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(6417, -1547)
-collision_layer = 32
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(15, -4)
-shape = SubResource("RectangleShape2D_mxg24")
-
-[node name="TerritorialJumper" parent="." instance=ExtResource("4_g4ohe")]
+[node name="TerritorialJumper" parent="Enemies" instance=ExtResource("4_g4ohe")]
 position = Vector2(1159, 350)
 
-[node name="AshPriest1" parent="." instance=ExtResource("6_nfakm")]
+[node name="AshPriest1" parent="Enemies" instance=ExtResource("6_nfakm")]
 position = Vector2(2442, 308)
 
-[node name="AshPriest2" parent="." instance=ExtResource("6_nfakm")]
+[node name="AshPriest2" parent="Enemies" instance=ExtResource("6_nfakm")]
 position = Vector2(4256, -398)
 
-[node name="TerritorialJumper2" parent="." instance=ExtResource("4_g4ohe")]
+[node name="TerritorialJumper2" parent="Enemies" instance=ExtResource("4_g4ohe")]
 position = Vector2(4662, -1570)
 
-[node name="TerritorialJumper3" parent="." instance=ExtResource("4_g4ohe")]
+[node name="TerritorialJumper3" parent="Enemies" instance=ExtResource("4_g4ohe")]
 position = Vector2(3748, 929)
 _relative_left_bound = 1000.0
 
-[node name="ResourceBreakable" parent="." instance=ExtResource("10_nes5d")]
+[node name="LevelObjects" type="Node2D" parent="."]
 
-[node name="ResourceBreakable2" parent="." instance=ExtResource("10_nes5d")]
+[node name="Area2D" type="Area2D" parent="LevelObjects"]
+position = Vector2(6417, -1547)
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelObjects/Area2D"]
+position = Vector2(15, -4)
+shape = SubResource("RectangleShape2D_mxg24")
+
+[node name="ResourceBreakable" parent="LevelObjects" instance=ExtResource("10_nes5d")]
+
+[node name="ResourceBreakable2" parent="LevelObjects" instance=ExtResource("10_nes5d")]
 position = Vector2(1639, 115)
 
-[node name="ResourceBreakable3" parent="." instance=ExtResource("10_nes5d")]
+[node name="ResourceBreakable3" parent="LevelObjects" instance=ExtResource("10_nes5d")]
 position = Vector2(1474, 115)
 
-[node name="ResourceBreakable4" parent="." instance=ExtResource("10_nes5d")]
+[node name="ResourceBreakable4" parent="LevelObjects" instance=ExtResource("10_nes5d")]
 position = Vector2(1404, 116)
 
-[connection signal="area_entered" from="Area2D" to="UIManager" method="_on_area_2d_area_entered"]
+[node name="ResourceBreakable5" parent="LevelObjects" instance=ExtResource("10_nes5d")]
+position = Vector2(4975, -395)
+
+[node name="ResourceBreakable6" parent="LevelObjects" instance=ExtResource("10_nes5d")]
+position = Vector2(2122, 372)
+
+[connection signal="area_entered" from="LevelObjects/Area2D" to="UIManager" method="_on_area_2d_area_entered"]
 
 [editable path="Camera2D/CanvasLayer"]
