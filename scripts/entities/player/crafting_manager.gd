@@ -30,7 +30,7 @@ func _ready() -> void:
 func craft(ingredients: Dictionary) -> String:
 	var weapon_pool: Array[String]
 	var tag_counts := _get_ingredients_tags(ingredients)
-
+	
 	for weapon in _recipe_tags:
 		for i in _get_tag_match_count(weapon, tag_counts):
 			weapon_pool.append(weapon)

@@ -119,6 +119,8 @@ func _on_changed_health(newHealth: int) -> void:
 func _on_crafting_started() -> void:
 	if _resource_inventory_manager.get_ingredient_count() == 8:
 		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
+		_resource_inventory_manager.subtract_resources(_resource_inventory_manager.ingredients)
+		EventBus.ingredients_reset.emit()
 		var weapon_scene = CSVManager.get_weapon_scene(weapon)
 		if weapon_scene != null:
 			_weapon_inventory_manager.add_weapon(weapon_scene)

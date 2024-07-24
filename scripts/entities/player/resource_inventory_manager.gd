@@ -30,6 +30,13 @@ func subtract_resource(resource_name: String, resource_count: int) -> void:
 		_update_resource(resource_name)
 
 
+func subtract_resources(resources: Dictionary) -> void:
+	for resource in resources:
+		var resource_count = resources[resource]
+		if has_resource_count(resource, resource_count):
+			self.resources[resource] -= resource_count
+			_update_resource(resource)
+
 func has_resource_count(resource_name: String, resource_count: int) -> bool:
 	if has_resource(resource_name):
 		return resources[resource_name] - resource_count >= 0

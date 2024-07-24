@@ -13,6 +13,6 @@ signal crafting_menu_state_changed(crafting_open: bool)
 
 #From UI
 signal ingredient_selected(ingredient_name: String)
-signal ingredients_reset(ingredient_name: String)
+signal ingredients_reset()
 signal ingredient_deselected()
 signal crafting_started()
