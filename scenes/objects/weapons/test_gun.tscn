@@ -7,7 +7,7 @@
 
 [node name="TestGun" type="Node2D"]
 script = ExtResource("1_2ukhe")
-max_durability = 20
+max_durability = 3
 _fire_delay = 0.5
 weapon_name = "test_gun"
 

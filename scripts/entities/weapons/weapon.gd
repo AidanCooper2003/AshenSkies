@@ -9,6 +9,7 @@ signal weapon_broke()
 @export var weapon_name: String
 
 var _can_fire := false
+var _enabled := false
 
 @onready var _fire_delay_timer := $FireDelayTimer
 @onready var sprite := $Sprite2D
@@ -37,6 +38,21 @@ func set_sprite_right() -> void:
 
 func set_sprite_left() -> void:
 	scale = Vector2(1, 1)
+
+
+func enable() -> void:
+	_enabled = true
+	sprite.visible = true
+	_can_fire = false
+	_fire_delay_timer.start()
+
+
+func disable() -> void:
+	_enabled = false
+	sprite.visible = false
+
+func get_enabled() -> bool:
+	return _enabled
 
 
 func _on_fire_delay_timer_timeout() -> void:

@@ -79,9 +79,9 @@ func _handle_tertiary_fire() -> void:
 
 func _handle_weapon_swap() -> void:
 	if Input.is_action_just_pressed("SwapWeaponDown"):
-		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
+		_weapon_inventory_manager.swap_weapon_left()
 	if Input.is_action_just_pressed("SwapWeaponUp"):
-		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_right())
+		_weapon_inventory_manager.swap_weapon_right()
 	EventBus.active_slot_changed.emit(_weapon_inventory_manager.current_weapon)
 
 
@@ -136,5 +136,4 @@ func _reset_weapon_inventory_ui() -> void:
 		var weapon_name = _weapon_inventory_manager.get_weapon_name(i)
 		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
 		if weapon_name != "":
-			EventBus.durability_changed.emit(i, 1)
-		print(weapon_name)
+			EventBus.durability_changed.emit(i, )

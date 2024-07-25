@@ -7,7 +7,7 @@
 
 [node name="SpikeballLauncher" type="Node2D"]
 script = ExtResource("1_emrt6")
-max_durability = 15
+max_durability = 3
 _fire_delay = 0.5
 weapon_name = "spikeball_launcher"
 
