@@ -18,6 +18,7 @@ var _enabled := false
 func _ready() -> void:
 	_fire_delay_timer.wait_time = _fire_delay
 	_fire_delay_timer.start()
+	disable()
 
 
 func fire_primary(weapon_angle: Vector2) -> bool:
