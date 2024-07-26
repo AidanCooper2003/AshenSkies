@@ -59,7 +59,3 @@ func aim() -> void:
 
 func has_weapon():
 	return instantiated_weapon != null
-
-
-##Returns 0 if no weapon is instantiated
-
