@@ -55,16 +55,11 @@ func aim() -> void:
 		_weapon_holder.global_position = global_position
 		_weapon_holder.global_rotation = weapon_angle
 		_aim_angle = (aim_position - _weapon_holder.global_position).normalized()
-		
+
+
 func has_weapon():
 	return instantiated_weapon != null
 
 
 ##Returns 0 if no weapon is instantiated
-func get_durability_percentage() -> float:
-	if has_weapon():
-		var durability_percentage := (
-				float(instantiated_weapon.durability) / 
-				float(instantiated_weapon.max_durability)) * 100
-		return durability_percentage
-	return 0.0
+

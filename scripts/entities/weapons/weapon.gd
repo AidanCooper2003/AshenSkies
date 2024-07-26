@@ -52,6 +52,7 @@ func disable() -> void:
 	_enabled = false
 	sprite.visible = false
 
+
 func get_enabled() -> bool:
 	return _enabled
 

@@ -29,7 +29,6 @@ func add_weapon(weapon: String) -> void:
 		weapons.append(weapon_instance)
 
 
-
 func swap_weapon_left() -> void:
 	if has_multiple_weapons():
 		weapons[current_weapon].disable()
@@ -66,23 +65,33 @@ func remove_weapon(weapon_index: int) -> void:
 	else:
 		swap_weapon(current_weapon)
 	removed_weapon.queue_free()
-	
-	
+
+
 func remove_current_weapon() -> void:
 	remove_weapon(current_weapon)
-	
+
+
 
 func get_weapon_name(weapon_index: int) -> String:
 	if weapon_index <= weapons.size() - 1:
 		return weapons[weapon_index].weapon_name
 	return ""
 
-func get_weapon_durability(weapon_index: int) -> int:
+
+func get_weapon_durability_percentage(weapon_index) -> float:
 	if weapon_index <= weapons.size() - 1:
-		return weapons[weapon_index].durability
+		var durability_percentage := (
+				float(weapons[weapon_index].durability) / 
+				float(weapons[weapon_index].max_durability)) * 100
+		return durability_percentage
 	return 0.0
 
-func _reset_weapon():
+
+func get_current_weapon_durability_percentage() -> float:
+	return get_weapon_durability_percentage(current_weapon)
+
+
+func _reset_weapon() -> void:
 	if has_weapons:
 		_weapon_manager.instantiated_weapon = weapons[current_weapon]
 		weapons[current_weapon].enable()

@@ -87,7 +87,7 @@ func _handle_weapon_swap() -> void:
 
 func _handle_weapon_durability() -> void:
 	if _weapon_manager.has_weapon():
-		var durability_percentage: float = _weapon_manager.get_durability_percentage()
+		var durability_percentage: float = _weapon_inventory_manager.get_current_weapon_durability_percentage()
 		if durability_percentage <= 0:
 			_weapon_inventory_manager.remove_current_weapon()
 			_reset_weapon_inventory_ui()
@@ -136,4 +136,4 @@ func _reset_weapon_inventory_ui() -> void:
 		var weapon_name = _weapon_inventory_manager.get_weapon_name(i)
 		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
 		if weapon_name != "":
-			EventBus.durability_changed.emit(i, )
+			EventBus.durability_changed.emit(i, _weapon_inventory_manager.get_weapon_durability_percentage(i))
