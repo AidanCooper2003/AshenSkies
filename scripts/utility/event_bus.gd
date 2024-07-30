@@ -21,3 +21,4 @@ signal crafting_started()
 #From Level Objects
 signal resource_added(resource_name: String, resource_count: int)
 signal resource_subtracted(resource_name: String, resource_count: int)
+

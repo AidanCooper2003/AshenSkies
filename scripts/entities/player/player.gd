@@ -112,10 +112,10 @@ func _handle_weapon_firing() -> void:
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
-func _on_changed_health(newHealth: int) -> void:
+func _on_changed_health(newHealth: int, trigger_on_damage: bool) -> void:
 	if not _game_loaded:
 		await owner.ready
-	else:
+	elif trigger_on_damage:
 		_animation_player.play("iFrameFlashing")
 	EventBus.player_health_changed.emit(newHealth)
 

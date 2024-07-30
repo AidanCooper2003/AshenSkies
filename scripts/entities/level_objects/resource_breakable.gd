@@ -9,5 +9,5 @@ func _ready():
 		resource = LevelManager.choose_random_resource()
 
 func _on_damage_taken(damage_amount):
-	EventBus.resource_added.emit(resource, 10)
+	EventBus.resource_added.emit(resource, 3)
 	queue_free()

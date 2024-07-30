@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://5ie743i40d8"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/health_potion.gd" id="1_ie60t"]
+[ext_resource type="Texture2D" uid="uid://hitplobvit62" path="res://sprites/weapon_icons/health_potion.png" id="2_kkql5"]
+
+[node name="HealthPotion" type="Node2D"]
+script = ExtResource("1_ie60t")
+heal_amount = 1
+max_durability = 3
+_fire_delay = 1.0
+weapon_name = "health_potion"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(35, 33)
+scale = Vector2(0.132813, 0.132813)
+texture = ExtResource("2_kkql5")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

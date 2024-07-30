@@ -21,7 +21,6 @@ func has_resource(resource_name: String) -> bool:
 
 
 func add_resource(resource_name: String, resource_count: int) -> void:
-	print(resource_name)
 	if has_resource(resource_name):
 		resources[resource_name] += resource_count
 		_update_resource(resource_name)
@@ -105,7 +104,6 @@ func _update_all_resources() -> void:
 
 
 func _update_resource(resource_name: String) -> void:
-	print("Updating resource: " + resource_name + " in inventory.")
 	EventBus.resource_count_changed.emit(resource_name, get_resource_count(resource_name))
 	EventBus.ingredients_changed.emit(ingredients)
 
@@ -116,4 +114,5 @@ func _initialize_inventory() -> void:
 	add_resource_type("gun parts")
 	add_resource_type("airsoft bullet")
 	add_resource_type("testing fluid")
-	add_resource("testing fluid", 10)
+	add_resource("testing fluid", 64)
+	add_resource("gun parts", 64)

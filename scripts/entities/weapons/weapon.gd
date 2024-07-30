@@ -4,6 +4,9 @@ extends Node2D
 
 signal weapon_broke()
 
+signal self_damage_triggered(damage: int)
+signal health_change_triggered(health: int)
+
 @export var max_durability: int
 @export var _fire_delay: float
 @export var weapon_name: String

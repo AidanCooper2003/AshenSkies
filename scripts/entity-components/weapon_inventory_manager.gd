@@ -23,6 +23,9 @@ func has_room() -> bool:
 func add_weapon(weapon: String) -> void:
 	if has_room():
 		var weapon_instance = load("res://scenes/objects/weapons/" + weapon).instantiate()
+		if $"../HealthComponent":
+			weapon_instance.self_damage_triggered.connect($"../HealthComponent".take_damage)
+			weapon_instance.health_change_triggered.connect($"../HealthComponent".change_health)
 		_weapon_manager.add_weapon(weapon_instance)
 		if !has_weapons():
 			weapon_instance.enable()
