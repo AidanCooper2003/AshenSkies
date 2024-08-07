@@ -32,6 +32,17 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/csv-data-importer/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://addons/": "purple",
+"res://colliders/": "orange",
+"res://csv/": "yellow",
+"res://scenes/": "blue",
+"res://scripts/": "gray",
+"res://sprites/": "pink"
+}
+
 [input]
 
 "Move Left"={

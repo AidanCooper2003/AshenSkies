@@ -37,13 +37,13 @@ func _physics_process(_delta) -> void:
 	move_and_slide()
 
 
-func _on_health_component_health_changed(_current_health) -> void:
+func _on_health_component_health_changed(_current_health: int, trigger_on_damage: bool) -> void:
 	#Prevents a race condition with health's initial setting.
 	if _animation_player == null:
 		return
-		
-	_animation_player.play("hurt")
 	if _animation_player.is_playing():
 		_animation_player.stop()
 		_animation_player.play("hurt")
-		_animation_player.advance(0.1)
+		_animation_player.advance(0.06)
+	_animation_player.play("hurt")
+

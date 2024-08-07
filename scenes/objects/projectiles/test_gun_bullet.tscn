@@ -30,7 +30,7 @@ visible = false
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_2x3yh")
-_damage = 1.0
+_damage = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
 rotation = 1.57815
