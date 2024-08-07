@@ -5,10 +5,14 @@ extends Node
 
 var recipes := preload("res://csv/recipes.csv").records
 var resources := preload("res://csv/resources.csv").records
+var conditions := preload("res://csv/conditions.csv").records
+
+var _max_modifications = 5
 
 func _ready() -> void:
 	recipes.remove_at(0)
 	resources.remove_at(0)
+	conditions.remove_at(0)
 
 
 func print_csv() -> void:
@@ -54,6 +58,17 @@ func get_weapon_names() -> Array:
 
 func get_resource_names() -> Array:
 	return _get_names(resources, 0)
+
+
+func get_condition_modification(condition_name: String) -> Dictionary:
+	var condition := {}
+	for i in range(1, _max_modifications + 1):
+		var modification_name = get_property(conditions, 0, i * 2 - 1, condition_name)
+		if modification_name == "":
+			return condition
+		var modification_amount = get_property(conditions, 0, i * 2, condition_name)
+		condition[modification_name] = modification_amount
+	return condition
 
 
 func _get_names(collection: Array, name_column) -> Array:

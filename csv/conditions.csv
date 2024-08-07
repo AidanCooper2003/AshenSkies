@@ -1,0 +1,6 @@
+condition-name,modification-1,amount-1,modification-2,amount-2,modification-3,amount-3,modification-4,amount-4,modification-5,amount-5
+caffeinated,speed,0.1,,,,,,,,
+burning,damage_over_time,15,,,,,,,,
+deluged,end_burning,1,,,,,,,,
+supernova,damage_dealt,1,damage_over_time,10,,,,,,
+eudaimonic,damage_dealt,0.1,speed,0.1,regen_health,10,durability_consumption,-0.1,dodge,0.1
