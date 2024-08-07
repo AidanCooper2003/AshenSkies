@@ -31,17 +31,17 @@ func _physics_process(delta) -> void:
 
 #Print will show if the weapon has a fire mode with that button. In the future this will be replaced with a sound effect.
 func fire_primary() -> void:
-	if has_weapon() && not instantiated_weapon.fire_primary(_aim_angle):
+	if has_weapon() and not instantiated_weapon.fire_primary(_aim_angle):
 			print("no primary ability")
 
 
 func fire_secondary() -> void:
-	if has_weapon() && not instantiated_weapon.fire_secondary(_aim_angle):
+	if has_weapon() and not instantiated_weapon.fire_secondary(_aim_angle):
 		print("no secondary ability")
 
 
 func fire_tertiary() -> void:
-	if has_weapon() && not instantiated_weapon.fire_tertiary(_aim_angle):
+	if has_weapon() and not instantiated_weapon.fire_tertiary(_aim_angle):
 		print("no tertiary ability")
 
 

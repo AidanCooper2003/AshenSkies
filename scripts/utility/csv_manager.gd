@@ -60,13 +60,13 @@ func get_resource_names() -> Array:
 	return _get_names(resources, 0)
 
 
-func get_condition_modification(condition_name: String) -> Dictionary:
+func get_condition_modifications(condition_name: String) -> Dictionary:
 	var condition := {}
 	for i in range(1, _max_modifications + 1):
 		var modification_name = get_property(conditions, 0, i * 2 - 1, condition_name)
 		if modification_name == "":
 			return condition
-		var modification_amount = get_property(conditions, 0, i * 2, condition_name)
+		var modification_amount = get_property(conditions, 0, i * 2, condition_name) as float
 		condition[modification_name] = modification_amount
 	return condition
 

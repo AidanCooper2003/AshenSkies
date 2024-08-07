@@ -17,7 +17,3 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("Debug 4"):
 		var nothing := ""
 		_ui_manager._on_player_weapon_slot_changed(1, nothing)
-
-func _ready():
-	print(CSVManager.get_condition_modification("supernova"))
-	print(CSVManager.get_condition_modification("eudaimonic"))
