@@ -28,6 +28,8 @@ func add_weapon(weapon: String) -> void:
 			weapon_instance.health_change_triggered.connect($"../HealthComponent".change_health)
 		if $"../ConditionHandler":
 			weapon_instance.condition_added.connect($"../ConditionHandler".add_condition)
+		if owner is Node2D:
+			weapon_instance.character = owner
 		_weapon_manager.add_weapon(weapon_instance)
 		if !has_weapons():
 			weapon_instance.enable()

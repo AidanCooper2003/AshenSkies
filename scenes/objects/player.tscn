@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://brogejmjvqi2i"]
+[gd_scene load_steps=18 format=3 uid="uid://brogejmjvqi2i"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_v3r2n"]
 [ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/player/player_left.png" id="2_p5gux"]
@@ -12,7 +12,8 @@
 [ext_resource type="Script" path="res://scripts/entity-components/weapon_inventory_manager.gd" id="10_d84o6"]
 [ext_resource type="Script" path="res://scripts/entities/player/resource_inventory_manager.gd" id="11_ql8no"]
 [ext_resource type="Script" path="res://scripts/entities/player/crafting_manager.gd" id="12_qkxvb"]
-[ext_resource type="Script" path="res://scripts/entity-components/condition_handlergd.gd" id="13_4nisk"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="13_by10e"]
+[ext_resource type="Script" path="res://scripts/entity-components/entity_event_bus.gd" id="14_pd3id"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)
@@ -104,7 +105,10 @@ script = ExtResource("11_ql8no")
 script = ExtResource("12_qkxvb")
 
 [node name="ConditionHandler" type="Node2D" parent="."]
-script = ExtResource("13_4nisk")
+script = ExtResource("13_by10e")
+
+[node name="EntityEventBus" type="Node2D" parent="."]
+script = ExtResource("14_pd3id")
 
 [connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]

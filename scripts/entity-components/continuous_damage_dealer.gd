@@ -6,6 +6,7 @@ signal damage_dealt(damage: int)
 
 @export var _damage: int
 @export var _damage_delay: float
+@export var _conditions: Dictionary
 
 var _is_active: bool = true
 var _damage_disabled: bool
@@ -14,15 +15,20 @@ var _targets: Dictionary = {}
 func _physics_process(_delta) -> void:
 	for area in _targets:
 		if _targets.get(area) < Time.get_ticks_msec() - _damage_delay * 1000:
-			area.damage(_damage)
+			_trigger_damage(area)
 
+func _trigger_damage(area):
+	if _damage > 0:
+		area.damage(_damage)
+		damage_dealt.emit()
+	if not _conditions.is_empty():
+		area.receive_conditions(_conditions)
 
 func _on_area_entered(area) -> void:
 	if _is_active:
 		if area is HitboxComponent:
 			_targets[area] = Time.get_ticks_msec()
-			area.damage(_damage)
-
+			_trigger_damage(area)
 
 func _on_area_exited(area) -> void:
 	if _is_active:

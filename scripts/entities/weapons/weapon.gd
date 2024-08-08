@@ -12,6 +12,10 @@ signal condition_added(condition: String, time: float)
 @export var _fire_delay: float
 @export var weapon_name: String
 
+#Note: The node should still work even if this isn't assigned, just be missing
+#functionality that requires it.
+var character: Node2D
+
 var _can_fire := false
 var _enabled := false
 
@@ -61,6 +65,14 @@ func disable() -> void:
 func get_enabled() -> bool:
 	return _enabled
 
+
+func get_character_node(node_type: String) -> Node2D:
+	if character == null:
+		return null
+	for node in character.get_children():
+		if NodeHelper.is_instance_of_string(node, node_type):
+			return node
+	return null
 
 func _on_fire_delay_timer_timeout() -> void:
 	_can_fire = true

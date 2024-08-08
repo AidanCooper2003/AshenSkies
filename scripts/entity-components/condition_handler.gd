@@ -2,6 +2,8 @@ class_name ConditionHandler
 
 extends Node2D
 
+signal condition_expired(condition_name: String)
+
 var conditions: Dictionary
 
 #A condition has
@@ -19,16 +21,18 @@ func _physics_process(delta) -> void:
 			conditions[condition]["time"] -= delta
 			if conditions[condition]["time"] <= 0:
 				conditions.erase(condition)
+				print("expired..")
+				condition_expired.emit(condition)
 
 
 func add_condition(condition_name: String, time: float) -> void:
-	print(conditions)
 	if not conditions.has(condition_name):
 		var modifications := CSVManager.get_condition_modifications(condition_name)
 		conditions[condition_name] = modifications
 	elif conditions[condition_name]["time"] > time:
 		return
 	conditions[condition_name]["time"] = time
+	print(conditions)
 
 
 
@@ -45,3 +49,6 @@ func has_modification(modification_name: String) -> float:
 		if conditions[condition].has(modification_name):
 			return true
 	return false
+
+func has_condition(condition_name: String) -> bool:
+	return conditions.has(condition_name)

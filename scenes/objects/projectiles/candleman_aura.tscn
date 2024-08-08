@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cabx5olp3el53"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/aura.gd" id="1_gql1n"]
+[ext_resource type="Texture2D" uid="uid://beblerr312vhl" path="res://sprites/weapon_icons/circle.png" id="2_w4sds"]
+[ext_resource type="Script" path="res://scripts/entity-components/continuous_damage_dealer.gd" id="3_0wrsf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vpwd"]
+radius = 388.021
+
+[node name="CandlemanAura" type="Node2D"]
+script = ExtResource("1_gql1n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.407843, 0.0392157, 0.607843)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_w4sds")
+
+[node name="ContinuousDamageDealer" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_0wrsf")
+_damage_delay = 0.5
+_conditions = {
+"burning": 1.0
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]
+position = Vector2(-2, -3)
+shape = SubResource("CircleShape2D_2vpwd")
+
+[connection signal="area_entered" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_entered"]
+[connection signal="area_exited" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_exited"]

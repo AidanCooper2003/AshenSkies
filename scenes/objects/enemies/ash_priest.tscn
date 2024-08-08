@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkglorimicvgf" path="res://scenes/objects/weapons/ash_staff.tscn" id="4_n0fwc"]
 [ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="5_hrj6w"]
 [ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="6_acbgd"]
-[ext_resource type="Script" path="res://scripts/entity-components/condition_handlergd.gd" id="7_rt5ve"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="7_rt5ve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msu3x"]
 size = Vector2(84, 156)

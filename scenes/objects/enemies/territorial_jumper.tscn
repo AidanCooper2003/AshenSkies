@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="6_prjgq"]
 [ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="7_85u8s"]
 [ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="8_exqqi"]
-[ext_resource type="Script" path="res://scripts/entity-components/condition_handlergd.gd" id="10_m1wg3"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="10_v41aj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_136hl"]
 size = Vector2(64, 25)
@@ -81,7 +81,6 @@ target_position = Vector2(0, 134)
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 collision_layer = 4
 script = ExtResource("6_prjgq")
-_damage = 1.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
 visible = false
@@ -121,7 +120,7 @@ collision_mask = 16
 collide_with_areas = true
 
 [node name="ConditionHandler" type="Node2D" parent="."]
-script = ExtResource("10_m1wg3")
+script = ExtResource("10_v41aj")
 
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
