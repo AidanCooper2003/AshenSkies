@@ -17,12 +17,10 @@ script = ExtResource("2_diodx")
 _bullet = ExtResource("3_ehfst")
 _bullet_velocity = 2000.0
 
+[node name="FireDelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(26, 18)
 scale = Vector2(4, 4)
 texture = ExtResource("3_dgwie")
-
-[node name="FireDelayTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

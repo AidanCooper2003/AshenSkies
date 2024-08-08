@@ -1,4 +1,5 @@
 Item-name,Item-tags,Item-quality,Is-offensive
 spikeball_launcher,Gun,2,TRUE
 test_gun,Gun,2,TRUE
-health_potion,Test,2,FALSE
+health_potion,None,2,FALSE
+caffeination_station,Test,2,TRUE

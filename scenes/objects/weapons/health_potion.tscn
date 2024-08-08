@@ -17,5 +17,3 @@ texture = ExtResource("2_kkql5")
 
 [node name="FireDelayTimer" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

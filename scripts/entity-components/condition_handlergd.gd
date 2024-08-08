@@ -19,12 +19,6 @@ func _physics_process(delta) -> void:
 			conditions[condition]["time"] -= delta
 			if conditions[condition]["time"] <= 0:
 				conditions.erase(condition)
-	print(conditions)
-
-func _ready() -> void:
-	await owner.owner.ready
-	add_condition("caffeinated", 1)
-	print(conditions)
 
 
 func add_condition(condition_name: String, time: float) -> void:

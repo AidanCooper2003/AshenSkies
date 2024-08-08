@@ -26,6 +26,8 @@ func add_weapon(weapon: String) -> void:
 		if $"../HealthComponent":
 			weapon_instance.self_damage_triggered.connect($"../HealthComponent".take_damage)
 			weapon_instance.health_change_triggered.connect($"../HealthComponent".change_health)
+		if $"../ConditionHandler":
+			weapon_instance.condition_added.connect($"../ConditionHandler".add_condition)
 		_weapon_manager.add_weapon(weapon_instance)
 		if !has_weapons():
 			weapon_instance.enable()

@@ -28,9 +28,7 @@ func _ready():
 func _physics_process(delta) -> void:
 	var speed_modification := 1.0
 	if _condition_handler != null:
-		print(_condition_handler.get_modification("speed"))
 		speed_modification = 1 + _condition_handler.get_modification("speed")
-		print(speed_modification)
 	var current_decceleration_rate = _decceleration_coefficient
 	if not _character_body_2d.is_on_floor():
 		current_decceleration_rate *= _air_decceleration_coefficient

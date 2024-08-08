@@ -6,6 +6,7 @@ signal weapon_broke()
 
 signal self_damage_triggered(damage: int)
 signal health_change_triggered(health: int)
+signal condition_added(condition: String, time: float)
 
 @export var max_durability: int
 @export var _fire_delay: float
@@ -19,6 +20,7 @@ var _enabled := false
 @onready var durability := max_durability
 
 func _ready() -> void:
+	_fire_delay_timer.connect("timeout", _on_fire_delay_timer_timeout)
 	_fire_delay_timer.wait_time = _fire_delay
 	_fire_delay_timer.start()
 	disable()
