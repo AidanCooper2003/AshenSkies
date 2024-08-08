@@ -7,7 +7,7 @@
 
 [node name="BasicGunBullet" type="RigidBody2D"]
 collision_layer = 2
-collision_mask = 20
+collision_mask = 52
 gravity_scale = 0.0
 continuous_cd = 1
 max_contacts_reported = 5
@@ -29,7 +29,7 @@ shape = ExtResource("2_wjwft")
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1_2x3yh")
 _damage = 100
 

@@ -23,7 +23,6 @@ func _ready() -> void:
 
 
 func _physics_process(_delta) -> void:
-	print(_animation_player.current_animation_position)
 	if position.x < _actual_left_bound:
 		_current_walk_direction = 1
 	elif position.x > _actual_right_bound:

@@ -13,7 +13,6 @@ func _ready():
 
 func fire_primary(weapon_angle) -> bool:
 	if _can_fire && not aura_present():
-		print(condition_handler)
 		instantiate_aura()
 		durability -= 1;
 		_can_fire = false

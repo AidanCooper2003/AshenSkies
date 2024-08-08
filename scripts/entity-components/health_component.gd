@@ -7,6 +7,7 @@ signal health_changed(new_health: int, trigger_on_damage: bool)
 @export var _max_health : int
 @export var _simple_health : bool
 @export var damage_over_time_delay := 0.1
+@export var damage_resistance := 1.0
 
 var _current_health : int
 var _condition_handler: ConditionHandler
@@ -32,10 +33,12 @@ func _physics_process(delta):
 
 
 
-func take_damage(damage : int) -> void:
-	print("taking damage")
+func take_damage(damage : int, resistance_override : bool) -> void:
+	var resistance := damage_resistance
+	if resistance_override:
+		resistance = 1
 	if not _simple_health:
-		_current_health = clampi(_current_health - damage, 0, _max_health)
+		_current_health = clampi(_current_health - damage * resistance, 0, _max_health)
 	else:
 		_current_health -= 1
 	health_changed.emit(_current_health, true)
@@ -57,23 +60,21 @@ func get_at_max_health() -> bool:
 
 
 func _on_hitbox_component_damage_taken(damageAmount) -> void:
-	take_damage(damageAmount)
+	take_damage(damageAmount, false)
 	
 func _handle_simple_damage_over_time(delta: float) -> void:
 	var damage_over_time = _condition_handler.get_modification("damage_over_time")
 	_accumulated_simple_tick_damage += delta * damage_over_time
 	if _accumulated_simple_tick_damage >= 100:
 		_accumulated_simple_tick_damage = 0
-		take_damage(1)
+		take_damage(1, false)
 
 func _handle_damage_over_time(delta: float) -> void:
 	if _no_current_damage_over_time:
 		_time_since_tick_damage = damage_over_time_delay
 		_no_current_damage_over_time = false
-		print("jumpstart")
 	var damage_over_time = _condition_handler.get_modification("damage_over_time")
-	print("everystep")
 	_time_since_tick_damage += delta
 	if _time_since_tick_damage > damage_over_time_delay:
-		take_damage(damage_over_time)
+		take_damage(damage_over_time, true)
 		_time_since_tick_damage = 0
