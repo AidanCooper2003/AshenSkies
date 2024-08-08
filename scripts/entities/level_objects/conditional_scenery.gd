@@ -4,7 +4,6 @@ extends StaticBody2D
 
 @export var trigger_conditions: Array
 
-@onready var _health_component := $HealthComponent
 @onready var _animation_player := $AnimationPlayer
 
 func _on_condition_handler_condition_added(condition_name):
