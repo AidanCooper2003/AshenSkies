@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://posx1uyfda5n"]
+[gd_scene load_steps=13 format=3 uid="uid://posx1uyfda5n"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemies/ash_priest.gd" id="1_bmwkr"]
 [ext_resource type="Script" path="res://scripts/entity-components/weapon_manager.gd" id="2_5xul8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bkglorimicvgf" path="res://scenes/objects/weapons/ash_staff.tscn" id="4_n0fwc"]
 [ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="5_hrj6w"]
 [ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="6_acbgd"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handlergd.gd" id="7_rt5ve"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msu3x"]
 size = Vector2(84, 156)
@@ -101,7 +102,11 @@ libraries = {
 "": SubResource("AnimationLibrary_i23s2")
 }
 
+[node name="ConditionHandler" type="Node2D" parent="."]
+script = ExtResource("7_rt5ve")
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_area_2d_body_exited"]
+[connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]
 [connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

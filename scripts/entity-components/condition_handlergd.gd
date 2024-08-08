@@ -22,6 +22,7 @@ func _physics_process(delta) -> void:
 
 
 func add_condition(condition_name: String, time: float) -> void:
+	print(conditions)
 	if not conditions.has(condition_name):
 		var modifications := CSVManager.get_condition_modifications(condition_name)
 		conditions[condition_name] = modifications
@@ -30,9 +31,17 @@ func add_condition(condition_name: String, time: float) -> void:
 	conditions[condition_name]["time"] = time
 
 
+
 func get_modification(modification_name: String) -> float:
 	var change_amount := 0.0
 	for condition in conditions:
 		if conditions[condition].has(modification_name):
 			change_amount += conditions[condition][modification_name]
 	return change_amount
+
+
+func has_modification(modification_name: String) -> float:
+	for condition in conditions:
+		if conditions[condition].has(modification_name):
+			return true
+	return false

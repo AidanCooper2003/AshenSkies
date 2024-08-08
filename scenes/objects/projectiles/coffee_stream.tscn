@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://de38ubvxs3e26"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_klvkj"]
+[ext_resource type="Texture2D" uid="uid://dap7cfh50ghns" path="res://sprites/projectiles/bullet.png" id="2_hswg6"]
+[ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="3_5axrp"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_px3n1"]
+
+[node name="CoffeeStream" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 20
+gravity_scale = 0.0
+continuous_cd = 1
+max_contacts_reported = 5
+contact_monitor = true
+script = ExtResource("1_klvkj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.839216, 0.329412, 0, 1)
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_hswg6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = ExtResource("3_5axrp")
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("4_px3n1")
+_damage = 10
+_conditions = {
+"burning": 1.0
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+rotation = 1.5708
+shape = ExtResource("3_5axrp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]

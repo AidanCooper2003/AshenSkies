@@ -20,12 +20,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
-	if _condition_handler == null:
+	if _condition_handler == null || not _condition_handler.has_modification("damage_over_time"):
 		return
 	
 	if _simple_health:
 		_handle_simple_damage_over_time(delta)
 	else:
+		print("Handling")
 		_handle_damage_over_time(delta)
 
 
@@ -63,7 +64,9 @@ func _handle_simple_damage_over_time(delta: float) -> void:
 		take_damage(1)
 
 func _handle_damage_over_time(delta: float) -> void:
+	print(_time_since_tick_damage)
 	var damage_over_time = _condition_handler.get_modification("damage_over_time")
 	_time_since_tick_damage += delta
 	if _time_since_tick_damage > 0.1:
 		take_damage(damage_over_time)
+		_time_since_tick_damage = 0

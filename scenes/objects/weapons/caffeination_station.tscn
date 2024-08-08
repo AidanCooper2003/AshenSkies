@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/caffeination_station.gd" id="1_y7uvs"]
 [ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_o3kdy"]
-[ext_resource type="PackedScene" uid="uid://cxgy32f0tctp1" path="res://scenes/objects/projectiles/test_gun_bullet.tscn" id="3_xja5r"]
+[ext_resource type="PackedScene" uid="uid://de38ubvxs3e26" path="res://scenes/objects/projectiles/coffee_stream.tscn" id="3_xns68"]
 [ext_resource type="Texture2D" uid="uid://cn01dopbkljvp" path="res://sprites/weapon_icons/coffee-pot.png" id="4_vs7t4"]
 
 [node name="Node2D" type="Node2D"]
@@ -12,13 +12,15 @@ _fire_delay = 1.0
 weapon_name = "Caffeination Station"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(25, -7)
 script = ExtResource("2_o3kdy")
-_bullet = ExtResource("3_xja5r")
+_bullet = ExtResource("3_xns68")
 _bullet_velocity = 2000.0
 
 [node name="FireDelayTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
 scale = Vector2(0.133, 0.133)
 texture = ExtResource("4_vs7t4")
