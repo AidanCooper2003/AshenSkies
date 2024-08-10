@@ -9,7 +9,7 @@ var condition_handler: ConditionHandler
 
 func _ready():
 	super()
-	get_condition_handler()
+	condition_handler = get_character_node("ConditionHandler")
 
 func fire_primary(weapon_angle) -> bool:
 	if _can_fire && not aura_present():
@@ -37,7 +37,3 @@ func aura_present() -> bool:
 	if condition_handler.has_condition(weapon_name):
 		return true
 	return false
-	
-func get_condition_handler() -> void:
-	condition_handler = get_character_node("ConditionHandler")
-

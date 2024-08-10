@@ -35,9 +35,15 @@ func _physics_process(delta):
 
 func take_damage(damage : int, resistance_override : bool) -> void:
 	var resistance := damage_resistance
+	var will_dodge := false
 	if resistance_override:
 		resistance = 1
-	if not _simple_health:
+	var rand = randf()
+	print(rand)
+	print(_condition_handler.get_modification("dodge"))
+	if randf() <= _condition_handler.get_modification("dodge"):
+		will_dodge = true
+	elif not _simple_health:
 		_current_health = clampi(_current_health - damage * resistance, 0, _max_health)
 	else:
 		_current_health -= 1

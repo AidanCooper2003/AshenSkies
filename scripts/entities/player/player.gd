@@ -20,6 +20,8 @@ var _game_loaded := false
 @onready var _resource_inventory_manager := $ResourceInventoryManager
 @onready var _crafting_manager := $CraftingManager
 @onready var _sprite_2d := $Sprite2D
+@onready var _condition_handler := $ConditionHandler
+@onready var _health_component := $HealthComponent
 
 func _ready():
 	_setup_signals()
@@ -117,7 +119,17 @@ func _on_changed_health(newHealth: int, trigger_on_damage: bool) -> void:
 		await owner.ready
 	elif trigger_on_damage:
 		_animation_player.play("iFrameFlashing")
-	EventBus.player_health_changed.emit(newHealth)
+	if not _condition_handler.has_modification("health_blind") || newHealth == 0:
+		EventBus.player_health_changed.emit(newHealth)
+
+
+func _on_condition_added(condition_name: String) -> void:
+	if _condition_handler.has_modification("health_blind"):
+		EventBus.player_health_changed.emit(-1)
+
+func _on_condition_removed(condition_name: String) -> void:
+	if not _condition_handler.has_modification("health_blind"):
+		EventBus.player_health_changed.emit(_health_component._current_health)
 
 
 func _on_crafting_started() -> void:

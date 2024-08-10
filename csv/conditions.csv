@@ -5,3 +5,4 @@ deluged,end_burning,1,,,,,,,,
 supernova,damage_dealt,1,damage_over_time,10,,,,,,
 eudaimonic,damage_dealt,0.1,speed,0.1,regen_health,10,durability_consumption,-0.1,dodge,0.1
 candlemans_brew,,,,,,,,,,
+hydrax,dodge,0.5,health_blind,1,,,,,,

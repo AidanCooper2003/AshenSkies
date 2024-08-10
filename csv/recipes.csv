@@ -3,4 +3,5 @@ spikeball_launcher,Gun,2,TRUE
 test_gun,Gun,2,TRUE
 health_potion,Air,2,FALSE
 caffeination_station,Gun,2,TRUE
-candlemans_brew,Test,2,TRUE
+candlemans_brew,Air,2,TRUE
+hydrax,Test,2,FALSE

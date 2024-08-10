@@ -33,6 +33,9 @@ func _on_area_2d_area_entered(area) -> void:
 
 
 func _on_player_health_changed(new_health: int) -> void:
+	if new_health == -1:
+		_health_text.text = "Player Health: ???"
+		return
 	_health_text.text = "Player Health: " + str(new_health)
 	if new_health == 0:
 		_death_text.visible = true

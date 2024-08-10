@@ -81,6 +81,7 @@ target_position = Vector2(0, 134)
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 collision_layer = 4
 script = ExtResource("6_prjgq")
+_damage = 1
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageDealerComponent"]
 visible = false
