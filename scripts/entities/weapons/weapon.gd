@@ -55,7 +55,8 @@ func enable() -> void:
 	_enabled = true
 	sprite.visible = true
 	_can_fire = false
-	_fire_delay_timer.start()
+	if _fire_delay_timer != null:
+		_fire_delay_timer.start()
 
 
 func disable() -> void:

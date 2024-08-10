@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://wacwpc45f1s1"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_htkb0"]
+[ext_resource type="Texture2D" uid="uid://8u3quvyedfgk" path="res://sprites/weapon_icons/terminal_lucidity.png" id="2_rb473"]
+
+[node name="TerminalLucidity" type="Node2D"]
+script = ExtResource("1_htkb0")
+_condition_name = "lucidity"
+_condition_length = 5.0
+max_durability = 1
+_fire_delay = 1.0
+weapon_name = "terminal_lucidity"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(34, 34)
+rotation = 5.75959
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_rb473")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
