@@ -61,6 +61,15 @@ func get_resource_names() -> Array:
 	return _get_names(resources, 0)
 
 
+func get_tag_type(tag_name: String) -> String:
+	return get_property(tags, 0, 1, tag_name)
+
+
+func get_tag_types() -> Dictionary:
+	return get_properties(tags, 0, 1)
+
+
+
 func get_condition_modifications(condition_name: String) -> Dictionary:
 	var condition := {}
 	for i in range(1, _max_modifications + 1):

@@ -8,12 +8,15 @@ var _recipe_tags: Dictionary
 var _recipe_qualities: Dictionary
 var _resource_tags: Dictionary
 var _resource_qualities: Dictionary
+var _tag_types: Dictionary
 
 func _ready() -> void:
 	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
 	_resource_tags = CSVManager.get_tags(CSVManager.resources, 0, 1)
 	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
 	_resource_qualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
+	_tag_types = CSVManager.get_tag_types()
+	
 	
 	# _test_crafting()
 
@@ -41,22 +44,7 @@ func craft(ingredients: Dictionary) -> String:
 		return "test_gun"
 
 func _test_crafting() -> void:
-	print("Only Gun Tags")
-	print("----------")
-	for i in 10:
-		print(craft({"gun parts": 8}))
-	print("Only Air Tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 8}))
-	print("Equal part air and gun tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 4, "gun parts": 4}))
-	print("More air than gun tags")
-	print("----------")
-	for i in 10:
-		print(craft({"cyclonium": 6, "gun parts": 2}))
+	pass
 
 
 func _get_tag_match_count(weapon: String, tag_counts: Dictionary) -> int:
