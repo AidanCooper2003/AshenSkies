@@ -12,10 +12,6 @@ var _is_menu_open: bool = false
 var _resource_containers: Dictionary
 var _containers_full: bool = false
 
-func _init() -> void:
-	_resource_textures = CSVManager.get_properties(CSVManager.resources, 0, 3)
-
-
 func _ready() -> void:
 	_setup_signals()
 	_setup_ingredient_buttons()
@@ -39,7 +35,7 @@ func _on_resource_count_changed(resource_name, resource_count) -> void:
 			if not _resource_containers.values().has(resourceContainer):
 				_resource_containers[resource_name] = resourceContainer
 				_resource_containers[resource_name].get_child(0).texture = (
-						load("res://sprites/resource_icons/" + _resource_textures[resource_name])
+						load("res://sprites/resource_icons/" + resource_name + ".png")
 				)
 				break
 		#If there are no more resource containers, ignore the change.

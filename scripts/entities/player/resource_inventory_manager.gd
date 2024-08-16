@@ -111,8 +111,8 @@ func _update_resource(resource_name: String) -> void:
 #Maybe have some csv for a verifier of valid resource types later?
 func _initialize_inventory() -> void:
 	add_resource_type("cyclonium")
-	add_resource_type("gun parts")
-	add_resource_type("airsoft bullet")
-	add_resource_type("testing fluid")
-	add_resource("testing fluid", 64)
-	add_resource("gun parts", 64)
+	add_resource_type("gun_parts")
+	add_resource_type("airsoft_bullets")
+	add_resource_type("testing_fluid")
+	add_resource("testing_fluid", 64)
+	add_resource("gun_parts", 64)
