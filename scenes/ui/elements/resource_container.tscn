@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bow7e73jbp8hw"]
 
-[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="1_1xlbe"]
+[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/resource_icons/cancel.png" id="1_1xlbe"]
 
 [node name="ResourceContainer" type="Button"]
 anchors_preset = 15

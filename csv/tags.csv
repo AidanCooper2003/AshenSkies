@@ -1,0 +1,9 @@
+Tag-Name,Tag-Type
+Projectile,Form
+Melee,Form
+Potion,Form
+Fire,Element
+Wind,Element
+Food,Element
+Healing,Mechanic
+Transportation,Mechanic

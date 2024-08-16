@@ -6,6 +6,7 @@ extends Node
 var recipes := preload("res://csv/recipes.csv").records
 var resources := preload("res://csv/resources.csv").records
 var conditions := preload("res://csv/conditions.csv").records
+var tags := preload("res://csv/tags.csv").records
 
 var _max_modifications = 5
 

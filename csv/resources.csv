@@ -1,5 +1,16 @@
 Resource-name,tags,quality
-gun_parts,Gun,1
-cyclonium,Air,1
-airsoft_bullet,"Gun, Air",1
-testing_fluid,Test,1
+projectile_essence,Projectile,0
+melee_essence,Melee,0
+absorption_essence,Potion,0
+fire_essence,Fire,1
+wind_essence,Wind,1
+food_essence,Food,1
+healing_essence,Healing,1
+transportation_essence,Transportation,1
+firestorm_essence,"Fire, Wind",2
+charred_essence,"Fire, Food",2
+biscuit_essence,"Wind, Food",2
+nutrition_essence,"Food, Healing",3
+glider_essence,"Wind, Transportation",3
+rocket_essence,"Fire, Transportation",3
+fever_essence,"Fire, Healing",3
