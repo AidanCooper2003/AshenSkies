@@ -35,6 +35,7 @@ func _set_resource_category_counts() -> void:
 	_resource_category_counts["single_mechanic"] = 1
 	_resource_category_counts["double_element"] = 1
 	_resource_category_counts["double_mixed"] = 1
+
 	
 func _set_resource_category_odds() -> void:
 	_resource_category_odds["single_form"] = .25

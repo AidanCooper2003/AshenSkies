@@ -34,9 +34,18 @@ func craft(ingredients: Dictionary) -> String:
 	var weapon_pool: Array[String]
 	var tag_counts := _get_ingredients_tags(ingredients)
 	
+	#TODO If tags don't contain form tags, add one of each
+	
 	for weapon in _recipe_tags:
 		for i in _get_tag_match_count(weapon, tag_counts):
+			#TODO If weapon contains element tag that is not present, don't add it
 			weapon_pool.append(weapon)
+	
+	#TODO Further away weapon quality is from crafting quality, higher chance to reroll and remove from pool.
+	#This may require some testing to ensure it doesn't cause an infinite loop of not choosing weapons
+	#If items run out, maybe reget item pool and pick totally randomly?
+	#Or make sure numbers work in such a way where you're always guaranteed to have at least one item that will not have a roll done.
+	
 	var chosen_weapon := randi_range(0, weapon_pool.size() - 1)
 	if weapon_pool.size() > 0:
 		return weapon_pool[chosen_weapon]
