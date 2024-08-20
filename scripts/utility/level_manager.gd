@@ -20,6 +20,7 @@ func choose_random_resource() -> String:
 			return _chosen_resources[category].pick_random()
 	return ""
 
+
 func _assign_resources_to_categories() -> void:
 	var types = CSVManager.get_types_of_resources()
 	for type in types:
@@ -27,7 +28,6 @@ func _assign_resources_to_categories() -> void:
 		for i in range(_resource_category_counts[type]):
 			_chosen_resources[type].append(types[type][randi_range(0, types[type].size() - 1)])
 	
-
 
 func _set_resource_category_counts() -> void:
 	_resource_category_counts["single_form"] = 3
