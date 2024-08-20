@@ -4,7 +4,9 @@ extends Node2D
 
 const MAX_INGREDIENTS = 8
 
+
 @export var resources: Dictionary = {}
+@export var max_resources: int
 
 var ingredients: Dictionary = {}
 
@@ -21,6 +23,8 @@ func has_resource(resource_name: String) -> bool:
 
 
 func add_resource(resource_name: String, resource_count: int) -> void:
+	if max_resources > resources.size() && !has_resource(resource_name):
+		add_resource_type(resource_name)
 	if has_resource(resource_name):
 		resources[resource_name] += resource_count
 		_update_resource(resource_name)
@@ -110,13 +114,4 @@ func _update_resource(resource_name: String) -> void:
 
 #Maybe have some csv for a verifier of valid resource types later?
 func _initialize_inventory() -> void:
-	add_resource_type("projectile_essence")
-	add_resource_type("melee_essence")
-	add_resource_type("absorption_essence")
-	add_resource_type("fire_essence")
-	add_resource_type("wind_essence")
-	add_resource_type("firestorm_essence")
-	add_resource_type("charred_essence")
-	add_resource_type("glider_essence")
-	add_resource_type("rocket_essence")
 	add_resource("projectile_essence", 64)

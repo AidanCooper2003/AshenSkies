@@ -100,6 +100,7 @@ _weapon_manager = NodePath("../WeaponManager")
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ql8no")
+max_resources = 12
 
 [node name="CraftingManager" type="Node2D" parent="."]
 script = ExtResource("12_qkxvb")

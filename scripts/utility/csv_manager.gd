@@ -61,6 +61,18 @@ func get_resource_names() -> Array:
 	return _get_names(resources, 0)
 
 
+func get_types_of_resources() -> Dictionary:
+	var resource_types = get_properties(resources, 0, 3)
+	var types_of_resources := {}
+	for resource in resource_types:
+		var type = resource_types[resource]
+		if !types_of_resources.has(type):
+			types_of_resources[type] = [resource]
+		else:
+			types_of_resources[type].append(resource)
+	return types_of_resources
+
+
 func get_tag_type(tag_name: String) -> String:
 	return get_property(tags, 0, 1, tag_name)
 
