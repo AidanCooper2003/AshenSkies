@@ -34,17 +34,33 @@ func craft(ingredients: Dictionary) -> String:
 	var weapon_pool: Array[String]
 	var tag_counts := _get_ingredients_tags(ingredients)
 	
-	#TODO If tags don't contain form tags, add one of each
+	#If tags don't contain form tags, add one of each
+	var has_form_tag := false
+	for tag in tag_counts:
+		if _tag_types[tag] == "Form":
+			has_form_tag = true
+			break
+	if !has_form_tag:
+		for tag in _tag_types:
+			if _tag_types[tag] == "Form":
+				tag_counts[tag] = 1
 	
+	#Loop through each recipe, and add the weapon for each tag match as long as all element tags are present
 	for weapon in _recipe_tags:
 		for i in _get_tag_match_count(weapon, tag_counts):
-			#TODO If weapon contains element tag that is not present, don't add it
 			weapon_pool.append(weapon)
-	
+	print(tag_counts)
+	print(weapon_pool)
 	#TODO Further away weapon quality is from crafting quality, higher chance to reroll and remove from pool.
 	#This may require some testing to ensure it doesn't cause an infinite loop of not choosing weapons
 	#If items run out, maybe reget item pool and pick totally randomly?
 	#Or make sure numbers work in such a way where you're always guaranteed to have at least one item that will not have a roll done.
+	
+	var quality := 0
+	for ingredient in ingredients:
+		quality += _resource_qualities[ingredient]
+	print(quality)
+	
 	
 	var chosen_weapon := randi_range(0, weapon_pool.size() - 1)
 	if weapon_pool.size() > 0:
@@ -60,8 +76,10 @@ func _get_tag_match_count(weapon: String, tag_counts: Dictionary) -> int:
 	var weapon_tags = _recipe_tags[weapon]
 	var weapon_count := 0
 	for tag in weapon_tags:
-		if not tag_counts.has(tag):
-			return 0 # If your ingredients don't contain every tag in the weapon, the weapon can't be added
+		if _tag_types[tag] != "Mechanic" && not tag_counts.has(tag):
+			return 0 # If your ingredients don't contain every non-mechanical tag in the weapon, the weapon can't be added
+		if _tag_types[tag] == "Mechanic" && !tag_counts.has(tag):
+			tag_counts[tag] = 0
 		weapon_count += tag_counts[tag]
 	return weapon_count
 

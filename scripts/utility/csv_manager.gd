@@ -88,8 +88,6 @@ func get_condition_modifications(condition_name: String) -> Dictionary:
 		var modification_name = get_property(conditions, 0, i * 2 - 1, condition_name)
 		if modification_name == "" || modification_name == null:
 			return condition
-		print(modification_name)
-		print(get_property(conditions, 0, i * 2, condition_name))
 		var modification_amount = get_property(conditions, 0, i * 2, condition_name) as float
 		condition[modification_name] = modification_amount
 	return condition

@@ -97,6 +97,18 @@ visible = false
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2
 
+[node name="IngredientButton5" parent="Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="4"]
+visible = false
+
+[node name="IngredientButton6" parent="Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="5"]
+visible = false
+
+[node name="IngredientButton7" parent="Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="6"]
+visible = false
+
+[node name="IngredientButton8" parent="Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="7"]
+visible = false
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 0)
 tile_set = ExtResource("2_n6233")

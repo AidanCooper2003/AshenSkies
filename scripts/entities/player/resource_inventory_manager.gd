@@ -2,7 +2,7 @@ class_name ResourceInventoryManager
 
 extends Node2D
 
-const MAX_INGREDIENTS = 8
+var max_ingredients = 4
 
 
 @export var resources: Dictionary = {}
@@ -61,7 +61,7 @@ func increment_ingredient(resource_name: String) -> void:
 	if (
 			has_resource(resource_name)
 			and resources[resource_name] > 0 
-			and get_ingredient_count() < MAX_INGREDIENTS
+			and get_ingredient_count() < max_ingredients
 	):
 		if not ingredients.has(resource_name):
 			ingredients[resource_name] = 1

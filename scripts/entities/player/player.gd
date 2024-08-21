@@ -133,7 +133,7 @@ func _on_condition_removed(condition_name: String) -> void:
 
 
 func _on_crafting_started() -> void:
-	if _resource_inventory_manager.get_ingredient_count() == 8 && _weapon_inventory_manager.has_room():
+	if _resource_inventory_manager.get_ingredient_count() == _resource_inventory_manager.max_ingredients && _weapon_inventory_manager.has_room():
 		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
 		_resource_inventory_manager.subtract_resources(_resource_inventory_manager.ingredients)
 		EventBus.ingredients_reset.emit()
