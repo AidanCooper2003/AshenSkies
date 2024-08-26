@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7i616x2hng5o"]
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/caffeination_station.gd" id="1_y7uvs"]
-[ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_o3kdy"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_a8cw0"]
 [ext_resource type="PackedScene" uid="uid://de38ubvxs3e26" path="res://scenes/objects/projectiles/coffee_stream.tscn" id="3_xns68"]
 [ext_resource type="Texture2D" uid="uid://cn01dopbkljvp" path="res://sprites/weapon_icons/caffeination_station.png" id="4_vs7t4"]
 
@@ -12,8 +12,7 @@ _fire_delay = 1.0
 weapon_name = "caffeination_station"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
-position = Vector2(25, -7)
-script = ExtResource("2_o3kdy")
+script = ExtResource("2_a8cw0")
 _bullet = ExtResource("3_xns68")
 _bullet_velocity = 2000.0
 

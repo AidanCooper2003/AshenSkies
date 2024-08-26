@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bj8mc0ihk6wcy"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_18ax0"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/multi_projectile_shooter.gd" id="2_l5a2t"]
+[ext_resource type="PackedScene" uid="uid://chkyht7meopu" path="res://scenes/objects/projectiles/depleted_ash_bullet.tscn" id="3_wadad"]
+[ext_resource type="Texture2D" uid="uid://x8mo76hw4yn0" path="res://sprites/weapon_icons/depleted_ash.png" id="4_i4nph"]
+
+[node name="DepletedAsh" type="Node2D"]
+script = ExtResource("1_18ax0")
+max_durability = 10
+_fire_delay = 2.0
+weapon_name = "depleted_ash"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(52, 4)
+script = ExtResource("2_l5a2t")
+bullet_count = 5
+bullet_angle_variance = 0.1
+_bullet = ExtResource("3_wadad")
+_bullet_velocity = 1000.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(259, 258)
+texture = ExtResource("4_i4nph")

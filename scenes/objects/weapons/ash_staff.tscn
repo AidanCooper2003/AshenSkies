@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkglorimicvgf"]
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_8ec8x"]
-[ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_jb88t"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_qf4tf"]
 [ext_resource type="PackedScene" uid="uid://bia5ul7w7do3n" path="res://scenes/objects/projectiles/ash_staff_bullet.tscn" id="3_e5jr1"]
 [ext_resource type="Texture2D" uid="uid://56cmojcdccr3" path="res://sprites/weapon_icons/ash_staff.png" id="4_qevtc"]
 
@@ -12,10 +12,9 @@ _fire_delay = 2.0
 weapon_name = "ash_staff"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
-position = Vector2(92, 6)
-script = ExtResource("2_jb88t")
+script = ExtResource("2_qf4tf")
 _bullet = ExtResource("3_e5jr1")
-_bullet_velocity = 400.0
+_bullet_velocity = 500.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(41, 7)
