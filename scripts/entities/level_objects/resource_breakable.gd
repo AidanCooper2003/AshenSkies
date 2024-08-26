@@ -10,5 +10,5 @@ func _ready():
 
 
 func _on_damage_taken(damage_amount):
-	EventBus.resource_added.emit(resource, 3)
+	EventBus.resource_added.emit(resource, 2)
 	queue_free()

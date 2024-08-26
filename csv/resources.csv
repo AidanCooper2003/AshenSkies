@@ -6,6 +6,7 @@ fire_essence,Fire,1,single_element
 wind_essence,Wind,1,single_element
 food_essence,Food,1,single_element
 healing_essence,Healing,1,single_mechanic
+defense_essence,Defense,1,single_mechanic
 transportation_essence,Transportation,1,single_mechanic
 firestorm_essence,"Fire, Wind",2,double_element
 charred_essence,"Fire, Food",2,double_element

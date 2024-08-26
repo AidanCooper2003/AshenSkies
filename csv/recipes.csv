@@ -2,7 +2,7 @@ Item-name,Item-tags,Item-quality,Is-offensive
 spikeball_launcher,Projectile,2,TRUE
 test_gun,Projectile,1,TRUE
 health_potion,"Potion, Healing",1,FALSE
-caffeination_station,"Projectile, Fire, Food",2,TRUE
+caffeination_station,"Projectile, Fire, Food, Transportation",2,TRUE
 candlemans_brew,"Potion, Fire",2,TRUE
-hydrax,"Potion, Healing",2,FALSE
-terminal_lucidity,Potion,3,FALSE
+hydrax,"Potion, Defense",2,FALSE
+terminal_lucidity,"Potion, Transportation, Defense",3,FALSE
