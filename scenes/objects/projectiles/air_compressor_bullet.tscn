@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmcjw58eo3d85"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_kar7r"]
+[ext_resource type="Texture2D" uid="uid://bb7i2sh3s0qre" path="res://sprites/projectiles/air_burst.png" id="2_5wd8d"]
+[ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="3_ml0mg"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_ct8od"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xm0np"]
+radius = 25.02
+
+[node name="AirCompressorBullet" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 52
+gravity_scale = 0.0
+continuous_cd = 1
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp = -0.1
+script = ExtResource("1_kar7r")
+knockback = 2000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_5wd8d")
+offset = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57782
+shape = SubResource("CircleShape2D_xm0np")
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 36
+script = ExtResource("4_ct8od")
+_damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+rotation = 1.57815
+shape = ExtResource("3_ml0mg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="damage_dealt" from="DamageDealerComponent" to="." method="_on_damage_dealer_component_damage_dealt"]

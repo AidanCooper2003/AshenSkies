@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://4iiah531mhmi"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_e6g8v"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_dk3ih"]
+[ext_resource type="PackedScene" uid="uid://cmcjw58eo3d85" path="res://scenes/objects/projectiles/air_compressor_bullet.tscn" id="3_37oy6"]
+[ext_resource type="Texture2D" uid="uid://pr36fwy4bhy" path="res://sprites/weapon_icons/air_compressor.png" id="4_cghle"]
+
+[node name="AirCompressor" type="Node2D"]
+script = ExtResource("1_e6g8v")
+max_durability = 200
+_fire_delay = 0.1
+weapon_name = "test_gun"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(61, 30)
+script = ExtResource("2_dk3ih")
+_bullet = ExtResource("3_37oy6")
+_bullet_velocity = 2000.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(30, 30)
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("4_cghle")
+
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]
