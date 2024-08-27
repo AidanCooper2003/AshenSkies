@@ -1,6 +1,6 @@
 class_name AshPriest
 
-extends Node2D
+extends CharacterBody2D
 
 var _target: Node2D
 
@@ -11,6 +11,12 @@ func _physics_process(delta) -> void:
 	if _target != null:
 		_weapon_manager.aim_position = _target.position
 		_weapon_manager.fire_primary()
+	move_and_slide()
+	velocity = Vector2(velocity.x * 0.4, velocity.y)
+	if velocity.y <= 0:
+		velocity = Vector2(velocity.x, velocity.y * 0.4)
+
+
 
 
 func _on_area_2d_body_entered(body) -> void:

@@ -42,7 +42,7 @@ size = Vector2(20, 16)
 
 [node name="TerritorialJumper" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 16
+collision_mask = 18
 floor_max_angle = 1.0472
 script = ExtResource("1_y404u")
 _relative_left_bound = 100.0
@@ -72,7 +72,6 @@ _gravity_component = NodePath("../GravityComponent")
 [node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
 script = ExtResource("5_lhlh0")
 _character_body_2d = NodePath("..")
-_downwards_gravity_coefficient = 1.0
 
 [node name="EnemyDetector" type="ShapeCast2D" parent="."]
 position = Vector2(0, -178)
@@ -102,6 +101,9 @@ script = ExtResource("8_exqqi")
 visible = false
 shape = ExtResource("3_baf3f")
 
+[node name="KnockbackHandler" type="Node2D" parent="HitboxComponent"]
+script = ExtResource("11_2qbdc")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3dthq")
@@ -123,9 +125,6 @@ collide_with_areas = true
 
 [node name="ConditionHandler" type="Node2D" parent="."]
 script = ExtResource("10_v41aj")
-
-[node name="KnockbackHandler" type="Node2D" parent="."]
-script = ExtResource("11_2qbdc")
 
 [connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

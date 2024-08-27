@@ -142,8 +142,19 @@ _ui_manager = NodePath("../UIManager")
 [node name="TerritorialJumper" parent="Enemies" instance=ExtResource("4_g4ohe")]
 position = Vector2(1159, 350)
 
+[node name="TerritorialJumper4" parent="Enemies" instance=ExtResource("4_g4ohe")]
+position = Vector2(-282, 79)
+
+[node name="WalkerComponent" parent="Enemies/TerritorialJumper4" index="2" node_paths=PackedStringArray("_character_body_2d")]
+_character_body_2d = NodePath("../../TerritorialJumper")
+_acceleration = 0.0
+
+[node name="JumperComponent" parent="Enemies/TerritorialJumper4" index="3" node_paths=PackedStringArray("_character_body_2d", "_gravity_component")]
+_character_body_2d = NodePath("../../TerritorialJumper")
+_gravity_component = NodePath("../../TerritorialJumper/GravityComponent")
+
 [node name="AshPriest1" parent="Enemies" instance=ExtResource("6_nfakm")]
-position = Vector2(2442, 308)
+position = Vector2(2440, 304)
 
 [node name="AshPriest2" parent="Enemies" instance=ExtResource("6_nfakm")]
 position = Vector2(4256, -398)
@@ -183,12 +194,13 @@ position = Vector2(4975, -395)
 position = Vector2(2122, 372)
 
 [node name="Crate" parent="LevelObjects" instance=ExtResource("11_fa3go")]
-position = Vector2(-161, -160)
+position = Vector2(198, 96)
 collision_mask = 31
 
 [node name="Crate2" parent="LevelObjects" instance=ExtResource("11_fa3go")]
-position = Vector2(-162, -224)
+position = Vector2(198, 32)
 
 [connection signal="area_entered" from="LevelObjects/Area2D" to="UIManager" method="_on_area_2d_area_entered"]
 
 [editable path="Camera2D/CanvasLayer"]
+[editable path="Enemies/TerritorialJumper4"]

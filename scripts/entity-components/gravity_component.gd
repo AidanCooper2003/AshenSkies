@@ -3,7 +3,7 @@ class_name GravityComponent
 extends Node2D
 
 @export var _character_body_2d: CharacterBody2D
-@export var _downwards_gravity_coefficient: float
+@export var _downwards_gravity_coefficient := 1.0
 @export var _gravity_coefficient := 1.0
 
 var _gravity: float

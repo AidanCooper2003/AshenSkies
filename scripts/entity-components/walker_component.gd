@@ -26,6 +26,8 @@ func _ready():
 ##If an entities velocity is outside the bounds, do not set it lower in case the entity was launched.
 ##If an entities velocity is outside the bounds, moving in the opposite direction should slow it down.
 func _physics_process(delta) -> void:
+	if _character_body_2d == null:
+		return
 	var speed_modification := 1.0
 	if _condition_handler != null:
 		speed_modification = 1 + _condition_handler.get_modification("speed")
