@@ -6,3 +6,4 @@ caffeination_station,"Projectile, Fire, Food, Transportation",2,TRUE
 candlemans_brew,"Potion, Fire",2,TRUE
 hydrax,"Potion, Defense",2,FALSE
 terminal_lucidity,"Potion, Transportation, Defense",3,FALSE
+depleted_ash,"Projectile, Fire",2,TRUE

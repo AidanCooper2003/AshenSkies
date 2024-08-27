@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://chkyht7meopu"]
 
 [ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_gquwf"]
-[ext_resource type="Texture2D" uid="uid://dap7cfh50ghns" path="res://sprites/projectiles/bullet.png" id="2_nxyr7"]
+[ext_resource type="Texture2D" uid="uid://dhsyt7gcum26k" path="res://sprites/projectiles/fire.png" id="2_jrmbf"]
 [ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="3_6tv65"]
 [ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_8cb4g"]
 
 [node name="BasicGunBullet" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 52
-gravity_scale = 0.0
+gravity_scale = 3.0
 continuous_cd = 1
 max_contacts_reported = 5
 contact_monitor = true
@@ -17,8 +17,8 @@ script = ExtResource("1_gquwf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(2, 2)
-texture = ExtResource("2_nxyr7")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_jrmbf")
 offset = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,7 +31,10 @@ visible = false
 collision_layer = 2
 collision_mask = 36
 script = ExtResource("4_8cb4g")
-_damage = 100
+_damage = 10
+_conditions = {
+"burning": 2.0
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
 rotation = 1.57815

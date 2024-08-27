@@ -19,4 +19,4 @@ func fire_bullet(weapon_angle: Vector2):
 		get_tree().current_scene.add_child(bullet_instance)
 		bullet_instance.position = self.global_position
 		bullet_instance.apply_impulse(new_angle * _bullet_velocity * bullet_velocity_offset, Vector2.ZERO)
-		bullet_instance.rotation = new_angle
+		bullet_instance.rotation = new_angle.angle()

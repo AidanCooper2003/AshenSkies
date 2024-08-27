@@ -17,3 +17,12 @@ func _process(_delta) -> void:
 		EventBus.crafting_started.emit()
 	if Input.is_action_just_pressed("Debug 2"):
 		EventBus.ingredients_reset.emit()
+	if Input.is_action_just_pressed("Debug 4"):
+		_assign_weapon("depleted_ash")
+
+
+func _assign_weapon(weapon: String) -> void:
+	var weapon_scene = CSVManager.get_weapon_scene(weapon)
+	if weapon_scene != null:
+		_player._weapon_inventory_manager.add_weapon(weapon_scene)
+	EventBus.weapon_in_slot_changed.emit(_player._weapon_inventory_manager.weapons.size() - 1, weapon)
