@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bxn60d8h5jtnl"]
+[gd_scene load_steps=14 format=3 uid="uid://bxn60d8h5jtnl"]
 
 [ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="1_eg45t"]
 [ext_resource type="PackedScene" uid="uid://bvfn2yusm676m" path="res://scenes/ui/default_canvas.tscn" id="2_eqhnj"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://posx1uyfda5n" path="res://scenes/objects/enemies/ash_priest.tscn" id="6_nfakm"]
 [ext_resource type="PackedScene" uid="uid://cn6ksjgoqo6mb" path="res://scenes/objects/level_objects/resource_breakable.tscn" id="10_nes5d"]
 [ext_resource type="PackedScene" uid="uid://bmm784h0woepx" path="res://scenes/objects/level_objects/crate.tscn" id="11_fa3go"]
-[ext_resource type="PackedScene" uid="uid://ctpchwrspw2pg" path="res://scenes/objects/level_objects/Spike.tscn" id="12_afd8e"]
 [ext_resource type="PackedScene" uid="uid://ctpchwrspw2pg" path="res://scenes/objects/level_objects/spike.tscn" id="13_ypxdt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mxg24"]
@@ -209,19 +208,19 @@ collision_mask = 31
 [node name="Crate2" parent="LevelObjects" instance=ExtResource("11_fa3go")]
 position = Vector2(198, 32)
 
-[node name="Caltrops" parent="LevelObjects" instance=ExtResource("12_afd8e")]
+[node name="Caltrops" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
 position = Vector2(-1007, 208)
 
-[node name="Caltrops4" parent="LevelObjects" instance=ExtResource("12_afd8e")]
+[node name="Caltrops4" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
 position = Vector2(-1100, 208)
 
-[node name="Caltrops5" parent="LevelObjects" instance=ExtResource("12_afd8e")]
+[node name="Caltrops5" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
 position = Vector2(-1193, 208)
 
-[node name="Caltrops2" parent="LevelObjects" instance=ExtResource("12_afd8e")]
+[node name="Caltrops2" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
 position = Vector2(-549, 80)
 
-[node name="Caltrops3" parent="LevelObjects" instance=ExtResource("12_afd8e")]
+[node name="Caltrops3" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
 position = Vector2(-456, 80)
 
 [node name="Caltrops6" parent="LevelObjects" instance=ExtResource("13_ypxdt")]
