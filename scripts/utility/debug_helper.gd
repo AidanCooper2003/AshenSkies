@@ -18,6 +18,7 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("Debug 2"):
 		EventBus.ingredients_reset.emit()
 	if Input.is_action_just_pressed("Debug 4"):
+		_assign_weapon("popcorn")
 		_assign_weapon("candlemans_brew")
 
 

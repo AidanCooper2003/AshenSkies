@@ -39,7 +39,6 @@ func _physics_process(_delta) -> void:
 
 func _on_health_component_health_changed(_current_health: int, trigger_on_damage: bool) -> void:
 	#Prevents a race condition with health's initial setting.
-	print(_current_health)
 	if _animation_player == null:
 		return
 	if _animation_player.is_playing():

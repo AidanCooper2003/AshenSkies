@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://eioijht5roqe"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_5y5rl"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_eala4"]
+[ext_resource type="PackedScene" uid="uid://bb6ar8tc8buqy" path="res://scenes/objects/projectiles/kernel.tscn" id="3_t8jso"]
+[ext_resource type="Texture2D" uid="uid://cblmn0n7lgkqv" path="res://sprites/weapon_icons/popcorn.png" id="4_qe72w"]
+
+[node name="Popcorn" type="Node2D"]
+script = ExtResource("1_5y5rl")
+max_durability = 25
+_fire_delay = 0.25
+weapon_name = "popcorn"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(30, 0)
+script = ExtResource("2_eala4")
+_bullet = ExtResource("3_t8jso")
+_bullet_velocity = 1000.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.20268e-13, 0)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("4_qe72w")
+
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

@@ -15,13 +15,11 @@ var _targets: Dictionary = {}
 
 func _physics_process(_delta) -> void:
 	for area in _targets:
-		print(str(_targets.get(area)) + ", " + str(Time.get_ticks_msec()))
 		if _targets.get(area) < Time.get_ticks_msec() - _damage_delay * 1000:
 			_trigger_damage(area)
 			_targets[area] = Time.get_ticks_msec()
 
 func _trigger_damage(area):
-	print("triggering damage" + str(Time.get_unix_time_from_system()))
 	if _damage > 0:
 		area.damage(_damage)
 		damage_dealt.emit()
