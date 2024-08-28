@@ -29,29 +29,46 @@ func _setup_signals():
 	EventBus.weapon_in_slot_changed.connect(_on_weapon_in_slot_changed)
 
 func _on_area_2d_area_entered(area) -> void:
+	if _final_timer_text == null:
+		return
 	_final_timer_text.text = "FINAL TIME: " + str(snapped(_time, 0.001))
 
 
 func _on_player_health_changed(new_health: int) -> void:
+	if _health_text == null:
+		return
 	if new_health == -1:
 		_health_text.text = "Player Health: ???"
 		return
 	_health_text.text = "Player Health: " + str(new_health)
+	if _death_text == null:
+		return
 	if new_health == 0:
 		_death_text.visible = true
 
 
 func _on_active_slot_changed(new_weapon: int) -> void:
+	if (
+			_weapon_slots == null
+			or _weapon_slots.size() == 0 
+			or _weapon_slots[_last_selected_weapon] == null 
+			or _weapon_slots[new_weapon] == null
+		):
+		return
 	_weapon_slots[_last_selected_weapon].modulate = _deselected_slot_color
 	_weapon_slots[new_weapon].modulate = _selected_slot_color
 	_last_selected_weapon = new_weapon
 
 
 func _on_durability_changed(current_weapon: int, durability: int) -> void:
+	if _weapon_slots[current_weapon] == null:
+		return
 	_weapon_slots[current_weapon].get_child(2).value = durability
 
 
 func _on_weapon_in_slot_changed(weapon_slot: int, weapon_name: String) -> void:
+	if _weapon_slots[weapon_slot] == null:
+		return
 	if weapon_name == "":
 		_weapon_slots[weapon_slot].get_child(1).texture = null
 		_weapon_slots[weapon_slot].get_child(2).visible = false

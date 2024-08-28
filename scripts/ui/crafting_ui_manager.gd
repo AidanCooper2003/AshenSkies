@@ -17,6 +17,8 @@ func _ready() -> void:
 
 
 func _setup_ingredient_buttons() -> void:
+	if _resource_grid == null:
+		return
 	for button in _resource_grid.get_children():
 		button.connect("pressed", _on_ingredient_clicked.bind(button))
 
@@ -29,6 +31,8 @@ func _setup_signals():
 
 func _on_resource_count_changed(resource_name, resource_count) -> void:
 	#If there isn't a resource container for the resource, assign it.
+	if _resource_grid == null:
+		return
 	if not _resource_containers.has(resource_name):
 		for resourceContainer in _resource_grid.get_children():
 			if not _resource_containers.values().has(resourceContainer):
@@ -52,6 +56,8 @@ func _on_resource_count_changed(resource_name, resource_count) -> void:
 
 
 func _on_ingredients_changed(ingredients: Dictionary) -> void:
+	if _crafting_grid == null:
+		return
 	var ingredient_containers := _crafting_grid.get_children()
 	var container_index := 0
 	for ingredient in ingredients:
@@ -67,6 +73,8 @@ func _on_ingredients_changed(ingredients: Dictionary) -> void:
 
 
 func _on_change_crafting_menu_state(is_menu_open) -> void:
+	if _crafting_container == null:
+		return
 	_is_menu_open = is_menu_open
 	_crafting_container.visible = _is_menu_open
 

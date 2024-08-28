@@ -1,0 +1,192 @@
+[gd_scene load_steps=14 format=3 uid="uid://c3j5g6k3cnanf"]
+
+[ext_resource type="TileSet" uid="uid://b46a5kc02ihhm" path="res://TileSet.tres" id="1_xfl6o"]
+[ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="2_jydhg"]
+[ext_resource type="PackedScene" uid="uid://brogejmjvqi2i" path="res://scenes/objects/player.tscn" id="2_tx7oa"]
+[ext_resource type="Script" path="res://scripts/ui/crafting_ui_manager.gd" id="3_2u4to"]
+[ext_resource type="PackedScene" uid="uid://dvj6filacs6pn" path="res://scenes/default_camera.tscn" id="3_bh11o"]
+[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/resource_icons/cancel.png" id="4_elfdr"]
+[ext_resource type="Script" path="res://scripts/utility/debug_helper.gd" id="5_f0y20"]
+[ext_resource type="Script" path="res://scripts/entities/level_objects/kill_bound.gd" id="8_5envf"]
+[ext_resource type="Texture2D" uid="uid://dcr0l6ltvubvj" path="res://sprites/level_objects/lava/10001.png" id="8_r360b"]
+[ext_resource type="PackedScene" uid="uid://cn6ksjgoqo6mb" path="res://scenes/objects/level_objects/resource_breakable.tscn" id="10_s61si"]
+[ext_resource type="PackedScene" uid="uid://g6ffppkryo60" path="res://scenes/objects/enemies/territorial_jumper.tscn" id="11_megux"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_857r5"]
+size = Vector2(200059, 13888)
+
+[sub_resource type="Theme" id="Theme_rktwn"]
+
+[node name="Game" type="Node2D"]
+
+[node name="KillBound" type="Area2D" parent="."]
+collision_layer = 31
+collision_mask = 31
+script = ExtResource("8_5envf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillBound"]
+position = Vector2(23539.5, 10890)
+shape = SubResource("RectangleShape2D_857r5")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KillBound"]
+position = Vector2(23028, -21366)
+shape = SubResource("RectangleShape2D_857r5")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="KillBound"]
+position = Vector2(-82700, 3722)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_857r5")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="KillBound"]
+position = Vector2(127732, -6006)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_857r5")
+
+[node name="Sprite2D" type="Sprite2D" parent="KillBound"]
+position = Vector2(23027.3, -21051)
+scale = Vector2(6261.86, 452.125)
+texture = ExtResource("8_r360b")
+
+[node name="Sprite2D2" type="Sprite2D" parent="KillBound"]
+position = Vector2(22078, 11191)
+scale = Vector2(6261.86, 452.125)
+texture = ExtResource("8_r360b")
+
+[node name="Sprite2D3" type="Sprite2D" parent="KillBound"]
+position = Vector2(-82882, -3401)
+rotation = 1.5708
+scale = Vector2(6261.86, 452.125)
+texture = ExtResource("8_r360b")
+
+[node name="Sprite2D4" type="Sprite2D" parent="KillBound"]
+position = Vector2(128190, -13257)
+rotation = 1.5708
+scale = Vector2(6261.86, 452.125)
+texture = ExtResource("8_r360b")
+
+[node name="Camera2D" parent="." instance=ExtResource("3_bh11o")]
+position = Vector2(-907, 131)
+
+[node name="UIManager" type="Node2D" parent="." node_paths=PackedStringArray("_timer_text", "_final_timer_text", "_health_text", "_death_text", "_weapon_slots")]
+script = ExtResource("2_jydhg")
+_timer_text = NodePath("../Camera2D/CanvasLayer/Control/Timer")
+_final_timer_text = NodePath("../Camera2D/CanvasLayer/Control/Final Time")
+_health_text = NodePath("../Camera2D/CanvasLayer/Control/Health")
+_death_text = NodePath("../Camera2D/CanvasLayer/Control/Death")
+_deselected_slot_color = Color(1, 1, 1, 0.623529)
+_selected_slot_color = Color(1, 1, 1, 0.87451)
+_weapon_slots = [NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control2"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control3"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control4")]
+
+[node name="CraftingUIManager" type="Node2D" parent="." node_paths=PackedStringArray("_crafting_container", "_resource_grid", "_crafting_grid")]
+script = ExtResource("3_2u4to")
+_crafting_container = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer")
+_resource_grid = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid")
+_crafting_grid = NodePath("../Camera2D/CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid")
+_no_texture = ExtResource("4_elfdr")
+
+[node name="DebugHelper" type="Node2D" parent="." node_paths=PackedStringArray("_player", "_ui_manager")]
+script = ExtResource("5_f0y20")
+_player = NodePath("../World/Player")
+_ui_manager = NodePath("../UIManager")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("2_tx7oa")]
+position = Vector2(-907, 131)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="World/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="TileMap" type="TileMap" parent="World"]
+tile_set = ExtResource("1_xfl6o")
+format = 2
+layer_0/tile_data = PackedInt32Array(393199, 65540, 3, 393200, 131076, 3, 393201, 131076, 3, 393202, 131076, 3, 393203, 131076, 3, 393204, 131076, 3, 393205, 131076, 3, 393206, 131076, 3, 393207, 131076, 3, 393208, 131076, 3, 393209, 4, 3, 393210, 4, 3, 393211, 131076, 3, 458735, 4, 3, 524271, 4, 3, 589807, 4, 3, 655343, 4, 3, 720879, 4, 3, 720880, 4, 3, 720881, 4, 3, 720882, 4, 3, 720883, 4, 3, 655348, 4, 3, 655349, 4, 3, 655350, 4, 3, 655351, 4, 3, 655352, 4, 3, 655353, 4, 3, 655354, 4, 3, 655355, 4, 3, 720891, 4, 3, 458747, 4, 3, 524283, 4, 3, 589819, 4, 3, 720888, 4, 3, 720887, 4, 3, 720886, 4, 3, 720885, 4, 3, 720884, 4, 3, 720889, 4, 3, 720890, 4, 3, 589818, 4, 3, 589817, 4, 3, 589816, 4, 3, 589815, 4, 3, 589814, 4, 3, 589813, 4, 3, 589812, 4, 3, 655347, 4, 3, 655346, 4, 3, 655345, 4, 3, 655344, 4, 3, 589808, 4, 3, 524272, 4, 3, 458736, 4, 3, 458737, 4, 3, 524273, 4, 3, 524274, 4, 3, 589810, 4, 3, 589809, 4, 3, 458738, 4, 3, 458739, 4, 3, 524275, 4, 3, 524276, 4, 3, 589811, 4, 3, 458740, 4, 3, 458741, 4, 3, 458742, 4, 3, 458743, 4, 3, 458744, 4, 3, 458745, 4, 3, 458746, 4, 3, 524282, 4, 3, 524281, 4, 3, 524280, 4, 3, 524279, 4, 3, 524278, 4, 3, 524277, 4, 3, 196601, 65540, 3, 196602, 196612, 3, 262137, 4, 3, 327673, 4, 3, 327674, 4, 3, 262138, 4, 3, 393212, 131076, 3, 458748, 4, 3, 524284, 4, 3, 589820, 4, 3, 655356, 4, 3, 720892, 4, 3, 393213, 131076, 3, 458749, 4, 3, 524285, 4, 3, 589821, 4, 3, 655357, 4, 3, 720893, 4, 3, 720894, 4, 3, 655358, 4, 3, 589822, 4, 3, 524286, 4, 3, 458750, 4, 3, 393214, 131076, 3, 720895, 4, 3, 655360, 4, 3, 655361, 4, 3, 589825, 4, 3, 589824, 4, 3, 655359, 4, 3, 589823, 4, 3, 524287, 4, 3, 458751, 4, 3, 393215, 4, 3, 327679, 4, 3, 262143, 4, 3, 196607, 4, 3, 131071, 4, 3, 65535, 4, 3, -1, 4, 3, -65537, 4, 3, -131073, 4, 3, -196609, 65540, 3, -262144, 131076, 3, -262143, 196612, 3, -196607, 4, 3, -131071, 4, 3, -65535, 4, 3, 1, 4, 3, 65537, 4, 3, 131073, 4, 3, 196609, 4, 3, 262145, 4, 3, 524289, 4, 3, 458753, 4, 3, 393217, 4, 3, 327681, 4, 3, 524288, 4, 3, 327680, 4, 3, 262144, 4, 3, 196608, 4, 3, 131072, 4, 3, 65536, 4, 3, 0, 4, 3, -65536, 4, 3, -131072, 4, 3, -196608, 4, 3, 393216, 4, 3, 458752, 4, 3, 655362, 4, 3, 589826, 4, 3, 589827, 4, 3, 524291, 4, 3, 458755, 4, 3, 393219, 131076, 3, 393218, 131076, 3, 458754, 4, 3, 524290, 4, 3, 655363, 4, 3, 655364, 4, 3, 655365, 4, 3, 655366, 4, 3, 655367, 4, 3, 655368, 4, 3, 655369, 4, 3, 589834, 4, 3, 589835, 4, 3, 589836, 4, 3, 589837, 4, 3, 589838, 4, 3, 589839, 4, 3, 589840, 4, 3, 655377, 4, 3, 655376, 4, 3, 655375, 4, 3, 655374, 4, 3, 655373, 4, 3, 655370, 4, 3, 589831, 4, 3, 589830, 4, 3, 524293, 4, 3, 524292, 4, 3, 393220, 131076, 3, 393221, 131076, 3, 393222, 131076, 3, 393223, 131076, 3, 393224, 131076, 3, 393225, 131076, 3, 393226, 131076, 3, 393227, 131076, 3, 393228, 131076, 3, 393229, 131076, 3, 393230, 131076, 3, 393231, 131076, 3, 393232, 131076, 3, 458768, 4, 3, 524304, 4, 3, 589841, 4, 3, 524305, 4, 3, 458769, 4, 3, 393233, 196612, 3, 524303, 4, 3, 524302, 4, 3, 458767, 4, 3, 458766, 4, 3, 458765, 4, 3, 458764, 4, 3, 458763, 4, 3, 458762, 4, 3, 458761, 4, 3, 458760, 4, 3, 458759, 4, 3, 458758, 4, 3, 458757, 4, 3, 589828, 4, 3, 589829, 4, 3, 524294, 4, 3, 458756, 4, 3, 524295, 4, 3, 524296, 4, 3, 524297, 4, 3, 524298, 4, 3, 524299, 4, 3, 524300, 4, 3, 524301, 4, 3, 589833, 4, 3, 589832, 4, 3, 655371, 4, 3, 655372, 4, 3, -458728, 65540, 3, -458727, 131076, 3, -458726, 131076, 3, -458725, 131076, 3, -458724, 131076, 3, -458723, 131076, 3, -458722, 131076, 3, -458721, 131076, 3, -458720, 131076, 3, -458719, 131076, 3, -458718, 196612, 3, -393192, 4, 3, -327656, 4, 3, -262120, 4, 3, -196584, 4, 3, -131048, 4, 3, -65512, 4, 3, 24, 4, 3, 65560, 4, 3, 131096, 4, 3, 196632, 4, 3, 262168, 4, 3, 327704, 4, 3, 393240, 4, 3, 458776, 4, 3, 524312, 4, 3, 589848, 4, 3, 655384, 4, 3, 655385, 4, 3, 655386, 4, 3, 655387, 4, 3, 655388, 4, 3, 655389, 4, 3, 655390, 4, 3, 655391, 4, 3, 655392, 4, 3, 655393, 4, 3, 655394, 4, 3, 589858, 4, 3, 524322, 4, 3, 524321, 4, 3, 458785, 4, 3, 393249, 4, 3, 327713, 4, 3, 262177, 4, 3, 262178, 4, 3, 196642, 4, 3, 131106, 4, 3, 65570, 4, 3, 34, 4, 3, -65502, 4, 3, -131038, 4, 3, -196574, 4, 3, -262110, 4, 3, -327646, 4, 3, -393182, 4, 3, 327714, 4, 3, 393250, 4, 3, 458786, 4, 3, 589857, 4, 3, 196636, 4, 3, 131100, 4, 3, 65564, 4, 3, 28, 4, 3, -65508, 4, 3, -131044, 4, 3, -196580, 4, 3, -262116, 4, 3, -327652, 4, 3, -393188, 4, 3, -393189, 4, 3, -393190, 4, 3, -393191, 4, 3, -327655, 4, 3, -262119, 4, 3, -196583, 4, 3, -131047, 4, 3, -65511, 4, 3, 25, 4, 3, 65561, 4, 3, 131097, 4, 3, 196633, 4, 3, 262169, 4, 3, 327705, 4, 3, 393241, 4, 3, 458777, 4, 3, 524313, 4, 3, 589849, 4, 3, 589850, 4, 3, 524314, 4, 3, 458778, 4, 3, 393242, 4, 3, 327706, 4, 3, 262170, 4, 3, 196634, 4, 3, 131098, 4, 3, 65562, 4, 3, 26, 4, 3, -65510, 4, 3, -131046, 4, 3, -196582, 4, 3, -262118, 4, 3, -327654, 4, 3, -327653, 4, 3, -262117, 4, 3, -196581, 4, 3, -131045, 4, 3, -65509, 4, 3, 27, 4, 3, 65563, 4, 3, 131099, 4, 3, 196635, 4, 3, 262171, 4, 3, 327707, 4, 3, 393243, 4, 3, 458779, 4, 3, 524315, 4, 3, 589851, 4, 3, 589852, 4, 3, 524316, 4, 3, 458780, 4, 3, 393244, 4, 3, 327708, 4, 3, 262172, 4, 3, 262173, 4, 3, 196637, 4, 3, 131101, 4, 3, 65565, 4, 3, 29, 4, 3, -65507, 4, 3, -131043, 4, 3, -196579, 4, 3, -262115, 4, 3, -327651, 4, 3, -393187, 4, 3, -393186, 4, 3, -327650, 4, 3, -262114, 4, 3, -196578, 4, 3, -131042, 4, 3, -65506, 4, 3, 30, 4, 3, 65566, 4, 3, 131102, 4, 3, 196638, 4, 3, 262174, 4, 3, 327710, 4, 3, 327709, 4, 3, 393245, 4, 3, 458781, 4, 3, 524317, 4, 3, 589853, 4, 3, 589854, 4, 3, 524318, 4, 3, 458782, 4, 3, 393246, 4, 3, 393247, 4, 3, 327711, 4, 3, 262175, 4, 3, 196639, 4, 3, 131103, 4, 3, 65567, 4, 3, 31, 4, 3, -65505, 4, 3, -131041, 4, 3, -196577, 4, 3, -262113, 4, 3, -327649, 4, 3, -393185, 4, 3, -393184, 4, 3, -327648, 4, 3, -262112, 4, 3, -196576, 4, 3, -131040, 4, 3, -65504, 4, 3, 32, 4, 3, 65568, 4, 3, 131104, 4, 3, 196640, 4, 3, 262176, 4, 3, 327712, 4, 3, 393248, 4, 3, 458784, 4, 3, 458783, 4, 3, 524319, 4, 3, 589855, 4, 3, 589856, 4, 3, 524320, 4, 3, 196641, 4, 3, 131105, 4, 3, 65569, 4, 3, 33, 4, 3, -65503, 4, 3, -131039, 4, 3, -196575, 4, 3, -262111, 4, 3, -327647, 4, 3, -393183, 4, 3, 720913, 4, 3, 786449, 4, 3, 851985, 4, 3, 917521, 4, 3, 983057, 4, 3, 720920, 4, 3, 786456, 4, 3, 851992, 4, 3, 917528, 4, 3, 983064, 4, 3, 1048600, 4, 3, 1114136, 4, 3, 1179672, 4, 3, 1245208, 4, 3, 1310744, 4, 3, 1376280, 4, 3, 1376279, 131076, 3, 1376278, 131076, 3, 1376277, 131076, 3, 1376276, 4, 3, 1376275, 4, 3, 1376274, 4, 3, 1376273, 131076, 3, 1376281, 4, 3, 1376282, 4, 3, 1376283, 4, 3, 1376284, 4, 3, 1376285, 4, 3, 1310749, 4, 3, 1310750, 4, 3, 1310751, 4, 3, 1310752, 4, 3, 1310753, 4, 3, 1310754, 4, 3, 1376290, 4, 3, 1376289, 4, 3, 1376288, 4, 3, 1376287, 4, 3, 1376286, 4, 3, 1310747, 4, 3, 1310746, 4, 3, 1245209, 4, 3, 1310745, 4, 3, 1179673, 4, 3, 1114137, 4, 3, 1048601, 4, 3, 983065, 4, 3, 917529, 4, 3, 851993, 4, 3, 786457, 4, 3, 720921, 4, 3, 1179674, 4, 3, 1245210, 4, 3, 1245211, 4, 3, 1245212, 4, 3, 1310748, 4, 3, 1114138, 4, 3, 1048602, 4, 3, 983066, 4, 3, 917530, 4, 3, 851994, 4, 3, 786458, 4, 3, 720922, 4, 3, 720923, 4, 3, 786460, 4, 3, 786461, 4, 3, 786462, 4, 3, 786463, 4, 3, 720927, 4, 3, 720928, 4, 3, 720929, 4, 3, 720930, 4, 3, 786466, 4, 3, 852002, 4, 3, 917538, 4, 3, 983074, 4, 3, 1048610, 4, 3, 1114146, 4, 3, 1179682, 4, 3, 1245218, 4, 3, 1245217, 4, 3, 1245216, 4, 3, 1245215, 4, 3, 1245214, 4, 3, 720925, 4, 3, 720926, 4, 3, 720924, 4, 3, 983069, 4, 3, 917533, 4, 3, 851997, 4, 3, 851996, 4, 3, 851995, 4, 3, 786459, 4, 3, 917531, 4, 3, 983067, 4, 3, 1048603, 4, 3, 1114139, 4, 3, 1179675, 4, 3, 1179676, 4, 3, 1114140, 4, 3, 1048604, 4, 3, 983068, 4, 3, 917532, 4, 3, 1048605, 4, 3, 1114141, 4, 3, 1179677, 4, 3, 1245213, 4, 3, 1179678, 4, 3, 1114142, 4, 3, 1048606, 4, 3, 983070, 4, 3, 917534, 4, 3, 851998, 4, 3, 851999, 4, 3, 917535, 4, 3, 983071, 4, 3, 1048607, 4, 3, 1114143, 4, 3, 1179679, 4, 3, 1179680, 4, 3, 1114144, 4, 3, 1048608, 4, 3, 983072, 4, 3, 917536, 4, 3, 852000, 4, 3, 786464, 4, 3, 786465, 4, 3, 852001, 4, 3, 917537, 4, 3, 983073, 4, 3, 1048609, 4, 3, 1114145, 4, 3, 1179681, 4, 3, 983056, 4, 3, 1376272, 131076, 3, 1376271, 131076, 3, 1376270, 131076, 3, 1376269, 131076, 3, 1376268, 131076, 3, 1376267, 131076, 3, 1376266, 131076, 3, 983055, 4, 3, 983054, 4, 3, 983053, 4, 3, 983052, 4, 3, 983051, 4, 3, 983050, 4, 3, 917514, 4, 3, 851978, 4, 3, 786442, 4, 3, 720906, 4, 3, 720907, 4, 3, 786443, 4, 3, 851979, 4, 3, 917515, 4, 3, 917516, 4, 3, 851980, 4, 3, 786444, 4, 3, 720908, 4, 3, 786445, 4, 3, 851981, 4, 3, 917517, 4, 3, 720909, 4, 3, 720910, 4, 3, 786446, 4, 3, 851982, 4, 3, 917518, 4, 3, 917519, 4, 3, 851983, 4, 3, 786447, 4, 3, 720911, 4, 3, 786448, 4, 3, 851984, 4, 3, 917520, 4, 3, 720912, 4, 3, 1441802, 4, 3, 1507338, 4, 3, 1572874, 4, 3, 1572875, 4, 3, 1572876, 4, 3, 1572877, 4, 3, 1572878, 4, 3, 1572879, 4, 3, 1572880, 4, 3, 1572881, 4, 3, 1507345, 4, 3, 1507346, 4, 3, 1507347, 4, 3, 1507348, 4, 3, 1507349, 4, 3, 1507350, 4, 3, 1507351, 4, 3, 1507352, 4, 3, 1507353, 4, 3, 1507354, 4, 3, 1507355, 4, 3, 1507356, 4, 3, 1507357, 4, 3, 1572893, 4, 3, 1572894, 4, 3, 1572895, 4, 3, 1572896, 4, 3, 1572897, 4, 3, 1572898, 4, 3, 1572892, 4, 3, 1572891, 4, 3, 1572890, 4, 3, 1572889, 4, 3, 1572888, 4, 3, 1572887, 4, 3, 1572886, 4, 3, 1572885, 4, 3, 1572884, 4, 3, 1572883, 4, 3, 1572882, 4, 3, 1507342, 4, 3, 1507341, 4, 3, 1507340, 4, 3, 1507339, 4, 3, 1441803, 4, 3, 1441804, 4, 3, 1441805, 4, 3, 1441806, 4, 3, 1441807, 4, 3, 1441808, 4, 3, 1441809, 4, 3, 1441810, 4, 3, 1441818, 4, 3, 1441819, 4, 3, 1441820, 4, 3, 1441821, 4, 3, 1441822, 4, 3, 1441823, 4, 3, 1441824, 4, 3, 1441825, 4, 3, 1507361, 4, 3, 1507362, 4, 3, 1441826, 4, 3, 1507360, 4, 3, 1507359, 4, 3, 1507358, 4, 3, 1441817, 4, 3, 1441816, 4, 3, 1441815, 4, 3, 1441814, 4, 3, 1441813, 4, 3, 1441812, 4, 3, 1441811, 4, 3, 1507344, 4, 3, 1507343, 4, 3, 1572873, 4, 3, 1572872, 4, 3, 1572871, 4, 3, 1572870, 4, 3, 1572869, 4, 3, 1572868, 4, 3, 1572867, 4, 3, 1507330, 4, 3, 1507329, 4, 3, 1507328, 4, 3, 1572863, 4, 3, 1572862, 4, 3, 1572861, 4, 3, 1638397, 4, 3, 1638396, 4, 3, 1638395, 4, 3, 1638398, 4, 3, 1638399, 4, 3, 1572864, 4, 3, 1572865, 4, 3, 1572866, 4, 3, 983049, 4, 3, 983048, 4, 3, 983047, 4, 3, 983046, 4, 3, 983045, 4, 3, 983044, 4, 3, 983043, 4, 3, 983042, 4, 3, 983041, 4, 3, 983040, 4, 3, 1048575, 4, 3, 1048574, 4, 3, 1048573, 4, 3, 983037, 4, 3, 1048572, 4, 3, 983036, 4, 3, 917500, 4, 3, 851964, 4, 3, 786428, 4, 3, 786429, 4, 3, 786430, 4, 3, 786431, 4, 3, 720896, 4, 3, 720897, 4, 3, 720898, 4, 3, 720899, 4, 3, 720900, 4, 3, 720901, 4, 3, 720902, 4, 3, 720903, 4, 3, 720904, 4, 3, 720905, 4, 3, 851977, 4, 3, 917513, 4, 3, 917512, 4, 3, 917511, 4, 3, 917510, 4, 3, 917509, 4, 3, 917508, 4, 3, 917507, 4, 3, 917506, 4, 3, 851969, 4, 3, 851968, 4, 3, 917503, 4, 3, 917502, 4, 3, 917501, 4, 3, 917499, 4, 3, 851963, 4, 3, 851965, 4, 3, 851966, 4, 3, 983038, 4, 3, 983039, 4, 3, 917504, 4, 3, 917505, 4, 3, 786433, 4, 3, 786432, 4, 3, 851967, 4, 3, 786434, 4, 3, 786435, 4, 3, 786436, 4, 3, 786437, 4, 3, 786438, 4, 3, 786439, 4, 3, 786440, 4, 3, 786441, 4, 3, 851976, 4, 3, 851975, 4, 3, 851974, 4, 3, 851973, 4, 3, 851972, 4, 3, 851971, 4, 3, 851970, 4, 3, 786427, 4, 3, 983035, 4, 3, 1048571, 4, 3, 1572859, 4, 3, 1507323, 4, 3, 1441787, 65540, 3, 1441788, 131076, 3, 1441789, 131076, 3, 1441790, 131076, 3, 1441791, 131076, 3, 1376256, 131076, 3, 1376257, 4, 3, 1376258, 4, 3, 1376259, 4, 3, 1376260, 131076, 3, 1376261, 131076, 3, 1376262, 131076, 3, 1376263, 131076, 3, 1376264, 131076, 3, 1376265, 131076, 3, 1441801, 4, 3, 1507337, 4, 3, 1507336, 4, 3, 1507335, 4, 3, 1441799, 4, 3, 1441798, 4, 3, 1441797, 4, 3, 1441796, 4, 3, 1441795, 4, 3, 1441794, 4, 3, 1441793, 4, 3, 1441792, 4, 3, 1507327, 4, 3, 1507326, 4, 3, 1507325, 4, 3, 1507324, 4, 3, 1572860, 4, 3, 1507332, 4, 3, 1507333, 4, 3, 1507334, 4, 3, 1441800, 4, 3, 1507331, 4, 3, 1179649, 65540, 3, 1179650, 131076, 3, 1179651, 196612, 3, 1245187, 4, 3, 1245186, 4, 3, 1245185, 4, 3, 1310721, 4, 3, 1310722, 4, 3, 1310723, 4, 3, 1638394, 4, 3, 1638393, 4, 3, 1638392, 4, 3, 1638391, 4, 3, 1638390, 4, 3, 1638389, 4, 3, 1638388, 4, 3, 1638387, 4, 3, 1638386, 4, 3, 1572850, 131076, 3, 1572851, 131076, 3, 1572852, 131076, 3, 1572853, 131076, 3, 1572854, 131076, 3, 1572855, 131076, 3, 1572856, 131076, 3, 1572857, 131076, 3, 1572858, 131076, 3, 1310738, 65540, 3, 1310739, 131076, 3, 1310740, 196612, 3, 1638385, 4, 3, 1572849, 4, 3, 1507313, 4, 3, 1507312, 4, 3, 1507311, 4, 3, 1507310, 4, 3, 1507309, 4, 3, 1572845, 4, 3, 1638381, 4, 3, 1638382, 4, 3, 1638383, 4, 3, 1638384, 4, 3, 1572848, 4, 3, 1572847, 4, 3, 1572846, 4, 3, 1441773, 65540, 3, 1441774, 131076, 3, 1441775, 131076, 3, 1441776, 131076, 3, 1441777, 196612, 3, 1376245, 458756, 4, 1376247, 524292, 4, 1376246, 131076, 3, -786421, 458756, 4, -786419, 524292, 4, -786420, 131076, 3)
+
+[node name="Tutorial Texts" type="Node2D" parent="World"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = -692.0
+offset_top = 108.0
+offset_right = -523.0
+offset_bottom = 137.0
+theme = SubResource("Theme_rktwn")
+text = "Press 'Space' to Jump"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = -266.0
+offset_top = -75.0
+offset_right = -102.0
+offset_bottom = 88.0
+theme = SubResource("Theme_rktwn")
+text = "You can make an extra jump while already in the air. Hold 'Space' longer to go higher with your jumps!"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = 676.0
+offset_top = 125.0
+offset_right = 1140.0
+offset_bottom = 297.0
+text = "Press \"C\" to open up your crafting menu.
+
+Click on the \"Projectile Essence\" on the left side of your inventory to add them to the crafting window. Then, press \"F\" to finish crafting!
+
+"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = 626.0
+offset_top = 1111.0
+offset_right = 958.0
+offset_bottom = 1142.0
+text = "Left click to shoot your gun at these pots to get some new ingredients!"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = -758.0
+offset_top = 1160.0
+offset_right = -432.0
+offset_bottom = 1213.0
+text = "Combining different ingredients gives different odds to get different weapons!"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="World/Tutorial Texts"]
+offset_left = 1751.0
+offset_top = -939.0
+offset_right = 2077.0
+offset_bottom = -886.0
+text = "Note: Going past here will skip the tutorial!"
+
+[node name="Pots" type="Node2D" parent="World"]
+
+[node name="ResourceBreakable" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(688, 1331)
+_forced_resource = "absorption_essence"
+_resource_count = 1
+
+[node name="ResourceBreakable2" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(760, 1332)
+_forced_resource = "absorption_essence"
+_resource_count = 1
+
+[node name="ResourceBreakable3" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(832, 1332)
+_forced_resource = "healing_essence"
+_resource_count = 1
+
+[node name="ResourceBreakable4" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(904, 1332)
+_forced_resource = "healing_essence"
+_resource_count = 1
+
+[node name="TerritorialJumpers" type="Node2D" parent="World"]
+
+[node name="TerritorialJumper" parent="World/TerritorialJumpers" instance=ExtResource("11_megux")]
+position = Vector2(-864, 1440)
+_relative_left_bound = 0.0
+_relative_right_bound = 500.0
+
+[node name="TerritorialJumper2" parent="World/TerritorialJumpers" instance=ExtResource("11_megux")]
+position = Vector2(809, -800)
+_relative_left_bound = 12.0
+_relative_right_bound = 12.0
+
+[connection signal="area_entered" from="KillBound" to="KillBound" method="_on_area_entered"]
+
+[editable path="Camera2D"]
+[editable path="Camera2D/CanvasLayer"]

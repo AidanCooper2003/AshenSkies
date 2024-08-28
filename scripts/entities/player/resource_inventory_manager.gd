@@ -114,4 +114,4 @@ func _update_resource(resource_name: String) -> void:
 
 #Maybe have some csv for a verifier of valid resource types later?
 func _initialize_inventory() -> void:
-	add_resource("projectile_essence", 64)
+	add_resource("projectile_essence", 6)
