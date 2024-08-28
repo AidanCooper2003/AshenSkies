@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cabx5olp3el53"]
+[gd_scene load_steps=7 format=3 uid="uid://cabx5olp3el53"]
 
 [ext_resource type="Script" path="res://scripts/entities/projectiles/aura.gd" id="1_gql1n"]
 [ext_resource type="Texture2D" uid="uid://beblerr312vhl" path="res://sprites/weapon_icons/circle.png" id="2_w4sds"]
@@ -6,6 +6,27 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vpwd"]
 radius = 388.021
+
+[sub_resource type="Animation" id="Animation_0qj7r"]
+resource_name = "start_aura"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1v5y5"]
+_data = {
+"start_aura": SubResource("Animation_0qj7r")
+}
 
 [node name="CandlemanAura" type="Node2D"]
 script = ExtResource("1_gql1n")
@@ -27,6 +48,11 @@ _conditions = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]
 position = Vector2(-2, -3)
 shape = SubResource("CircleShape2D_2vpwd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1v5y5")
+}
 
 [connection signal="area_entered" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_entered"]
 [connection signal="area_exited" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_exited"]
