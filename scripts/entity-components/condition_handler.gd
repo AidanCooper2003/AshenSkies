@@ -35,8 +35,6 @@ func add_condition(condition_name: String, time: float) -> void:
 	conditions[condition_name]["time"] = time
 
 
-
-
 func get_modification(modification_name: String) -> float:
 	var change_amount := 0.0
 	for condition in conditions:
@@ -50,6 +48,7 @@ func has_modification(modification_name: String) -> float:
 		if conditions[condition].has(modification_name):
 			return true
 	return false
+
 
 func has_condition(condition_name: String) -> bool:
 	return conditions.has(condition_name)
