@@ -38,8 +38,9 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 	var will_dodge := false
 	if resistance_override:
 		resistance = 1
+	print(resistance)
 	var rand = randf()
-	if randf() <= _condition_handler.get_modification("dodge"):
+	if randf() <= _condition_handler.get_modification("dodge") and not resistance_override:
 		will_dodge = true
 	elif not _simple_health:
 		_current_health = clampi(_current_health - damage * resistance, 0, _max_health)

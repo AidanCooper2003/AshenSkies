@@ -9,6 +9,8 @@ var resource: String
 
 func _ready():
 	resource = _forced_resource
+	if resource != "" && $ResourceIcon != null:
+		$ResourceIcon.texture = load("res://sprites/resource_icons/" + resource + ".png")
 	if resource == "":
 		resource = LevelManager.choose_random_resource()
 

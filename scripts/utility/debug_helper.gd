@@ -18,7 +18,9 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("Debug 2"):
 		EventBus.ingredients_reset.emit()
 	if Input.is_action_just_pressed("Debug 4"):
-		pass
+		_assign_weapon("terminal_lucidity")
+		_assign_weapon("terminal_lucidity")
+		_assign_weapon("terminal_lucidity")
 
 
 func _assign_weapon(weapon: String) -> void:

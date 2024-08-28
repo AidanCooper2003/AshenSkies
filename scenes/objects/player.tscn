@@ -114,6 +114,7 @@ script = ExtResource("14_pd3id")
 [connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]
 [connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="take_damage"]
 [connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
 [connection signal="condition_added" from="ConditionHandler" to="." method="_on_condition_added"]
 [connection signal="condition_expired" from="ConditionHandler" to="." method="_on_condition_removed"]
