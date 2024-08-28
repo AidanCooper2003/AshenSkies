@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bia5ul7w7do3n"]
 
 [ext_resource type="Script" path="res://scripts/entities/projectiles/basic_gun_bullet.gd" id="1_flxvv"]
-[ext_resource type="Texture2D" uid="uid://bvca55fgdj6ng" path="res://sprites/projectiles/solar_essence.png" id="2_8poc3"]
+[ext_resource type="Texture2D" uid="uid://hfiaavulhhf0" path="res://sprites/projectiles/polar-star.png" id="2_4upqj"]
 [ext_resource type="Shape2D" uid="uid://dv2i3fxhgrcvw" path="res://colliders/ash_staff_bullet_collider.tres" id="3_x5epf"]
 [ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_vchdq"]
 
@@ -16,8 +16,8 @@ linear_damp = -0.1
 script = ExtResource("1_flxvv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_8poc3")
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_4upqj")
 offset = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

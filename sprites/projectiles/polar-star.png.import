@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvca55fgdj6ng"
-path="res://.godot/imported/solar_essence.png-f1742ab7ef84481bfc8a0b56424d1bfb.ctex"
+uid="uid://hfiaavulhhf0"
+path="res://.godot/imported/polar-star.png-f8cfcc4e9e938ddc83fb1a8e847a4354.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/projectiles/solar_essence.png"
-dest_files=["res://.godot/imported/solar_essence.png-f1742ab7ef84481bfc8a0b56424d1bfb.ctex"]
+source_file="res://sprites/projectiles/polar-star.png"
+dest_files=["res://.godot/imported/polar-star.png-f8cfcc4e9e938ddc83fb1a8e847a4354.ctex"]
 
 [params]
 
