@@ -42,7 +42,7 @@ size = Vector2(20, 16)
 
 [node name="TerritorialJumper" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 18
+collision_mask = 16
 floor_max_angle = 1.0472
 script = ExtResource("1_y404u")
 _relative_left_bound = 100.0
@@ -94,7 +94,7 @@ _max_health = 300
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 34
 script = ExtResource("8_exqqi")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]

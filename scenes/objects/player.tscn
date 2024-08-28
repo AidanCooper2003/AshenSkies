@@ -76,7 +76,7 @@ _max_health = 3
 _simple_health = true
 
 [node name="HitboxComponent" type="Area2D" parent="."]
-collision_mask = 12
+collision_mask = 44
 script = ExtResource("8_mbve0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

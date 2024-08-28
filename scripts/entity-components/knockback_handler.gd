@@ -15,8 +15,4 @@ func apply_knockback(knockback_velocity: Vector2):
 	if _physics_body is RigidBody2D:
 		_physics_body.apply_impulse(knockback_velocity * knockback_resistance)
 	elif _physics_body is CharacterBody2D:
-		print(knockback_resistance)
-		print(_physics_body.velocity.x + (knockback_velocity.x * knockback_resistance))
-		print(_physics_body.velocity.y + (knockback_velocity.y * knockback_resistance))
-		print(Vector2(_physics_body.velocity.x + (knockback_velocity.x * knockback_resistance), _physics_body.velocity.y + (knockback_velocity.y * knockback_resistance)))
 		_physics_body.velocity = Vector2(_physics_body.velocity.x + (knockback_velocity.x * knockback_resistance), _physics_body.velocity.y + (knockback_velocity.y * knockback_resistance))
