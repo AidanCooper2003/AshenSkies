@@ -62,8 +62,8 @@ func _jump() -> void:
 	var speed_modifier := 1.0
 	if _condition_handler.has_modification("speed"):
 		print(_condition_handler.get_modification("speed"))
-		print(1 + ((_condition_handler.get_modification("speed") - 1) * _jump_speed_modifier))
-		speed_modifier *= 1 + ((_condition_handler.get_modification("speed") - 1) * _jump_speed_modifier)
+		print(1 + ((_condition_handler.get_modification("speed")) * _jump_speed_modifier))
+		speed_modifier *= (1 + (((_condition_handler.get_modification("speed"))) * _jump_speed_modifier))
 	_character_body_2d.velocity.y = -_jump_force * speed_modifier
 	_gravity_component.fast_fall_override = false
 	if not _is_on_floor and not _is_coyote_state:

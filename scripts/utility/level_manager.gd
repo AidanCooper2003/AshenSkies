@@ -36,7 +36,7 @@ func _assign_resources_to_categories() -> void:
 	
 
 func _set_resource_category_counts() -> void:
-	_resource_category_counts["single_form"] = 3
+	_resource_category_counts["single_form"] = 2
 	_resource_category_counts["single_element"] = 2
 	_resource_category_counts["single_mechanic"] = 1
 	_resource_category_counts["double_element"] = 1
