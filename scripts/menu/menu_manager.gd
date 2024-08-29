@@ -23,6 +23,11 @@ func _on_start_button_pressed() -> void:
 
 
 func _initialize_grimoire() -> void:
+	print("lol")
+	$Grimoire/VBoxContainer/Stats.text = ""
+	if SaveManager.has_save_data("best_time"):
+		print("has_data")
+		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + str(SaveManager.retrieve_save_data("best_time"))
 	for recipe in CSVManager.get_weapon_names():
 		var grimoire_entry = load("res://scenes/ui/elements/grimoire_entry.tscn").instantiate()
 		var grimoire_texture_rect = grimoire_entry.get_child(0)
@@ -32,7 +37,6 @@ func _initialize_grimoire() -> void:
 			grimoire_texture_rect.modulate = Color.WHITE
 		grimoire_entry.pressed.connect(_update_weapon_stats.bind(recipe))
 		$Grimoire/VBoxContainer/TabContainer/WeaponGrid.add_child(grimoire_entry)
-	$Grimoire/VBoxContainer/Stats.text = "Stats:"
 	for resource in CSVManager.get_resource_names():
 		var grimoire_entry = load("res://scenes/ui/elements/grimoire_entry.tscn").instantiate()
 		var grimoire_texture_rect = grimoire_entry.get_child(0)
@@ -82,8 +86,10 @@ func _update_weapon_stats(weapon_name: String) -> void:
 		"Weapon Name: " + weapon_name + "\n"
 		+ "Times Crafted: " + str(times_crafted) + "\n"
 		+ "Tags: " + str(tags) + "\n"
-		+ "Quality: " + str(quality)
+		+ "Quality: " + str(quality) + "\n"
 	)
+	if SaveManager.has_save_data("best_time"):
+		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + str(SaveManager.retrieve_save_data("best_time"))
 
 
 func _update_resource_stats(weapon_name: String) -> void:
@@ -101,7 +107,7 @@ func _update_resource_stats(weapon_name: String) -> void:
 		+ "Quality: " + str(quality) + "\n"
 	)
 	if SaveManager.has_save_data("best_time"):
-		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + SaveManager.retrieve_save_data("best_time")
+		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + str(SaveManager.retrieve_save_data("best_time"))
 
 func _on_settings_pressed() -> void:
 	$Camera2D.position = Vector2(960, 1620)
