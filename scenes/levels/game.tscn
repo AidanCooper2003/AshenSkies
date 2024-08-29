@@ -68,12 +68,20 @@ texture = ExtResource("8_r360b")
 [node name="Camera2D" parent="." instance=ExtResource("3_bh11o")]
 position = Vector2(-907, 131)
 
-[node name="UIManager" type="Node2D" parent="." node_paths=PackedStringArray("_timer_text", "_final_timer_text", "_health_text", "_death_text", "_weapon_slots")]
+[node name="Conditions" type="RichTextLabel" parent="Camera2D/CanvasLayer/Control" index="4"]
+layout_mode = 0
+offset_top = 169.0
+offset_right = 345.0
+offset_bottom = 442.0
+theme_override_font_sizes/normal_font_size = 31
+
+[node name="UIManager" type="Node2D" parent="." node_paths=PackedStringArray("_timer_text", "_final_timer_text", "_health_text", "_death_text", "_conditions_text", "_weapon_slots")]
 script = ExtResource("2_jydhg")
 _timer_text = NodePath("../Camera2D/CanvasLayer/Control/Timer")
 _final_timer_text = NodePath("../Camera2D/CanvasLayer/Control/Final Time")
 _health_text = NodePath("../Camera2D/CanvasLayer/Control/Health")
 _death_text = NodePath("../Camera2D/CanvasLayer/Control/Death")
+_conditions_text = NodePath("../Camera2D/CanvasLayer/Control/Conditions")
 _deselected_slot_color = Color(1, 1, 1, 0.623529)
 _selected_slot_color = Color(1, 1, 1, 0.87451)
 _weapon_slots = [NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control2"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control3"), NodePath("../Camera2D/CanvasLayer/Control/InventoryContainer/Control4")]

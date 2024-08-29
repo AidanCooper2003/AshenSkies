@@ -23,7 +23,9 @@ func _physics_process(delta) -> void:
 			if conditions[condition]["time"] <= 0:
 				conditions.erase(condition)
 				condition_expired.emit(condition)
-
+		#TODO Take this out of the condition handler.
+		if get_parent().name == "Player":
+			EventBus.player_conditions_changed.emit(conditions)
 
 func add_condition(condition_name: String, time: float) -> void:
 	if not conditions.has(condition_name):

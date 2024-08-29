@@ -1,6 +1,5 @@
 Resource-name,tags,quality,category
 projectile_essence,Projectile,0,single_form
-melee_essence,Melee,0,single_form
 absorption_essence,Absorption,0,single_form
 fire_essence,Fire,1,single_element
 wind_essence,Wind,1,single_element
