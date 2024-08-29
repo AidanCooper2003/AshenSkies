@@ -32,7 +32,7 @@ func add_condition(condition_name: String, time: float) -> void:
 		var modifications := CSVManager.get_condition_modifications(condition_name)
 		conditions[condition_name] = modifications
 		condition_added.emit(condition_name)
-	elif conditions[condition_name]["time"] < time:
+	elif conditions[condition_name]["time"] > time:
 		return
 	conditions[condition_name]["time"] = time
 

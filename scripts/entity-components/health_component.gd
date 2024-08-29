@@ -10,13 +10,15 @@ const simple_damage_over_time_coefficient = 2
 @export var _simple_health : bool
 @export var damage_over_time_delay := 0.1
 @export var damage_resistance := 1.0
+@export var iframe_length : float
 
 
 var _current_health : int
 var _condition_handler: ConditionHandler
 var _time_since_tick_damage: float
 var _accumulated_simple_tick_damage: float
-var _no_current_damage_over_time:= true
+var _no_current_damage_over_time := true
+var iframe_start_time : float
 
 func _ready() -> void:
 	_current_health = _max_health
@@ -28,6 +30,9 @@ func _ready() -> void:
 func _physics_process(delta):
 	if _condition_handler == null || not _condition_handler.has_modification("damage_over_time"):
 		_no_current_damage_over_time = true
+		_accumulated_simple_tick_damage = 0
+		if get_parent().name == "Player":
+			EventBus.accumulated_damage.emit(0)
 		return
 	if _simple_health:
 		_handle_simple_damage_over_time(delta)
@@ -37,6 +42,8 @@ func _physics_process(delta):
 
 
 func take_damage(damage : int, resistance_override : bool) -> void:
+	if Time.get_ticks_msec() < iframe_length * 1000 + iframe_start_time:
+		return
 	var resistance := damage_resistance
 	var will_dodge := false
 	if resistance_override:
@@ -49,6 +56,7 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 		_current_health = clampi(_current_health - damage * resistance, 0, _max_health)
 	else:
 		_current_health -= 1
+		iframe_start_time = Time.get_ticks_msec()
 	health_changed.emit(_current_health, true)
 	if _current_health <= 0:
 		die()
@@ -76,6 +84,9 @@ func _handle_simple_damage_over_time(delta: float) -> void:
 	if _accumulated_simple_tick_damage >= 100:
 		_accumulated_simple_tick_damage = 0
 		take_damage(1, false)
+	#TODO Change this
+	if get_parent().name == "Player":
+		EventBus.accumulated_damage.emit(_accumulated_simple_tick_damage)
 
 func _handle_damage_over_time(delta: float) -> void:
 	if _no_current_damage_over_time:

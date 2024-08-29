@@ -7,6 +7,7 @@ extends Node2D
 @export var _health_text: RichTextLabel
 @export var _death_text: RichTextLabel
 @export var _conditions_text: RichTextLabel
+@export var _accumulated_damage_text: RichTextLabel
 @export var _deselected_slot_color: Color
 @export var _selected_slot_color: Color
 @export var _weapon_slots: Array[Control]
@@ -29,6 +30,7 @@ func _setup_signals():
 	EventBus.active_slot_changed.connect(_on_active_slot_changed)
 	EventBus.weapon_in_slot_changed.connect(_on_weapon_in_slot_changed)
 	EventBus.player_conditions_changed.connect(_on_player_conditions_changed)
+	EventBus.accumulated_damage.connect(_on_player_accumulated_damage)
 
 func _on_area_2d_area_entered(area) -> void:
 	if _final_timer_text == null:
@@ -86,3 +88,11 @@ func _on_player_conditions_changed(conditions: Dictionary) -> void:
 	for condition in conditions:
 		condition_text = condition_text + condition + ": " + str(snapped(conditions[condition]["time"], 1)) + "\n"
 	_conditions_text.text = condition_text
+	
+func _on_player_accumulated_damage(damage: float) -> void:
+	if damage == 0:
+		print("no damage")
+		_accumulated_damage_text.text = ""
+	else:
+		_accumulated_damage_text.text = "-" + str(snapped(damage / 100.0, 0.01))
+	

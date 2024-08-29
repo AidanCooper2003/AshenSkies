@@ -212,9 +212,9 @@ frame_progress = 0.533551
 collision_layer = 32
 collision_mask = 47
 script = ExtResource("46_4urdm")
-_damage_delay = 0.5
+_damage_delay = 0.05
 _conditions = {
-"burning": 0.5
+"burning": 2.0
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]

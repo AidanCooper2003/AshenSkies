@@ -11,6 +11,7 @@ signal resource_count_changed(resource_name: String, resource_count: int)
 signal ingredients_changed(ingredients: Dictionary)
 signal crafting_menu_state_changed(crafting_open: bool)
 signal player_conditions_changed(conditions: Dictionary)
+signal accumulated_damage(damage: float)
 
 
 #From UI
