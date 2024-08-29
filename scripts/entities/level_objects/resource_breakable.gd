@@ -15,6 +15,6 @@ func _ready():
 		resource = LevelManager.choose_random_resource()
 
 
-func _on_damage_taken(damage_amount):
+func _on_damage_taken(damage_amount, _resistance_override):
 	EventBus.resource_added.emit(resource, _resource_count)
 	queue_free()

@@ -23,7 +23,7 @@ func _on_area_entered(area) -> void:
 		damage_dealt.emit()
 	if not _conditions.is_empty():
 		area.receive_conditions(_conditions)
-	var knockback_handler = get_node(str(area.get_path()) + "/KnockbackHandler")
+	var knockback_handler = get_node_or_null(str(area.get_path()) + "/KnockbackHandler")
 	if knockback_handler:
 		knockback_handler.apply_knockback(global_position.direction_to(area.global_position) * _knockback)
 	if _pierce <= 0:

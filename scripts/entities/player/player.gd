@@ -141,6 +141,10 @@ func _on_crafting_started() -> void:
 		if weapon_scene != null:
 			_weapon_inventory_manager.add_weapon(weapon_scene)
 		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
+		if SaveManager.has_save_data(weapon + "_count"):
+			SaveManager.add_save_data(weapon + "_count", SaveManager.retrieve_save_data(weapon + "_count") + 1)
+		else:
+			SaveManager.add_save_data(weapon + "_count", 1)
 
 
 func _reset_weapon_inventory_ui() -> void:

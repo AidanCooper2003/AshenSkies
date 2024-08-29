@@ -119,5 +119,5 @@ _character_body_2d = NodePath("..")
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_area_2d_body_exited"]
 [connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]
-[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="take_damage"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

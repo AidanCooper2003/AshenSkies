@@ -46,7 +46,7 @@ func get_property(collection: Array, name_column: int, property_column: int, obj
 
 
 func get_weapon_icon(weaponName: String) -> Variant:
-	return weaponName + ".png"
+	return "res://sprites/weapon_icons/" + weaponName + ".png"
 
 
 func get_weapon_scene(weaponName: String) -> Variant:

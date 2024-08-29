@@ -21,6 +21,8 @@ func _process(_delta) -> void:
 		_assign_weapon("terminal_lucidity")
 		_assign_weapon("terminal_lucidity")
 		_assign_weapon("terminal_lucidity")
+	if Input.is_action_just_pressed("Exit To Menu"):
+		get_tree().change_scene_to_file("res://scenes/levels/main_menu.tscn")
 
 
 func _assign_weapon(weapon: String) -> void:

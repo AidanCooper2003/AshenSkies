@@ -74,6 +74,6 @@ func _on_weapon_in_slot_changed(weapon_slot: int, weapon_name: String) -> void:
 		_weapon_slots[weapon_slot].get_child(2).visible = false
 		return
 	_weapon_slots[weapon_slot].get_child(1).texture = (
-			load("res://sprites/weapon_icons/" + CSVManager.get_weapon_icon(weapon_name))
+			load(CSVManager.get_weapon_icon(weapon_name))
 	)
 	_weapon_slots[weapon_slot].get_child(2).visible = true

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AshenSkies"
-run/main_scene="res://scenes/levels/game.tscn"
+run/main_scene="res://scenes/levels/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.2493, 0.550056, 1, 1)
 config/icon="res://icon.svg"
@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 CSVManager="*res://scripts/utility/csv_manager.gd"
 EventBus="*res://scripts/utility/event_bus.gd"
 LevelManager="*res://scripts/utility/level_manager.gd"
+SaveManager="*res://scripts/utility/save_manager.gd"
 
 [display]
 
@@ -39,6 +40,7 @@ folder_colors={
 "res://addons/": "purple",
 "res://colliders/": "orange",
 "res://csv/": "yellow",
+"res://saves/": "red",
 "res://scenes/": "blue",
 "res://scripts/": "gray",
 "res://sprites/": "pink"
@@ -129,6 +131,11 @@ ToggleCraftingMenu={
 "Debug 4"={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":76,"key_label":0,"unicode":108,"echo":false,"script":null)
+]
+}
+"Exit To Menu"={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":77,"key_label":0,"unicode":77,"echo":false,"script":null)
 ]
 }
 
