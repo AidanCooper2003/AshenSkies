@@ -6,6 +6,6 @@ caffeination_station,"Projectile, Fire, Food, Transportation",2,TRUE
 candlemans_brew,"Absorption, Fire",2,TRUE
 hydrax,"Absorption, Defense",2,FALSE
 terminal_lucidity,"Absorption, Transportation, Defense",3,FALSE
-depleted_ash,"Projectile, Fire",2,TRUE
+depleted_ash,"Projectile, Fire, Multishot",2,TRUE
 air_compressor,"Projectile, Wind",1,TRUE
 popcorn,"Projectile, Wind, Fire, Explosive",2,TRUE

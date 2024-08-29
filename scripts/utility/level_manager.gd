@@ -6,9 +6,15 @@ var _resource_category_odds: Dictionary
 var _chosen_resources: Dictionary
 
 func _ready():
+	setup_resources()
+	EventBus.level_changed.connect(setup_resources)
+
+
+func setup_resources():
 	_set_resource_category_counts()
 	_set_resource_category_odds()
 	_assign_resources_to_categories()
+
 
 #Currently ignores weights
 func choose_random_resource() -> String:
@@ -36,7 +42,7 @@ func _set_resource_category_counts() -> void:
 	_resource_category_counts["double_element"] = 1
 	_resource_category_counts["double_mixed"] = 1
 
-	
+
 func _set_resource_category_odds() -> void:
 	_resource_category_odds["single_form"] = .25
 	_resource_category_odds["single_element"] = .30

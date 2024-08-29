@@ -15,3 +15,5 @@ nutrition_essence,"Food, Healing",3,double_mixed
 glider_essence,"Wind, Transportation",3,double_mixed
 rocket_essence,"Fire, Transportation",3,double_mixed
 fever_essence,"Fire, Healing",3,double_mixed
+nuclear_essence,"Fire, Explosive",3,double_mixed
+grapeshot_essence,"Food, Multishot",3,double_mixed

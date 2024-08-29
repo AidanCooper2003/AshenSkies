@@ -47,8 +47,12 @@ func _update_stats(weapon_name: String):
 	var tags = _recipe_tags[weapon_name]
 	var quality = _recipe_qualities[weapon_name]
 	$Grimoire/VBoxContainer/Stats.text = (
-		"weapon_name:" + "\n"
+		"Weapon Name: " + weapon_name + "\n"
 		+ "Times Crafted: " + str(times_crafted) + "\n"
 		+ "Tags: " + str(tags) + "\n"
 		+ "Quality: " + str(quality)
 	)
+
+
+func _on_settings_pressed():
+	$Camera2D.position = Vector2(960, 1620)

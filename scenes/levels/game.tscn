@@ -227,6 +227,30 @@ position = Vector2(-184, 2051)
 _forced_resource = "rocket_essence"
 _resource_count = 1
 
+[node name="ResourceBreakable13" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
+[node name="ResourceBreakable14" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
+[node name="ResourceBreakable15" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
+[node name="ResourceBreakable16" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
+[node name="ResourceBreakable17" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
+[node name="ResourceBreakable18" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(-1275, 259)
+_resource_count = 1
+
 [node name="TerritorialJumpers" type="Node2D" parent="World"]
 
 [node name="TerritorialJumper" parent="World/TerritorialJumpers" instance=ExtResource("11_megux")]
