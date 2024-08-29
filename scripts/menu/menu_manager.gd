@@ -36,7 +36,6 @@ func _initialize_grimoire() -> void:
 	for resource in CSVManager.get_resource_names():
 		var grimoire_entry = load("res://scenes/ui/elements/grimoire_entry.tscn").instantiate()
 		var grimoire_texture_rect = grimoire_entry.get_child(0)
-		print(CSVManager.get_resource_icon(resource))
 		grimoire_entry.get_child(0).texture = load(CSVManager.get_resource_icon(resource))
 		var resource_count = SaveManager.retrieve_save_data(resource + "_count")
 		if resource_count != null && resource_count > 0:
@@ -49,7 +48,6 @@ func _initialize_settings() -> void:
 		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = SaveManager.retrieve_save_data("music_volume")
 	else:
 		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = 50
-	print(linear_to_db(0.5))
 
 func _reset_grimoire() -> void:
 	for child in $Grimoire/VBoxContainer/TabContainer/WeaponGrid.get_children():
@@ -100,8 +98,10 @@ func _update_resource_stats(weapon_name: String) -> void:
 		"Resource Name: " + weapon_name + "\n"
 		+ "Times Obtained: " + str(times_obtained) + "\n"
 		+ "Tags: " + str(tags) + "\n"
-		+ "Quality: " + str(quality)
+		+ "Quality: " + str(quality) + "\n"
 	)
+	if SaveManager.has_save_data("best_time"):
+		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + SaveManager.retrieve_save_data("best_time")
 
 func _on_settings_pressed() -> void:
 	$Camera2D.position = Vector2(960, 1620)

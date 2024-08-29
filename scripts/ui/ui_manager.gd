@@ -33,9 +33,12 @@ func _setup_signals():
 	EventBus.accumulated_damage.connect(_on_player_accumulated_damage)
 
 func _on_area_2d_area_entered(area) -> void:
-	if _final_timer_text == null:
+	if _final_timer_text == null or _final_timer_text.visible:
 		return
+	_final_timer_text.visible = true
 	_final_timer_text.text = "FINAL TIME: " + str(snapped(_time, 0.001))
+	SaveManager.save_min_data("best_time", snapped(_time, 0.001))
+	print(SaveManager.retrieve_save_data("best_time"))
 
 
 func _on_player_health_changed(new_health: int) -> void:
@@ -91,7 +94,6 @@ func _on_player_conditions_changed(conditions: Dictionary) -> void:
 	
 func _on_player_accumulated_damage(damage: float) -> void:
 	if damage == 0:
-		print("no damage")
 		_accumulated_damage_text.text = ""
 	else:
 		_accumulated_damage_text.text = "-" + str(snapped(damage / 100.0, 0.01))

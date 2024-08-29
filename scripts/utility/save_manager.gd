@@ -21,6 +21,14 @@ func add_save_data(key: String, value) -> void:
 	save[key] = value
 	save_game()
 
+func save_min_data(key: String, value) -> void:
+	if not value is float or not value is int:
+		return
+	print("printing min save")
+	if value < save[key] or !save.has(key):
+		save[key] = value
+	save_game()
+
 
 func has_save_data(key) -> bool:
 	return save.has(key)

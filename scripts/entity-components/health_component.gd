@@ -48,7 +48,6 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 	var will_dodge := false
 	if resistance_override:
 		resistance = 1
-	print(resistance)
 	var rand = randf()
 	if randf() <= _condition_handler.get_modification("dodge") and not resistance_override:
 		will_dodge = true

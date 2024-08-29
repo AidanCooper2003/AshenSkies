@@ -25,6 +25,7 @@ theme = ExtResource("1_seas8")
 text = "Time: 0.00"
 
 [node name="Final Time" type="RichTextLabel" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 742.0
 offset_top = 419.0
