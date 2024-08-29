@@ -5,16 +5,18 @@ extends Node
 var _recipe_tags : Dictionary
 var _recipe_qualities : Dictionary
 
-func _ready():
+var confirm_available := false
+
+func _ready() -> void:
 	_initialize_grimoire()
 	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
 	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
 
-func _on_start_button_pressed():
+func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/game.tscn")
 
 
-func _initialize_grimoire():
+func _initialize_grimoire() -> void:
 	for recipe in CSVManager.get_weapon_names():
 		var grimoire_entry = load("res://scenes/ui/elements/grimoire_entry.tscn").instantiate()
 		var grimoire_texture_rect = grimoire_entry.get_child(0)
@@ -24,21 +26,28 @@ func _initialize_grimoire():
 			grimoire_texture_rect.modulate = Color.WHITE
 		grimoire_entry.pressed.connect(_update_stats.bind(recipe))
 		$Grimoire/VBoxContainer/IconGrid.add_child(grimoire_entry)
+	$Grimoire/VBoxContainer/Stats.text = "Stats:"
 
+func _reset_grimoire() -> void:
+	for child in $Grimoire/VBoxContainer/IconGrid.get_children():
+		child.queue_free()
+	_initialize_grimoire()
 
-func _on_exit_button_pressed():
+func _on_exit_button_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_grimoire_button_pressed():
+func _on_grimoire_button_pressed() -> void:
 	$Camera2D.position = Vector2(2880, 540)
 
 
-func _on_return_button_pressed():
+func _on_return_button_pressed() -> void:
 	$Camera2D.position = Vector2(960, 540)
+	_make_confirm_unavailable()
+	
 
 
-func _update_stats(weapon_name: String):
+func _update_stats(weapon_name: String) -> void:
 	var times_crafted = 0
 	if SaveManager.has_save_data(weapon_name + "_count"):
 		times_crafted = "Times crafted: " + str(SaveManager.retrieve_save_data(weapon_name + "_count"))
@@ -54,5 +63,26 @@ func _update_stats(weapon_name: String):
 	)
 
 
-func _on_settings_pressed():
+func _on_settings_pressed() -> void:
 	$Camera2D.position = Vector2(960, 1620)
+
+
+func _on_reset_save_button_pressed() -> void:
+	$Settings/VBoxContainer/ResetSaveButton.text = "Click button below to confirm."
+	$Settings/ConfirmButton.visible = true
+	$Settings/VBoxContainer/ResetSaveButton.disabled = true
+	confirm_available = true
+
+
+func _make_confirm_unavailable() -> void:
+	confirm_available = false
+	$Settings/VBoxContainer/ResetSaveButton.disabled = false
+	$Settings/ConfirmButton.visible = false
+	$Settings/VBoxContainer/ResetSaveButton.text = "Reset Save Data"
+
+func _on_confirm_button_pressed() -> void:
+	if confirm_available:
+		SaveManager.reset_save()
+		_reset_grimoire()
+		_make_confirm_unavailable()
+	

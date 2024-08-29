@@ -101,20 +101,6 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="ReturnButton" type="Button" parent="Settings"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -158.0
-offset_top = -71.0
-grow_horizontal = 0
-grow_vertical = 0
-theme = ExtResource("2_yufyc")
-text = "Return"
-
 [node name="RichTextLabel" type="RichTextLabel" parent="Settings"]
 layout_mode = 1
 anchors_preset = -1
@@ -141,6 +127,55 @@ godotengine.org/license
 "
 fit_content = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetSaveButton" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Reset Save Data"
+
+[node name="ReturnButton" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Return"
+
+[node name="ConfirmButton" type="Button" parent="Settings"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Cofnirm Save Deletion"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 position_smoothing_enabled = true
@@ -150,4 +185,6 @@ position_smoothing_enabled = true
 [connection signal="pressed" from="Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/ResetSaveButton" to="." method="_on_reset_save_button_pressed"]
 [connection signal="pressed" from="Settings/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Settings/ConfirmButton" to="." method="_on_confirm_button_pressed"]
