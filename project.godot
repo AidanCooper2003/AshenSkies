@@ -43,6 +43,7 @@ folder_colors={
 "res://saves/": "red",
 "res://scenes/": "blue",
 "res://scripts/": "gray",
+"res://sounds/": "green",
 "res://sprites/": "pink"
 }
 

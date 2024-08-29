@@ -28,3 +28,6 @@ signal resource_subtracted(resource_name: String, resource_count: int)
 # From Game
 signal level_changed()
 
+
+# From Settings
+signal music_volume_changed()

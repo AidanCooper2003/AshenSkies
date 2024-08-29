@@ -9,8 +9,10 @@ var confirm_available := false
 
 func _ready() -> void:
 	_initialize_grimoire()
+	_initialize_settings()
 	_recipe_tags = CSVManager.get_tags(CSVManager.recipes, 0, 1)
 	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
+	
 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/game.tscn")
@@ -27,6 +29,13 @@ func _initialize_grimoire() -> void:
 		grimoire_entry.pressed.connect(_update_stats.bind(recipe))
 		$Grimoire/VBoxContainer/IconGrid.add_child(grimoire_entry)
 	$Grimoire/VBoxContainer/Stats.text = "Stats:"
+	
+func _initialize_settings() -> void:
+	if SaveManager.has_save_data("music_volume"):
+		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = SaveManager.retrieve_save_data("music_volume")
+	else:
+		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = 50
+	print(linear_to_db(0.5))
 
 func _reset_grimoire() -> void:
 	for child in $Grimoire/VBoxContainer/IconGrid.get_children():
@@ -72,6 +81,7 @@ func _on_reset_save_button_pressed() -> void:
 	$Settings/ConfirmButton.visible = true
 	$Settings/VBoxContainer/ResetSaveButton.disabled = true
 	confirm_available = true
+	SaveManager.add_save_data("music_volume", $Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value)
 
 
 func _make_confirm_unavailable() -> void:
@@ -85,4 +95,8 @@ func _on_confirm_button_pressed() -> void:
 		SaveManager.reset_save()
 		_reset_grimoire()
 		_make_confirm_unavailable()
-	
+
+
+func _on_h_slider_value_changed(value):
+	SaveManager.add_save_data("music_volume", value)
+	EventBus.music_volume_changed.emit()

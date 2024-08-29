@@ -4,10 +4,13 @@ extends Node2D
 
 signal health_changed(new_health: int, trigger_on_damage: bool)
 
+const simple_damage_over_time_coefficient = 2
+
 @export var _max_health : int
 @export var _simple_health : bool
 @export var damage_over_time_delay := 0.1
 @export var damage_resistance := 1.0
+
 
 var _current_health : int
 var _condition_handler: ConditionHandler
@@ -69,7 +72,7 @@ func _on_hitbox_component_damage_taken(damageAmount) -> void:
 	
 func _handle_simple_damage_over_time(delta: float) -> void:
 	var damage_over_time = _condition_handler.get_modification("damage_over_time")
-	_accumulated_simple_tick_damage += delta * damage_over_time
+	_accumulated_simple_tick_damage += delta * damage_over_time * simple_damage_over_time_coefficient
 	if _accumulated_simple_tick_damage >= 100:
 		_accumulated_simple_tick_damage = 0
 		take_damage(1, false)

@@ -9,7 +9,7 @@ func _ready():
 func reset_save():
 	save = {}
 	save_game()
-	
+
 
 func retrieve_save_data(key: String) -> Variant:
 	if save.has(key):
@@ -20,6 +20,7 @@ func retrieve_save_data(key: String) -> Variant:
 func add_save_data(key: String, value) -> void:
 	save[key] = value
 	save_game()
+
 
 func has_save_data(key) -> bool:
 	return save.has(key)
