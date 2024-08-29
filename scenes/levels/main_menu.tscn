@@ -115,6 +115,32 @@ grow_vertical = 0
 theme = ExtResource("2_yufyc")
 text = "Return"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.314
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 0.119995
+offset_bottom = 1.0
+grow_vertical = 2
+theme = ExtResource("2_yufyc")
+theme_override_font_sizes/normal_font_size = 37
+text = "Credits:
+-Godot Engine
+godotengine.org/license
+-CSV Data Importer by timothyqiu
+-Lava by davesch on opengameart.org
+-Spikeball Launcher and Staff by SnoopethDuckDuck on opengameart.org
+-Test/Dummy Gun by congusbongus on opengameart.org
+-Wooden Crate by Proxy Games on opengameart.org
+-Resource + Many weapon icons from game-icons.net
+-Bullet and Tilemap: Kenney.nl
+
+
+"
+fit_content = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 position_smoothing_enabled = true
