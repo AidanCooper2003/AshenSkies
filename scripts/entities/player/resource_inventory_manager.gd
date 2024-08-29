@@ -28,6 +28,10 @@ func add_resource(resource_name: String, resource_count: int) -> void:
 	if has_resource(resource_name):
 		resources[resource_name] += resource_count
 		_update_resource(resource_name)
+		if SaveManager.has_save_data(resource_name + "_count"):
+			SaveManager.add_save_data(resource_name + "_count", SaveManager.retrieve_save_data(resource_name + "_count") + resource_count)
+		else:
+			SaveManager.add_save_data(resource_name + "_count", resource_count)
 
 
 func subtract_resource(resource_name: String, resource_count: int) -> void:

@@ -45,17 +45,20 @@ func get_property(collection: Array, name_column: int, property_column: int, obj
 	return null
 
 
-func get_weapon_icon(weaponName: String) -> Variant:
-	return "res://sprites/weapon_icons/" + weaponName + ".png"
+func get_weapon_icon(weapon_name: String) -> String:
+	return "res://sprites/weapon_icons/" + weapon_name + ".png"
 
 
-func get_weapon_scene(weaponName: String) -> Variant:
-	return weaponName + ".tscn"
+func get_weapon_scene(weapon_name: String) -> Variant:
+	return weapon_name + ".tscn"
 
 
 func get_weapon_names() -> Array:
 	return _get_names(recipes, 0)
 
+
+func get_resource_icon(resource_name: String) -> String:
+	return "res://sprites/resource_icons/" + resource_name + ".png"
 
 func get_resource_names() -> Array:
 	return _get_names(resources, 0)

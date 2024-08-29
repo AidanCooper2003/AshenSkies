@@ -83,9 +83,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IconGrid" type="GridContainer" parent="Grimoire/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="Grimoire/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="WeaponGrid" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 6
+
+[node name="ResourceGrid" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
 columns = 6
 
 [node name="Stats" type="RichTextLabel" parent="Grimoire/VBoxContainer"]
