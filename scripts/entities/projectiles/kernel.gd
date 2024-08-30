@@ -10,7 +10,6 @@ func _on_timer_timeout():
 
 
 func _explode(is_mega_explosion: bool):
-	print("Explode!" + str(is_mega_explosion))
 	var kernel_explosion
 	if is_mega_explosion:
 		kernel_explosion = _mega_explosive.instantiate()

@@ -36,7 +36,7 @@ func _initialize_grimoire() -> void:
 		if weapon_count != null && weapon_count > 0:
 			grimoire_texture_rect.modulate = Color.WHITE
 		grimoire_entry.pressed.connect(_update_weapon_stats.bind(recipe))
-		$Grimoire/VBoxContainer/TabContainer/WeaponGrid.add_child(grimoire_entry)
+		$Grimoire/VBoxContainer/TabContainer/Weapons.add_child(grimoire_entry)
 	for resource in CSVManager.get_resource_names():
 		var grimoire_entry = load("res://scenes/ui/elements/grimoire_entry.tscn").instantiate()
 		var grimoire_texture_rect = grimoire_entry.get_child(0)
@@ -45,7 +45,7 @@ func _initialize_grimoire() -> void:
 		if resource_count != null && resource_count > 0:
 			grimoire_texture_rect.modulate = Color.WHITE
 		grimoire_entry.pressed.connect(_update_resource_stats.bind(resource))
-		$Grimoire/VBoxContainer/TabContainer/ResourceGrid.add_child(grimoire_entry)
+		$Grimoire/VBoxContainer/TabContainer/Resources.add_child(grimoire_entry)
 	
 func _initialize_settings() -> void:
 	if SaveManager.has_save_data("music_volume"):
@@ -54,9 +54,9 @@ func _initialize_settings() -> void:
 		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = 50
 
 func _reset_grimoire() -> void:
-	for child in $Grimoire/VBoxContainer/TabContainer/WeaponGrid.get_children():
+	for child in $Grimoire/VBoxContainer/TabContainer/Weapons.get_children():
 		child.queue_free()
-	for child in $Grimoire/VBoxContainer/TabContainer/ResourceGrid.get_children():
+	for child in $Grimoire/VBoxContainer/TabContainer/Resources.get_children():
 		child.queue_free()
 	_initialize_grimoire()
 

@@ -87,12 +87,12 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WeaponGrid" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+[node name="Weapons" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 columns = 6
 
-[node name="ResourceGrid" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+[node name="Resources" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 columns = 6

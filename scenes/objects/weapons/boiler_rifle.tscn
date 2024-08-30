@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgnsydfc65djh"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_jugay"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_tatho"]
+[ext_resource type="PackedScene" uid="uid://b2gb1xqvobax4" path="res://scenes/objects/projectiles/boiler_rifle_bullet.tscn" id="3_7u3fd"]
+[ext_resource type="Texture2D" uid="uid://bi4mn6mpgwkhp" path="res://sprites/weapon_icons/boiler_rifle.png" id="4_xo5xx"]
+
+[node name="BoilerRifle" type="Node2D"]
+script = ExtResource("1_jugay")
+max_durability = 7
+_fire_delay = 1.5
+weapon_name = "boiler_rifle"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(131, 32)
+script = ExtResource("2_tatho")
+_bullet = ExtResource("3_7u3fd")
+_bullet_velocity = 2500.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(63, 31)
+scale = Vector2(4, 4)
+texture = ExtResource("4_xo5xx")

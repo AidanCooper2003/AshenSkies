@@ -7,6 +7,8 @@ var resource: String
 @export var _forced_resource: String
 @export var _resource_count: int
 
+var _resource_already_provided := false
+
 func _ready():
 	resource = _forced_resource
 	if resource != "" && $ResourceIcon != null:
@@ -17,5 +19,7 @@ func _ready():
 
 
 func _on_damage_taken(damage_amount, _resistance_override):
-	EventBus.resource_added.emit(resource, _resource_count)
+	if not _resource_already_provided:
+		_resource_already_provided = true
+		EventBus.resource_added.emit(resource, _resource_count)
 	queue_free()

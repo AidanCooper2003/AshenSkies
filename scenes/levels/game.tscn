@@ -209,7 +209,7 @@ _resource_count = 1
 
 [node name="ResourceBreakable2" parent="World/Pots" instance=ExtResource("10_s61si")]
 position = Vector2(759, 1283)
-_forced_resource = "absorption_essence"
+_forced_resource = "healing_essence"
 _resource_count = 1
 
 [node name="ResourceBreakable3" parent="World/Pots" instance=ExtResource("10_s61si")]

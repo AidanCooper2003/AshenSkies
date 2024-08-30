@@ -12,6 +12,7 @@ _fire_delay = 0.5
 weapon_name = "test_gun"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(48, 4)
 script = ExtResource("2_bhu8k")
 _bullet = ExtResource("3_ehfst")
 _bullet_velocity = 2000.0
