@@ -36,8 +36,8 @@ script = ExtResource("2_ag6n6")
 _audio_stream_player = NodePath("../AudioStreamPlayer")
 
 [node name="KillBound" type="Area2D" parent="."]
-collision_layer = 31
-collision_mask = 31
+collision_layer = 63
+collision_mask = 63
 script = ExtResource("8_5envf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillBound"]

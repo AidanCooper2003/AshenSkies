@@ -13,6 +13,7 @@ _fire_delay = 1.0
 weapon_name = "candlemans_brew"
 
 [node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -16,4 +16,5 @@ scale = Vector2(0.132813, 0.132813)
 texture = ExtResource("2_kkql5")
 
 [node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
 one_shot = true

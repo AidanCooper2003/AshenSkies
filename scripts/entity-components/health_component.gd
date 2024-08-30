@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 
 func take_damage(damage : int, resistance_override : bool) -> void:
-	if Time.get_ticks_msec() < iframe_length * 1000 + iframe_start_time:
+	if not resistance_override && Time.get_ticks_msec() < iframe_length * 1000 + iframe_start_time:
 		return
 	var resistance := damage_resistance
 	var will_dodge := false
@@ -56,6 +56,8 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 	else:
 		_current_health -= 1
 		iframe_start_time = Time.get_ticks_msec()
+	_current_health = clamp(_current_health, 0, INF)
+	print(_current_health)
 	health_changed.emit(_current_health, true)
 	if _current_health <= 0:
 		die()

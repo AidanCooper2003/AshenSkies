@@ -21,7 +21,7 @@ _bullet = ExtResource("3_wadad")
 _bullet_velocity = 1500.0
 
 [node name="FireDelayTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.001
 one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -17,6 +17,7 @@ var walk_direction := 0
 
 var _stopping_threshold := 1.0
 var _condition_handler: ConditionHandler
+var _acceleration_speed_modifier = 0.5
 
 func _ready():
 	await owner.ready
@@ -36,7 +37,7 @@ func _physics_process(delta) -> void:
 		current_decceleration_rate *= _air_decceleration_coefficient
 	var velocity = _character_body_2d.velocity
 	var intended_x_velocity
-	var modified_acceleration = _acceleration * speed_modification
+	var modified_acceleration = _acceleration * (1 + ((speed_modification - 1) * _acceleration_speed_modifier))
 	var modified_max_velocity = _max_velocity * speed_modification
 	
 	#If moving in the opposite direction than currently moving, use decceleration rate. Otherwise, accelerate normally.

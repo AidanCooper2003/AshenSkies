@@ -45,7 +45,7 @@ func force_jump() -> void:
 	var speed_modifier := 1.0
 	if _condition_handler.has_modification("speed") * _jump_speed_modifier:
 		speed_modifier *= _condition_handler.get_modification("speed")
-	_character_body_2d.velocity.y = -_jump_force * _condition_handler.get_modification("speed")
+	_character_body_2d.velocity.y = -_jump_force * (1 + ((speed_modifier - 1) * _jump_speed_modifier))
 	_gravity_component.fast_fall_override = false
 
 
