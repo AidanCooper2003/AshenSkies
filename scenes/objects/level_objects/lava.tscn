@@ -206,7 +206,8 @@ shape = SubResource("RectangleShape2D_snfmt")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bkckk")
-frame_progress = 0.533551
+autoplay = "default"
+frame_progress = 0.69729
 
 [node name="ContinuousDamageDealer" type="Area2D" parent="."]
 collision_layer = 32
