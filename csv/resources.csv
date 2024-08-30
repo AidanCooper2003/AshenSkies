@@ -17,3 +17,5 @@ fever_essence,"Fire, Healing",3,double_mixed
 nuclear_essence,"Fire, Explosive",3,double_mixed
 grapeshot_essence,"Food, Multishot",3,double_mixed
 particle_essence,"Wind, Pierce",3,double_mixed
+abstraction_essence,None,5,unique
+everything_essence,"Projectile, Absorption, Fire, Wind, Food, Healing, Defense, Transportation, Explosive, Multishot, Pierce",3,unique
