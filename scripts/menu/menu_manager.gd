@@ -6,6 +6,8 @@ var _recipe_tags : Dictionary
 var _recipe_qualities : Dictionary
 var _resource_tags : Dictionary
 var _resource_qualities : Dictionary
+var _recipe_names: Dictionary
+var _recipe_descriptions: Dictionary
 
 var confirm_available := false
 
@@ -16,6 +18,8 @@ func _ready() -> void:
 	_recipe_qualities = CSVManager.get_properties(CSVManager.recipes, 0, 2)
 	_resource_tags = CSVManager.get_tags(CSVManager.resources, 0, 1)
 	_resource_qualities = CSVManager.get_properties(CSVManager.resources, 0, 2)
+	_recipe_names = CSVManager.get_properties(CSVManager.recipes, 0, 4)
+	_recipe_descriptions = CSVManager.get_properties(CSVManager.recipes, 0, 5)
 	
 
 func _on_start_button_pressed() -> void:
@@ -81,11 +85,14 @@ func _update_weapon_stats(weapon_name: String) -> void:
 		return
 	var tags = _recipe_tags[weapon_name]
 	var quality = _recipe_qualities[weapon_name]
+	var localized_name = _recipe_names[weapon_name]
+	var localized_description = _recipe_descriptions[weapon_name]
 	$Grimoire/VBoxContainer/Stats.text = (
-		"Weapon Name: " + weapon_name + "\n"
+		"Weapon Name: " + localized_name + "\n"
 		+ "Times Crafted: " + str(times_crafted) + "\n"
 		+ "Tags: " + str(tags) + "\n"
 		+ "Quality: " + str(quality) + "\n"
+		+ "Description: " + localized_description + "\n"
 	)
 	if SaveManager.has_save_data("best_time"):
 		$Grimoire/VBoxContainer/Stats.text = $Grimoire/VBoxContainer/Stats.text + "Best Time: " + str(SaveManager.retrieve_save_data("best_time"))

@@ -1,17 +1,17 @@
-Item-name,Item-tags,Item-quality,Is-offensive
-spikeball_launcher,Projectile,2,TRUE
-test_gun,Projectile,1,TRUE
-health_potion,"Absorption, Healing",1,FALSE
-caffeination_station,"Projectile, Fire, Food, Transportation",1,TRUE
-candlemans_brew,"Absorption, Fire",2,TRUE
-hydrax,"Absorption, Defense",2,FALSE
-terminal_lucidity,"Absorption, Transportation, Defense",3,FALSE
-depleted_ash,"Projectile, Fire, Multishot",2,TRUE
-air_compressor,"Projectile, Wind",1,TRUE
-popcorn,"Projectile, Wind, Fire, Explosive",2,TRUE
-hastemaker,"Absorption, Transportation",1,FALSE
-boiler_rifle,"Projectile, Fire, Pierce",3,TRUE
-fullblast,"Projectile, Multishot, Pierce",3,TRUE
-graditudanal_dinner,"Absorption, Food",1,FALSE
-phantom_rounds,"Absorption, Wind",3,FALSE
-biologic_overclock,"Absorption, Fire",3,FALSE
+Item-name,Item-tags,Item-quality,Is-offensive,localized_name,localized_description
+spikeball_launcher,Projectile,2,TRUE,Spikeball Launcher,Shoots spikeballs that continuously deal damage to enemies.
+test_gun,Projectile,1,TRUE,Origin Gun,A gun as basic as you can find.
+health_potion,"Absorption, Healing",1,FALSE,Health Potion,"Reverses time in a localized area, healing wounds up to three times."
+caffeination_station,"Projectile, Fire, Food, Transportation",1,TRUE,Caffeination Station,"Drink a bit, shoot a bit. Grants a speed boost and burns enemies."
+candlemans_brew,"Absorption, Fire",2,TRUE,Candleman's Brew,Used annually in the maze of a million candles. Burns all nearby enemies.
+hydrax,"Absorption, Defense",2,FALSE,Hydrax,"Your skin sweats out an oily, velocity reducing substance. Blocks pain receptors but gives a 50% chance to not take damage."
+terminal_lucidity,"Absorption, Transportation, Defense",3,FALSE,Terminal Lucidity,Laz's expirements with Egocycling found a source of knowledge that gives you power.
+depleted_ash,"Projectile, Fire, Multishot",2,TRUE,Depleted Ash,Those who found Weigh's first gilded temple were cursed by the remnants of his creations. Shoots a shotgun blast of cursed fire.
+air_compressor,"Projectile, Wind",1,TRUE,Air Compressor,"Blasts pressurized air, knocking enemies back."
+popcorn,"Projectile, Wind, Fire, Explosive",2,TRUE,Kernels,"Used to smuggle enchanted fuels, shoots thermally reactive popcorn kernels that pop after a couple seconds."
+hastemaker,"Absorption, Transportation",1,FALSE,Hastemaker,"A prayer to the last active monitor, gives a large speed boost."
+boiler_rifle,"Projectile, Fire, Pierce",3,TRUE,Boiler Rifle,"Shoots a piercing bolt that boils enemies, slowing them down and dealing damage over time. "
+fullblast,"Projectile, Multishot, Pierce",3,TRUE,Fullblast,Shoots... a lot.
+graditudanal_dinner,"Absorption, Food",1,FALSE,Graditudanal Dinner,"I wasn't there for that last supper. Fulfills you, giving lowered speed in exchange for increased damage and chance to not use durability."
+phantom_rounds,"Absorption, Wind",3,FALSE,Phantom Rounds,Originally designed to locate Anakimi in the Fleshwarren. Temporarily makes weapons consume no durability.
+biologic_overclock,"Absorption, Fire",3,FALSE,Biologic Overclock,A last resort turned to by The Yeast King prior to The Fungicide. Increased durability usage in exchange for double damage and a speed boost.
