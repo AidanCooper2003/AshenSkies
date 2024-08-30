@@ -61,11 +61,11 @@ shape = SubResource("RectangleShape2D_ps0wi")
 disabled = true
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource("CircleShape2D_xsna6")
+debug_color = Color(0, 0.6, 0.701961, 0.129412)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.333, 0.333)

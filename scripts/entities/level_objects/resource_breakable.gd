@@ -12,6 +12,7 @@ func _ready():
 	if resource != "" && $ResourceIcon != null:
 		$ResourceIcon.texture = load("res://sprites/resource_icons/" + resource + ".png")
 	if resource == "":
+		$ResourceIcon.texture = load("res://sprites/resource_icons/unknown_resource.png")
 		resource = LevelManager.choose_random_resource()
 
 

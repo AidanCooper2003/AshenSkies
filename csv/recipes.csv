@@ -9,3 +9,4 @@ terminal_lucidity,"Absorption, Transportation, Defense",3,FALSE
 depleted_ash,"Projectile, Fire, Multishot",2,TRUE
 air_compressor,"Projectile, Wind",1,TRUE
 popcorn,"Projectile, Wind, Fire, Explosive",2,TRUE
+hastemaker,"Absorption, Transportation",1,FALSE

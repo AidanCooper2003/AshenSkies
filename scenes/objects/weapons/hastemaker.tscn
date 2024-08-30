@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://1nk327lkl2on"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_kmf3b"]
+[ext_resource type="Texture2D" uid="uid://cd4h06imc2p3b" path="res://sprites/weapon_icons/hastemaker.png" id="2_3r7gw"]
+
+[node name="TerminalLucidity" type="Node2D"]
+script = ExtResource("1_kmf3b")
+_condition_name = "haste"
+_condition_length = 15.0
+max_durability = 1
+_fire_delay = 1.0
+weapon_name = "terminal_lucidity"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_3r7gw")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
