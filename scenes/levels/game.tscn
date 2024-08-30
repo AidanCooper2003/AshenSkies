@@ -308,6 +308,22 @@ _resource_count = 1
 position = Vector2(2016, 1864)
 _resource_count = 1
 
+[node name="ResourceBreakable25" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(3168, 1480)
+_resource_count = 1
+
+[node name="ResourceBreakable26" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(3232, 1480)
+_resource_count = 1
+
+[node name="ResourceBreakable27" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(3104, 1480)
+_resource_count = 1
+
+[node name="ResourceBreakable28" parent="World/Pots" instance=ExtResource("10_s61si")]
+position = Vector2(3040, 1480)
+_resource_count = 1
+
 [node name="TerritorialJumpers" type="Node2D" parent="World"]
 
 [node name="TerritorialJumper" parent="World/TerritorialJumpers" instance=ExtResource("11_megux")]
@@ -424,22 +440,6 @@ position = Vector2(1760, 1952)
 
 [node name="Crate2" parent="World/Crates" instance=ExtResource("16_ws7rv")]
 position = Vector2(1824, 1952)
-
-[node name="ResourceBreakable" parent="." instance=ExtResource("10_s61si")]
-position = Vector2(3168, 1480)
-_resource_count = 1
-
-[node name="ResourceBreakable2" parent="." instance=ExtResource("10_s61si")]
-position = Vector2(3232, 1480)
-_resource_count = 1
-
-[node name="ResourceBreakable3" parent="." instance=ExtResource("10_s61si")]
-position = Vector2(3104, 1480)
-_resource_count = 1
-
-[node name="ResourceBreakable4" parent="." instance=ExtResource("10_s61si")]
-position = Vector2(3040, 1480)
-_resource_count = 1
 
 [connection signal="area_entered" from="KillBound" to="KillBound" method="_on_area_entered"]
 [connection signal="area_entered" from="World/Area2D" to="UIManager" method="_on_area_2d_area_entered"]
