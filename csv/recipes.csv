@@ -12,3 +12,6 @@ popcorn,"Projectile, Wind, Fire, Explosive",2,TRUE
 hastemaker,"Absorption, Transportation",1,FALSE
 boiler_rifle,"Projectile, Fire, Pierce",3,TRUE
 fullblast,"Projectile, Multishot, Pierce",3,TRUE
+graditudanal_dinner,"Absorption, Food",1,FALSE
+phantom_rounds,"Absorption, Wind",3,FALSE
+biologic_overclock,"Absorption, Fire",3,FALSE

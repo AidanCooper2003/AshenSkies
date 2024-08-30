@@ -23,7 +23,6 @@ func _on_start_button_pressed() -> void:
 
 
 func _initialize_grimoire() -> void:
-	print("lol")
 	$Grimoire/VBoxContainer/Stats.text = ""
 	if SaveManager.has_save_data("best_time"):
 		print("has_data")

@@ -43,8 +43,8 @@ func _physics_process(delta) -> void:
 
 func force_jump() -> void:
 	var speed_modifier := 1.0
-	if _condition_handler.has_modification("speed") * _jump_speed_modifier:
-		speed_modifier *= (1 + (((1 - _condition_handler.get_modification("speed"))) * _jump_speed_modifier))
+	if _condition_handler.get_modification("speed"):
+		speed_modifier *= (1 + (_condition_handler.get_modification("speed") * _jump_speed_modifier))
 	_character_body_2d.velocity.y = -_jump_force * speed_modifier
 	_gravity_component.fast_fall_override = false
 
@@ -61,7 +61,7 @@ func release_jump() -> void:
 func _jump() -> void:
 	var speed_modifier := 1.0
 	if _condition_handler.has_modification("speed"):
-		speed_modifier *= (1 + (((1 - _condition_handler.get_modification("speed"))) * _jump_speed_modifier))
+		speed_modifier *= (1 + (_condition_handler.get_modification("speed") * _jump_speed_modifier))
 	_character_body_2d.velocity.y = -_jump_force * speed_modifier
 	_gravity_component.fast_fall_override = false
 	if not _is_on_floor and not _is_coyote_state:

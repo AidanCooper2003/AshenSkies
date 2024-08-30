@@ -41,11 +41,11 @@ func get_modification(modification_name: String) -> float:
 	var change_amount := 0.0
 	for condition in conditions:
 		if conditions[condition].has(modification_name):
-			change_amount += conditions[condition][modification_name]
+			change_amount += float(conditions[condition][modification_name])
 	return change_amount
 
 
-func has_modification(modification_name: String) -> float:
+func has_modification(modification_name: String) -> bool:
 	for condition in conditions:
 		if conditions[condition].has(modification_name):
 			return true

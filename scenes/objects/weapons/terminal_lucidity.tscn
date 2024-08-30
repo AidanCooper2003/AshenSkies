@@ -8,6 +8,7 @@ script = ExtResource("1_htkb0")
 _condition_name = "lucidity"
 _condition_length = 5.0
 max_durability = 1
+_fire_delay = 0.5
 weapon_name = "terminal_lucidity"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

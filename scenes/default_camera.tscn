@@ -11,13 +11,6 @@ position_smoothing_speed = 10.0
 [node name="CanvasLayer" parent="." instance=ExtResource("1_a7gti")]
 
 [node name="Control" parent="CanvasLayer" index="0"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_force_pass_scroll_events = false
 
 [node name="Health" parent="CanvasLayer/Control" index="2"]
@@ -71,7 +64,7 @@ offset_right = 0.0
 grow_horizontal = 2
 value = 100.0
 
-[node name="CraftingContainer" parent="CanvasLayer/Control" index="5"]
+[node name="CraftingContainer" parent="CanvasLayer/Control" index="7"]
 visible = false
 mouse_force_pass_scroll_events = false
 mouse_default_cursor_shape = 2

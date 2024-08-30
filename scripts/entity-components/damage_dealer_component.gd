@@ -28,4 +28,7 @@ func _on_area_entered(area) -> void:
 		knockback_handler.apply_knockback(global_position.direction_to(area.global_position) * _knockback)
 	if _pierce <= 0:
 		final_pierce_reached.emit()
+		
+func modify_damage(modifier: float):
+	_damage *= modifier
 

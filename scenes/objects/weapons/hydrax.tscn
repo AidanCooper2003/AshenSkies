@@ -8,7 +8,7 @@ script = ExtResource("1_4k52x")
 _condition_name = "hydrax"
 _condition_length = 15.0
 max_durability = 3
-_fire_delay = 1.0
+_fire_delay = 0.5
 weapon_name = "hydrax"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

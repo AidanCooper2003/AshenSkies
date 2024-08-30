@@ -11,6 +11,7 @@ extends ProjectileShooter
 @export var is_angle_variance_random : bool
 
 func fire_bullet(weapon_angle: Vector2):
+	var damage_modifier = _get_damage_modification()
 	for i in range(bullet_count):
 		var bullet_instance = _bullet.instantiate()
 		var bullet_velocity_offset = randf_range(1 - bullet_velocity_variance, 1 + bullet_velocity_variance) 
@@ -20,3 +21,6 @@ func fire_bullet(weapon_angle: Vector2):
 		bullet_instance.position = self.global_position
 		bullet_instance.apply_impulse(new_angle * _bullet_velocity * bullet_velocity_offset, Vector2.ZERO)
 		bullet_instance.rotation = new_angle.angle()
+		if bullet_instance.find_child("DamageDealerComponent"):
+			bullet_instance.find_child("DamageDealerComponent").modify_damage(damage_modifier)
+			print(bullet_instance.find_child("DamageDealerComponent")._damage)

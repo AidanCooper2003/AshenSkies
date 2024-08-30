@@ -271,39 +271,51 @@ columns = 3
 
 [node name="ResourceContainer1" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer2" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer3" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer4" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer5" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer6" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer7" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer8" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer9" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer10" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer11" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer12" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="CraftingGrid" type="GridContainer" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

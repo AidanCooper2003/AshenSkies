@@ -7,7 +7,7 @@
 script = ExtResource("1_ie60t")
 heal_amount = 1
 max_durability = 3
-_fire_delay = 1.0
+_fire_delay = 0.5
 weapon_name = "health_potion"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

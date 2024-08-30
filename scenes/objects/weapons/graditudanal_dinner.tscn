@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfqyug4yettsu"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_p2qcx"]
+[ext_resource type="Texture2D" uid="uid://bpgeijl8g7pw5" path="res://sprites/weapon_icons/graditudanal_dinner.png" id="2_5v5mh"]
+
+[node name="GraditudanalDinner" type="Node2D"]
+script = ExtResource("1_p2qcx")
+_condition_name = "fulfilled"
+_condition_length = 25.0
+max_durability = 2
+_fire_delay = 0.5
+weapon_name = "graditudanal_dinner"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_5v5mh")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001

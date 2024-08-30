@@ -15,6 +15,7 @@ signal condition_added(condition: String, time: float)
 #Note: The node should still work even if this isn't assigned, just be missing
 #functionality that requires it.
 var character: Node2D
+var condition_handler : ConditionHandler
 
 var _can_fire := false
 var _enabled := false
@@ -29,6 +30,7 @@ func _ready() -> void:
 		_fire_delay_timer.wait_time = _fire_delay
 		_fire_delay_timer.start()
 	disable()
+	condition_handler = get_character_node("ConditionHandler")
 
 
 func fire_primary(weapon_angle: Vector2) -> bool:
@@ -78,3 +80,25 @@ func get_character_node(node_type: String) -> Node2D:
 
 func _on_fire_delay_timer_timeout() -> void:
 	_can_fire = true
+	
+	
+##Currently only handles values from -1 -> 1. Higher durability consumption doesn't increase consumption
+func _decrement_durability() -> void:
+	if (
+			condition_handler == null 
+			or not condition_handler.has_modification("durability_consumption")
+			or  condition_handler.get_modification("durability_consumption") == 0
+		):
+		durability -= 1
+		return
+	var durability_consumption = condition_handler.get_modification("durability_consumption")
+	if durability_consumption > 0:
+		var choice = randf()
+		if choice < durability_consumption:
+			durability -= 2
+		else:
+			durability -= 1
+	else:
+		var choice = -randf()
+		if choice < durability_consumption:
+			durability -= 1

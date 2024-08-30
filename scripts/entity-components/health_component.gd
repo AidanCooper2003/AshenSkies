@@ -57,7 +57,6 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 		_current_health -= 1
 		iframe_start_time = Time.get_ticks_msec()
 	_current_health = clamp(_current_health, 0, INF)
-	print(_current_health)
 	health_changed.emit(_current_health, true)
 	if _current_health <= 0:
 		die()

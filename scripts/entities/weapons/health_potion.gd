@@ -13,7 +13,7 @@ func _ready():
 func fire_primary(_weapon_angle):
 	if _can_fire and _get_can_heal():
 		health_change_triggered.emit(heal_amount)
-		durability -= 1;
+		_decrement_durability()
 		_can_fire = false
 		_fire_delay_timer.start()
 	if durability <= 0:

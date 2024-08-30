@@ -5,16 +5,10 @@ extends Weapon
 @export var _aura: PackedScene
 @export var _aura_duration: float
 
-var condition_handler: ConditionHandler
-
-func _ready():
-	super()
-	condition_handler = get_character_node("ConditionHandler")
-
 func fire_primary(weapon_angle) -> bool:
 	if _can_fire && not aura_present():
+		_decrement_durability()
 		instantiate_aura()
-		durability -= 1;
 		_can_fire = false
 		_fire_delay_timer.start()
 	if durability <= 0:

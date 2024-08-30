@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cicdpfjuy05j8"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_avh2o"]
+[ext_resource type="Texture2D" uid="uid://dhpi7rpg42g8g" path="res://sprites/weapon_icons/phantom_rounds.png" id="2_hhobq"]
+
+[node name="PhantomRounds" type="Node2D"]
+script = ExtResource("1_avh2o")
+_condition_name = "phantom_bullets"
+_condition_length = 10.0
+max_durability = 3
+_fire_delay = 0.5
+weapon_name = "phantom_rounds"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_hhobq")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001

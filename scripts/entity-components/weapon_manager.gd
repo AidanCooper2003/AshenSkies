@@ -15,6 +15,7 @@ func _ready() -> void:
 	_weapon_holder = get_child(0)
 	if _default_weapon != null:
 		instantiated_weapon = _default_weapon.instantiate()
+		instantiated_weapon.character = get_parent()
 		_weapon_holder.add_child(instantiated_weapon)
 	_aim_angle = Vector2.ZERO
 

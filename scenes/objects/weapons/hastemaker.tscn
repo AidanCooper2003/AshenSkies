@@ -8,6 +8,7 @@ script = ExtResource("1_kmf3b")
 _condition_name = "haste"
 _condition_length = 15.0
 max_durability = 2
+_fire_delay = 0.5
 weapon_name = "hastemaker"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
