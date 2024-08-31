@@ -165,6 +165,7 @@ text = "Press \"C\" to open up your crafting menu.
 
 Left click on the \"Projectile Essence\" on the left side of your inventory to add them to the crafting window. Then, press \"F\" to finish crafting!
 
+Note: Press \"R\" to return ingredients from crafting.
 "
 
 [node name="RichTextLabel4" type="RichTextLabel" parent="World/Tutorial Texts"]
@@ -176,10 +177,12 @@ text = "Left click to shoot your gun at these pots to get some new ingredients!"
 
 [node name="RichTextLabel5" type="RichTextLabel" parent="World/Tutorial Texts"]
 offset_left = -758.0
-offset_top = 1160.0
+offset_top = 1072.0
 offset_right = -432.0
 offset_bottom = 1213.0
-text = "Combining different ingredients gives different odds to get different weapons!"
+text = "Combining different ingredients gives different odds to get different weapons!
+
+Some weapons gives buffs instead of shooting projectiles."
 
 [node name="RichTextLabel6" type="RichTextLabel" parent="World/Tutorial Texts"]
 offset_left = 1751.0

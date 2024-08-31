@@ -49,6 +49,5 @@ func _set_resource_category_odds() -> void:
 	_resource_category_odds["single_element"] = .30
 	_resource_category_odds["single_mechanic"] = .20
 	_resource_category_odds["double_element"] = .15
-	_resource_category_odds["double_mixed"] = .0925
 	_resource_category_odds["double_mixed"] = .095
-	_resource_category_odds["unique"] = .0025
+	_resource_category_odds["unique"] = .005

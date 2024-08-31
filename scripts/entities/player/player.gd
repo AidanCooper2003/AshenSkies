@@ -150,6 +150,7 @@ func _on_crafting_started() -> void:
 func _reset_weapon_inventory_ui() -> void:
 	for i in range(_weapon_inventory_manager.weapon_inventory_size):
 		var weapon_name = _weapon_inventory_manager.get_weapon_name(i)
+		print(weapon_name)
 		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
 		if weapon_name != "":
 			EventBus.durability_changed.emit(i, _weapon_inventory_manager.get_weapon_durability_percentage(i))

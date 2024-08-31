@@ -54,7 +54,7 @@ func _initialize_settings() -> void:
 	if SaveManager.has_save_data("music_volume"):
 		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = SaveManager.retrieve_save_data("music_volume")
 	else:
-		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = 50
+		$Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider.value = 10
 
 func _reset_grimoire() -> void:
 	for child in $Grimoire/VBoxContainer/TabContainer/Weapons.get_children():
