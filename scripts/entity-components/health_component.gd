@@ -54,7 +54,7 @@ func take_damage(damage : int, resistance_override : bool) -> void:
 	elif not _simple_health:
 		_current_health = clampi(_current_health - damage * resistance, 0, _max_health)
 	else:
-		_current_health -= 1
+		_current_health -= ceil(float(damage) / 100.0)
 		iframe_start_time = Time.get_ticks_msec()
 	_current_health = clamp(_current_health, 0, INF)
 	health_changed.emit(_current_health, true)

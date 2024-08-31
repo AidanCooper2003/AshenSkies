@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfn7def37gx2v"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_x0bmc"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_7jmln"]
+[ext_resource type="PackedScene" uid="uid://pa7kt51pp6hn" path="res://scenes/objects/projectiles/banana_peel.tscn" id="3_dhg6v"]
+[ext_resource type="Texture2D" uid="uid://xqikg0oyx2xt" path="res://sprites/weapon_icons/banana_bunch.png" id="4_w2rae"]
+
+[node name="BananaBunch" type="Node2D"]
+script = ExtResource("1_x0bmc")
+max_durability = 20
+_fire_delay = 0.5
+weapon_name = "test_gun"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(32, 0)
+script = ExtResource("2_7jmln")
+_bullet = ExtResource("3_dhg6v")
+_bullet_velocity = 500.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8.17124e-14, -23)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("4_w2rae")

@@ -31,4 +31,3 @@ func _on_area_entered(area) -> void:
 		
 func modify_damage(modifier: float):
 	_damage *= modifier
-
