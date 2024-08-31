@@ -36,7 +36,7 @@ func _on_area_2d_area_entered(area) -> void:
 	if _final_timer_text == null or _final_timer_text.visible:
 		return
 	_final_timer_text.visible = true
-	_final_timer_text.text = "FINAL TIME: " + str(snapped(_time, 0.001))
+	_final_timer_text.text = "FINAL TIME: " + str(snapped(_time, 0.001)) + "\nPress SHIFT+M to return to the menu."
 	SaveManager.save_min_data("best_time", snapped(_time, 0.001))
 	print(SaveManager.retrieve_save_data("best_time"))
 
