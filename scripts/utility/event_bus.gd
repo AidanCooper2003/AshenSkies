@@ -4,9 +4,9 @@ extends Node
 
 #From Player
 signal player_health_changed(health: int)
-signal durability_changed(durability_percentage: float)
+signal durability_changed(slot: int, durability_percentage: float)
 signal active_slot_changed(slot_index: int)
-signal weapon_in_slot_changed(weapon_name: String)
+signal weapon_in_slot_changed(slot: int, weapon_name: String)
 signal resource_count_changed(resource_name: String, resource_count: int)
 signal ingredients_changed(ingredients: Dictionary)
 signal crafting_menu_state_changed(crafting_open: bool)

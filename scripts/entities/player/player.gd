@@ -153,3 +153,5 @@ func _reset_weapon_inventory_ui() -> void:
 		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
 		if weapon_name != "":
 			EventBus.durability_changed.emit(i, _weapon_inventory_manager.get_weapon_durability_percentage(i))
+		else:
+			EventBus.durability_changed.emit(i, 100)
