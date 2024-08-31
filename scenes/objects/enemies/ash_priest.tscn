@@ -43,7 +43,7 @@ _data = {
 
 [node name="AshPriest" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 18
+collision_mask = 16
 script = ExtResource("1_bmwkr")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
