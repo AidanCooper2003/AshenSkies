@@ -17,4 +17,4 @@ phantom_rounds,"Absorption, Wind",3,FALSE,Phantom Rounds,Originally designed to 
 biologic_overclock,"Absorption, Fire",3,FALSE,Biologic Overclock,A last resort turned to by The Yeast King prior to The Fungicide. Increased durability usage in exchange for double damage and a speed boost.
 panacea,"Projectile, Healing",1,TRUE,Panacea,"Solution to all matters of life and death. Does more damage while at max health, and gives a chance to heal with every shot fired."
 banana_bunch,"Projectile, Food",1,TRUE,Banana Bunch,"Trips enemies, greatly lowering their speed."
-current,"Projectile, Wind, Multishot",1,TRUE,Current,Creates a large gust of wind that knocks enemies far back.
+current,"Projectile, Wind, Multishot",2,TRUE,Current,Creates a large gust of wind that knocks enemies far back.
