@@ -9,7 +9,7 @@
 script = ExtResource("1_e6g8v")
 max_durability = 200
 _fire_delay = 0.1
-weapon_name = "test_gun"
+weapon_name = "air_compressor"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
 position = Vector2(61, 30)

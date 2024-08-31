@@ -95,7 +95,7 @@ func _handle_weapon_durability() -> void:
 			_reset_weapon_inventory_ui()
 		else:
 			EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
-
+	
 
 func _handle_crafting_toggle() -> void:
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):

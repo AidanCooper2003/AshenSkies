@@ -19,7 +19,10 @@ func _process(_delta) -> void:
 	if Input.is_action_just_pressed("Debug 2"):
 		EventBus.ingredients_reset.emit()
 	if Input.is_action_just_pressed("Debug 4"):
-		pass
+		_assign_weapon("test_gun")
+		_assign_weapon("air_compressor")
+		_assign_weapon("health_potion")
+		_assign_weapon("biologic_overclock")
 	if Input.is_action_just_pressed("Exit To Menu"):
 		get_tree().change_scene_to_file("res://scenes/levels/main_menu.tscn")
 
