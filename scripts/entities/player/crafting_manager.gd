@@ -38,6 +38,10 @@ func craft(ingredients: Dictionary) -> String:
 	var tag_counts := _get_ingredients_tags(ingredients)
 	var ingredients_quality := _get_ingredients_quality(ingredients)
 	
+	for ingredient in ingredients:
+		if ingredient == "projectile_essence" && ingredients[ingredient] == 4:
+			return "test_gun"
+	
 	
 	#If tags don't contain form tags, add one of each
 	var has_form_tag := false
