@@ -141,7 +141,7 @@ func _get_ingredients_quality(ingredients: Dictionary) -> int:
 	return quality
 
 func _choose_quality(quality: int) -> int:
-	quality = clampi(quality, 0, 14)
+	quality = clampi(quality, 0, 11)
 	var weights: Array = _quality_weights[quality]
 	var weight_total = weights.reduce(_sum, 0)
 	var choice = randf_range(0, weight_total)
@@ -157,16 +157,13 @@ func _sum(accumulator, number):
 func _initialize_quality_weights() -> void:
 	_quality_weights[0] = [1, 0, 0]
 	_quality_weights[1] = [6, 1, 0]
-	_quality_weights[2] = [4, 1, 0]
-	_quality_weights[3] = [3, 1, 0]
-	_quality_weights[4] = [3, 2, 0]
-	_quality_weights[5] = [1, 1, 0]
-	_quality_weights[6] = [1, 2, 0]
-	_quality_weights[7] = [0, 1, 0]
-	_quality_weights[8] = [0, 6, 1]
-	_quality_weights[9] = [0, 4, 1]
-	_quality_weights[10] = [0, 3, 1]
-	_quality_weights[11] = [0, 3, 2]
-	_quality_weights[12] = [0, 1, 1]
-	_quality_weights[13] = [0, 1, 2]
-	_quality_weights[14] = [0, 0, 1]
+	_quality_weights[2] = [3, 1, 0]
+	_quality_weights[3] = [2, 1, 0]
+	_quality_weights[4] = [1, 1, 0]
+	_quality_weights[5] = [1, 2, 0]
+	_quality_weights[6] = [0, 1, 0]
+	_quality_weights[7] = [0, 6, 1]
+	_quality_weights[8] = [0, 3, 1]
+	_quality_weights[9] = [0, 1, 1]
+	_quality_weights[10] = [0, 1, 2]
+	_quality_weights[11] = [0, 0, 1]

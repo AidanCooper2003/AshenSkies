@@ -203,7 +203,7 @@ offset_left = -488.0
 offset_top = 1896.0
 offset_right = -46.0
 offset_bottom = 1976.0
-text = "Different materials have different rarities. Increasing rarities increase the chance of getting better items!"
+text = "Different materials have different rarities (background color). Increasing rarities increase the chance of getting better items!"
 
 [node name="RichTextLabel9" type="RichTextLabel" parent="World/Tutorial Texts"]
 offset_left = -955.0
@@ -214,7 +214,7 @@ text = "Bonus tips for those who are curious!
 
 - Every weapon is made of tags, and each resource contains tags. More matching tags mean higher chances. 
 - There are three tag types. Form, Element, and Mechanic. Forms and elements are necessary to craft a specific weapon, but forms will be added automatically if none exist. Mechanic tags still boost chances but are not required to make the weapon.
-- 0 quality of inputted resources guarantees a quality 1 weapon, 6 guarantees a 2, 14 guarantees a 3. Increasing the numbers between those threshold increases the odd of the higher quality appearing.
+- 0 quality of inputted resources guarantees a quality 1 weapon, 6 guarantees a 2, 11 guarantees a 3. Increasing the numbers between those threshold increases the odd of the higher quality appearing.
 - If no weapons of a certain quality exists for a set of tags, the quality will be adjusted until there are some.
 - Each time the level is loaded, new resources will be set to be possible spawns for the pots. Look around the map to see if you can find them if you haven't already!
 - If you want to know more about a weapon or resource, check out the grimoire in the main menu! You can go back to the main menu by pressing SHIFT + M
