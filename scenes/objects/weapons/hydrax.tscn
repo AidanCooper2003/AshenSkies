@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bryunwo2clw51"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_4k52x"]
+[ext_resource type="Texture2D" uid="uid://di05gkvqk73se" path="res://sprites/weapon_icons/hydrax.png" id="2_5m1a3"]
+
+[node name="Hydrax" type="Node2D"]
+script = ExtResource("1_4k52x")
+_condition_name = "hydrax"
+_condition_length = 30.0
+max_durability = 2
+_fire_delay = 0.5
+weapon_name = "hydrax"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 5.49779
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_5m1a3")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001

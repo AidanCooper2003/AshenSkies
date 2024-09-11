@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctpchwrspw2pg"]
+
+[ext_resource type="Texture2D" uid="uid://20ju4sqvqrws" path="res://sprites/level_objects/caltrops.png" id="1_m8rk0"]
+[ext_resource type="Script" path="res://scripts/entity-components/continuous_damage_dealer.gd" id="2_ji67l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft65d"]
+size = Vector2(93, 96)
+
+[node name="Caltrops" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_m8rk0")
+
+[node name="ContinuousDamageDealer" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 5
+script = ExtResource("2_ji67l")
+_damage = 100
+_damage_delay = 1.0
+_knockback = 250.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageDealer"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ft65d")
+
+[connection signal="area_entered" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_entered"]
+[connection signal="area_exited" from="ContinuousDamageDealer" to="ContinuousDamageDealer" method="_on_area_exited"]

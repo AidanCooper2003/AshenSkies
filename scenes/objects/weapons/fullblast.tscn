@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpofewxhy8a3"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_6tsh2"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/multi_projectile_shooter.gd" id="2_31a20"]
+[ext_resource type="PackedScene" uid="uid://bxbo5p2fwdodb" path="res://scenes/objects/projectiles/fullblast_bullet.tscn" id="3_b38jv"]
+[ext_resource type="Texture2D" uid="uid://uqpndlgsxs2q" path="res://sprites/weapon_icons/fullblast.png" id="4_6vaxl"]
+
+[node name="Fullblast" type="Node2D"]
+script = ExtResource("1_6tsh2")
+max_durability = 5
+_fire_delay = 2.0
+weapon_name = "fullblast"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(62, 0)
+script = ExtResource("2_31a20")
+bullet_count = 15
+bullet_angle_variance = 0.4
+bullet_velocity_variance = 0.1
+is_bullet_variance_random = true
+is_angle_variance_random = true
+_bullet = ExtResource("3_b38jv")
+_bullet_velocity = 1500.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(31, 0)
+scale = Vector2(3, 3)
+texture = ExtResource("4_6vaxl")
+
+[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

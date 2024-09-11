@@ -2,9 +2,11 @@ class_name ResourceInventoryManager
 
 extends Node2D
 
-const MAX_INGREDIENTS = 8
+var max_ingredients = 4
+
 
 @export var resources: Dictionary = {}
+@export var max_resources: int
 
 var ingredients: Dictionary = {}
 
@@ -21,10 +23,15 @@ func has_resource(resource_name: String) -> bool:
 
 
 func add_resource(resource_name: String, resource_count: int) -> void:
-	print(resource_name)
+	if max_resources > resources.size() && !has_resource(resource_name):
+		add_resource_type(resource_name)
 	if has_resource(resource_name):
 		resources[resource_name] += resource_count
 		_update_resource(resource_name)
+		if SaveManager.has_save_data(resource_name + "_count"):
+			SaveManager.add_save_data(resource_name + "_count", SaveManager.retrieve_save_data(resource_name + "_count") + resource_count)
+		else:
+			SaveManager.add_save_data(resource_name + "_count", resource_count)
 
 
 func subtract_resource(resource_name: String, resource_count: int) -> void:
@@ -58,7 +65,7 @@ func increment_ingredient(resource_name: String) -> void:
 	if (
 			has_resource(resource_name)
 			and resources[resource_name] > 0 
-			and get_ingredient_count() < MAX_INGREDIENTS
+			and get_ingredient_count() < max_ingredients
 	):
 		if not ingredients.has(resource_name):
 			ingredients[resource_name] = 1
@@ -105,15 +112,10 @@ func _update_all_resources() -> void:
 
 
 func _update_resource(resource_name: String) -> void:
-	print("Updating resource: " + resource_name + " in inventory.")
 	EventBus.resource_count_changed.emit(resource_name, get_resource_count(resource_name))
 	EventBus.ingredients_changed.emit(ingredients)
 
 
 #Maybe have some csv for a verifier of valid resource types later?
 func _initialize_inventory() -> void:
-	add_resource_type("cyclonium")
-	add_resource_type("gun parts")
-	add_resource_type("airsoft bullet")
-	add_resource_type("testing fluid")
-	add_resource("testing fluid", 10)
+	add_resource("projectile_essence", 6)

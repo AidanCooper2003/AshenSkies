@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb6ar8tc8buqy"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/kernel.gd" id="1_wl6jq"]
+[ext_resource type="PackedScene" uid="uid://d1xcciy6h32fo" path="res://scenes/objects/projectiles/kernel_mega_explosion.tscn" id="2_e260f"]
+[ext_resource type="PackedScene" uid="uid://bo8foonavqxy1" path="res://scenes/objects/projectiles/kernel_explosion.tscn" id="2_mm5oe"]
+[ext_resource type="Texture2D" uid="uid://dap7cfh50ghns" path="res://sprites/projectiles/bullet.png" id="2_rj2gm"]
+[ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="3_rgyih"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="4_a0p71"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="5_36yr5"]
+[ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="6_mv7lj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2foj5"]
+bounce = 0.4
+
+[node name="BasicGunBullet" type="RigidBody2D"]
+modulate = Color(0, 0.00784314, 0.054902, 1)
+collision_layer = 0
+collision_mask = 48
+physics_material_override = SubResource("PhysicsMaterial_2foj5")
+continuous_cd = 1
+max_contacts_reported = 5
+contact_monitor = true
+linear_damp = -0.1
+script = ExtResource("1_wl6jq")
+_explosive = ExtResource("2_mm5oe")
+_mega_explosive = ExtResource("2_e260f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_rj2gm")
+offset = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57782
+shape = ExtResource("3_rgyih")
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 36
+script = ExtResource("4_a0p71")
+_damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+rotation = 1.57815
+shape = ExtResource("3_rgyih")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="ConditionHandler" type="Node2D" parent="."]
+script = ExtResource("5_36yr5")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 42
+script = ExtResource("6_mv7lj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+rotation = 1.5708
+shape = ExtResource("3_rgyih")
+
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="damage_dealt" from="DamageDealerComponent" to="." method="_on_damage_dealer_component_damage_dealt"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="condition_added" from="ConditionHandler" to="." method="_on_condition_handler_condition_added"]
+[connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]

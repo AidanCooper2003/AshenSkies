@@ -1,11 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://posx1uyfda5n"]
+[gd_scene load_steps=15 format=3 uid="uid://posx1uyfda5n"]
 
 [ext_resource type="Script" path="res://scripts/entities/enemies/ash_priest.gd" id="1_bmwkr"]
-[ext_resource type="Texture2D" uid="uid://cj0d48cfl53wg" path="res://sprites/enemies/sun_priest.png" id="1_y2jae"]
 [ext_resource type="Script" path="res://scripts/entity-components/weapon_manager.gd" id="2_5xul8"]
+[ext_resource type="Texture2D" uid="uid://cr558ak3p7g6q" path="res://sprites/enemies/sun-priest.png" id="2_ywxqr"]
 [ext_resource type="PackedScene" uid="uid://bkglorimicvgf" path="res://scenes/objects/weapons/ash_staff.tscn" id="4_n0fwc"]
 [ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="5_hrj6w"]
 [ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="6_acbgd"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="7_rt5ve"]
+[ext_resource type="Script" path="res://scripts/entity-components/knockback_handler.gd" id="8_mkqqb"]
+[ext_resource type="Script" path="res://scripts/entity-components/gravity_component.gd" id="9_shacq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msu3x"]
 size = Vector2(84, 156)
@@ -16,36 +19,57 @@ size = Vector2(38, 81.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xsna6"]
 radius = 892.402
 
+[sub_resource type="Animation" id="Animation_5yslm"]
+resource_name = "hurt"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.435294, 0.364706, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i23s2"]
+_data = {
+"hurt": SubResource("Animation_5yslm")
+}
+
 [node name="AshPriest" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 16
 script = ExtResource("1_bmwkr")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_msu3x")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-60, -38.75)
 shape = SubResource("RectangleShape2D_ps0wi")
+disabled = true
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(62, -39)
 shape = SubResource("RectangleShape2D_ps0wi")
+disabled = true
 
 [node name="PlayerDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 shape = SubResource("CircleShape2D_xsna6")
+debug_color = Color(0, 0.6, 0.701961, 0.129412)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.333, 0.333)
-texture = ExtResource("1_y2jae")
+texture = ExtResource("2_ywxqr")
 
 [node name="WeaponManager" type="Node2D" parent="."]
 script = ExtResource("2_5xul8")
@@ -65,15 +89,35 @@ shape = SubResource("RectangleShape2D_msu3x")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-60, -38.75)
 shape = SubResource("RectangleShape2D_ps0wi")
+disabled = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(62, -39)
 shape = SubResource("RectangleShape2D_ps0wi")
+disabled = true
+
+[node name="KnockbackHandler" type="Node2D" parent="HitboxComponent"]
+script = ExtResource("8_mkqqb")
+knockback_resistance = 0.75
 
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("6_acbgd")
-_max_health = 4
+_max_health = 400
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i23s2")
+}
+
+[node name="ConditionHandler" type="Node2D" parent="."]
+script = ExtResource("7_rt5ve")
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
+script = ExtResource("9_shacq")
+_character_body_2d = NodePath("..")
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_area_2d_body_exited"]
-[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
+[connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="take_damage"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]

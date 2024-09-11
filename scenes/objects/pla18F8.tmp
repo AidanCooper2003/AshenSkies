@@ -1,0 +1,115 @@
+[gd_scene load_steps=18 format=3 uid="uid://brogejmjvqi2i"]
+
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_v3r2n"]
+[ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/player/player_left.png" id="2_p5gux"]
+[ext_resource type="Texture2D" uid="uid://csujbkq6c4xrd" path="res://sprites/player/player_right.png" id="3_jc6ji"]
+[ext_resource type="Script" path="res://scripts/entity-components/walker_component.gd" id="4_4fqoi"]
+[ext_resource type="Script" path="res://scripts/entity-components/gravity_component.gd" id="5_j8pe6"]
+[ext_resource type="PackedScene" uid="uid://cndgq5qmvtnyy" path="res://scenes/objects/entity_parts/jumper.tscn" id="6_q6d2k"]
+[ext_resource type="Script" path="res://scripts/entity-components/health_component.gd" id="7_r6hrc"]
+[ext_resource type="Script" path="res://scripts/entity-components/hitbox_component.gd" id="8_mbve0"]
+[ext_resource type="Script" path="res://scripts/entity-components/weapon_manager.gd" id="9_fy50t"]
+[ext_resource type="Script" path="res://scripts/entity-components/weapon_inventory_manager.gd" id="10_d84o6"]
+[ext_resource type="Script" path="res://scripts/entities/player/resource_inventory_manager.gd" id="11_ql8no"]
+[ext_resource type="Script" path="res://scripts/entities/player/crafting_manager.gd" id="12_qkxvb"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="13_by10e"]
+[ext_resource type="Script" path="res://scripts/entity-components/entity_event_bus.gd" id="14_pd3id"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
+size = Vector2(48, 96)
+
+[sub_resource type="Animation" id="Animation_ybw7g"]
+resource_name = "iFrameFlashing"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.501961), Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lsudj"]
+_data = {
+"iFrameFlashing": SubResource("Animation_ybw7g")
+}
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 48
+script = ExtResource("1_v3r2n")
+_left_sprite = ExtResource("2_p5gux")
+_right_sprite = ExtResource("3_jc6ji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(6, 6)
+texture = ExtResource("3_jc6ji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WalkerComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
+script = ExtResource("4_4fqoi")
+_character_body_2d = NodePath("..")
+_acceleration = 800.0
+_decceleration_coefficient = 4.0
+_air_decceleration_coefficient = 0.5
+_max_velocity = 600.0
+
+[node name="GravityComponent" type="Node2D" parent="." node_paths=PackedStringArray("_character_body_2d")]
+script = ExtResource("5_j8pe6")
+_character_body_2d = NodePath("..")
+_downwards_gravity_coefficient = 2.0
+_gravity_coefficient = 1.5
+
+[node name="JumperComponent" parent="." node_paths=PackedStringArray("_character_body_2d", "_gravity_component") instance=ExtResource("6_q6d2k")]
+_character_body_2d = NodePath("..")
+_gravity_component = NodePath("../GravityComponent")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("7_r6hrc")
+_max_health = 3
+_simple_health = true
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 12
+script = ExtResource("8_mbve0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_t5u02")
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource("9_fy50t")
+
+[node name="WeaponHolder" type="Node2D" parent="WeaponManager"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lsudj")
+}
+
+[node name="WeaponInventoryManager" type="Node2D" parent="." node_paths=PackedStringArray("_weapon_manager")]
+script = ExtResource("10_d84o6")
+weapon_inventory_size = 4
+_weapon_manager = NodePath("../WeaponManager")
+
+[node name="ResourceInventoryManager" type="Node2D" parent="."]
+script = ExtResource("11_ql8no")
+
+[node name="CraftingManager" type="Node2D" parent="."]
+script = ExtResource("12_qkxvb")
+
+[node name="ConditionHandler" type="Node2D" parent="."]
+script = ExtResource("13_by10e")
+
+[node name="EntityEventBus" type="Node2D" parent="."]
+script = ExtResource("14_pd3id")
+
+[connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]

@@ -17,12 +17,15 @@ var _can_jump := true
 var _coyote_timer: Timer
 var _jump_cooldown_timer: Timer
 var _jump_queue_timer: Timer
+var _condition_handler: ConditionHandler
+var _jump_speed_modifier := 0.5
 
 func _ready() -> void:
 	_jump_cooldown_timer = get_child(0)
 	_jump_cooldown_timer.wait_time = _jump_delay
 	_coyote_timer = get_child(1)
 	_jump_queue_timer = get_child(2)
+	_condition_handler = owner.get_node("ConditionHandler")
 
 
 func _physics_process(delta) -> void:
@@ -39,7 +42,10 @@ func _physics_process(delta) -> void:
 
 
 func force_jump() -> void:
-	_character_body_2d.velocity.y = -_jump_force
+	var speed_modifier := 1.0
+	if _condition_handler.get_modification("speed"):
+		speed_modifier *= (1 + (_condition_handler.get_modification("speed") * _jump_speed_modifier))
+	_character_body_2d.velocity.y = -_jump_force * speed_modifier
 	_gravity_component.fast_fall_override = false
 
 
@@ -53,7 +59,10 @@ func release_jump() -> void:
 
 
 func _jump() -> void:
-	_character_body_2d.velocity.y = -_jump_force
+	var speed_modifier := 1.0
+	if _condition_handler.has_modification("speed"):
+		speed_modifier *= (1 + (_condition_handler.get_modification("speed") * _jump_speed_modifier))
+	_character_body_2d.velocity.y = -_jump_force * speed_modifier
 	_gravity_component.fast_fall_override = false
 	if not _is_on_floor and not _is_coyote_state:
 		_current_jumps -= 1

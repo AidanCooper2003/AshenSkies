@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1xcciy6h32fo"]
+
+[ext_resource type="Script" path="res://scripts/entities/projectiles/kernel_explosion.gd" id="1_plt66"]
+[ext_resource type="Texture2D" uid="uid://beblerr312vhl" path="res://sprites/weapon_icons/circle.png" id="2_tubyv"]
+[ext_resource type="Script" path="res://scripts/entity-components/damage_dealer_component.gd" id="3_y5xhk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u3ogy"]
+radius = 131.004
+
+[sub_resource type="Animation" id="Animation_1tsgn"]
+resource_name = "explosion_grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(1.4, 1.4), Vector2(1.6, 1.6), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxvwb"]
+_data = {
+"explosion_grow": SubResource("Animation_1tsgn")
+}
+
+[node name="KernelMegaExplosion" type="Node2D"]
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("1_plt66")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.678431, 0.0901961, 0, 0.607843)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_tubyv")
+
+[node name="DamageDealerComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 36
+script = ExtResource("3_y5xhk")
+_damage = 250
+_pierce = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
+shape = SubResource("CircleShape2D_u3ogy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qxvwb")
+}
+
+[connection signal="area_entered" from="DamageDealerComponent" to="DamageDealerComponent" method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

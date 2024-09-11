@@ -16,29 +16,43 @@ extends Node2D
 var walk_direction := 0
 
 var _stopping_threshold := 1.0
+var _condition_handler: ConditionHandler
+var _acceleration_speed_modifier := 0.5
+var _max_velocity_speed_modifier := 1.0
+
+func _ready():
+	await owner.ready
+	_condition_handler = owner.get_node("ConditionHandler")
 
 ##If an entities velocity + acceleration is within the x velocity bounds, the entity may increase its speed.
 ##If an entities velocity is outside the bounds, do not set it lower in case the entity was launched.
 ##If an entities velocity is outside the bounds, moving in the opposite direction should slow it down.
 func _physics_process(delta) -> void:
+	if _character_body_2d == null:
+		return
+	var speed_modification := 1.0
+	if _condition_handler != null:
+		speed_modification = 1 + _condition_handler.get_modification("speed")
 	var current_decceleration_rate = _decceleration_coefficient
 	if not _character_body_2d.is_on_floor():
 		current_decceleration_rate *= _air_decceleration_coefficient
 	var velocity = _character_body_2d.velocity
-	var _intended_x_velocity
+	var intended_x_velocity
+	var modified_acceleration = _acceleration * (1 + ((speed_modification - 1) * _acceleration_speed_modifier))
+	var modified_max_velocity = _max_velocity * (1 + ((speed_modification - 1) * _max_velocity_speed_modifier))
 	
 	#If moving in the opposite direction than currently moving, use decceleration rate. Otherwise, accelerate normally.
 	if sign(walk_direction) == sign(velocity.x):
-		_intended_x_velocity = velocity.x + (delta * walk_direction * _acceleration)
+		intended_x_velocity = velocity.x + (delta * walk_direction * modified_acceleration * (speed_modification + 1))
 	else:
-		_intended_x_velocity = (
-				velocity.x + (delta * walk_direction * current_decceleration_rate * _acceleration)
+		intended_x_velocity = (
+				velocity.x + (delta * walk_direction * current_decceleration_rate * modified_acceleration * (speed_modification + 1))
 		)
 	
-	#If walk_direction is 0, deccelerate
-	if walk_direction == 0:
+	#If walk_direction is 0 or current velocity is outside of bounds, deccelerate
+	if walk_direction == 0 || _character_body_2d.velocity.x >= modified_max_velocity || _character_body_2d.velocity.x <= -modified_max_velocity:
 		var deccelerated_x_velocity = (
-				velocity.x + (delta * _acceleration * current_decceleration_rate * -sign(velocity.x))
+				velocity.x + (delta * modified_acceleration * current_decceleration_rate * -sign(velocity.x) * (speed_modification + 1))
 		)
 		# If decceleration would cause velocity to overshoot 0, set to 0.
 		if abs(deccelerated_x_velocity) > abs(velocity.x) - _stopping_threshold:
@@ -47,8 +61,8 @@ func _physics_process(delta) -> void:
 	
 	#If movement is within bounds, or outside of bounds but getting closer to bounds.
 	elif ( 
-			((-_max_velocity <= _intended_x_velocity) and (_intended_x_velocity <= _max_velocity))
-			or ((_intended_x_velocity < -_max_velocity) and (_intended_x_velocity > velocity.x))
-			or ((_intended_x_velocity > _max_velocity) and (_intended_x_velocity < velocity.x))
+			((-modified_max_velocity <= intended_x_velocity) and (intended_x_velocity <= modified_max_velocity))
+			or ((intended_x_velocity < -modified_max_velocity) and (intended_x_velocity > velocity.x))
+			or ((intended_x_velocity > modified_max_velocity) and (intended_x_velocity < velocity.x))
 	):
-		_character_body_2d.velocity = Vector2(_intended_x_velocity, velocity.y)
+		_character_body_2d.velocity = Vector2(intended_x_velocity, velocity.y)

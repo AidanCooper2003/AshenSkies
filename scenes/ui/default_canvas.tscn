@@ -1,25 +1,31 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvfn2yusm676m"]
 
 [ext_resource type="Theme" uid="uid://t5lkcrxxkxm6" path="res://default-theme.tres" id="1_seas8"]
-[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/cancel.png" id="5_n4eca"]
+[ext_resource type="Texture2D" uid="uid://cpp0qgn1m27b1" path="res://sprites/resource_icons/cancel.png" id="5_n4eca"]
 [ext_resource type="PackedScene" uid="uid://bow7e73jbp8hw" path="res://scenes/ui/elements/resource_container.tscn" id="5_xt3hk"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Timer" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_right = 606.0
-offset_bottom = 157.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.215
+anchor_bottom = 0.145
+offset_right = 0.199982
+offset_bottom = 0.399994
 theme = ExtResource("1_seas8")
 text = "Time: 0.00"
 
 [node name="Final Time" type="RichTextLabel" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 742.0
 offset_top = 419.0
@@ -47,12 +53,42 @@ theme = ExtResource("1_seas8")
 text = "You're Dead!
 Press \"R\" to restart."
 
+[node name="Conditions" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.156
+anchor_right = 0.18
+anchor_bottom = 0.409
+offset_top = 0.519989
+offset_right = -0.600006
+offset_bottom = 0.279999
+theme_override_font_sizes/normal_font_size = 31
+text = "
+"
+
+[node name="AccumulatedDamage" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.183
+anchor_top = 0.052
+anchor_right = 0.217
+anchor_bottom = 0.096
+offset_left = 0.639984
+offset_top = -0.16
+offset_right = -0.640015
+offset_bottom = 0.32
+theme_override_font_sizes/normal_font_size = 31
+
 [node name="InventoryContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 412.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.215
+anchor_right = 0.529
+anchor_bottom = 0.144
+offset_left = -0.800018
 offset_top = -1.0
-offset_right = 1015.0
-offset_bottom = 155.0
+offset_right = -0.680054
+offset_bottom = -0.520004
 
 [node name="Control" type="Control" parent="Control/InventoryContainer"]
 modulate = Color(1, 1, 1, 0.705882)
@@ -75,6 +111,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control"]
@@ -144,6 +181,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control3"]
@@ -178,6 +216,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="ProgressBar" type="ProgressBar" parent="Control/InventoryContainer/Control4"]
@@ -236,39 +275,51 @@ columns = 3
 
 [node name="ResourceContainer1" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer2" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer3" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer4" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer5" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer6" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer7" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer8" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer9" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer10" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer11" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="ResourceContainer12" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer/ResourceStorageGrid" instance=ExtResource("5_xt3hk")]
 layout_mode = 2
+focus_mode = 0
 
 [node name="CraftingGrid" type="GridContainer" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -603,3 +654,8 @@ stretch_mode = 5
 [node name="ColorRect" type="ColorRect" parent="Control/CraftingContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

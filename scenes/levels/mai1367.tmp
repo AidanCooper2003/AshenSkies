@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://beym8gb6q0jpn"]
+
+[ext_resource type="Script" path="res://scripts/menu/menu_manager.gd" id="1_oxis6"]
+[ext_resource type="Theme" uid="uid://t5lkcrxxkxm6" path="res://default-theme.tres" id="2_yufyc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 2.0
+anchor_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_oxis6")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -110.5
+offset_right = 110.0
+offset_bottom = 110.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Start"
+
+[node name="GrimoireButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Grimroire"
+
+[node name="ExitButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Exit"
+
+[node name="Grimoire" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Grimoire"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IconGrid" type="GridContainer" parent="Grimoire/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 6
+
+[node name="Stats" type="RichTextLabel" parent="Grimoire/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_yufyc")
+text = "Stats:"
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -1151.0
+offset_bottom = -1080.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Return"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+position_smoothing_enabled = true
+
+[connection signal="pressed" from="Main/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/GrimoireButton" to="." method="_on_grimoire_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

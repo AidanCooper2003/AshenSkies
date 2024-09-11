@@ -6,12 +6,13 @@
 [ext_resource type="Shape2D" uid="uid://fo3xnkshg13n" path="res://colliders/basic_bullet.tres" id="2_wjwft"]
 
 [node name="BasicGunBullet" type="RigidBody2D"]
-collision_layer = 2
-collision_mask = 20
+collision_layer = 0
+collision_mask = 48
 gravity_scale = 0.0
 continuous_cd = 1
 max_contacts_reported = 5
 contact_monitor = true
+linear_damp = -0.1
 script = ExtResource("1_v6rfs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -28,9 +29,9 @@ shape = ExtResource("2_wjwft")
 [node name="DamageDealerComponent" type="Area2D" parent="."]
 visible = false
 collision_layer = 2
-collision_mask = 4
+collision_mask = 36
 script = ExtResource("1_2x3yh")
-_damage = 1.0
+_damage = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageDealerComponent"]
 rotation = 1.57815

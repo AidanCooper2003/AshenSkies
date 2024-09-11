@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://df8xr2wt6mt4y"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/panacea.gd" id="1_xkkx3"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_ddh7f"]
+[ext_resource type="PackedScene" uid="uid://c0rown6ecq1s1" path="res://scenes/objects/projectiles/panacea_bullet.tscn" id="3_7swca"]
+[ext_resource type="Texture2D" uid="uid://20b4itb87qxt" path="res://sprites/weapon_icons/panacea.png" id="4_1engv"]
+
+[node name="Panacea" type="Node2D"]
+script = ExtResource("1_xkkx3")
+heal_amount = 1
+heal_chance = 0.1
+max_durability = 40
+_fire_delay = 0.35
+weapon_name = "panacea"
+
+[node name="ProjectileShooter" type="Node2D" parent="."]
+position = Vector2(30, -6)
+script = ExtResource("2_ddh7f")
+_bullet = ExtResource("3_7swca")
+_bullet_velocity = 2000.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("4_1engv")

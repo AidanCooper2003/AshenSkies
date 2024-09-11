@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://brogejmjvqi2i"]
+[gd_scene load_steps=17 format=3 uid="uid://brogejmjvqi2i"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_v3r2n"]
 [ext_resource type="Texture2D" uid="uid://d3cp4fluwqdob" path="res://sprites/player/player_left.png" id="2_p5gux"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/entity-components/weapon_inventory_manager.gd" id="10_d84o6"]
 [ext_resource type="Script" path="res://scripts/entities/player/resource_inventory_manager.gd" id="11_ql8no"]
 [ext_resource type="Script" path="res://scripts/entities/player/crafting_manager.gd" id="12_qkxvb"]
+[ext_resource type="Script" path="res://scripts/entity-components/condition_handler.gd" id="13_by10e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5u02"]
 size = Vector2(48, 96)
@@ -72,9 +73,10 @@ _gravity_component = NodePath("../GravityComponent")
 script = ExtResource("7_r6hrc")
 _max_health = 3
 _simple_health = true
+iframe_length = 1.0
 
 [node name="HitboxComponent" type="Area2D" parent="."]
-collision_mask = 12
+collision_mask = 44
 script = ExtResource("8_mbve0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -91,16 +93,24 @@ libraries = {
 "": SubResource("AnimationLibrary_lsudj")
 }
 
-[node name="WeaponInventoryManager" type="Node2D" parent="."]
+[node name="WeaponInventoryManager" type="Node2D" parent="." node_paths=PackedStringArray("_weapon_manager")]
 script = ExtResource("10_d84o6")
-_weapon_inventory_size = 4
+weapon_inventory_size = 4
+_weapon_manager = NodePath("../WeaponManager")
 
 [node name="ResourceInventoryManager" type="Node2D" parent="."]
 script = ExtResource("11_ql8no")
+max_resources = 12
 
 [node name="CraftingManager" type="Node2D" parent="."]
 script = ExtResource("12_qkxvb")
 
+[node name="ConditionHandler" type="Node2D" parent="."]
+script = ExtResource("13_by10e")
+
 [connection signal="on_floor_state_changed" from="." to="JumperComponent" method="_on_character_change_on_floor_state"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_changed_health"]
-[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="_on_hitbox_component_damage_taken"]
+[connection signal="condition_added" from="HitboxComponent" to="ConditionHandler" method="add_condition"]
+[connection signal="damage_taken" from="HitboxComponent" to="HealthComponent" method="take_damage"]
+[connection signal="condition_added" from="ConditionHandler" to="." method="_on_condition_added"]
+[connection signal="condition_expired" from="ConditionHandler" to="." method="_on_condition_removed"]

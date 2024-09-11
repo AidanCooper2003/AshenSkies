@@ -1,5 +1,21 @@
-Resource-name,tags,quality,Icon-path
-gun parts,Gun,1,gun_parts.png
-cyclonium,Air,1,cyclonium.png
-airsoft bullet,"Gun, Air",1,airsoft_bullets.png
-testing fluid,Test,1,testing_fluid.png
+Resource-name,tags,quality,category
+projectile_essence,Projectile,0,single_form
+absorption_essence,Absorption,0,single_form
+fire_essence,Fire,1,single_element
+wind_essence,Wind,1,single_element
+food_essence,Food,1,single_element
+healing_essence,Healing,1,single_mechanic
+defense_essence,Defense,1,single_mechanic
+transportation_essence,Transportation,1,single_mechanic
+firestorm_essence,"Fire, Wind",2,double_element
+charred_essence,"Fire, Food",2,double_element
+biscuit_essence,"Wind, Food",2,double_element
+nutrition_essence,"Food, Healing",3,double_mixed
+glider_essence,"Wind, Transportation",3,double_mixed
+rocket_essence,"Fire, Transportation",3,double_mixed
+fever_essence,"Fire, Healing",3,double_mixed
+nuclear_essence,"Fire, Explosive",3,double_mixed
+grapeshot_essence,"Food, Multishot",3,double_mixed
+particle_essence,"Wind, Pierce",3,double_mixed
+abstraction_essence,None,5,unique
+everything_essence,"Projectile, Absorption, Fire, Wind, Food, Healing, Defense, Transportation, Explosive, Multishot, Pierce",3,unique

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqci5r4ott3jx"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/buff_potion.gd" id="1_dextt"]
+[ext_resource type="Texture2D" uid="uid://cgtjhu7h7p31a" path="res://sprites/weapon_icons/biologic_overclock.png" id="2_vw7fe"]
+
+[node name="BiologicOverclock" type="Node2D"]
+script = ExtResource("1_dextt")
+_condition_name = "overclocked"
+_condition_length = 15.0
+max_durability = 2
+_fire_delay = 0.5
+weapon_name = "biologic_overclock"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_vw7fe")
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001

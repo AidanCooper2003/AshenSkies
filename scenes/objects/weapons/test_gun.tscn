@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bg12mot7m8ooy"]
 
 [ext_resource type="Script" path="res://scripts/entities/weapons/basic_gun.gd" id="1_2ukhe"]
-[ext_resource type="Script" path="res://scripts/entities/weapon_components/projectile_shooter.gd" id="2_diodx"]
+[ext_resource type="Script" path="res://scripts/entities/weapon_components/single_projectile_shooter.gd" id="2_bhu8k"]
 [ext_resource type="Texture2D" uid="uid://pslav07eagb2" path="res://sprites/weapon_icons/test_gun.png" id="3_dgwie"]
 [ext_resource type="PackedScene" uid="uid://cxgy32f0tctp1" path="res://scenes/objects/projectiles/test_gun_bullet.tscn" id="3_ehfst"]
 
@@ -9,19 +9,19 @@
 script = ExtResource("1_2ukhe")
 max_durability = 20
 _fire_delay = 0.5
+weapon_name = "test_gun"
 
 [node name="ProjectileShooter" type="Node2D" parent="."]
-position = Vector2(52, 4)
-script = ExtResource("2_diodx")
+position = Vector2(48, 4)
+script = ExtResource("2_bhu8k")
 _bullet = ExtResource("3_ehfst")
 _bullet_velocity = 2000.0
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(26, 18)
 scale = Vector2(4, 4)
 texture = ExtResource("3_dgwie")
-
-[node name="FireDelayTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="FireDelayTimer" to="." method="_on_fire_delay_timer_timeout"]

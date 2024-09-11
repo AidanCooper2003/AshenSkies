@@ -7,14 +7,9 @@ extends Node2D
 @export var _crafting_grid: GridContainer
 @export var _no_texture: Texture
 
-var _resource_textures: Dictionary
 var _is_menu_open: bool = false
 var _resource_containers: Dictionary
 var _containers_full: bool = false
-
-func _init() -> void:
-	_resource_textures = CSVManager.get_properties(CSVManager.resources, 0, 3)
-
 
 func _ready() -> void:
 	_setup_signals()
@@ -22,6 +17,8 @@ func _ready() -> void:
 
 
 func _setup_ingredient_buttons() -> void:
+	if _resource_grid == null:
+		return
 	for button in _resource_grid.get_children():
 		button.connect("pressed", _on_ingredient_clicked.bind(button))
 
@@ -33,14 +30,15 @@ func _setup_signals():
 
 
 func _on_resource_count_changed(resource_name, resource_count) -> void:
-	print("Changing resource: " + resource_name + ", " + str(resource_count))
 	#If there isn't a resource container for the resource, assign it.
+	if _resource_grid == null:
+		return
 	if not _resource_containers.has(resource_name):
 		for resourceContainer in _resource_grid.get_children():
 			if not _resource_containers.values().has(resourceContainer):
 				_resource_containers[resource_name] = resourceContainer
 				_resource_containers[resource_name].get_child(0).texture = (
-						load("res://sprites/resource_icons/" + _resource_textures[resource_name])
+						load("res://sprites/resource_icons/" + resource_name + ".png")
 				)
 				break
 		#If there are no more resource containers, ignore the change.
@@ -58,12 +56,14 @@ func _on_resource_count_changed(resource_name, resource_count) -> void:
 
 
 func _on_ingredients_changed(ingredients: Dictionary) -> void:
+	if _crafting_grid == null:
+		return
 	var ingredient_containers := _crafting_grid.get_children()
 	var container_index := 0
 	for ingredient in ingredients:
 		for i in range(ingredients[ingredient]):
 			ingredient_containers[container_index].icon = (
-					load("res://sprites/resource_icons/" + _resource_textures[ingredient])
+					load("res://sprites/resource_icons/" + ingredient + ".png")
 			)
 			container_index += 1
 	if container_index < 7:
@@ -73,6 +73,8 @@ func _on_ingredients_changed(ingredients: Dictionary) -> void:
 
 
 func _on_change_crafting_menu_state(is_menu_open) -> void:
+	if _crafting_container == null:
+		return
 	_is_menu_open = is_menu_open
 	_crafting_container.visible = _is_menu_open
 

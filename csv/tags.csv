@@ -1,0 +1,14 @@
+Tag-Name,Tag-Type
+Projectile,Form
+Melee,Form
+Absorption,Form
+Fire,Element
+Wind,Element
+Food,Element
+Healing,Mechanic
+Transportation,Mechanic
+Defense,Mechanic
+Explosive,Mechanic
+Multishot,Mechanic
+Pierce,Mechanic
+None,Mechanic

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bapj7u1vrs2yo"]
+
+[ext_resource type="Script" path="res://scripts/entities/weapons/aura_potion.gd" id="1_4uipw"]
+[ext_resource type="PackedScene" uid="uid://cabx5olp3el53" path="res://scenes/objects/projectiles/candleman_aura.tscn" id="2_dmtty"]
+[ext_resource type="Texture2D" uid="uid://hor45n7t53as" path="res://sprites/weapon_icons/candlemans_brew.png" id="2_og0kr"]
+
+[node name="CandlemansBrew" type="Node2D"]
+script = ExtResource("1_4uipw")
+_aura = ExtResource("2_dmtty")
+_aura_duration = 5.0
+max_durability = 2
+_fire_delay = 0.5
+weapon_name = "candlemans_brew"
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(35, 34)
+scale = Vector2(0.133, 0.133)
+texture = ExtResource("2_og0kr")

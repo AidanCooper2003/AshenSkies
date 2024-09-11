@@ -20,6 +20,8 @@ var _game_loaded := false
 @onready var _resource_inventory_manager := $ResourceInventoryManager
 @onready var _crafting_manager := $CraftingManager
 @onready var _sprite_2d := $Sprite2D
+@onready var _condition_handler := $ConditionHandler
+@onready var _health_component := $HealthComponent
 
 func _ready():
 	_setup_signals()
@@ -79,17 +81,21 @@ func _handle_tertiary_fire() -> void:
 
 func _handle_weapon_swap() -> void:
 	if Input.is_action_just_pressed("SwapWeaponDown"):
-		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_left())
+		_weapon_inventory_manager.swap_weapon_left()
 	if Input.is_action_just_pressed("SwapWeaponUp"):
-		_weapon_manager.switch_weapon(_weapon_inventory_manager.swap_weapon_right())
+		_weapon_inventory_manager.swap_weapon_right()
 	EventBus.active_slot_changed.emit(_weapon_inventory_manager.current_weapon)
 
 
 func _handle_weapon_durability() -> void:
 	if _weapon_manager.has_weapon():
-		var durability_percentage: float = _weapon_manager.get_durability_percentage()
-		EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
-
+		var durability_percentage: float = _weapon_inventory_manager.get_current_weapon_durability_percentage()
+		if durability_percentage <= 0:
+			_weapon_inventory_manager.remove_current_weapon()
+			_reset_weapon_inventory_ui()
+		else:
+			EventBus.durability_changed.emit(_weapon_inventory_manager.current_weapon, durability_percentage)
+	
 
 func _handle_crafting_toggle() -> void:
 	if Input.is_action_just_pressed("ToggleCraftingMenu"):
@@ -108,16 +114,26 @@ func _handle_weapon_firing() -> void:
 	_handle_weapon_swap()
 	_handle_weapon_durability()
 
-func _on_changed_health(newHealth: int) -> void:
+func _on_changed_health(newHealth: int, trigger_on_damage: bool) -> void:
 	if not _game_loaded:
 		await owner.ready
-	else:
+	elif trigger_on_damage:
 		_animation_player.play("iFrameFlashing")
-	EventBus.player_health_changed.emit(newHealth)
+	if not _condition_handler.has_modification("health_blind") || newHealth == 0:
+		EventBus.player_health_changed.emit(newHealth)
+
+
+func _on_condition_added(condition_name: String) -> void:
+	if _condition_handler.has_modification("health_blind"):
+		EventBus.player_health_changed.emit(-1)
+
+func _on_condition_removed(condition_name: String) -> void:
+	if not _condition_handler.has_modification("health_blind"):
+		EventBus.player_health_changed.emit(_health_component._current_health)
 
 
 func _on_crafting_started() -> void:
-	if _resource_inventory_manager.get_ingredient_count() == 8:
+	if _resource_inventory_manager.get_ingredient_count() == _resource_inventory_manager.max_ingredients && _weapon_inventory_manager.has_room():
 		var weapon = _crafting_manager.craft(_resource_inventory_manager.ingredients)
 		_resource_inventory_manager.subtract_resources(_resource_inventory_manager.ingredients)
 		EventBus.ingredients_reset.emit()
@@ -125,3 +141,18 @@ func _on_crafting_started() -> void:
 		if weapon_scene != null:
 			_weapon_inventory_manager.add_weapon(weapon_scene)
 		EventBus.weapon_in_slot_changed.emit(_weapon_inventory_manager.weapons.size() - 1, weapon)
+		if SaveManager.has_save_data(weapon + "_count"):
+			SaveManager.add_save_data(weapon + "_count", SaveManager.retrieve_save_data(weapon + "_count") + 1)
+		else:
+			SaveManager.add_save_data(weapon + "_count", 1)
+
+
+func _reset_weapon_inventory_ui() -> void:
+	for i in range(_weapon_inventory_manager.weapon_inventory_size):
+		var weapon_name = _weapon_inventory_manager.get_weapon_name(i)
+		print(weapon_name)
+		EventBus.weapon_in_slot_changed.emit(i, weapon_name)
+		if weapon_name != "":
+			EventBus.durability_changed.emit(i, _weapon_inventory_manager.get_weapon_durability_percentage(i))
+		else:
+			EventBus.durability_changed.emit(i, 100)

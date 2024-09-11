@@ -1,0 +1,233 @@
+[gd_scene load_steps=5 format=3 uid="uid://beym8gb6q0jpn"]
+
+[ext_resource type="Script" path="res://scripts/menu/menu_manager.gd" id="1_oxis6"]
+[ext_resource type="AudioStream" uid="uid://daj3gjlen0ujk" path="res://sounds/Traversing_the_Heavens.mp3" id="2_ikcxx"]
+[ext_resource type="Script" path="res://scripts/utility/audio_manager.gd" id="2_s5fap"]
+[ext_resource type="Theme" uid="uid://t5lkcrxxkxm6" path="res://default-theme.tres" id="2_yufyc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchor_right = 2.0
+anchor_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_oxis6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+position_smoothing_enabled = true
+
+[node name="AudioManager" type="Node2D" parent="." node_paths=PackedStringArray("_audio_stream_player")]
+script = ExtResource("2_s5fap")
+_audio_stream_player = NodePath("../AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ikcxx")
+volume_db = -6.021
+autoplay = true
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -110.5
+offset_right = 110.0
+offset_bottom = 110.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Start"
+
+[node name="GrimoireButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Grimroire"
+
+[node name="Settings" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="Main/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Exit"
+
+[node name="Grimoire" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Grimoire"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="Grimoire/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Weapons" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 8
+
+[node name="Resources" type="GridContainer" parent="Grimoire/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+columns = 6
+
+[node name="Stats" type="RichTextLabel" parent="Grimoire/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_yufyc")
+text = "Stats:"
+
+[node name="ReturnButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -1151.0
+offset_bottom = -1080.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Return"
+
+[node name="Settings" type="Control" parent="."]
+layout_mode = 1
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Credits" type="RichTextLabel" parent="Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.314
+anchor_bottom = 1.0
+offset_top = -5.0
+offset_right = 0.119995
+offset_bottom = 21.0
+grow_vertical = 2
+theme = ExtResource("2_yufyc")
+theme_override_font_sizes/normal_font_size = 37
+text = "Credits:
+-Godot Engine
+godotengine.org/license
+-CSV Data Importer by timothyqiu
+-Lava by davesch on opengameart.org
+-Many weapons by SnoopethDuckDuck on opengameart.org
+-Test/Dummy Gun by congusbongus on opengameart.org
+-Wooden Crate by Proxy Games on opengameart.org
+-Resource + Many weapon icons from game-icons.net
+-Bullet and Tilemap: Kenney.nl
+- Music by teknoaxe
+(Menu: Traversing the Heavens, Game: Emerging from the Lights)"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetSaveButton" type="Button" parent="Settings/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_yufyc")
+text = "Reset Save Data"
+
+[node name="PanelContainer" type="PanelContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="RichTextLabel" parent="Settings/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Music Volume"
+fit_content = true
+
+[node name="VolumeSlider" type="HSlider" parent="Settings/VBoxContainer/PanelContainer/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -178.5
+offset_top = -16.0
+offset_right = 178.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ReturnButton" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -71.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Return"
+
+[node name="ConfirmButton" type="Button" parent="Settings"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -8.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_yufyc")
+text = "Confirm Save Deletion"
+
+[connection signal="pressed" from="Main/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/GrimoireButton" to="." method="_on_grimoire_button_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/ResetSaveButton" to="." method="_on_reset_save_button_pressed"]
+[connection signal="value_changed" from="Settings/VBoxContainer/PanelContainer/Panel/VolumeSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Settings/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Settings/ConfirmButton" to="." method="_on_confirm_button_pressed"]

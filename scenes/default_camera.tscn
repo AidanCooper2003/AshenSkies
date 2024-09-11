@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvj6filacs6pn"]
+
+[ext_resource type="PackedScene" uid="uid://bvfn2yusm676m" path="res://scenes/ui/default_canvas.tscn" id="1_a7gti"]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2(-101, 69)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="CanvasLayer" parent="." instance=ExtResource("1_a7gti")]
+
+[node name="Control" parent="CanvasLayer" index="0"]
+mouse_force_pass_scroll_events = false
+
+[node name="Health" parent="CanvasLayer/Control" index="2"]
+text = "Player Health: 0"
+
+[node name="Death" parent="CanvasLayer/Control" index="3"]
+text = "You're Dead!
+Press \"[\" to restart."
+
+[node name="Control" parent="CanvasLayer/Control/InventoryContainer" index="0"]
+modulate = Color(1, 1, 1, 0.588235)
+
+[node name="ProgressBar" parent="CanvasLayer/Control/InventoryContainer/Control" index="2"]
+anchors_preset = 12
+anchor_right = 1.0
+offset_top = -13.0
+offset_right = 0.0
+grow_horizontal = 2
+value = 100.0
+
+[node name="Control2" parent="CanvasLayer/Control/InventoryContainer" index="1"]
+modulate = Color(1, 1, 1, 0.588235)
+
+[node name="ProgressBar" parent="CanvasLayer/Control/InventoryContainer/Control2" index="2"]
+anchors_preset = 12
+anchor_right = 1.0
+offset_top = -12.0
+offset_right = 0.0
+grow_horizontal = 2
+value = 100.0
+
+[node name="Control3" parent="CanvasLayer/Control/InventoryContainer" index="2"]
+modulate = Color(1, 1, 1, 0.588235)
+
+[node name="ProgressBar" parent="CanvasLayer/Control/InventoryContainer/Control3" index="2"]
+anchors_preset = 12
+anchor_right = 1.0
+offset_top = -12.0
+offset_right = 0.0
+grow_horizontal = 2
+value = 100.0
+
+[node name="Control4" parent="CanvasLayer/Control/InventoryContainer" index="3"]
+modulate = Color(1, 1, 1, 0.588235)
+
+[node name="ProgressBar" parent="CanvasLayer/Control/InventoryContainer/Control4" index="2"]
+anchors_preset = 12
+anchor_right = 1.0
+offset_top = -11.0
+offset_right = 0.0
+grow_horizontal = 2
+value = 100.0
+
+[node name="CraftingContainer" parent="CanvasLayer/Control" index="7"]
+visible = false
+mouse_force_pass_scroll_events = false
+mouse_default_cursor_shape = 2
+
+[node name="IngredientButton5" parent="CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="4"]
+visible = false
+
+[node name="IngredientButton6" parent="CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="5"]
+visible = false
+
+[node name="IngredientButton7" parent="CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="6"]
+visible = false
+
+[node name="IngredientButton8" parent="CanvasLayer/Control/CraftingContainer/HBoxContainer/VBoxContainer/CraftingGrid" index="7"]
+visible = false
+
+[editable path="CanvasLayer"]
